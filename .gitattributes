@@ -1,3 +1,4 @@
 /mvnw text eol=lf
 *.cmd text eol=crlf
 src/main/resources/mysql-dump/** filter=lfs diff=lfs merge=lfs -text
+src/main/resources/schema-diagram/** filter=lfs diff=lfs merge=lfs -text
