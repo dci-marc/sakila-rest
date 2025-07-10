@@ -1,9 +1,6 @@
 package org.dcistudent.sakilarest.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Lob;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import org.hibernate.annotations.Immutable;
 
 /**
@@ -13,6 +10,7 @@ import org.hibernate.annotations.Immutable;
 @Immutable
 @Table(name = "actor_info", schema = "sakila")
 public class ActorInfo {
+  @Id
   @Column(name = "actor_id", columnDefinition = "int UNSIGNED not null")
   private Long actorId;
 

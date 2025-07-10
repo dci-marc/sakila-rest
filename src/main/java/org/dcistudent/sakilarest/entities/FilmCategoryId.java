@@ -4,11 +4,13 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import org.hibernate.Hibernate;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 
 @Embeddable
 public class FilmCategoryId implements Serializable {
+  @Serial
   private static final long serialVersionUID = -3732591992087887041L;
   @Column(name = "film_id", columnDefinition = "int UNSIGNED not null")
   private Long filmId;

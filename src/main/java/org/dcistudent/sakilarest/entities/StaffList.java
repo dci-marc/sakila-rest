@@ -2,6 +2,7 @@ package org.dcistudent.sakilarest.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import org.hibernate.annotations.Immutable;
 
@@ -12,6 +13,7 @@ import org.hibernate.annotations.Immutable;
 @Immutable
 @Table(name = "staff_list", schema = "sakila")
 public class StaffList {
+  @Id
   @Column(name = "ID", columnDefinition = "int UNSIGNED not null")
   private Long id;
 

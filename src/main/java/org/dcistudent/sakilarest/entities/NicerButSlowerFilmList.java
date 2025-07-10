@@ -1,9 +1,6 @@
 package org.dcistudent.sakilarest.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Lob;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import org.hibernate.annotations.Immutable;
 
 import java.math.BigDecimal;
@@ -15,6 +12,7 @@ import java.math.BigDecimal;
 @Immutable
 @Table(name = "nicer_but_slower_film_list", schema = "sakila")
 public class NicerButSlowerFilmList {
+  @Id
   @Column(name = "FID", columnDefinition = "int UNSIGNED")
   private Long fid;
 

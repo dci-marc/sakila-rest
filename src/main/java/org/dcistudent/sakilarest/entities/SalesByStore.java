@@ -2,6 +2,7 @@ package org.dcistudent.sakilarest.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import org.hibernate.annotations.Immutable;
 
@@ -14,6 +15,7 @@ import java.math.BigDecimal;
 @Immutable
 @Table(name = "sales_by_store", schema = "sakila")
 public class SalesByStore {
+  @Id
   @Column(name = "store", nullable = false, length = 101)
   private String store;
 
