@@ -31,5 +31,10 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Docker ###
+mysql_data/
+
+### Configuration files ###
 /src/main/resources/application.properties
 /src/main/resources/application-dev.properties
