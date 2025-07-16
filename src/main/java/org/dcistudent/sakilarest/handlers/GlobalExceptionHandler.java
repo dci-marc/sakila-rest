@@ -13,8 +13,16 @@ import java.util.Objects;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
+  @ExceptionHandler(Exception.class)
+  public Response<String> handleGeneric(Exception ex) {
+    return ResponseFactory.create(
+        Response.Status.INTERNAL_SERVER_ERROR.get(),
+        "server:internal:error"
+    );
+  }
+
   @ExceptionHandler(HttpMessageNotReadableException.class)
-  public Response handleUnreadable(HttpMessageNotReadableException ex) {
+  public Response<String> handleUnreadable(HttpMessageNotReadableException ex) {
     return ResponseFactory.create(
         Response.Status.BAD_REQUEST.get(),
         "Malformed JSON or missing required fields"
@@ -22,7 +30,7 @@ public class GlobalExceptionHandler {
   }
 
   @ExceptionHandler(MethodArgumentNotValidException.class)
-  public Response handleValidation(MethodArgumentNotValidException ex) {
+  public Response<String> handleValidation(MethodArgumentNotValidException ex) {
     return ResponseFactory.create(
         Response.Status.BAD_REQUEST.get(),
         "Validation failed",
