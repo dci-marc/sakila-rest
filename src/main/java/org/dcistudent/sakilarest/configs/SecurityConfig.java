@@ -1,27 +1,54 @@
 package org.dcistudent.sakilarest.configs;
 
+import org.dcistudent.sakilarest.security.AudienceValidator;
+import org.springframework.boot.autoconfigure.security.oauth2.resource.OAuth2ResourceServerProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.oauth2.core.DelegatingOAuth2TokenValidator;
+import org.springframework.security.oauth2.core.OAuth2TokenValidator;
+import org.springframework.security.oauth2.jwt.*;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 public class SecurityConfig {
 
+  private final Auth0Config auth0Config;
+
+  public SecurityConfig(Auth0Config auth0Config) {
+    this.auth0Config = auth0Config;
+  }
+
   @Bean
   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     http
         .csrf(csrf -> csrf
-            .ignoringRequestMatchers("/auth/**", "/api/v1/auth/**")
+            .ignoringRequestMatchers("/**", "/api/v1/**")
         )
         .authorizeHttpRequests(auth -> auth
             .requestMatchers("/auth/**", "/api/v1/auth/**").permitAll()
-            .anyRequest().authenticated()
+            .requestMatchers("/**", "/api/v1/**").authenticated()
+            .anyRequest().denyAll()
         )
-        .httpBasic(Customizer.withDefaults());
+        .oauth2ResourceServer(oauth2 -> oauth2
+            .jwt(Customizer.withDefaults())
+        );
 
     return http.build();
   }
 
+  @Bean
+  public JwtDecoder jwtDecoder(OAuth2ResourceServerProperties properties) {
+    String issuer = this.auth0Config.getIssuer();
+
+    NimbusJwtDecoder decoder = JwtDecoders.fromIssuerLocation(issuer);
+    OAuth2TokenValidator<Jwt> audienceValidator = new AudienceValidator(this.auth0Config.getAudience());
+    OAuth2TokenValidator<Jwt> withIssuer = JwtValidators.createDefaultWithIssuer(issuer);
+    OAuth2TokenValidator<Jwt> validator = new DelegatingOAuth2TokenValidator<>(withIssuer, audienceValidator);
+
+    decoder.setJwtValidator(validator);
+
+    return decoder;
+  }
 }
