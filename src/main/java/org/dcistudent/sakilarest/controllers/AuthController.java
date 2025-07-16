@@ -1,49 +1,71 @@
 package org.dcistudent.sakilarest.controllers;
 
-import com.auth0.jwt.JWT;
-import com.auth0.jwt.algorithms.Algorithm;
 import jakarta.validation.Valid;
 import org.dcistudent.sakilarest.factories.ResponseFactory;
 import org.dcistudent.sakilarest.models.Response;
 import org.dcistudent.sakilarest.models.auth.UserRequest;
 import org.dcistudent.sakilarest.models.auth.UserResponse;
-import org.dcistudent.sakilarest.services.auth.UserService;
+import org.dcistudent.sakilarest.services.Auth0Service;
 import org.jetbrains.annotations.NotNull;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.time.ZonedDateTime;
-import java.util.UUID;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
 
-  private final @NotNull UserService userService;
+  private final @NotNull Auth0Service auth0Service;
 
-  public AuthController(@NotNull UserService userService) {
-    this.userService = userService;
+  public AuthController(@NotNull Auth0Service auth0Service) {
+    this.auth0Service = auth0Service;
   }
 
   @PostMapping("/register")
-  public String register(@NotNull @RequestBody @Valid UserRequest request) {
+  public Response<String> register(@NotNull @RequestBody @Valid UserRequest request) {
     try {
-      if (Boolean.FALSE.equals(userService.create(request))) {
-        return ResponseFactory.create(
-            Response.Status.BAD_REQUEST.get(),
-            "auth:user:creation:fail"
-        ).toString();
-      }
+      this.auth0Service.registerUser(request.getEmail(), request.getPassword());
+    } catch (IllegalArgumentException e) {
+      return ResponseFactory.create(
+          Response.Status.BAD_REQUEST.get(),
+          "auth:user:creation:fail",
+          e.getMessage()
+      );
     } catch (Exception e) {
       return ResponseFactory.create(
           Response.Status.INTERNAL_SERVER_ERROR.get(),
           "server:internal:error"
-      ).toString();
+      );
     }
 
     return ResponseFactory.create(
         Response.Status.OK.get(),
         "auth:user:creation:success",
-        (new UserResponse(request.getName(), request.getEmail()).toString())
-    ).toString();
+        (new UserResponse(request.getEmail()).toString())
+    );
+  }
+
+  @PostMapping("/login")
+  public Response<String> login(@NotNull @RequestBody @Valid UserRequest request) {
+    Map<String, String> token;
+
+    try {
+      token = this.auth0Service.loginUser(request.getEmail(), request.getPassword());
+    } catch (IllegalArgumentException e) {
+      return ResponseFactory.create(
+          Response.Status.BAD_REQUEST.get(),
+          "auth:user:login:fail",
+          e.getMessage()
+      );
+    }
+
+    return ResponseFactory.create(
+        Response.Status.OK.get(),
+        "auth:user:login:success",
+        token.get("access_token")
+    );
   }
 }

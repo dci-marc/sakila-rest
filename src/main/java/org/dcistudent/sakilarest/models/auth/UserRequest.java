@@ -9,11 +9,6 @@ import org.jetbrains.annotations.NotNull;
 public class UserRequest {
 
   @NotBlank
-  @Size(min = 3, max = 16, message = "Name must be between 3 and 16 characters long.")
-  @Pattern(regexp = "^[\\w]+$", message = "Name must be alphanumeric and can include underscores.")
-  private String name;
-
-  @NotBlank
   @Email(message = "Email should be valid.")
   private String email;
 
@@ -25,18 +20,9 @@ public class UserRequest {
   )
   private String password;
 
-  public UserRequest(@NotNull String name, @NotNull String email, @NotNull String password) {
-    this.name = name;
+  public UserRequest(@NotNull String email, @NotNull String password) {
     this.email = email;
     this.password = password;
-  }
-
-  public @NotNull String getName() {
-    return this.name;
-  }
-
-  public void setName(@NotNull String name) {
-    this.name = name;
   }
 
   public @NotNull String getEmail() {
