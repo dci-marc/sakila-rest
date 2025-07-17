@@ -2,6 +2,7 @@ package org.dcistudent.sakilarest.handlers;
 
 import org.dcistudent.sakilarest.factories.ResponseFactory;
 import org.dcistudent.sakilarest.models.Response;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -14,7 +15,7 @@ import java.util.Objects;
 public class GlobalExceptionHandler {
 
   @ExceptionHandler(Exception.class)
-  public Response<String> handleGeneric(Exception ex) {
+  public Response<String> handleGeneric(@NotNull Exception ex) {
     return ResponseFactory.create(
         Response.Status.INTERNAL_SERVER_ERROR.get(),
         "server:internal:error"
@@ -22,18 +23,18 @@ public class GlobalExceptionHandler {
   }
 
   @ExceptionHandler(HttpMessageNotReadableException.class)
-  public Response<String> handleUnreadable(HttpMessageNotReadableException ex) {
+  public @NotNull Response<String> handleUnreadable(@NotNull HttpMessageNotReadableException ex) {
     return ResponseFactory.create(
         Response.Status.BAD_REQUEST.get(),
-        "Malformed JSON or missing required fields"
+        "error:request:unreadable"
     );
   }
 
   @ExceptionHandler(MethodArgumentNotValidException.class)
-  public Response<String> handleValidation(MethodArgumentNotValidException ex) {
+  public @NotNull Response<String> handleValidation(@NotNull MethodArgumentNotValidException ex) {
     return ResponseFactory.create(
         Response.Status.BAD_REQUEST.get(),
-        "Validation failed",
+        "error:validation:fail",
         ex.getBindingResult().getFieldErrors().stream()
             .map(err -> Map.of(
                 "field", err.getField(),

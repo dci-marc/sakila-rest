@@ -1,5 +1,6 @@
 package org.dcistudent.sakilarest.configs;
 
+import org.jetbrains.annotations.NotNull;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
@@ -7,76 +8,87 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix = "auth0")
 public final class Auth0Config {
 
-  private String domain;
-  private String audience;
-  private String issuer;
-  private String mgmtClientId;
-  private String mgmtClientSecret;
-  private String appClientId;
-  private String appClientSecret;
-  private String connection;
+  private @NotNull String domain;
+  private @NotNull String audience;
+  private @NotNull String issuer;
+  private @NotNull String mgmtClientId;
+  private @NotNull String mgmtClientSecret;
+  private @NotNull String appClientId;
+  private @NotNull String appClientSecret;
+  private @NotNull String connection;
 
-  public String getDomain() {
+  public Auth0Config() {
+    this.domain = "";
+    this.audience = "";
+    this.issuer = "";
+    this.mgmtClientId = "";
+    this.mgmtClientSecret = "";
+    this.appClientId = "";
+    this.appClientSecret = "";
+    this.connection = "";
+  }
+
+  public @NotNull String getDomain() {
     return this.domain;
   }
 
-  public void setDomain(String domain) {
+  public void setDomain(@NotNull String domain) {
     this.domain = domain;
   }
 
-  public String getAudience() {
+  public @NotNull String getAudience() {
     return this.audience;
   }
 
-  public void setAudience(String audience) {
+  public void setAudience(@NotNull String audience) {
     this.audience = audience;
   }
 
-  public String getIssuer() {
+  public @NotNull String getIssuer() {
     return this.issuer;
   }
 
-  public void setIssuer(String issuer) {
+  public void setIssuer(@NotNull String issuer) {
     this.issuer = issuer;
   }
 
-  public String getMgmtClientId() {
+  public @NotNull String getMgmtClientId() {
     return this.mgmtClientId;
   }
 
-  public void setMgmtClientId(String mgmtClientId) {
+  public void setMgmtClientId(@NotNull String mgmtClientId) {
     this.mgmtClientId = mgmtClientId;
   }
 
-  public String getMgmtClientSecret() {
+  public @NotNull String getMgmtClientSecret() {
     return this.mgmtClientSecret;
   }
 
-  public void setMgmtClientSecret(String mgmtClientSecret) {
+  public void setMgmtClientSecret(@NotNull String mgmtClientSecret) {
     this.mgmtClientSecret = mgmtClientSecret;
   }
 
-  public String getAppClientId() {
+  public @NotNull String getAppClientId() {
     return this.appClientId;
   }
 
-  public void setAppClientId(String appClientId) {
+  public void setAppClientId(@NotNull String appClientId) {
     this.appClientId = appClientId;
   }
 
-  public String getAppClientSecret() {
+  public @NotNull String getAppClientSecret() {
     return this.appClientSecret;
   }
 
-  public void setAppClientSecret(String appClientSecret) {
+  public void setAppClientSecret(@NotNull String appClientSecret) {
     this.appClientSecret = appClientSecret;
   }
 
-  public String getConnection() {
+  public @NotNull String getConnection() {
     return this.connection;
   }
 
-  public void setConnection(String connection) {
+  public void setConnection(@NotNull String connection) {
     this.connection = connection;
   }
 }

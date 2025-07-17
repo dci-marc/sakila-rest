@@ -1,6 +1,7 @@
 package org.dcistudent.sakilarest.configs;
 
 import org.dcistudent.sakilarest.security.AudienceValidator;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.OAuth2ResourceServerProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,14 +15,14 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 public class SecurityConfig {
 
-  private final Auth0Config auth0Config;
+  private final @NotNull Auth0Config auth0Config;
 
-  public SecurityConfig(Auth0Config auth0Config) {
+  public SecurityConfig(@NotNull Auth0Config auth0Config) {
     this.auth0Config = auth0Config;
   }
 
   @Bean
-  public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+  public @NotNull SecurityFilterChain securityFilterChain(@NotNull HttpSecurity http) throws Exception {
     http
         .csrf(csrf -> csrf
             .ignoringRequestMatchers("/**", "/api/v1/**")
@@ -39,7 +40,7 @@ public class SecurityConfig {
   }
 
   @Bean
-  public JwtDecoder jwtDecoder(OAuth2ResourceServerProperties properties) {
+  public @NotNull JwtDecoder jwtDecoder(@NotNull OAuth2ResourceServerProperties properties) {
     String issuer = this.auth0Config.getIssuer();
 
     NimbusJwtDecoder decoder = JwtDecoders.fromIssuerLocation(issuer);

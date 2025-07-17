@@ -1,6 +1,7 @@
 package org.dcistudent.sakilarest.services;
 
 import org.dcistudent.sakilarest.configs.Auth0Config;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
@@ -8,19 +9,20 @@ import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
 import java.util.Map;
+import java.util.Objects;
 
 @Service
 public class Auth0Service {
 
-  private final WebClient webClient;
-  private final Auth0Config config;
+  private final @NotNull WebClient webClient;
+  private final @NotNull Auth0Config config;
 
-  public Auth0Service(Auth0Config config, WebClient.Builder builder) {
+  public Auth0Service(@NotNull Auth0Config config, @NotNull WebClient.Builder builder) {
     this.config = config;
     this.webClient = builder.baseUrl("https://" + config.getDomain()).build();
   }
 
-  public String getManagementToken() {
+  public @NotNull String getManagementToken() {
     var body = Map.of(
         "grant_type", "client_credentials",
         "client_id", config.getMgmtClientId(),
@@ -28,7 +30,7 @@ public class Auth0Service {
         "audience", config.getAudience()
     );
 
-    return webClient.post()
+    return Objects.requireNonNull(webClient.post()
         .uri("/oauth/token")
         .contentType(MediaType.APPLICATION_JSON)
         .bodyValue(body)
@@ -40,10 +42,10 @@ public class Auth0Service {
             }))
         .bodyToMono(Map.class)
         .map(resp -> (String) resp.get("access_token"))
-        .block();
+        .block());
   }
 
-  public void registerUser(String email, String password) {
+  public void registerUser(@NotNull String email, @NotNull String password) {
     String token = getManagementToken();
 
     var body = Map.of(
@@ -67,7 +69,7 @@ public class Auth0Service {
         .block();
   }
 
-  public Map loginUser(String username, String password) {
+  public @NotNull Map loginUser(@NotNull String username, @NotNull String password) {
     var body = Map.of(
         "grant_type", "password",
         "username", username,
@@ -79,7 +81,7 @@ public class Auth0Service {
         "realm", config.getConnection()
     );
 
-    return webClient.post()
+    return Objects.requireNonNull(webClient.post()
         .uri("/oauth/token")
         .contentType(MediaType.APPLICATION_JSON)
         .bodyValue(body)
@@ -90,6 +92,6 @@ public class Auth0Service {
               return Mono.error(new RuntimeException("Auth0 login failed: " + errorBody));
             }))
         .bodyToMono(Map.class)
-        .block();
+        .block());
   }
 }

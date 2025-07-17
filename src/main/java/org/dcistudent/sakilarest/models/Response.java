@@ -83,11 +83,11 @@ public final class Response<T> {
 
     private final String value;
 
-    Message(String value) {
+    Message(@NotNull String value) {
       this.value = value;
     }
 
-    public String get() {
+    public @NotNull String get() {
       return this.value;
     }
   }
