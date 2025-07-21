@@ -12,10 +12,6 @@ public class User {
   @Column(name = "id", nullable = false, unique = true)
   private Long id;
 
-  @Column(name = "name", nullable = false)
-  @NotNull
-  private String name;
-
   @Column(name = "password", nullable = false)
   @NotNull
   private String password;
@@ -26,22 +22,13 @@ public class User {
 
   public User() {}
 
-  public User(@NotNull String name, @NotNull String password, @NotNull String email) {
-    this.name = name;
+  public User(@NotNull String password, @NotNull String email) {
     this.password = password;
     this.email = email;
   }
 
   public @NotNull Long getId() {
     return this.id;
-  }
-
-  public @NotNull String getName() {
-    return this.name;
-  }
-
-  public void setName(@NotNull String name) {
-    this.name = name;
   }
 
   public @NotNull String getPassword() {

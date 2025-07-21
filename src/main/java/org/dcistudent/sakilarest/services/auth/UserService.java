@@ -22,7 +22,7 @@ public class UserService {
     }
 
     this.userRepository.save(
-        new User(request.getName(), request.getEmail(), request.getPassword())
+        new User(request.getEmail(), request.getPassword())
     );
 
     return true;
