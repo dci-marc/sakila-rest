@@ -15,7 +15,7 @@ import java.util.Objects;
 public class GlobalExceptionHandler {
 
   @ExceptionHandler(Exception.class)
-  public Response<String> handleGeneric(@NotNull Exception ex) {
+  public @NotNull Response<String> handleGeneric(@NotNull Exception ex) {
     return ResponseFactory.create(
         Response.Status.INTERNAL_SERVER_ERROR.get(),
         "server:internal:error"
