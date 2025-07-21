@@ -1,7 +1,7 @@
 package org.dcistudent.sakilarest.services.auth;
 
 import org.dcistudent.sakilarest.entities.auth.User;
-import org.dcistudent.sakilarest.models.auth.UserRequest;
+import org.dcistudent.sakilarest.models.requests.UserRequest;
 import org.dcistudent.sakilarest.repositories.auth.UserRepository;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
