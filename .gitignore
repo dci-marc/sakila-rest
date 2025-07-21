@@ -38,3 +38,6 @@ mysql_data/
 ### Configuration files ###
 /src/main/resources/application.properties
 /src/main/resources/*-dev.*
+
+### Logging ###
+#/src/main/resources/log/**
