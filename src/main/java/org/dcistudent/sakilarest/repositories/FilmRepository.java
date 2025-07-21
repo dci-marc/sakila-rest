@@ -11,5 +11,5 @@ import java.util.Optional;
 @Repository
 public interface FilmRepository extends PagingAndSortingRepository<Film, Long> {
 
-  @NotNull Optional<List<Film>> findFilmsByTitle(@NotNull String title);
+  @NotNull Optional<List<Film>> findByTitleContaining(@NotNull String pattern);
 }

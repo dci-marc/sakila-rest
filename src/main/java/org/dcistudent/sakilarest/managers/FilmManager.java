@@ -25,11 +25,8 @@ public class FilmManager {
     return this.filmRepository.findAll(pageable);
   }
 
-  public @NotNull List<Film> findByTitle(@NotNull String title) {
-    return this.filmRepository
-        .findFilmsByTitle(title)
-        .orElseThrow(() ->
-          new IllegalArgumentException("No films found with title: " + title)
-        );
+  public @NotNull List<Film> findByTitle(@NotNull String pattern) {
+    return this.filmRepository.findByTitleContaining(pattern)
+        .orElseThrow(() -> new IllegalArgumentException("No films found with pattern: " + pattern));
   }
 }
