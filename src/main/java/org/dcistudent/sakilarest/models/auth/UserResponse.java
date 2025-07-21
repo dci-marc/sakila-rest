@@ -2,7 +2,7 @@ package org.dcistudent.sakilarest.models.auth;
 
 import org.jetbrains.annotations.NotNull;
 
-public class UserResponse {
+public final class UserResponse {
 
   @NotNull
   private String email;

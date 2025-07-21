@@ -6,7 +6,7 @@ import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import org.jetbrains.annotations.NotNull;
 
-public class UserRequest {
+public final class UserRequest {
 
   @NotBlank
   @Email(message = "Email should be valid.")
