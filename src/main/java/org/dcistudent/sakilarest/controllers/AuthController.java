@@ -34,11 +34,6 @@ public class AuthController {
           "auth:user:creation:fail",
           e.getMessage()
       );
-    } catch (Exception e) {
-      return ResponseFactory.create(
-          Response.Status.INTERNAL_SERVER_ERROR.get(),
-          "server:internal:error"
-      );
     }
 
     return ResponseFactory.create(
