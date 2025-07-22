@@ -3,7 +3,7 @@ package org.dcistudent.sakilarest.entities;
 import jakarta.persistence.*;
 import org.jetbrains.annotations.NotNull;
 
-import java.time.ZonedDateTime;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "log")
@@ -20,13 +20,13 @@ public class Log {
 
   @Column(name = "datetime", nullable = false)
   @NotNull
-  private ZonedDateTime datetime;
+  private LocalDateTime datetime;
 
-  @Column(name = "message", nullable = false)
+  @Column(name = "message", nullable = false, columnDefinition = "MEDIUMTEXT")
   @NotNull
   private String message;
 
-  public Log(@NotNull String id,@NotNull Integer level,@NotNull ZonedDateTime datetime,@NotNull String message) {
+  public Log(@NotNull String id,@NotNull Integer level,@NotNull LocalDateTime datetime,@NotNull String message) {
     this.id = id;
     this.level = level;
     this.datetime = datetime;
@@ -51,11 +51,11 @@ public class Log {
     this.level = level;
   }
 
-  public @NotNull ZonedDateTime getDatetime() {
+  public @NotNull LocalDateTime getDatetime() {
     return this.datetime;
   }
 
-  public void setDatetime(@NotNull ZonedDateTime datetime) {
+  public void setDatetime(@NotNull LocalDateTime datetime) {
     this.datetime = datetime;
   }
 
