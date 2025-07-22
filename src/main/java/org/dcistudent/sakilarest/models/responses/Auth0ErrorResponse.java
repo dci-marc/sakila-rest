@@ -13,14 +13,13 @@ public final class Auth0ErrorResponse {
       int statusCode,
       @NotNull String error,
       @NotNull String message,
-      @NotNull String errorCode,
-      @NotNull StatusCategory statusCategory
+      @NotNull String errorCode
   ) {
     this.statusCode = statusCode;
     this.error = error;
     this.message = message;
     this.errorCode = errorCode;
-    this.statusCategory = statusCategory;
+    this.statusCategory = StatusCategory.fromStatusCode(statusCode);
   }
 
   public int getStatusCode() {
@@ -73,7 +72,7 @@ public final class Auth0ErrorResponse {
 
     @Override
     public @NotNull String toString() {
-      return this.description;
+      return description;
     }
   }
 }
