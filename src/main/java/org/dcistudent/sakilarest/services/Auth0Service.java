@@ -1,27 +1,38 @@
 package org.dcistudent.sakilarest.services;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.dcistudent.sakilarest.configs.Auth0Config;
 import org.dcistudent.sakilarest.exceptions.Auth0Exception;
 import org.dcistudent.sakilarest.models.responses.Auth0ErrorResponse;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
+import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.stereotype.Service;
-import org.springframework.web.reactive.function.client.WebClient;
-import reactor.core.publisher.Mono;
+import org.springframework.web.client.ResponseErrorHandler;
+import org.springframework.web.client.RestTemplate;
 
+import java.io.IOException;
 import java.util.Map;
 import java.util.Objects;
 
 @Service
 public class Auth0Service {
 
-  private final @NotNull WebClient webClient;
+  private final @NotNull RestTemplate restTemplate;
   private final @NotNull Auth0Config config;
 
-  public Auth0Service(@NotNull Auth0Config config, @NotNull WebClient.Builder builder) {
+  public Auth0Service(@NotNull Auth0Config config, @NotNull RestTemplateBuilder builder) {
     this.config = config;
-    this.webClient = builder.baseUrl("https://" + config.getDomain()).build();
+    @NotNull ObjectMapper objectMapper = new ObjectMapper();
+
+    this.restTemplate = builder
+        .rootUri("https://" + config.getDomain())
+        .errorHandler(new Auth0ResponseErrorHandler(objectMapper))
+        .build();
   }
 
   public @NotNull String getManagementToken() {
@@ -32,19 +43,16 @@ public class Auth0Service {
         "audience", config.getAudience()
     );
 
-    return Objects.requireNonNull(webClient.post()
-        .uri("/oauth/token")
-        .contentType(MediaType.APPLICATION_JSON)
-        .bodyValue(body)
-        .retrieve()
-        .onStatus(status -> !status.is2xxSuccessful(),
-            clientResponse -> clientResponse.bodyToMono(String.class).flatMap(errorBody -> {
-              System.err.println("Auth0 Management Token Error: " + errorBody);
-              return Mono.error(new RuntimeException("Failed to get management token: " + errorBody));
-            }))
-        .bodyToMono(Map.class)
-        .map(resp -> (String) resp.get("access_token"))
-        .block());
+    HttpHeaders headers = new HttpHeaders();
+    headers.setContentType(MediaType.APPLICATION_JSON);
+    HttpEntity<Map<String, String>> requestEntity = new HttpEntity<>(body, headers);
+
+    Map<String, Object> response = Objects.requireNonNull(restTemplate.postForObject(
+        "/oauth/token",
+        requestEntity,
+        Map.class
+    ));
+    return (String) response.get("access_token");
   }
 
   public void registerUser(@NotNull String email, @NotNull String password) {
@@ -56,23 +64,17 @@ public class Auth0Service {
         "connection", config.getConnection()
     );
 
-    webClient.post()
-        .uri("/api/v2/users")
-        .header(HttpHeaders.AUTHORIZATION, "Bearer " + token)
-        .contentType(MediaType.APPLICATION_JSON)
-        .bodyValue(body)
-        .retrieve()
-        .onStatus(status -> !status.is2xxSuccessful(), clientResponse ->
-            clientResponse.bodyToMono(Auth0ErrorResponse.class)
-                .flatMap(error -> {
-                  System.err.printf(
-                      "Auth0 Error: [%d] %s - %s%n", error.getStatusCode(), error.getError(), error.getMessage()
-                  );
-                  return Mono.error(new Auth0Exception(error));
-                })
-        )
-        .bodyToMono(Void.class)
-        .block();
+    HttpHeaders headers = new HttpHeaders();
+    headers.setContentType(MediaType.APPLICATION_JSON);
+    headers.set(HttpHeaders.AUTHORIZATION, "Bearer " + token);
+    HttpEntity<Map<String, String>> requestEntity = new HttpEntity<>(body, headers);
+
+    restTemplate.exchange(
+        "/api/v2/users",
+        HttpMethod.POST,
+        requestEntity,
+        Void.class
+    );
   }
 
   public @NotNull Map<String, String> loginUser(@NotNull String username, @NotNull String password) {
@@ -87,21 +89,38 @@ public class Auth0Service {
         "realm", config.getConnection()
     );
 
-    return Objects.requireNonNull(webClient.post()
-        .uri("/oauth/token")
-        .contentType(MediaType.APPLICATION_JSON)
-        .bodyValue(body)
-        .retrieve()
-        .onStatus(status -> !status.is2xxSuccessful(), clientResponse ->
-            clientResponse.bodyToMono(Auth0ErrorResponse.class)
-                .flatMap(error -> {
-                  System.err.printf(
-                      "Auth0 Error: [%d] %s - %s%n", error.getStatusCode(), error.getError(), error.getMessage()
-                  );
-                  return Mono.error(new Auth0Exception(error));
-                })
-        )
-        .bodyToMono(Map.class)
-        .block());
+    HttpHeaders headers = new HttpHeaders();
+    headers.setContentType(MediaType.APPLICATION_JSON);
+    HttpEntity<Map<String, String>> requestEntity = new HttpEntity<>(body, headers);
+
+    return Objects.requireNonNull(restTemplate.postForObject(
+        "/oauth/token",
+        requestEntity,
+        Map.class
+    ));
   }
+
+  private record Auth0ResponseErrorHandler(ObjectMapper objectMapper) implements ResponseErrorHandler {
+
+    @Override
+      public boolean hasError(@NotNull ClientHttpResponse response) throws IOException {
+        return !response.getStatusCode().is2xxSuccessful();
+      }
+
+      @Override
+      public void handleError(@NotNull ClientHttpResponse response) throws IOException {
+        String errorBody = new String(response.getBody().readAllBytes());
+        try {
+          Auth0ErrorResponse auth0Error = objectMapper.readValue(errorBody, Auth0ErrorResponse.class);
+          System.err.printf(
+              "Auth0 Error: [%d] %s - %s%n", auth0Error.getStatusCode(), auth0Error.getError(), auth0Error.getMessage()
+          );
+          throw new Auth0Exception(auth0Error);
+        } catch (IOException e) {
+          // If parsing to Auth0ErrorResponse fails, throw a generic RuntimeException
+          System.err.println("Auth0 Error (unparseable or generic): " + errorBody);
+          throw new RuntimeException("Failed to process Auth0 response: " + errorBody, e);
+        }
+      }
+    }
 }
