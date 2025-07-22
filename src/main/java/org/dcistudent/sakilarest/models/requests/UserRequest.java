@@ -15,8 +15,8 @@ public final class UserRequest {
   @NotBlank
   @Size(min = 8, max = 64, message = "Password must be between 8 and 64 characters long.")
   @Pattern(
-      regexp = "^[\\w@#$%^&+=]+$",
-      message = "Password must be alphanumeric and can include special characters like @, #, $, %, ^, &, +, =."
+      regexp = "^[\\w\\d!\"#$%&'()*+,-./:;<=>?@\\[\\]^_`{|}~]+$",
+      message = "Password contains disallowed special characters."
   )
   private String password;
 
