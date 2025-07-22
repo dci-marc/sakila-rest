@@ -75,7 +75,7 @@ public class Auth0Service {
         .block();
   }
 
-  public @NotNull Map loginUser(@NotNull String username, @NotNull String password) {
+  public @NotNull Map<String, String> loginUser(@NotNull String username, @NotNull String password) {
     var body = Map.of(
         "grant_type", "password",
         "username", username,
@@ -92,11 +92,15 @@ public class Auth0Service {
         .contentType(MediaType.APPLICATION_JSON)
         .bodyValue(body)
         .retrieve()
-        .onStatus(status -> !status.is2xxSuccessful(),
-            clientResponse -> clientResponse.bodyToMono(String.class).flatMap(errorBody -> {
-              System.err.println("Auth0 Login User Error: " + errorBody); // Crucial for debugging 500s
-              return Mono.error(new RuntimeException("Auth0 login failed: " + errorBody));
-            }))
+        .onStatus(status -> !status.is2xxSuccessful(), clientResponse ->
+            clientResponse.bodyToMono(Auth0ErrorResponse.class)
+                .flatMap(error -> {
+                  System.err.printf(
+                      "Auth0 Error: [%d] %s - %s%n", error.getStatusCode(), error.getError(), error.getMessage()
+                  );
+                  return Mono.error(new Auth0Exception(error));
+                })
+        )
         .bodyToMono(Map.class)
         .block());
   }
