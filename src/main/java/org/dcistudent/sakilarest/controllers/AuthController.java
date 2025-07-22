@@ -52,7 +52,7 @@ public class AuthController {
 
   @PostMapping("/login")
   public Response<String> login(@NotNull @RequestBody @Valid UserRequest request) {
-    Map<String, String> token;
+    @NotNull Map<String, String> token;
 
     try {
       token = this.auth0Service.loginUser(request.getEmail(), request.getPassword());
