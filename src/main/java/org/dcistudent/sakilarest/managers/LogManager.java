@@ -5,7 +5,7 @@ import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.ZonedDateTime;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Service
@@ -22,7 +22,7 @@ public class LogManager {
     logRepository.insert(
         UUID.randomUUID().toString(),
         level,
-        ZonedDateTime.now().toString(),
+        LocalDateTime.now().toString(),
         message
     );
   }
