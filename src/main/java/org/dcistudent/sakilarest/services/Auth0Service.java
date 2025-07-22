@@ -1,6 +1,8 @@
 package org.dcistudent.sakilarest.services;
 
 import org.dcistudent.sakilarest.configs.Auth0Config;
+import org.dcistudent.sakilarest.exceptions.Auth0Exception;
+import org.dcistudent.sakilarest.models.responses.Auth0ErrorResponse;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -60,11 +62,15 @@ public class Auth0Service {
         .contentType(MediaType.APPLICATION_JSON)
         .bodyValue(body)
         .retrieve()
-        .onStatus(status -> !status.is2xxSuccessful(),
-            clientResponse -> clientResponse.bodyToMono(String.class).flatMap(errorBody -> {
-              System.err.println("Auth0 Register User Error: " + errorBody);
-              return Mono.error(new RuntimeException("Failed to register user: " + errorBody));
-            }))
+        .onStatus(status -> !status.is2xxSuccessful(), clientResponse ->
+            clientResponse.bodyToMono(Auth0ErrorResponse.class)
+                .flatMap(error -> {
+                  System.err.printf(
+                      "Auth0 Error: [%d] %s - %s%n", error.getStatusCode(), error.getError(), error.getMessage()
+                  );
+                  return Mono.error(new Auth0Exception(error));
+                })
+        )
         .bodyToMono(Void.class)
         .block();
   }

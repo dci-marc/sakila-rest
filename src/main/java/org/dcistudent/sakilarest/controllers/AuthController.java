@@ -1,6 +1,7 @@
 package org.dcistudent.sakilarest.controllers;
 
 import jakarta.validation.Valid;
+import org.dcistudent.sakilarest.exceptions.Auth0Exception;
 import org.dcistudent.sakilarest.factories.ResponseFactory;
 import org.dcistudent.sakilarest.models.Response;
 import org.dcistudent.sakilarest.models.requests.UserRequest;
@@ -28,6 +29,12 @@ public class AuthController {
   public Response<String> register(@NotNull @RequestBody @Valid UserRequest request) {
     try {
       this.auth0Service.registerUser(request.getEmail(), request.getPassword());
+    }catch (Auth0Exception e) {
+      return ResponseFactory.create(
+          e.getError().getStatusCode(),
+          "auth:user:creation:fail",
+          e.getError().getStatusCategory().toString()
+      );
     } catch (IllegalArgumentException e) {
       return ResponseFactory.create(
           Response.Status.BAD_REQUEST.get(),
