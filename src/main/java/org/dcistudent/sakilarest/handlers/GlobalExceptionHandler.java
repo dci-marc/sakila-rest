@@ -1,5 +1,6 @@
 package org.dcistudent.sakilarest.handlers;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.dcistudent.sakilarest.factories.ResponseFactory;
 import org.dcistudent.sakilarest.loggers.SqlLogger;
 import org.dcistudent.sakilarest.models.Response;
@@ -38,6 +39,16 @@ public class GlobalExceptionHandler {
     return ResponseFactory.create(
         Response.Status.BAD_REQUEST.get(),
         "error:request:unreadable"
+    );
+  }
+
+  @ExceptionHandler(JsonProcessingException.class)
+  public @NotNull Response<String> handleJsonProcessing(@NotNull JsonProcessingException e) {
+    this.sqlLogger.logFatal(Arrays.toString(e.getStackTrace()));
+
+    return ResponseFactory.create(
+        Response.Status.INTERNAL_SERVER_ERROR.get(),
+        "error:json:processing"
     );
   }
 
