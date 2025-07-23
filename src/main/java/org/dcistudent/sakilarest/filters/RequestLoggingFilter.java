@@ -18,7 +18,7 @@ import java.util.logging.Logger;
 @Profile("dev")
 public class RequestLoggingFilter extends OncePerRequestFilter {
 
-  private static final Logger LOG = Logger.getLogger(RequestLoggingFilter.class.getName());
+  private static final @NotNull Logger LOG = Logger.getLogger(RequestLoggingFilter.class.getName());
 
   @Override
   protected void doFilterInternal(
