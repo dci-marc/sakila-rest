@@ -2,20 +2,6 @@ package org.dcistudent.sakilarest.models.responses;
 
 import org.jetbrains.annotations.NotNull;
 
-public final class UserResponse {
-
-  @NotNull
-  private String email;
-
-  public UserResponse(@NotNull String email) {
-    this.email = email;
-  }
-
-  public @NotNull String getEmail() {
-    return this.email;
-  }
-
-  public void setEmail(@NotNull String email) {
-    this.email = email;
-  }
+public record UserResponse(@NotNull String email) {
 }
+
