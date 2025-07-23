@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 @Service
 public class LogManager {
@@ -20,7 +19,6 @@ public class LogManager {
   @Transactional
   public void log(int level, @NotNull String message) {
     logRepository.insert(
-        UUID.randomUUID().toString(),
         level,
         LocalDateTime.now().toString(),
         message

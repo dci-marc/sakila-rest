@@ -9,9 +9,10 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.UUID;
 
 @Repository
-public interface LogRepository extends JpaRepository<Log, Long> {
+public interface LogRepository extends JpaRepository<Log, UUID> {
 
   default @NotNull List<Log> findWithLimit(@NotNull Integer limit) {
     if (limit < 1 || limit > 100) {
@@ -34,7 +35,6 @@ public interface LogRepository extends JpaRepository<Log, Long> {
           "VALUES (:id, :level, :datetime, :message)"
   )
   void insert(
-      @NotNull @Param("id") String uuid,
       @NotNull @Param("level") Integer level,
       @NotNull @Param("datetime") String datetime,
       @NotNull @Param("message") String message

@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import org.jetbrains.annotations.NotNull;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Entity
 @Table(name = "log")
@@ -12,7 +13,7 @@ public class Log {
   @Id
   @GeneratedValue(strategy = GenerationType.UUID)
   @Column(name = "id", nullable = false, unique = true)
-  private String id;
+  private UUID id;
 
   @Column(name = "level", nullable = false)
   @NotNull
@@ -26,22 +27,13 @@ public class Log {
   @NotNull
   private String message;
 
-  public Log(@NotNull String id,@NotNull Integer level,@NotNull LocalDateTime datetime,@NotNull String message) {
-    this.id = id;
+  public Log(@NotNull Integer level,@NotNull LocalDateTime datetime,@NotNull String message) {
     this.level = level;
     this.datetime = datetime;
     this.message = message;
   }
 
   public Log() {}
-
-  public @NotNull String getId() {
-    return this.id;
-  }
-
-  public void setId(@NotNull String id) {
-    this.id = id;
-  }
 
   public @NotNull Integer getLevel() {
     return this.level;
