@@ -34,7 +34,7 @@ public class GlobalExceptionHandler {
   }
 
   @ExceptionHandler(HttpMessageNotReadableException.class)
-  public @NotNull Response<String> handleUnreadable(@NotNull HttpMessageNotReadableException ex) {
+  public @NotNull Response<String> handleUnreadable(@NotNull HttpMessageNotReadableException e) {
     return ResponseFactory.create(
         Response.Status.BAD_REQUEST.get(),
         "error:request:unreadable"
@@ -42,8 +42,8 @@ public class GlobalExceptionHandler {
   }
 
   @ExceptionHandler(MethodArgumentNotValidException.class)
-  public @NotNull Response<List<Map<String, String>>> handleValidation(MethodArgumentNotValidException ex) {
-    List<Map<String, String>> errors = ex.getBindingResult().getFieldErrors().stream()
+  public @NotNull Response<List<Map<String, String>>> handleValidation(MethodArgumentNotValidException e) {
+    List<Map<String, String>> errors = e.getBindingResult().getFieldErrors().stream()
         .map(err -> {
           Map<String, String> errorDetail = new HashMap<>();
           errorDetail.put("field", err.getField());
