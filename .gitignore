@@ -33,7 +33,7 @@ build/
 .vscode/
 
 ### Docker ###
-mysql_data/
+mariadb_data/
 
 ### Configuration files ###
 /src/main/resources/application.properties

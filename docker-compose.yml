@@ -1,16 +1,16 @@
 services:
-  mysql:
-    image: mysql:8
+  mariadb:
+    image: mariadb:latest
     container_name: sakila-mysql
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: sakila
-      MYSQL_USER: marc
-      MYSQL_PASSWORD: marc
+      MARIADB_ROOT_PASSWORD: root
+      MARIADB_DATABASE: sakila
+      MARIADB_USER: marc
+      MARIADB_PASSWORD: marc
     ports:
       - "3306:3306"
     volumes:
-      - ./mysql_data:/var/lib/mysql
+      - ./mariadb_data:/var/lib/mysql
       - ./src/main/resources/mysql-dump/dump-sakila-202507101349.sql.gz:/docker-entrypoint-initdb.d/init.sql.gz
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
@@ -19,4 +19,4 @@ services:
       retries: 5
 
 volumes:
-  mysql_data:
+  mariadb_data:
