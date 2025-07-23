@@ -1,19 +1,19 @@
 package org.dcistudent.sakilarest.models;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotBlank;
+import lombok.Getter;
+import lombok.Setter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+@Getter
+@Setter
 public final class Response<T> {
 
   private final int status;
   @NotBlank
-  private final String message;
-  @JsonInclude(JsonInclude.Include.NON_NULL)
-  @JsonProperty("data")
-  private final T data;
+  private final @NotNull String message;
+  private final @NotNull T data;
 
   private Response(int status, @NotNull String message, @Nullable T data) {
     this.status = status;
@@ -45,19 +45,6 @@ public final class Response<T> {
    */
   public static Response<String> create(int status, @NotNull String message) {
     return new Response<>(status, message, "");
-  }
-
-  public int getStatus() {
-    return this.status;
-  }
-
-  public @NotNull String getMessage() {
-    return this.message;
-  }
-
-  @Nullable
-  public T getData() {
-    return this.data;
   }
 
   public enum Status {

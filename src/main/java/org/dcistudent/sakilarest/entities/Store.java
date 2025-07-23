@@ -1,9 +1,13 @@
 package org.dcistudent.sakilarest.entities;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
+import org.jetbrains.annotations.NotNull;
 
 import java.time.Instant;
+import java.util.List;
 
 @Entity
 @Table(name = "store", schema = "sakila", indexes = {
@@ -11,53 +15,28 @@ import java.time.Instant;
 }, uniqueConstraints = {
     @UniqueConstraint(name = "idx_unique_manager", columnNames = {"manager_staff_id"})
 })
+@Getter
+@Setter
 public class Store {
   @Id
   @Column(name = "store_id", columnDefinition = "int UNSIGNED not null")
-  private Long id;
+  private @NotNull Long id;
 
   @OneToOne(fetch = FetchType.LAZY, optional = false)
   @JoinColumn(name = "manager_staff_id", nullable = false)
-  private Staff managerStaff;
+  private @NotNull Staff managerStaff;
 
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
   @JoinColumn(name = "address_id", nullable = false)
-  private Address address;
+  private @NotNull Address address;
+
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "store")
+  private @NotNull List<Customer> customer;
+
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "store")
+  private @NotNull List<Inventory> inventory;
 
   @ColumnDefault("CURRENT_TIMESTAMP")
   @Column(name = "last_update", nullable = false)
-  private Instant lastUpdate;
-
-  public Long getId() {
-    return id;
-  }
-
-  public void setId(Long id) {
-    this.id = id;
-  }
-
-  public Staff getManagerStaff() {
-    return managerStaff;
-  }
-
-  public void setManagerStaff(Staff managerStaff) {
-    this.managerStaff = managerStaff;
-  }
-
-  public Address getAddress() {
-    return address;
-  }
-
-  public void setAddress(Address address) {
-    this.address = address;
-  }
-
-  public Instant getLastUpdate() {
-    return lastUpdate;
-  }
-
-  public void setLastUpdate(Instant lastUpdate) {
-    this.lastUpdate = lastUpdate;
-  }
-
+  private @NotNull Instant lastUpdate;
 }

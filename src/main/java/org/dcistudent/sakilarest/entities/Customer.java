@@ -2,6 +2,7 @@ package org.dcistudent.sakilarest.entities;
 
 import jakarta.persistence.*;
 import org.hibernate.annotations.ColumnDefault;
+import org.jetbrains.annotations.NotNull;
 
 import java.time.Instant;
 
@@ -14,35 +15,35 @@ import java.time.Instant;
 public class Customer {
   @Id
   @Column(name = "customer_id", columnDefinition = "int UNSIGNED not null")
-  private Long id;
+  private @NotNull Long id;
 
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
   @JoinColumn(name = "store_id", nullable = false)
-  private Store store;
+  private @NotNull Store store;
 
   @Column(name = "first_name", nullable = false, length = 45)
-  private String firstName;
+  private @NotNull String firstName;
 
   @Column(name = "last_name", nullable = false, length = 45)
-  private String lastName;
+  private @NotNull String lastName;
 
   @Column(name = "email", length = 50)
-  private String email;
+  private @NotNull String email;
 
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
   @JoinColumn(name = "address_id", nullable = false)
-  private Address address;
+  private @NotNull Address address;
 
   @ColumnDefault("1")
   @Column(name = "active", nullable = false)
-  private Boolean active = false;
+  private @NotNull Boolean active = false;
 
   @Column(name = "create_date", nullable = false)
-  private Instant createDate;
+  private @NotNull Instant createDate;
 
   @ColumnDefault("CURRENT_TIMESTAMP")
   @Column(name = "last_update")
-  private Instant lastUpdate;
+  private @NotNull Instant lastUpdate;
 
   public Long getId() {
     return id;

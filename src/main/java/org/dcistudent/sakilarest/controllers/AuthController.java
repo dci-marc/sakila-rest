@@ -26,7 +26,7 @@ public class AuthController {
   }
 
   @PostMapping("/register")
-  public Response<String> register(@NotNull @RequestBody @Valid UserRequest request) {
+  public @NotNull Response<String> register(@NotNull @RequestBody @Valid UserRequest request) {
     try {
       this.auth0Service.registerUser(request.getEmail(), request.getPassword());
     }catch (Auth0Exception e) {
@@ -51,7 +51,7 @@ public class AuthController {
   }
 
   @PostMapping("/login")
-  public Response<String> login(@NotNull @RequestBody @Valid UserRequest request) {
+  public @NotNull Response<String> login(@NotNull @RequestBody @Valid UserRequest request) {
     @NotNull Map<String, String> token;
 
     try {

@@ -1,7 +1,10 @@
 package org.dcistudent.sakilarest.entities;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
+import org.jetbrains.annotations.NotNull;
 
 import java.time.Instant;
 
@@ -10,53 +13,22 @@ import java.time.Instant;
     @Index(name = "idx_fk_film_id", columnList = "film_id"),
     @Index(name = "idx_store_id_film_id", columnList = "store_id, film_id")
 })
+@Getter
+@Setter
 public class Inventory {
   @Id
   @Column(name = "inventory_id", columnDefinition = "int UNSIGNED not null")
-  private Long id;
+  private @NotNull Long id;
 
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
   @JoinColumn(name = "film_id", nullable = false)
-  private Film film;
+  private @NotNull Film film;
 
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
   @JoinColumn(name = "store_id", nullable = false)
-  private Store store;
+  private @NotNull Store store;
 
   @ColumnDefault("CURRENT_TIMESTAMP")
   @Column(name = "last_update", nullable = false)
-  private Instant lastUpdate;
-
-  public Long getId() {
-    return id;
-  }
-
-  public void setId(Long id) {
-    this.id = id;
-  }
-
-  public Film getFilm() {
-    return film;
-  }
-
-  public void setFilm(Film film) {
-    this.film = film;
-  }
-
-  public Store getStore() {
-    return store;
-  }
-
-  public void setStore(Store store) {
-    this.store = store;
-  }
-
-  public Instant getLastUpdate() {
-    return lastUpdate;
-  }
-
-  public void setLastUpdate(Instant lastUpdate) {
-    this.lastUpdate = lastUpdate;
-  }
-
+  private @NotNull Instant lastUpdate;
 }
