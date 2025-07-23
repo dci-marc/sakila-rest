@@ -34,6 +34,7 @@ public class RequestLoggingFilter extends OncePerRequestFilter {
       byte[] content = wrappedRequest.getContentAsByteArray();
       if (content.length > 0) {
         String requestBody = new String(content, wrappedRequest.getCharacterEncoding());
+        requestBody = requestBody.replaceAll("[\n\r]", "_");
         LOG.info("Request Body: " + requestBody);
       }
     }
