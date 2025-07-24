@@ -25,8 +25,30 @@ public class FilmManager {
     return this.filmRepository.findAll(pageable);
   }
 
-  public @NotNull List<Film> findByTitle(@NotNull String pattern) {
-    return this.filmRepository.findByTitleContaining(pattern)
+  public @NotNull Film findById(@NotNull Long id) {
+    return this.filmRepository.findById(id)
+        .orElseThrow(() -> new IllegalArgumentException("Film not found with ID: " + id));
+  }
+
+  public @NotNull List<Film> findByTitle(
+      @NotNull Integer limit,
+      @NotNull Integer offset,
+      @NotNull String pattern
+  ) {
+    Pageable pageable = PageRequest.of(offset, limit);
+    return this.filmRepository
+        .findByTitleContainingIgnoreCase(pattern, pageable)
+        .orElseThrow(() -> new IllegalArgumentException("No films found with pattern: " + pattern));
+  }
+
+  public @NotNull List<Film> findByDescription(
+      @NotNull Integer limit,
+      @NotNull Integer offset,
+      @NotNull String pattern
+  ) {
+    Pageable pageable = PageRequest.of(offset, limit);
+    return this.filmRepository
+        .findByDescription(pattern, pageable)
         .orElseThrow(() -> new IllegalArgumentException("No films found with pattern: " + pattern));
   }
 }
