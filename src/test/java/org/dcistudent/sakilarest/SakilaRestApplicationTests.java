@@ -8,6 +8,7 @@ class SakilaRestApplicationTests {
 
   @Test
   void contextLoads() {
+    throw new UnsupportedOperationException("This test is not implemented yet");
   }
 
 }
