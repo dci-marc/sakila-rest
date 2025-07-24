@@ -22,7 +22,8 @@ import java.util.Objects;
 @Service
 public class Auth0Service {
 
-  private final static @NotNull String STRING_PASSWORD = "password";
+  @NotNull
+  private static final String STRING_PASSWORD = "password";
 
   private final @NotNull RestTemplate restTemplate;
   private final @NotNull Auth0Config config;
