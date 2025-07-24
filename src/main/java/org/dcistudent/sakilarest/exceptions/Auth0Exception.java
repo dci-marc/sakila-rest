@@ -4,7 +4,8 @@ import org.dcistudent.sakilarest.models.responses.Auth0ErrorResponse;
 import org.jetbrains.annotations.NotNull;
 
 public class Auth0Exception extends RuntimeException {
-  private final Auth0ErrorResponse error;
+
+  private final transient @NotNull Auth0ErrorResponse error;
 
   public Auth0Exception(Auth0ErrorResponse error) {
     super(error.getMessage());
