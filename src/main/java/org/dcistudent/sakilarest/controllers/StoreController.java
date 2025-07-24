@@ -1,6 +1,5 @@
 package org.dcistudent.sakilarest.controllers;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import org.dcistudent.sakilarest.factories.ResponseFactory;
 import org.dcistudent.sakilarest.models.Response;
 import org.dcistudent.sakilarest.services.StoreService;
