@@ -22,6 +22,8 @@ import java.util.Objects;
 @Service
 public class Auth0Service {
 
+  private final static @NotNull String STRING_PASSWORD = "password";
+
   private final @NotNull RestTemplate restTemplate;
   private final @NotNull Auth0Config config;
 
@@ -60,7 +62,7 @@ public class Auth0Service {
 
     var body = Map.of(
         "email", email,
-        "password", password,
+        Auth0Service.STRING_PASSWORD, password,
         "connection", config.getConnection()
     );
 
@@ -79,9 +81,9 @@ public class Auth0Service {
 
   public @NotNull Map<String, String> loginUser(@NotNull String username, @NotNull String password) {
     var body = Map.of(
-        "grant_type", "password",
+        "grant_type", Auth0Service.STRING_PASSWORD,
         "username", username,
-        "password", password,
+        Auth0Service.STRING_PASSWORD, password,
         "audience", config.getAudience(),
         "scope", "openid profile email",
         "client_id", config.getAppClientId(),
