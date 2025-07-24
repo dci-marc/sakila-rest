@@ -18,7 +18,7 @@ public class StoreController {
   }
 
   @GetMapping("/{id}")
-  public @NotNull Response<Object> getStoreById(@NotNull @PathVariable Long id) throws JsonProcessingException {
+  public @NotNull Response<Object> getStoreById(@NotNull @PathVariable Long id) {
     try {
       return ResponseFactory.create(
           Response.Status.OK.get(),
