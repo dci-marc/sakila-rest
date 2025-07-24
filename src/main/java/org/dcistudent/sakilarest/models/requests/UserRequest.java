@@ -10,15 +10,15 @@ public final class UserRequest {
 
   @NotBlank
   @Email(message = "Email should be valid.")
-  private String email;
+  private @NotNull String email;
 
   @NotBlank
   @Size(min = 8, max = 64, message = "Password must be between 8 and 64 characters long.")
   @Pattern(
-      regexp = "^[\\w\\d!\"#$%&'()*+,-./:;<=>?@\\[\\]^_`{|}~]+$",
+      regexp = "^[\\w!\"#$%&'()*+,\\-./:;<=>?@\\[\\]^`{|}~]+$",
       message = "Password contains disallowed special characters."
   )
-  private String password;
+  private @NotNull String password;
 
   public UserRequest(@NotNull String email, @NotNull String password) {
     this.email = email;
