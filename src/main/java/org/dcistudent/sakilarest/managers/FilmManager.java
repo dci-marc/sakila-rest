@@ -30,7 +30,7 @@ public class FilmManager {
         .orElseThrow(() -> new IllegalArgumentException("Film not found with ID: " + id));
   }
 
-  public @NotNull List<Film> findByTitle(
+  public @NotNull Page<Film> findByTitle(
       @NotNull Integer limit,
       @NotNull Integer offset,
       @NotNull String pattern
@@ -41,7 +41,7 @@ public class FilmManager {
         .orElseThrow(() -> new IllegalArgumentException("No films found with pattern: " + pattern));
   }
 
-  public @NotNull List<Film> findByDescription(
+  public @NotNull Page<Film> findByDescription(
       @NotNull Integer limit,
       @NotNull Integer offset,
       @NotNull String pattern
@@ -50,5 +50,16 @@ public class FilmManager {
     return this.filmRepository
         .findByDescription(pattern, pageable)
         .orElseThrow(() -> new IllegalArgumentException("No films found with pattern: " + pattern));
+  }
+
+  public @NotNull Page<Film> findByReleaseYear(
+      @NotNull Integer limit,
+      @NotNull Integer offset,
+      @NotNull Integer pattern
+  ) {
+    Pageable pageable = PageRequest.of(offset, limit);
+    return this.filmRepository
+        .findByReleaseYear(pattern, pageable)
+        .orElseThrow(() -> new IllegalArgumentException("No films found with release year: " + pattern));
   }
 }
