@@ -7,5 +7,6 @@ RESTful API service demo on the Sakila dataset.
 This project is developed exclusively for personal use for possible reference
 implementations.
 
-It should reflect the best and most widely used concepts and principles, while
-also showing several possibilities for how different solutions can look.
+It should reflect the best and most widely used concepts and principles -
+as far as I can tell as a beginner - while also showing several possibilities
+for how different solutions can look.
