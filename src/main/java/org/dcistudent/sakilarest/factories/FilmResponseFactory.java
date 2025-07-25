@@ -9,6 +9,20 @@ import java.time.ZoneId;
 
 public final class FilmResponseFactory {
 
+  private FilmResponseFactory() {}
+
+  public static @NotNull FilmResponse create(@NotNull Film film) {
+    return new FilmResponse(
+        film.getTitle(),
+        film.getDescription(),
+        film.getReleaseYear(),
+        film.getLength(),
+        film.getRating(),
+        film.getSpecialFeatures(),
+        film.getLastUpdate().atZone(ZoneId.systemDefault()).toString()
+    );
+  }
+
   public static @NotNull Page<FilmResponse> create(@NotNull Page<Film> films) {
     return films.map(film -> new FilmResponse(
         film.getTitle(),
