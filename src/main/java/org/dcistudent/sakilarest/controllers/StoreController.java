@@ -2,6 +2,7 @@ package org.dcistudent.sakilarest.controllers;
 
 import org.dcistudent.sakilarest.factories.ResponseFactory;
 import org.dcistudent.sakilarest.models.Response;
+import org.dcistudent.sakilarest.models.responses.EmptyResponse;
 import org.dcistudent.sakilarest.models.responses.ResponsePayload;
 import org.dcistudent.sakilarest.services.StoreService;
 import org.jetbrains.annotations.NotNull;
@@ -22,7 +23,7 @@ public class StoreController {
   }
 
   @GetMapping("/{id}")
-  public @NotNull Response<? extends ResponsePayload> getStoreById(@NotNull @PathVariable Long id) {
+  public @NotNull Response<ResponsePayload> getStoreById(@NotNull @PathVariable Long id) {
     try {
       return ResponseFactory.create(
           Response.Status.OK.get(),
@@ -32,7 +33,8 @@ public class StoreController {
     } catch (IllegalArgumentException e) {
       return ResponseFactory.create(
           Response.Status.BAD_REQUEST.get(),
-          "store:fetch:not.found"
+          "store:fetch:not.found",
+          EmptyResponse.INSTANCE
       );
     }
   }

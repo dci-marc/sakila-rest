@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import org.dcistudent.sakilarest.factories.ResponseFactory;
 import org.dcistudent.sakilarest.models.Response;
 import org.dcistudent.sakilarest.models.requests.FilmRequest;
+import org.dcistudent.sakilarest.models.responses.EmptyResponse;
 import org.dcistudent.sakilarest.models.responses.FilmResponse;
 import org.dcistudent.sakilarest.models.responses.ResponsePayload;
 import org.dcistudent.sakilarest.services.FilmService;
@@ -22,7 +23,7 @@ public class FilmController {
   }
 
   @GetMapping("/{id}")
-  public @NotNull Response<? extends ResponsePayload> getFilm(@NotNull @PathVariable Integer id) {
+  public @NotNull Response<ResponsePayload> getFilm(@NotNull @PathVariable Integer id) {
     try {
       return ResponseFactory.create(
           Response.Status.OK.get(),
@@ -32,7 +33,8 @@ public class FilmController {
     } catch (IllegalArgumentException e) {
       return ResponseFactory.create(
           Response.Status.BAD_REQUEST.get(),
-          "film:fetch:not.found"
+          "film:fetch:not.found",
+          EmptyResponse.INSTANCE
       );
     }
   }
