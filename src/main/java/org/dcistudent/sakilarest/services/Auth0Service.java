@@ -3,13 +3,11 @@ package org.dcistudent.sakilarest.services;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.dcistudent.sakilarest.configs.Auth0Config;
 import org.dcistudent.sakilarest.exceptions.Auth0Exception;
+import org.dcistudent.sakilarest.loggers.SqlLogger;
 import org.dcistudent.sakilarest.models.responses.Auth0ErrorResponse;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
+import org.springframework.http.*;
 import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.ResponseErrorHandler;
@@ -28,7 +26,10 @@ public class Auth0Service {
   private final @NotNull RestTemplate restTemplate;
   private final @NotNull Auth0Config config;
 
-  public Auth0Service(@NotNull Auth0Config config, @NotNull RestTemplateBuilder builder) {
+  public Auth0Service(
+      @NotNull Auth0Config config,
+      @NotNull RestTemplateBuilder builder
+  ) {
     this.config = config;
     @NotNull ObjectMapper objectMapper = new ObjectMapper();
 
@@ -115,14 +116,25 @@ public class Auth0Service {
       String errorBody = new String(response.getBody().readAllBytes());
       try {
         Auth0ErrorResponse auth0Error = objectMapper.readValue(errorBody, Auth0ErrorResponse.class);
-        System.err.printf(
-            "Auth0 Error: [%d] %s - %s%n", auth0Error.getStatus(), auth0Error.getMessage(), auth0Error.getData()
+        SqlLogger.getInstance().logError(
+            String.format(
+                "Auth0 Error: [%d] %s - %s%n",
+                auth0Error.getStatus(),
+                auth0Error.getMessage(),
+                auth0Error.getData()
+            )
         );
         throw new Auth0Exception(auth0Error);
       } catch (IOException e) {
         // If parsing to Auth0ErrorResponse fails, throw a generic RuntimeException
-        System.err.println("Auth0 Error (unparseable or generic): " + errorBody);
-        throw new RuntimeException("Failed to process Auth0 response: " + errorBody, e);
+        SqlLogger.getInstance().logError(String.format("Auth0 Error (unparseable or generic): %s", errorBody));
+        throw new Auth0Exception(
+            new Auth0ErrorResponse(
+                HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                String.format("Failed to process Auth0 response: %s", errorBody),
+                HttpStatus.INTERNAL_SERVER_ERROR.value()
+            )
+        );
       }
     }
   }
