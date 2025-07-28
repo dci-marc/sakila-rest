@@ -41,6 +41,4 @@ public final class ResponseFactory {
   ) {
     return Response.create(status, message, EmptyResponse.INSTANCE);
   }
-
-
 }
