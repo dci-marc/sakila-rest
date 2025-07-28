@@ -6,6 +6,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.dcistudent.sakilarest.factories.ResponseFactory;
 import org.dcistudent.sakilarest.models.Response;
+import org.dcistudent.sakilarest.models.responses.EmptyResponse;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;
@@ -17,8 +19,12 @@ import java.io.IOException;
 public class AccessDeniedEntryPoint implements AccessDeniedHandler {
 
   @Override
-  public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws IOException, ServletException {
-    Response<String> responseModel = ResponseFactory.create(
+  public void handle(
+      @NotNull HttpServletRequest request,
+      @NotNull HttpServletResponse response,
+      @NotNull AccessDeniedException accessDeniedException
+  ) throws IOException, ServletException {
+    Response<EmptyResponse> responseModel = ResponseFactory.create(
         HttpStatus.FORBIDDEN.value(),
         "error:access:denied"
     );

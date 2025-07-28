@@ -106,24 +106,24 @@ public class Auth0Service {
   private record Auth0ResponseErrorHandler(ObjectMapper objectMapper) implements ResponseErrorHandler {
 
     @Override
-      public boolean hasError(@NotNull ClientHttpResponse response) throws IOException {
-        return !response.getStatusCode().is2xxSuccessful();
-      }
+    public boolean hasError(@NotNull ClientHttpResponse response) throws IOException {
+      return !response.getStatusCode().is2xxSuccessful();
+    }
 
-      @Override
-      public void handleError(@NotNull ClientHttpResponse response) throws IOException {
-        String errorBody = new String(response.getBody().readAllBytes());
-        try {
-          Auth0ErrorResponse auth0Error = objectMapper.readValue(errorBody, Auth0ErrorResponse.class);
-          System.err.printf(
-              "Auth0 Error: [%d] %s - %s%n", auth0Error.getStatusCode(), auth0Error.getError(), auth0Error.getMessage()
-          );
-          throw new Auth0Exception(auth0Error);
-        } catch (IOException e) {
-          // If parsing to Auth0ErrorResponse fails, throw a generic RuntimeException
-          System.err.println("Auth0 Error (unparseable or generic): " + errorBody);
-          throw new RuntimeException("Failed to process Auth0 response: " + errorBody, e);
-        }
+    @Override
+    public void handleError(@NotNull ClientHttpResponse response) throws IOException {
+      String errorBody = new String(response.getBody().readAllBytes());
+      try {
+        Auth0ErrorResponse auth0Error = objectMapper.readValue(errorBody, Auth0ErrorResponse.class);
+        System.err.printf(
+            "Auth0 Error: [%d] %s - %s%n", auth0Error.getStatus(), auth0Error.getMessage(), auth0Error.getData()
+        );
+        throw new Auth0Exception(auth0Error);
+      } catch (IOException e) {
+        // If parsing to Auth0ErrorResponse fails, throw a generic RuntimeException
+        System.err.println("Auth0 Error (unparseable or generic): " + errorBody);
+        throw new RuntimeException("Failed to process Auth0 response: " + errorBody, e);
       }
     }
+  }
 }

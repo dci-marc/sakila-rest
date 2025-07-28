@@ -29,11 +29,11 @@ public class AuthController {
   public @NotNull Response<String> register(@NotNull @RequestBody @Valid UserRequest request) {
     try {
       this.auth0Service.registerUser(request.getEmail(), request.getPassword());
-    }catch (Auth0Exception e) {
+    } catch (Auth0Exception e) {
       return ResponseFactory.create(
-          e.getError().getStatusCode(),
+          e.getError().getStatus(),
           "auth:user:creation:fail",
-          e.getError().getStatusCategory().toString()
+          e.getError().getMessage()
       );
     } catch (IllegalArgumentException e) {
       return ResponseFactory.create(
@@ -46,7 +46,7 @@ public class AuthController {
     return ResponseFactory.create(
         Response.Status.OK.get(),
         "auth:user:creation:success",
-        (new UserResponse(request.getEmail()).toString())
+        (new UserResponse(request.getEmail())).toString()
     );
   }
 

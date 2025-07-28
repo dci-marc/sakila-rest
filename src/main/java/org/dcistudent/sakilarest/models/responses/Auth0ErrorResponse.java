@@ -1,45 +1,14 @@
 package org.dcistudent.sakilarest.models.responses;
 
+import lombok.Getter;
+import org.dcistudent.sakilarest.models.Response;
 import org.jetbrains.annotations.NotNull;
 
-public final class Auth0ErrorResponse {
-  private final int statusCode;
-  private final @NotNull String error;
-  private final @NotNull String message;
-  private final @NotNull String errorCode;
-  private final @NotNull StatusCategory statusCategory;
+@Getter
+public final class Auth0ErrorResponse extends Response<String> implements ResponsePayload {
 
-  public Auth0ErrorResponse(
-      int statusCode,
-      @NotNull String error,
-      @NotNull String message,
-      @NotNull String errorCode
-  ) {
-    this.statusCode = statusCode;
-    this.error = error;
-    this.message = message;
-    this.errorCode = errorCode;
-    this.statusCategory = StatusCategory.fromStatusCode(statusCode);
-  }
-
-  public int getStatusCode() {
-    return this.statusCode;
-  }
-
-  public @NotNull String getError() {
-    return this.error;
-  }
-
-  public @NotNull String getMessage() {
-    return this.message;
-  }
-
-  public @NotNull String getErrorCode() {
-    return this.errorCode;
-  }
-
-  public @NotNull StatusCategory getStatusCategory() {
-    return this.statusCategory;
+  public Auth0ErrorResponse(int status, @NotNull String message, int statusCode) {
+    super(status, message, StatusCategory.fromStatusCode(statusCode).toString());
   }
 
   public enum StatusCategory {
@@ -54,9 +23,9 @@ public final class Auth0ErrorResponse {
     UNKNOWN(-1, "auth:unknown");
 
     public final int code;
-    public final String description;
+    public final @NotNull String description;
 
-    StatusCategory(int code, String description) {
+    StatusCategory(int code, @NotNull String description) {
       this.code = code;
       this.description = description;
     }

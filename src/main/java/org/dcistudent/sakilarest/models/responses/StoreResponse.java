@@ -9,5 +9,5 @@ public record StoreResponse(
     @NotNull StaffResponse staff,
     @NotNull List<CustomerResponse> customers,
     @NotNull List<FilmResponse> films
-) {
+) implements ResponsePayload {
 }

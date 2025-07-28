@@ -10,5 +10,4 @@ public record FilmResponse(
     @NotNull String rating,
     @NotNull String specialFeatures,
     @NotNull String lastUpdate
-) {
-}
+) implements ResponsePayload {}

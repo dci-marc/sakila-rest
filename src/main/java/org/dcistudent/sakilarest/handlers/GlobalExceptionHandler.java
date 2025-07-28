@@ -4,6 +4,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import org.dcistudent.sakilarest.factories.ResponseFactory;
 import org.dcistudent.sakilarest.loggers.SqlLogger;
 import org.dcistudent.sakilarest.models.Response;
+import org.dcistudent.sakilarest.models.responses.DictionaryListResponse;
+import org.dcistudent.sakilarest.models.responses.EmptyResponse;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -22,7 +24,7 @@ public class GlobalExceptionHandler {
   }
 
   @ExceptionHandler(Exception.class)
-  public @NotNull Response<String> handleGeneric(@NotNull Exception e) {
+  public @NotNull Response<EmptyResponse> handleGeneric(@NotNull Exception e) {
     this.sqlLogger.logFatal(Arrays.toString(e.getStackTrace()));
 
     return ResponseFactory.create(
@@ -32,7 +34,7 @@ public class GlobalExceptionHandler {
   }
 
   @ExceptionHandler(HttpMessageNotReadableException.class)
-  public @NotNull Response<String> handleUnreadable(@NotNull HttpMessageNotReadableException e) {
+  public @NotNull Response<EmptyResponse> handleUnreadable(@NotNull HttpMessageNotReadableException e) {
     return ResponseFactory.create(
         Response.Status.BAD_REQUEST.get(),
         "error:request:unreadable"
@@ -40,7 +42,7 @@ public class GlobalExceptionHandler {
   }
 
   @ExceptionHandler(JsonProcessingException.class)
-  public @NotNull Response<String> handleJsonProcessing(@NotNull JsonProcessingException e) {
+  public @NotNull Response<EmptyResponse> handleJsonProcessing(@NotNull JsonProcessingException e) {
     this.sqlLogger.logFatal(Arrays.toString(e.getStackTrace()));
 
     return ResponseFactory.create(
@@ -50,7 +52,7 @@ public class GlobalExceptionHandler {
   }
 
   @ExceptionHandler(MethodArgumentNotValidException.class)
-  public @NotNull Response<List<Map<String, String>>> handleValidation(MethodArgumentNotValidException e) {
+  public @NotNull Response<DictionaryListResponse> handleValidation(MethodArgumentNotValidException e) {
     List<Map<String, String>> errors = e.getBindingResult().getFieldErrors().stream()
         .map(err -> {
           Map<String, String> errorDetail = new HashMap<>();
@@ -63,7 +65,7 @@ public class GlobalExceptionHandler {
     return ResponseFactory.create(
         Response.Status.BAD_REQUEST.get(),
         "error:validation:fail",
-        errors
+        new DictionaryListResponse(errors)
     );
   }
 }
