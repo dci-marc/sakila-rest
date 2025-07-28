@@ -13,6 +13,10 @@ public class SqlLogger {
     this.logManager = logManager;
   }
 
+  public static @NotNull SqlLogger getInstance() {
+    return this;
+  }
+
   public void logDebug(@NotNull String message) {
     this.logManager.log(Level.DEBUG.get(), message);
   }
@@ -28,7 +32,6 @@ public class SqlLogger {
   public void logError(@NotNull String message) {
     this.logManager.log(Level.ERROR.get(), message);
   }
-
 
   public void logFatal(@NotNull String message) {
     this.logManager.log(Level.FATAL.get(), message);
