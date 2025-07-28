@@ -1,6 +1,6 @@
 services:
   mariadb:
-    image: mariadb:latest
+    image: mariadb:10.11
     container_name: sakila-mysql
     environment:
       MARIADB_ROOT_PASSWORD: root
@@ -11,9 +11,9 @@ services:
       - "3306:3306"
     volumes:
       - ./mariadb_data:/var/lib/mysql
-      - ./src/main/resources/mysql-dump/dump-sakila-202507101349.sql.gz:/docker-entrypoint-initdb.d/init.sql.gz
+      # - ./src/main/resources/mysql-dump/dump-sakila-202507101349.sql.gz:/docker-entrypoint-initdb.d/init.sql.gz
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
       interval: 10s
       timeout: 5s
       retries: 5
