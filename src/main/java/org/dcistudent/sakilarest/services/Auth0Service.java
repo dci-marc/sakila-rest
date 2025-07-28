@@ -28,14 +28,15 @@ public class Auth0Service {
 
   public Auth0Service(
       @NotNull Auth0Config config,
-      @NotNull RestTemplateBuilder builder
+      @NotNull RestTemplateBuilder builder,
+      @NotNull SqlLogger logger
   ) {
     this.config = config;
-    @NotNull ObjectMapper objectMapper = new ObjectMapper();
+    ObjectMapper objectMapper = new ObjectMapper();
 
     this.restTemplate = builder
         .rootUri("https://" + config.getDomain())
-        .errorHandler(new Auth0ResponseErrorHandler(objectMapper))
+        .errorHandler(new Auth0ResponseErrorHandler(objectMapper, logger))
         .build();
   }
 
@@ -104,7 +105,16 @@ public class Auth0Service {
     ));
   }
 
-  private record Auth0ResponseErrorHandler(ObjectMapper objectMapper) implements ResponseErrorHandler {
+  private class Auth0ResponseErrorHandler implements ResponseErrorHandler {
+
+    private final @NotNull ObjectMapper objectMapper;
+    private final @NotNull SqlLogger logger;
+
+    public Auth0ResponseErrorHandler(@NotNull ObjectMapper objectMapper, @NotNull SqlLogger logger) {
+      Objects.requireNonNull(objectMapper, "ObjectMapper must not be null");
+      this.objectMapper = objectMapper;
+      this.logger = logger;
+    }
 
     @Override
     public boolean hasError(@NotNull ClientHttpResponse response) throws IOException {
@@ -116,7 +126,7 @@ public class Auth0Service {
       String errorBody = new String(response.getBody().readAllBytes());
       try {
         Auth0ErrorResponse auth0Error = objectMapper.readValue(errorBody, Auth0ErrorResponse.class);
-        SqlLogger.getInstance().logError(
+        this.logger.logError(
             String.format(
                 "Auth0 Error: [%d] %s - %s%n",
                 auth0Error.getStatus(),
@@ -127,7 +137,7 @@ public class Auth0Service {
         throw new Auth0Exception(auth0Error);
       } catch (IOException e) {
         // If parsing to Auth0ErrorResponse fails, throw a generic RuntimeException
-        SqlLogger.getInstance().logError(String.format("Auth0 Error (unparseable or generic): %s", errorBody));
+        this.logger.logError(String.format("Auth0 Error (unparseable or generic): %s", errorBody));
         throw new Auth0Exception(
             new Auth0ErrorResponse(
                 HttpStatus.INTERNAL_SERVER_ERROR.value(),

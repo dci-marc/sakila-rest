@@ -13,10 +13,6 @@ public class SqlLogger {
     this.logManager = logManager;
   }
 
-  public static @NotNull SqlLogger getInstance() {
-    return this;
-  }
-
   public void logDebug(@NotNull String message) {
     this.logManager.log(Level.DEBUG.get(), message);
   }
