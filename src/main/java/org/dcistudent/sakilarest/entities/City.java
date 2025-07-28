@@ -14,8 +14,8 @@ public class City {
   @Column(name = "city_id", columnDefinition = "int UNSIGNED not null")
   private Long id;
 
-  @Column(name = "city", nullable = false, length = 50)
-  private String city;
+  @Column(name = "name", nullable = false, length = 50)
+  private String name;
 
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
   @JoinColumn(name = "country_id", nullable = false)
@@ -33,12 +33,12 @@ public class City {
     this.id = id;
   }
 
-  public String getCity() {
-    return city;
+  public String getName() {
+    return name;
   }
 
-  public void setCity(String city) {
-    this.city = city;
+  public void setName(String name) {
+    this.name = name;
   }
 
   public Country getCountry() {

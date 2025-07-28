@@ -15,8 +15,8 @@ public class Country {
   @Column(name = "country_id", columnDefinition = "int UNSIGNED not null")
   private Long id;
 
-  @Column(name = "country", nullable = false, length = 50)
-  private String country;
+  @Column(name = "name", nullable = false, length = 50)
+  private String name;
 
   @ColumnDefault("CURRENT_TIMESTAMP")
   @Column(name = "last_update", nullable = false)
@@ -30,12 +30,12 @@ public class Country {
     this.id = id;
   }
 
-  public String getCountry() {
-    return country;
+  public String getName() {
+    return name;
   }
 
-  public void setCountry(String country) {
-    this.country = country;
+  public void setName(String name) {
+    this.name = name;
   }
 
   public Instant getLastUpdate() {

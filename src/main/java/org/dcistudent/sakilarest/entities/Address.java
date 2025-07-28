@@ -14,8 +14,8 @@ public class Address {
   @Column(name = "address_id", columnDefinition = "int UNSIGNED not null")
   private Long id;
 
-  @Column(name = "address", nullable = false, length = 50)
-  private String address;
+  @Column(name = "name", nullable = false, length = 50)
+  private String name;
 
   @Column(name = "address2", length = 50)
   private String address2;
@@ -45,12 +45,12 @@ public class Address {
     this.id = id;
   }
 
-  public String getAddress() {
-    return address;
+  public String getName() {
+    return name;
   }
 
-  public void setAddress(String address) {
-    this.address = address;
+  public void setName(String name) {
+    this.name = name;
   }
 
   public String getAddress2() {
