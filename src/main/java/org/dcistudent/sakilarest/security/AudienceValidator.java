@@ -20,7 +20,7 @@ public class AudienceValidator implements OAuth2TokenValidator<Jwt> {
     }
 
     return OAuth2TokenValidatorResult.failure(
-        new OAuth2Error("invalid_token", "auth:audience.missing", null)
+        new OAuth2Error("invalid_token", "auth:audience.missing", "")
     );
   }
 }
