@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.dcistudent.sakilarest.configs.Auth0Config;
 import org.dcistudent.sakilarest.exceptions.Auth0Exception;
 import org.dcistudent.sakilarest.loggers.SqlLogger;
-import org.dcistudent.sakilarest.models.responses.Auth0ErrorResponse;
+import org.dcistudent.sakilarest.models.responses.error.Auth0ErrorResponse;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.*;

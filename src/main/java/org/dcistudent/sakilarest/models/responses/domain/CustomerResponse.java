@@ -1,4 +1,4 @@
-package org.dcistudent.sakilarest.models.responses;
+package org.dcistudent.sakilarest.models.responses.domain;
 
 import org.jetbrains.annotations.NotNull;
 

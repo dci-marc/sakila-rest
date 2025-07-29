@@ -5,7 +5,7 @@ import org.dcistudent.sakilarest.exceptions.Auth0Exception;
 import org.dcistudent.sakilarest.factories.ResponseFactory;
 import org.dcistudent.sakilarest.models.Response;
 import org.dcistudent.sakilarest.models.requests.UserRequest;
-import org.dcistudent.sakilarest.models.responses.UserResponse;
+import org.dcistudent.sakilarest.models.responses.domain.UserResponse;
 import org.dcistudent.sakilarest.services.Auth0Service;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.web.bind.annotation.PostMapping;

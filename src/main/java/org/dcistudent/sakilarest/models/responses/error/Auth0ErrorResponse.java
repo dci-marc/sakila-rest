@@ -1,7 +1,8 @@
-package org.dcistudent.sakilarest.models.responses;
+package org.dcistudent.sakilarest.models.responses.error;
 
 import lombok.Getter;
 import org.dcistudent.sakilarest.models.Response;
+import org.dcistudent.sakilarest.models.responses.Auth0Response;
 import org.jetbrains.annotations.NotNull;
 
 @Getter

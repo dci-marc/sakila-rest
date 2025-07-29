@@ -1,7 +1,8 @@
-package org.dcistudent.sakilarest.models.responses;
+package org.dcistudent.sakilarest.models.responses.shared;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import org.dcistudent.sakilarest.models.responses.ResponsePayload;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;

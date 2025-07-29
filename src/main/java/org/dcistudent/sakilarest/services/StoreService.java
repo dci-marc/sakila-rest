@@ -2,17 +2,18 @@ package org.dcistudent.sakilarest.services;
 
 import org.dcistudent.sakilarest.entities.Store;
 import org.dcistudent.sakilarest.managers.StoreManager;
-import org.dcistudent.sakilarest.models.responses.CustomerResponse;
-import org.dcistudent.sakilarest.models.responses.FilmResponse;
 import org.dcistudent.sakilarest.models.responses.StaffResponse;
-import org.dcistudent.sakilarest.models.responses.StoreResponse;
+import org.dcistudent.sakilarest.models.responses.domain.CustomerResponse;
+import org.dcistudent.sakilarest.models.responses.domain.FilmResponse;
+import org.dcistudent.sakilarest.models.responses.domain.StoreResponse;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
 
 @Service
 public class StoreService {
 
-  @NotNull private final StoreManager storeManager;
+  @NotNull
+  private final StoreManager storeManager;
 
   public StoreService(@NotNull StoreManager storeManager) {
     this.storeManager = storeManager;

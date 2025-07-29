@@ -1,6 +1,6 @@
 package org.dcistudent.sakilarest.exceptions;
 
-import org.dcistudent.sakilarest.models.responses.Auth0ErrorResponse;
+import org.dcistudent.sakilarest.models.responses.error.Auth0ErrorResponse;
 import org.jetbrains.annotations.NotNull;
 
 public class Auth0Exception extends RuntimeException {

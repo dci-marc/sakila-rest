@@ -1,7 +1,7 @@
 package org.dcistudent.sakilarest.factories;
 
 import org.dcistudent.sakilarest.entities.Film;
-import org.dcistudent.sakilarest.models.responses.FilmResponse;
+import org.dcistudent.sakilarest.models.responses.domain.FilmResponse;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.data.domain.Page;
 

@@ -1,5 +1,6 @@
-package org.dcistudent.sakilarest.models.responses;
+package org.dcistudent.sakilarest.models.responses.domain;
 
+import org.dcistudent.sakilarest.models.responses.StaffResponse;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
