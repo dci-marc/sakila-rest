@@ -10,3 +10,14 @@ implementations.
 It should reflect the best and most widely used concepts and principles -
 as far as I can tell as a beginner - while also showing several possibilities
 for how different solutions can look.
+
+## SonarQube Badges
+
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=dci-marc_sakila-rest&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=dci-marc_sakila-rest)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=dci-marc_sakila-rest&metric=bugs)](https://sonarcloud.io/summary/new_code?id=dci-marc_sakila-rest)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=dci-marc_sakila-rest&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=dci-marc_sakila-rest)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=dci-marc_sakila-rest&metric=coverage)](https://sonarcloud.io/summary/new_code?id=dci-marc_sakila-rest)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=dci-marc_sakila-rest&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=dci-marc_sakila-rest)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=dci-marc_sakila-rest&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=dci-marc_sakila-rest)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=dci-marc_sakila-rest&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=dci-marc_sakila-rest)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=dci-marc_sakila-rest&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=dci-marc_sakila-rest)
