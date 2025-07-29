@@ -42,7 +42,7 @@ public final class Auth0ErrorResponse extends Response<String> implements Auth0R
 
     @Override
     public @NotNull String toString() {
-      return description;
+      return this.description;
     }
   }
 }
