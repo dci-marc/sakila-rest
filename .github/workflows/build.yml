@@ -36,4 +36,5 @@ jobs:
         run: mvn -B clean compile org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
           -DskipTests=true \
           -Dsonar.skipTests=true \
+          -Dsonar.organization=dci-marc \
           -Dsonar.projectKey=dci-marc_sakila-rest
