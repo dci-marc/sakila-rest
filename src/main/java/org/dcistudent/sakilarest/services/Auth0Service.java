@@ -43,16 +43,16 @@ public class Auth0Service {
   public @NotNull String getManagementToken() {
     var body = Map.of(
         "grant_type", "client_credentials",
-        "client_id", config.getMgmtClientId(),
-        "client_secret", config.getMgmtClientSecret(),
-        "audience", config.getAudience()
+        "client_id", this.config.getMgmtClientId(),
+        "client_secret", this.config.getMgmtClientSecret(),
+        "audience", this.config.getAudience()
     );
 
     HttpHeaders headers = new HttpHeaders();
     headers.setContentType(MediaType.APPLICATION_JSON);
     HttpEntity<Map<String, String>> requestEntity = new HttpEntity<>(body, headers);
 
-    Map<String, Object> response = Objects.requireNonNull(restTemplate.postForObject(
+    Map<String, Object> response = Objects.requireNonNull(this.restTemplate.postForObject(
         "/oauth/token",
         requestEntity,
         Map.class
@@ -61,12 +61,12 @@ public class Auth0Service {
   }
 
   public void registerUser(@NotNull String email, @NotNull String password) {
-    String token = getManagementToken();
+    String token = this.getManagementToken();
 
     var body = Map.of(
         "email", email,
         Auth0Service.STRING_PASSWORD, password,
-        "connection", config.getConnection()
+        "connection", this.config.getConnection()
     );
 
     HttpHeaders headers = new HttpHeaders();
@@ -74,7 +74,7 @@ public class Auth0Service {
     headers.set(HttpHeaders.AUTHORIZATION, "Bearer " + token);
     HttpEntity<Map<String, String>> requestEntity = new HttpEntity<>(body, headers);
 
-    restTemplate.exchange(
+    this.restTemplate.exchange(
         "/api/v2/users",
         HttpMethod.POST,
         requestEntity,
@@ -87,18 +87,18 @@ public class Auth0Service {
         "grant_type", Auth0Service.STRING_PASSWORD,
         "username", username,
         Auth0Service.STRING_PASSWORD, password,
-        "audience", config.getAudience(),
+        "audience", this.config.getAudience(),
         "scope", "openid profile email",
-        "client_id", config.getAppClientId(),
-        "client_secret", config.getAppClientSecret(),
-        "realm", config.getConnection()
+        "client_id", this.config.getAppClientId(),
+        "client_secret", this.config.getAppClientSecret(),
+        "realm", this.config.getConnection()
     );
 
     HttpHeaders headers = new HttpHeaders();
     headers.setContentType(MediaType.APPLICATION_JSON);
     HttpEntity<Map<String, String>> requestEntity = new HttpEntity<>(body, headers);
 
-    return Objects.requireNonNull(restTemplate.postForObject(
+    return Objects.requireNonNull(this.restTemplate.postForObject(
         "/oauth/token",
         requestEntity,
         Map.class
@@ -122,10 +122,11 @@ public class Auth0Service {
     }
 
     @Override
+    @SuppressWarnings("java:S7538")
     public void handleError(@NotNull ClientHttpResponse response) throws IOException {
       String errorBody = new String(response.getBody().readAllBytes());
       try {
-        Auth0ErrorResponse auth0Error = objectMapper.readValue(errorBody, Auth0ErrorResponse.class);
+        Auth0ErrorResponse auth0Error = this.objectMapper.readValue(errorBody, Auth0ErrorResponse.class);
         this.logger.logError(
             String.format(
                 "Auth0 Error: [%d] %s - %s%n",
