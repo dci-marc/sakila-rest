@@ -9,5 +9,5 @@ public record CustomerResponse(
     @NotNull Boolean active,
     @NotNull String createDate,
     @NotNull String lastUpdate
-) implements ResponsePayload {
+) implements DomainResponse {
 }
