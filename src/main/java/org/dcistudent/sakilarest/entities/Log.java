@@ -1,6 +1,8 @@
 package org.dcistudent.sakilarest.entities;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 import org.jetbrains.annotations.NotNull;
 
 import java.time.LocalDateTime;
@@ -8,54 +10,29 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "log")
+@Getter
+@Setter
 public class Log {
-
   @Id
   @GeneratedValue(strategy = GenerationType.UUID)
   @Column(name = "id", nullable = false, unique = true)
   private UUID id;
 
   @Column(name = "level", nullable = false)
-  @NotNull
-  private Integer level;
+  private @NotNull Integer level;
 
   @Column(name = "datetime", nullable = false)
-  @NotNull
-  private LocalDateTime datetime;
+  private @NotNull LocalDateTime datetime;
 
   @Column(name = "message", nullable = false, columnDefinition = "MEDIUMTEXT")
-  @NotNull
-  private String message;
+  private @NotNull String message;
 
-  public Log(@NotNull Integer level,@NotNull LocalDateTime datetime,@NotNull String message) {
+  public Log(@NotNull Integer level, @NotNull LocalDateTime datetime, @NotNull String message) {
     this.level = level;
     this.datetime = datetime;
     this.message = message;
   }
 
-  public Log() {}
-
-  public @NotNull Integer getLevel() {
-    return this.level;
-  }
-
-  public void setLevel(@NotNull Integer level) {
-    this.level = level;
-  }
-
-  public @NotNull LocalDateTime getDatetime() {
-    return this.datetime;
-  }
-
-  public void setDatetime(@NotNull LocalDateTime datetime) {
-    this.datetime = datetime;
-  }
-
-  public @NotNull String getMessage() {
-    return this.message;
-  }
-
-  public void setMessage(@NotNull String message) {
-    this.message = message;
+  public Log() {
   }
 }

@@ -1,76 +1,44 @@
 package org.dcistudent.sakilarest.entities;
 
 import jakarta.persistence.*;
+import lombok.Getter;
 import org.hibernate.annotations.Immutable;
+import org.jetbrains.annotations.NotNull;
 
 import java.math.BigDecimal;
 
-/**
- * Mapping for DB view
- */
 @Entity
 @Immutable
 @Table(name = "nicer_but_slower_film_list", schema = "sakila")
+@Getter
 public class NicerButSlowerFilmList {
   @Id
   @Column(name = "FID", columnDefinition = "int UNSIGNED")
-  private Long fid;
+  private @NotNull Long fid;
 
   @Column(name = "title")
-  private String title;
+  private @NotNull String title;
 
   @Lob
   @Column(name = "description")
-  private String description;
+  private @NotNull String description;
 
   @Column(name = "category", nullable = false, length = 25)
-  private String category;
+  private @NotNull String category;
 
   @Column(name = "price", precision = 4, scale = 2)
-  private BigDecimal price;
+  private @NotNull BigDecimal price;
 
   @Column(name = "length", columnDefinition = "smallint UNSIGNED")
-  private Integer length;
+  private @NotNull Integer length;
 
   @Lob
   @Column(name = "rating")
-  private String rating;
+  private @NotNull String rating;
 
   @Lob
   @Column(name = "actors")
-  private String actors;
-
-  public Long getFid() {
-    return fid;
-  }
-
-  public String getTitle() {
-    return title;
-  }
-
-  public String getDescription() {
-    return description;
-  }
-
-  public String getCategory() {
-    return category;
-  }
-
-  public BigDecimal getPrice() {
-    return price;
-  }
-
-  public Integer getLength() {
-    return length;
-  }
-
-  public String getRating() {
-    return rating;
-  }
-
-  public String getActors() {
-    return actors;
-  }
+  private @NotNull String actors;
 
   protected NicerButSlowerFilmList() {
   }

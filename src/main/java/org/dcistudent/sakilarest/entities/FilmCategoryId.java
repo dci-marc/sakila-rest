@@ -2,37 +2,26 @@ package org.dcistudent.sakilarest.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.Hibernate;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 
 @Embeddable
+@Getter
+@Setter
 public class FilmCategoryId implements Serializable {
   @Serial
   private static final long serialVersionUID = -3732591992087887041L;
   @Column(name = "film_id", columnDefinition = "int UNSIGNED not null")
-  private Long filmId;
+  private @NotNull Long filmId;
 
   @Column(name = "category_id", columnDefinition = "int UNSIGNED not null")
-  private Long categoryId;
-
-  public Long getFilmId() {
-    return filmId;
-  }
-
-  public void setFilmId(Long filmId) {
-    this.filmId = filmId;
-  }
-
-  public Long getCategoryId() {
-    return categoryId;
-  }
-
-  public void setCategoryId(Long categoryId) {
-    this.categoryId = categoryId;
-  }
+  private @NotNull Long categoryId;
 
   @Override
   public boolean equals(Object o) {
@@ -45,7 +34,6 @@ public class FilmCategoryId implements Serializable {
 
   @Override
   public int hashCode() {
-    return Objects.hash(filmId, categoryId);
+    return Objects.hash(this.filmId, this.categoryId);
   }
-
 }

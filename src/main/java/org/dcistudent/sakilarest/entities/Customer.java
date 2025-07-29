@@ -1,6 +1,8 @@
 package org.dcistudent.sakilarest.entities;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
 import org.jetbrains.annotations.NotNull;
 
@@ -12,6 +14,8 @@ import java.time.Instant;
     @Index(name = "idx_last_name", columnList = "last_name"),
     @Index(name = "idx_fk_address_id", columnList = "address_id")
 })
+@Getter
+@Setter
 public class Customer {
   @Id
   @Column(name = "customer_id", columnDefinition = "int UNSIGNED not null")
@@ -44,77 +48,4 @@ public class Customer {
   @ColumnDefault("CURRENT_TIMESTAMP")
   @Column(name = "last_update")
   private @NotNull Instant lastUpdate;
-
-  public Long getId() {
-    return id;
-  }
-
-  public void setId(Long id) {
-    this.id = id;
-  }
-
-  public Store getStore() {
-    return store;
-  }
-
-  public void setStore(Store store) {
-    this.store = store;
-  }
-
-  public String getFirstName() {
-    return firstName;
-  }
-
-  public void setFirstName(String firstName) {
-    this.firstName = firstName;
-  }
-
-  public String getLastName() {
-    return lastName;
-  }
-
-  public void setLastName(String lastName) {
-    this.lastName = lastName;
-  }
-
-  public String getEmail() {
-    return email;
-  }
-
-  public void setEmail(String email) {
-    this.email = email;
-  }
-
-  public Address getAddress() {
-    return address;
-  }
-
-  public void setAddress(Address address) {
-    this.address = address;
-  }
-
-  public Boolean getActive() {
-    return active;
-  }
-
-  public void setActive(Boolean active) {
-    this.active = active;
-  }
-
-  public Instant getCreateDate() {
-    return createDate;
-  }
-
-  public void setCreateDate(Instant createDate) {
-    this.createDate = createDate;
-  }
-
-  public Instant getLastUpdate() {
-    return lastUpdate;
-  }
-
-  public void setLastUpdate(Instant lastUpdate) {
-    this.lastUpdate = lastUpdate;
-  }
-
 }
