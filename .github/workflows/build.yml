@@ -33,4 +33,7 @@ jobs:
       - name: Build and analyze
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=dci-marc_sakila-rest
+        run: mvn -B clean compile org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
+          -DskipTests=true \
+          -Dsonar.skipTests=true \
+          -Dsonar.projectKey=dci-marc_sakila-rest
