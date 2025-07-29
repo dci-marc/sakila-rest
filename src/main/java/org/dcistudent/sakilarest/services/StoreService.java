@@ -21,7 +21,7 @@ public class StoreService {
 
   @NotNull
   public StoreResponse getById(@NotNull Long id) {
-    Store store = this.storeManager.getStoreById(id);
+    Store store = this.storeManager.findStoreByIdEager(id);
     return new StoreResponse(
         store.getLastUpdate().toString(),
         new StaffResponse(

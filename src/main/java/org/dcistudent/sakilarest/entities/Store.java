@@ -17,6 +17,13 @@ import java.util.List;
 })
 @Getter
 @Setter
+
+@NamedEntityGraph(name = "Store.eager", attributeNodes = {
+    @NamedAttributeNode("managerStaff"),
+    @NamedAttributeNode("customer"),
+    @NamedAttributeNode("inventory")
+})
+
 public class Store {
   @Id
   @Column(name = "store_id", columnDefinition = "int UNSIGNED not null")
