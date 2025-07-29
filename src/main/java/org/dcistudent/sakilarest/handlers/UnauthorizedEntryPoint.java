@@ -20,11 +20,11 @@ public class UnauthorizedEntryPoint implements AuthenticationEntryPoint {
       @NotNull HttpServletRequest request,
       @NotNull HttpServletResponse response,
       @NotNull AuthenticationException authException
-  )
-      throws java.io.IOException {
+  ) throws java.io.IOException {
     @NotNull Response<EmptyResponse> responseModel = ResponseFactory.create(
         HttpStatus.UNAUTHORIZED.value(),
-        "error:authentication:fail"
+        "auth:user:login:fail",
+        EmptyResponse.INSTANCE
     );
 
     response.setStatus(HttpStatus.UNAUTHORIZED.value());
