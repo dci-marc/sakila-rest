@@ -71,7 +71,7 @@ public class Response<T> {
     BAD_REQUEST("Bad Request"),
     INTERNAL_SERVER_ERROR("Internal Server Error");
 
-    private final String value;
+    private final @NotNull String value;
 
     Message(@NotNull String value) {
       this.value = value;

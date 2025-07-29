@@ -1,7 +1,6 @@
 package org.dcistudent.sakilarest.handlers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.dcistudent.sakilarest.factories.ResponseFactory;
@@ -23,7 +22,7 @@ public class AccessDeniedEntryPoint implements AccessDeniedHandler {
       @NotNull HttpServletRequest request,
       @NotNull HttpServletResponse response,
       @NotNull AccessDeniedException accessDeniedException
-  ) throws IOException, ServletException {
+  ) throws IOException {
     Response<EmptyResponse> responseModel = ResponseFactory.create(
         HttpStatus.FORBIDDEN.value(),
         "error:access:denied"

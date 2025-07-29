@@ -13,7 +13,6 @@ public class Auth0Exception extends RuntimeException {
   }
 
   public @NotNull Auth0ErrorResponse getError() {
-    return error;
+    return this.error;
   }
 }
-

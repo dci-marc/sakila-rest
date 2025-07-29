@@ -17,7 +17,7 @@ public class UserService {
   }
 
   public boolean create(@NotNull UserRequest request) {
-    if (userRepository.findByEmail(request.getEmail()).isPresent()) {
+    if (this.userRepository.findByEmail(request.getEmail()).isPresent()) {
       return false;
     }
 
