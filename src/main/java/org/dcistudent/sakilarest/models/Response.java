@@ -6,6 +6,8 @@ import lombok.Setter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Objects;
+
 @Getter
 @Setter
 public class Response<T> {
@@ -18,6 +20,7 @@ public class Response<T> {
   protected Response(int status, @NotNull String message, @Nullable T data) {
     this.status = status;
     this.message = message;
+    Objects.requireNonNull(data, "Data must not be null");
     this.data = data;
   }
 
