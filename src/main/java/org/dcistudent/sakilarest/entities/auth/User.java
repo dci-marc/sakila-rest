@@ -1,49 +1,31 @@
 package org.dcistudent.sakilarest.entities.auth;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 import org.jetbrains.annotations.NotNull;
 
 @Entity
 @Table(name = "users")
+@Getter
+@Setter
 public class User {
-
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id", nullable = false, unique = true)
   private Long id;
 
   @Column(name = "password", nullable = false)
-  @NotNull
-  private String password;
+  private @NotNull String password;
 
   @Column(name = "email", nullable = false, unique = true)
-  @NotNull
-  private String email;
+  private @NotNull String email;
 
-  public User() {}
+  public User() {
+  }
 
   public User(@NotNull String password, @NotNull String email) {
     this.password = password;
-    this.email = email;
-  }
-
-  public @NotNull Long getId() {
-    return this.id;
-  }
-
-  public @NotNull String getPassword() {
-    return this.password;
-  }
-
-  public void setPassword(@NotNull String password) {
-    this.password = password;
-  }
-
-  public @NotNull String getEmail() {
-    return this.email;
-  }
-
-  public void setEmail(@NotNull String email) {
     this.email = email;
   }
 }
