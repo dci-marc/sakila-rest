@@ -2,12 +2,13 @@ package org.dcistudent.sakilarest.services;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.dcistudent.sakilarest.configs.Auth0Config;
-import org.dcistudent.sakilarest.exceptions.Auth0Exception;
 import org.dcistudent.sakilarest.loggers.SqlLogger;
-import org.dcistudent.sakilarest.models.responses.error.Auth0ErrorResponse;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.http.*;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
 import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.ResponseErrorHandler;
@@ -105,48 +106,18 @@ public class Auth0Service {
     ));
   }
 
-  private class Auth0ResponseErrorHandler implements ResponseErrorHandler {
+  private record Auth0ResponseErrorHandler(
+      @NotNull ObjectMapper objectMapper,
+      @NotNull SqlLogger logger
+  ) implements ResponseErrorHandler {
 
-    private final @NotNull ObjectMapper objectMapper;
-    private final @NotNull SqlLogger logger;
-
-    public Auth0ResponseErrorHandler(@NotNull ObjectMapper objectMapper, @NotNull SqlLogger logger) {
+    private Auth0ResponseErrorHandler {
       Objects.requireNonNull(objectMapper, "ObjectMapper must not be null");
-      this.objectMapper = objectMapper;
-      this.logger = logger;
     }
 
     @Override
     public boolean hasError(@NotNull ClientHttpResponse response) throws IOException {
       return !response.getStatusCode().is2xxSuccessful();
-    }
-
-    @Override
-    @SuppressWarnings("java:S7538")
-    public void handleError(@NotNull ClientHttpResponse response) throws IOException {
-      String errorBody = new String(response.getBody().readAllBytes());
-      try {
-        Auth0ErrorResponse auth0Error = this.objectMapper.readValue(errorBody, Auth0ErrorResponse.class);
-        this.logger.logError(
-            String.format(
-                "Auth0 Error: [%d] %s - %s%n",
-                auth0Error.getStatus(),
-                auth0Error.getMessage(),
-                auth0Error.getData()
-            )
-        );
-        throw new Auth0Exception(auth0Error);
-      } catch (IOException e) {
-        // If parsing to Auth0ErrorResponse fails, throw a generic RuntimeException
-        this.logger.logError(String.format("Auth0 Error (unparseable or generic): %s", errorBody));
-        throw new Auth0Exception(
-            new Auth0ErrorResponse(
-                HttpStatus.INTERNAL_SERVER_ERROR.value(),
-                String.format("Failed to process Auth0 response: %s", errorBody),
-                HttpStatus.INTERNAL_SERVER_ERROR.value()
-            )
-        );
-      }
     }
   }
 }
