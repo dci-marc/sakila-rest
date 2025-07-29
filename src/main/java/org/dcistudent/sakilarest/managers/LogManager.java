@@ -18,7 +18,7 @@ public class LogManager {
 
   @Transactional
   public void log(int level, @NotNull String message) {
-    logRepository.insert(
+    this.logRepository.insert(
         level,
         LocalDateTime.now().toString(),
         message
