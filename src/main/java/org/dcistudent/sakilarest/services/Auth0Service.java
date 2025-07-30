@@ -49,7 +49,7 @@ public class Auth0Service {
         Map.class
     );
 
-    if (response == null || !response.containsKey("access_token")) {
+    if (response == null || !response.containsKey(Auth0Service.STRING_ACCESS_TOKEN)) {
       throw new Auth0Exception(
           new Auth0ErrorResponse(
               HttpStatus.INTERNAL_SERVER_ERROR.value(),
@@ -59,7 +59,7 @@ public class Auth0Service {
       );
     }
 
-    return (String) response.get("access_token");
+    return (String) response.get(Auth0Service.STRING_ACCESS_TOKEN);
   }
 
   public void registerUser(@NotNull String email, @NotNull String password) {
