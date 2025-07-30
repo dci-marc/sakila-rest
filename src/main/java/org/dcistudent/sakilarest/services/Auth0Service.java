@@ -15,8 +15,8 @@ import java.util.Map;
 @Service
 public class Auth0Service {
 
-  @NotNull
-  private static final String STRING_PASSWORD = "password";
+  private static final @NotNull String STRING_PASSWORD = "password";
+  private static final @NotNull String STRING_ACCESS_TOKEN = "access_token";
 
   private final @NotNull RestTemplate restTemplate;
   private final @NotNull Auth0Config config;
@@ -114,7 +114,7 @@ public class Auth0Service {
           Map.class
       );
 
-      if (response == null || !response.containsKey("access_token")) {
+      if (response == null || !response.containsKey(Auth0Service.STRING_ACCESS_TOKEN)) {
         throw new Auth0Exception(
             new Auth0ErrorResponse(HttpStatus.SERVICE_UNAVAILABLE.value())
         );
@@ -125,6 +125,6 @@ public class Auth0Service {
       );
     }
 
-    return (String) response.get("access_token");
+    return (String) response.get(Auth0Service.STRING_ACCESS_TOKEN);
   }
 }
