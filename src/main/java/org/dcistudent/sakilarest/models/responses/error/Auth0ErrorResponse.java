@@ -8,6 +8,10 @@ import org.jetbrains.annotations.NotNull;
 @Getter
 public final class Auth0ErrorResponse extends Response<String> implements Auth0Response {
 
+  public Auth0ErrorResponse(int status) {
+    super(status, StatusCategory.fromStatusCode(status).toString(), "");
+  }
+
   public Auth0ErrorResponse(int status, @NotNull String message, int statusCode) {
     super(status, message, StatusCategory.fromStatusCode(statusCode).toString());
   }

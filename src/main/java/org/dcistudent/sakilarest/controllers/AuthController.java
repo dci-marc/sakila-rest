@@ -1,11 +1,11 @@
 package org.dcistudent.sakilarest.controllers;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.validation.Valid;
+import org.dcistudent.sakilarest.exceptions.Auth0Exception;
 import org.dcistudent.sakilarest.factories.ResponseFactory;
 import org.dcistudent.sakilarest.models.Response;
 import org.dcistudent.sakilarest.models.requests.UserRequest;
+import org.dcistudent.sakilarest.models.responses.EmptyResponse;
 import org.dcistudent.sakilarest.models.responses.ResponsePayload;
 import org.dcistudent.sakilarest.models.responses.domain.UserResponse;
 import org.dcistudent.sakilarest.models.responses.error.ErrorResponse;
@@ -15,9 +15,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.HttpClientErrorException;
-
-import java.util.Map;
 
 @RestController
 @RequestMapping("/auth")
@@ -30,19 +27,14 @@ public class AuthController {
   }
 
   @PostMapping("/register")
-  public @NotNull Response<ResponsePayload> register(
-      @NotNull @RequestBody @Valid UserRequest request
-  ) throws JsonProcessingException {
+  public @NotNull Response<ResponsePayload> register(@NotNull @RequestBody @Valid UserRequest request) {
     try {
       this.auth0Service.registerUser(request.getEmail(), request.getPassword());
-    } catch (HttpClientErrorException e) {
+    } catch (Auth0Exception e) {
       return ResponseFactory.create(
-          e.getStatusCode().value(),
-          "auth:user:creation:fail",
-          new ErrorResponse(
-              (new ObjectMapper()).readValue(e.getResponseBodyAsString(), Map.class).get("message").toString()
-
-          )
+          e.getError().getStatus(),
+          e.getMessage(),
+          EmptyResponse.INSTANCE
       );
     } catch (IllegalArgumentException e) {
       return ResponseFactory.create(
@@ -61,22 +53,22 @@ public class AuthController {
 
   @PostMapping("/login")
   public @NotNull Response<String> login(@NotNull @RequestBody @Valid UserRequest request) {
-    @NotNull Map<String, String> token;
+    String token;
 
     try {
       token = this.auth0Service.loginUser(request.getEmail(), request.getPassword());
-    } catch (IllegalArgumentException e) {
+    } catch (Auth0Exception e) {
       return ResponseFactory.create(
-          Response.Status.BAD_REQUEST.get(),
-          "auth:user:login:fail",
-          e.getMessage()
+          e.getError().getStatus(),
+          e.getMessage(),
+          ""
       );
     }
 
     return ResponseFactory.create(
         Response.Status.OK.get(),
         "auth:user:login:success",
-        token.get("access_token")
+        token
     );
   }
 }

@@ -1,17 +1,16 @@
 package org.dcistudent.sakilarest.services;
 
 import org.dcistudent.sakilarest.configs.Auth0Config;
+import org.dcistudent.sakilarest.exceptions.Auth0Exception;
+import org.dcistudent.sakilarest.models.responses.error.Auth0ErrorResponse;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClientResponseException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Map;
-import java.util.Objects;
 
 @Service
 public class Auth0Service {
@@ -44,11 +43,22 @@ public class Auth0Service {
     headers.setContentType(MediaType.APPLICATION_JSON);
     HttpEntity<Map<String, String>> requestEntity = new HttpEntity<>(body, headers);
 
-    Map<String, Object> response = Objects.requireNonNull(this.restTemplate.postForObject(
+    Map<String, Object> response = this.restTemplate.postForObject(
         "/oauth/token",
         requestEntity,
         Map.class
-    ));
+    );
+
+    if (response == null || !response.containsKey("access_token")) {
+      throw new Auth0Exception(
+          new Auth0ErrorResponse(
+              HttpStatus.INTERNAL_SERVER_ERROR.value(),
+              "auth:management.token:fail",
+              HttpStatus.INTERNAL_SERVER_ERROR.value()
+          )
+      );
+    }
+
     return (String) response.get("access_token");
   }
 
@@ -66,15 +76,21 @@ public class Auth0Service {
     headers.set(HttpHeaders.AUTHORIZATION, "Bearer " + token);
     HttpEntity<Map<String, String>> requestEntity = new HttpEntity<>(body, headers);
 
-    this.restTemplate.exchange(
-        "/api/v2/users",
-        HttpMethod.POST,
-        requestEntity,
-        Void.class
-    );
+    try {
+      this.restTemplate.exchange(
+          "/api/v2/users",
+          HttpMethod.POST,
+          requestEntity,
+          Void.class
+      );
+    } catch (RestClientResponseException e) {
+      throw new Auth0Exception(
+          new Auth0ErrorResponse(e.getStatusCode().value())
+      );
+    }
   }
 
-  public @NotNull Map<String, String> loginUser(@NotNull String username, @NotNull String password) {
+  public @NotNull String loginUser(@NotNull String username, @NotNull String password) {
     var body = Map.of(
         "grant_type", Auth0Service.STRING_PASSWORD,
         "username", username,
@@ -85,15 +101,30 @@ public class Auth0Service {
         "client_secret", this.config.getAppClientSecret(),
         "realm", this.config.getConnection()
     );
+    Map<String, Object> response;
 
     HttpHeaders headers = new HttpHeaders();
     headers.setContentType(MediaType.APPLICATION_JSON);
     HttpEntity<Map<String, String>> requestEntity = new HttpEntity<>(body, headers);
 
-    return Objects.requireNonNull(this.restTemplate.postForObject(
-        "/oauth/token",
-        requestEntity,
-        Map.class
-    ));
+    try {
+      response = this.restTemplate.postForObject(
+          "/oauth/token",
+          requestEntity,
+          Map.class
+      );
+
+      if (response == null || !response.containsKey("access_token")) {
+        throw new Auth0Exception(
+            new Auth0ErrorResponse(HttpStatus.SERVICE_UNAVAILABLE.value())
+        );
+      }
+    } catch (RestClientResponseException e) {
+      throw new Auth0Exception(
+          new Auth0ErrorResponse(e.getStatusCode().value())
+      );
+    }
+
+    return (String) response.get("access_token");
   }
 }
