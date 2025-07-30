@@ -12,6 +12,8 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
 
+import java.io.IOException;
+
 @Component
 public class UnauthorizedEntryPoint implements AuthenticationEntryPoint {
 
@@ -20,11 +22,10 @@ public class UnauthorizedEntryPoint implements AuthenticationEntryPoint {
       @NotNull HttpServletRequest request,
       @NotNull HttpServletResponse response,
       @NotNull AuthenticationException authException
-  ) throws java.io.IOException {
+  ) throws IOException {
     @NotNull Response<EmptyResponse> responseModel = ResponseFactory.create(
         HttpStatus.UNAUTHORIZED.value(),
-        "auth:user:login:fail",
-        EmptyResponse.INSTANCE
+        "auth:user:login:fail"
     );
 
     response.setStatus(HttpStatus.UNAUTHORIZED.value());

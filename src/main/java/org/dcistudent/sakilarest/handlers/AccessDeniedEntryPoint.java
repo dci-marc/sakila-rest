@@ -23,7 +23,7 @@ public class AccessDeniedEntryPoint implements AccessDeniedHandler {
       @NotNull HttpServletResponse response,
       @NotNull AccessDeniedException accessDeniedException
   ) throws IOException {
-    Response<EmptyResponse> responseModel = ResponseFactory.create(
+    @NotNull Response<EmptyResponse> responseModel = ResponseFactory.create(
         HttpStatus.FORBIDDEN.value(),
         "error:access:denied"
     );
