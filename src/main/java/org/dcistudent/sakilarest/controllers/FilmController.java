@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/films")
 public class FilmController {
 
-  final @NotNull FilmService filmService;
+  private final @NotNull FilmService filmService;
 
   public FilmController(@NotNull FilmService filmService) {
     this.filmService = filmService;
