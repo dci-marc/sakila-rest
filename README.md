@@ -11,7 +11,10 @@ It should reflect the best and most widely used concepts and principles -
 as far as I can tell as a beginner - while also showing several possibilities
 for how different solutions can look.
 
-## SonarQube Badges
+## GitHub & SonarQube Badges
+
+[![CodeQL](https://github.com/dci-marc/sakila-rest/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/dci-marc/sakila-rest/actions/workflows/github-code-scanning/codeql)
+[![SonarQube](https://github.com/dci-marc/sakila-rest/actions/workflows/build.yml/badge.svg)](https://github.com/dci-marc/sakila-rest/actions/workflows/build.yml)
 
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=dci-marc_sakila-rest&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=dci-marc_sakila-rest)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=dci-marc_sakila-rest&metric=bugs)](https://sonarcloud.io/summary/new_code?id=dci-marc_sakila-rest)
