@@ -18,7 +18,7 @@ public interface LogRepository extends JpaRepository<Log, UUID> {
     if (limit < 1 || limit > 100) {
       throw new IllegalArgumentException("Limit must be between 1 and 100");
     }
-    return findWithLimitStatement(limit);
+    return this.findWithLimitStatement(limit);
   }
 
   @Query(
@@ -31,12 +31,11 @@ public interface LogRepository extends JpaRepository<Log, UUID> {
 
   @Modifying
   @Query(
-      "INSERT INTO Log (id, level, datetime, message) " +
-          "VALUES (:id, :level, :datetime, :message)"
+      "INSERT INTO Log (level, message) " +
+          "VALUES (:level, :message)"
   )
   void insert(
       @NotNull @Param("level") Integer level,
-      @NotNull @Param("datetime") String datetime,
       @NotNull @Param("message") String message
   );
 }

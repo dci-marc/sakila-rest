@@ -5,8 +5,6 @@ import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
-
 @Service
 public class LogManager {
 
@@ -20,7 +18,6 @@ public class LogManager {
   public void log(int level, @NotNull String message) {
     this.logRepository.insert(
         level,
-        LocalDateTime.now().toString(),
         message
     );
   }
