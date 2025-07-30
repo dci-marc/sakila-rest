@@ -1,20 +1,15 @@
 package org.dcistudent.sakilarest.services;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.dcistudent.sakilarest.configs.Auth0Config;
-import org.dcistudent.sakilarest.loggers.SqlLogger;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
-import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.ResponseErrorHandler;
 import org.springframework.web.client.RestTemplate;
 
-import java.io.IOException;
 import java.util.Map;
 import java.util.Objects;
 
@@ -29,15 +24,11 @@ public class Auth0Service {
 
   public Auth0Service(
       @NotNull Auth0Config config,
-      @NotNull RestTemplateBuilder builder,
-      @NotNull SqlLogger logger
+      @NotNull RestTemplateBuilder builder
   ) {
     this.config = config;
-    ObjectMapper objectMapper = new ObjectMapper();
-
     this.restTemplate = builder
         .rootUri("https://" + config.getDomain())
-        .errorHandler(new Auth0ResponseErrorHandler(objectMapper, logger))
         .build();
   }
 
@@ -104,20 +95,5 @@ public class Auth0Service {
         requestEntity,
         Map.class
     ));
-  }
-
-  private record Auth0ResponseErrorHandler(
-      @NotNull ObjectMapper objectMapper,
-      @NotNull SqlLogger logger
-  ) implements ResponseErrorHandler {
-
-    private Auth0ResponseErrorHandler {
-      Objects.requireNonNull(objectMapper, "ObjectMapper must not be null");
-    }
-
-    @Override
-    public boolean hasError(@NotNull ClientHttpResponse response) throws IOException {
-      return !response.getStatusCode().is2xxSuccessful();
-    }
   }
 }
