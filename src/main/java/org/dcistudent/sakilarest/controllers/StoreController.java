@@ -6,6 +6,8 @@ import org.dcistudent.sakilarest.models.responses.EmptyResponse;
 import org.dcistudent.sakilarest.models.responses.ResponsePayload;
 import org.dcistudent.sakilarest.services.StoreService;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,19 +27,23 @@ public class StoreController {
   }
 
   @GetMapping("/{id}")
-  public @NotNull Response<ResponsePayload> getStoreById(@NotNull @PathVariable Long id) {
+  public @NotNull ResponseEntity<Response<ResponsePayload>> getStoreById(@NotNull @PathVariable Long id) {
     try {
-      return ResponseFactory.create(
-          Response.Status.OK.get(),
-          "store:fetch:success",
-          this.storeService.getById(id)
-      );
+      return ResponseEntity.ok(
+          ResponseFactory.create(
+              Response.Status.OK.get(),
+              "store:fetch:success",
+              this.storeService.getById(id)
+          ));
     } catch (NoSuchElementException e) {
-      return ResponseFactory.create(
-          Response.Status.BAD_REQUEST.get(),
-          "store:fetch:not.found",
-          EmptyResponse.INSTANCE
-      );
+      return ResponseEntity
+          .badRequest()
+          .contentType(MediaType.APPLICATION_PROBLEM_JSON)
+          .body(ResponseFactory.create(
+              Response.Status.BAD_REQUEST.get(),
+              "store:fetch:not.found",
+              EmptyResponse.INSTANCE
+          ));
     }
   }
 }
