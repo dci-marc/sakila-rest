@@ -26,7 +26,8 @@ public class FilmManager {
   }
 
   public @NotNull Film findById(@NotNull Long id) {
-    return this.filmRepository.findById(id)
+    return this.filmRepository
+        .findById(id)
         .orElseThrow(() -> new NoSuchElementException("Film not found with ID: " + id));
   }
 
