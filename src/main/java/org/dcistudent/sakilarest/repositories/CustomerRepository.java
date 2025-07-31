@@ -7,8 +7,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.NativeQuery;
 
+import java.util.Optional;
+
 public interface CustomerRepository extends JpaRepository<Customer, Long> {
 
   @NativeQuery(value = "SELECT * FROM customer WHERE address_id >= 100")
-  @NotNull Page<Customer> findCustomersAddressAbove100(@NotNull Pageable pageable);
+  @NotNull Optional<Page<Customer>> findCustomersAddressAbove100(@NotNull Pageable pageable);
 }
