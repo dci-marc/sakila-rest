@@ -12,6 +12,8 @@ import org.jetbrains.annotations.NotNull;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.NoSuchElementException;
+
 @RestController
 @RequestMapping("/films")
 public class FilmController {
@@ -30,7 +32,7 @@ public class FilmController {
           "film:fetch:success",
           this.filmService.getFilm(id.longValue())
       );
-    } catch (IllegalArgumentException e) {
+    } catch (NoSuchElementException e) {
       return ResponseFactory.create(
           Response.Status.BAD_REQUEST.get(),
           "film:fetch:not.found",
@@ -47,7 +49,7 @@ public class FilmController {
           "films:fetch:success",
           this.filmService.routeSearch(request)
       );
-    } catch (IllegalArgumentException e) {
+    } catch (NoSuchElementException e) {
       return ResponseFactory.create(
           Response.Status.BAD_REQUEST.get(),
           "films:fetch:not.found",

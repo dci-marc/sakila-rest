@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.NoSuchElementException;
+
 @RestController
 @RequestMapping("/stores")
 public class StoreController {
@@ -30,7 +32,7 @@ public class StoreController {
           "store:fetch:success",
           this.storeService.getById(id)
       );
-    } catch (IllegalArgumentException e) {
+    } catch (NoSuchElementException e) {
       return ResponseFactory.create(
           Response.Status.BAD_REQUEST.get(),
           "store:fetch:not.found",

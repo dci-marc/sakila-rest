@@ -8,6 +8,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.NoSuchElementException;
+
 @Service
 public class FilmManager {
 
@@ -25,7 +27,7 @@ public class FilmManager {
 
   public @NotNull Film findById(@NotNull Long id) {
     return this.filmRepository.findById(id)
-        .orElseThrow(() -> new IllegalArgumentException("Film not found with ID: " + id));
+        .orElseThrow(() -> new NoSuchElementException("Film not found with ID: " + id));
   }
 
   public @NotNull Page<Film> findByTitle(
@@ -36,7 +38,7 @@ public class FilmManager {
     Pageable pageable = PageRequest.of(offset, limit);
     return this.filmRepository
         .findByTitleContainingIgnoreCase(pattern, pageable)
-        .orElseThrow(() -> new IllegalArgumentException("No films found with pattern: " + pattern));
+        .orElseThrow(() -> new NoSuchElementException("No films found with pattern: " + pattern));
   }
 
   public @NotNull Page<Film> findByDescription(
@@ -47,7 +49,7 @@ public class FilmManager {
     Pageable pageable = PageRequest.of(offset, limit);
     return this.filmRepository
         .findByDescription(pattern, pageable)
-        .orElseThrow(() -> new IllegalArgumentException("No films found with pattern: " + pattern));
+        .orElseThrow(() -> new NoSuchElementException("No films found with pattern: " + pattern));
   }
 
   public @NotNull Page<Film> findByReleaseYear(
@@ -58,6 +60,6 @@ public class FilmManager {
     Pageable pageable = PageRequest.of(offset, limit);
     return this.filmRepository
         .findByReleaseYear(pattern, pageable)
-        .orElseThrow(() -> new IllegalArgumentException("No films found with release year: " + pattern));
+        .orElseThrow(() -> new NoSuchElementException("No films found with release year: " + pattern));
   }
 }

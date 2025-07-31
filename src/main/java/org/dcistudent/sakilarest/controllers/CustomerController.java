@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.NoSuchElementException;
+
 @RestController
 @RequestMapping("/customers")
 public class CustomerController {
@@ -33,7 +35,7 @@ public class CustomerController {
           "customers:fetch:success",
           this.customerService.routeSearch(request)
       );
-    } catch (IllegalArgumentException e) {
+    } catch (NoSuchElementException e) {
       return ResponseFactory.create(
           Response.Status.BAD_REQUEST.get(),
           "customers:fetch:not.found",

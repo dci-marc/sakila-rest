@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -29,7 +30,7 @@ public class StoreManager {
   public @NotNull Store findStoreById(@NotNull Long id) {
     return this.repository
         .findById(id)
-        .orElseThrow(() -> new IllegalArgumentException("Store with id " + id + " not found"));
+        .orElseThrow(() -> new NoSuchElementException("Store with id " + id + " not found"));
   }
 
   public @NotNull Store findStoreByIdEager(@NotNull Long id) {
@@ -39,7 +40,6 @@ public class StoreManager {
 
     Store store = this.entityManager.find(Store.class, id, hints);
     return Optional.ofNullable(store)
-        .orElseThrow(() -> new IllegalArgumentException("Store with id " + id + " not found"));
-
+        .orElseThrow(() -> new NoSuchElementException("Store with id " + id + " not found"));
   }
 }

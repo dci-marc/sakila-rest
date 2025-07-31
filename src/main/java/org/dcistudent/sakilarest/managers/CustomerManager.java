@@ -8,6 +8,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.NoSuchElementException;
+
 @Service
 public class CustomerManager {
 
@@ -19,6 +21,10 @@ public class CustomerManager {
 
   public @NotNull Page<Customer> findCustomersAddressAbove100(@NotNull Integer limit, @NotNull Integer offset) {
     Pageable pageable = PageRequest.of(offset, limit);
-    return this.customerRepository.findCustomersAddressAbove100(pageable);
+    return this.customerRepository
+        .findCustomersAddressAbove100(pageable)
+        .orElseThrow(
+            () -> new NoSuchElementException("No customers found with address length greater than 100 characters")
+        );
   }
 }
