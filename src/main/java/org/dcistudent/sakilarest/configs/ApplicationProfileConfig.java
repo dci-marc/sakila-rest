@@ -1,5 +1,6 @@
 package org.dcistudent.sakilarest.configs;
 
+import org.jetbrains.annotations.NotNull;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
@@ -7,15 +8,24 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix = "spring.profiles")
 public final class ApplicationProfileConfig {
 
-  private String active;
-  public static final String PROFILE_DEVELOPMENT = "dev";
-  public static final String PROFILE_PRODUCTION = "prod";
+  private @NotNull String active;
+  public static final @NotNull String PROFILE_DEVELOPMENT;
+  public static final @NotNull String PROFILE_PRODUCTION;
 
-  public String getActive() {
-    return active;
+  static {
+    PROFILE_DEVELOPMENT = "dev";
+    PROFILE_PRODUCTION = "prod";
   }
 
-  public void setActive(String active) {
+  public ApplicationProfileConfig() {
+    this.active = "";
+  }
+
+  public @NotNull String getActive() {
+    return this.active;
+  }
+
+  public void setActive(@NotNull String active) {
     this.active = active;
   }
 
