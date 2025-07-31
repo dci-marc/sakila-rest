@@ -6,6 +6,9 @@ import jakarta.persistence.PersistenceContext;
 import org.dcistudent.sakilarest.entities.Store;
 import org.dcistudent.sakilarest.repositories.StoreRepository;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -25,6 +28,11 @@ public class StoreManager {
   public StoreManager(@NotNull EntityManager entityManager, @NotNull StoreRepository repository) {
     this.entityManager = entityManager;
     this.repository = repository;
+  }
+
+  public @NotNull Page<Store> findAll(@NotNull Integer limit, @NotNull Integer offset) {
+    Pageable pageable = PageRequest.of(offset, limit);
+    return this.repository.findAll(pageable);
   }
 
   public @NotNull Store findStoreById(@NotNull Long id) {
