@@ -26,6 +26,28 @@ public class FilmController {
     this.filmService = filmService;
   }
 
+  @GetMapping
+  public @NotNull ResponseEntity<Response<Page<FilmResponse>>> getFilms(
+      @NotNull @ModelAttribute @Valid FilmRequest request
+  ) {
+    try {
+      return ResponseEntity.ok(
+          ResponseFactory.create(
+              Response.Status.OK.get(),
+              "films:fetch:success",
+              this.filmService.routeSearch(request)
+          )
+      );
+    } catch (NoSuchElementException e) {
+      return ResponseEntity.badRequest().contentType(MediaType.APPLICATION_PROBLEM_JSON)
+          .body(ResponseFactory.create(
+              Response.Status.BAD_REQUEST.get(),
+              "films:fetch:not.found",
+              Page.empty()
+          ));
+    }
+  }
+
   @GetMapping("/{id}")
   public @NotNull ResponseEntity<Response<ResponsePayload>> getFilm(@NotNull @PathVariable Integer id) {
     try {
@@ -42,26 +64,6 @@ public class FilmController {
               Response.Status.BAD_REQUEST.get(),
               "film:fetch:not.found",
               EmptyResponse.INSTANCE
-          ));
-    }
-  }
-
-  @GetMapping
-  public @NotNull ResponseEntity<Response<Page<FilmResponse>>> getFilms(@NotNull @ModelAttribute @Valid FilmRequest request) {
-    try {
-      return ResponseEntity.ok(
-          ResponseFactory.create(
-              Response.Status.OK.get(),
-              "films:fetch:success",
-              this.filmService.routeSearch(request)
-          )
-      );
-    } catch (NoSuchElementException e) {
-      return ResponseEntity.badRequest().contentType(MediaType.APPLICATION_PROBLEM_JSON)
-          .body(ResponseFactory.create(
-              Response.Status.BAD_REQUEST.get(),
-              "films:fetch:not.found",
-              Page.empty()
           ));
     }
   }
