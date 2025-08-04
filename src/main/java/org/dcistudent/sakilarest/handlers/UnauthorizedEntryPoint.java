@@ -8,6 +8,8 @@ import org.dcistudent.sakilarest.models.Response;
 import org.dcistudent.sakilarest.models.responses.EmptyResponse;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
@@ -23,10 +25,13 @@ public class UnauthorizedEntryPoint implements AuthenticationEntryPoint {
       @NotNull HttpServletResponse response,
       @NotNull AuthenticationException authException
   ) throws IOException {
-    @NotNull Response<EmptyResponse> responseModel = ResponseFactory.create(
-        HttpStatus.UNAUTHORIZED.value(),
-        "auth:user:login:fail"
-    );
+    @NotNull ResponseEntity<Response<EmptyResponse>> responseModel = ResponseEntity
+        .status(HttpStatus.UNAUTHORIZED.value())
+        .contentType(MediaType.APPLICATION_PROBLEM_JSON)
+        .body(ResponseFactory.create(
+            HttpStatus.UNAUTHORIZED.value(),
+            "auth:user:login:fail"
+        ));
 
     response.setStatus(HttpStatus.UNAUTHORIZED.value());
     response.setContentType("application/json");
