@@ -1,6 +1,7 @@
 package org.dcistudent.sakilarest.handlers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import org.dcistudent.sakilarest.controllers.ProblemController;
 import org.dcistudent.sakilarest.factories.ResponseFactory;
 import org.dcistudent.sakilarest.loggers.SqlLogger;
 import org.dcistudent.sakilarest.models.Response;
@@ -14,6 +15,7 @@ import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.context.request.WebRequest;
 
 import java.util.*;
 
@@ -27,7 +29,17 @@ public class GlobalExceptionHandler {
   }
 
   @ExceptionHandler(Exception.class)
-  public @NotNull ResponseEntity<Response<EmptyResponse>> handleGeneric(@NotNull Exception e) {
+  @SuppressWarnings({
+      "java:S112", // General exception handling
+  })
+  public @NotNull ResponseEntity<Response<EmptyResponse>> handleGeneric(
+      @NotNull Exception e,
+      @NotNull WebRequest request
+  ) throws Exception {
+    if (request.getDescription(false).contains(ProblemController.MAPPING_BASE)) {
+      throw e;
+    }
+
     this.sqlLogger.logFatal(Arrays.toString(e.getStackTrace()));
 
     return ResponseEntity
