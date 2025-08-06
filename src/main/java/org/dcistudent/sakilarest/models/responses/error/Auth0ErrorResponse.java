@@ -4,15 +4,16 @@ import lombok.Getter;
 import org.dcistudent.sakilarest.models.Response;
 import org.dcistudent.sakilarest.models.responses.Auth0Response;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.http.HttpStatus;
 
 @Getter
 public final class Auth0ErrorResponse extends Response<String> implements Auth0Response {
 
-  public Auth0ErrorResponse(int status) {
-    super(status, StatusCategory.fromStatusCode(status).toString(), "");
+  public Auth0ErrorResponse(@NotNull HttpStatus status) {
+    super(status, StatusCategory.fromStatusCode(status.value()).toString(), "");
   }
 
-  public Auth0ErrorResponse(int status, @NotNull String message, int statusCode) {
+  public Auth0ErrorResponse(@NotNull HttpStatus status, @NotNull String message, int statusCode) {
     super(status, message, StatusCategory.fromStatusCode(statusCode).toString());
   }
 

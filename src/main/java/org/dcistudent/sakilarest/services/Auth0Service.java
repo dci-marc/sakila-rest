@@ -52,7 +52,7 @@ public class Auth0Service {
     if (response == null || !response.containsKey(Auth0Service.STRING_ACCESS_TOKEN)) {
       throw new Auth0Exception(
           new Auth0ErrorResponse(
-              HttpStatus.INTERNAL_SERVER_ERROR.value(),
+              HttpStatus.INTERNAL_SERVER_ERROR,
               "auth:management.token:fail",
               HttpStatus.INTERNAL_SERVER_ERROR.value()
           )
@@ -85,7 +85,7 @@ public class Auth0Service {
       );
     } catch (RestClientResponseException e) {
       throw new Auth0Exception(
-          new Auth0ErrorResponse(e.getStatusCode().value())
+          new Auth0ErrorResponse(HttpStatus.valueOf(e.getStatusCode().value()))
       );
     }
   }
@@ -116,12 +116,12 @@ public class Auth0Service {
 
       if (response == null || !response.containsKey(Auth0Service.STRING_ACCESS_TOKEN)) {
         throw new Auth0Exception(
-            new Auth0ErrorResponse(HttpStatus.SERVICE_UNAVAILABLE.value())
+            new Auth0ErrorResponse(HttpStatus.SERVICE_UNAVAILABLE)
         );
       }
     } catch (RestClientResponseException e) {
       throw new Auth0Exception(
-          new Auth0ErrorResponse(e.getStatusCode().value())
+          new Auth0ErrorResponse(HttpStatus.valueOf(e.getStatusCode().value()))
       );
     }
 

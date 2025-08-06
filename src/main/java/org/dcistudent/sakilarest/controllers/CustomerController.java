@@ -8,6 +8,7 @@ import org.dcistudent.sakilarest.models.responses.domain.CustomerResponse;
 import org.dcistudent.sakilarest.services.CustomerService;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,7 +35,7 @@ public class CustomerController {
     try {
       return ResponseEntity.ok(
           ResponseFactory.create(
-              Response.Status.OK.get(),
+              HttpStatus.OK,
               "customers:fetch:success",
               this.customerService.routeSearch(request)
           ));
@@ -43,7 +44,7 @@ public class CustomerController {
           .badRequest()
           .contentType(MediaType.APPLICATION_PROBLEM_JSON)
           .body(ResponseFactory.create(
-              Response.Status.BAD_REQUEST.get(),
+              HttpStatus.NOT_FOUND,
               "customers:fetch:not.found",
               Page.empty()
           ));

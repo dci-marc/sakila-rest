@@ -11,6 +11,7 @@ import org.dcistudent.sakilarest.models.responses.domain.UserResponse;
 import org.dcistudent.sakilarest.models.responses.error.ErrorResponse;
 import org.dcistudent.sakilarest.services.Auth0Service;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -46,7 +47,7 @@ public class AuthController {
           .badRequest()
           .contentType(MediaType.APPLICATION_PROBLEM_JSON)
           .body(ResponseFactory.create(
-              Response.Status.BAD_REQUEST.get(),
+              HttpStatus.BAD_REQUEST,
               "auth:user:creation:fail",
               new ErrorResponse(e.getMessage())
           ));
@@ -54,7 +55,7 @@ public class AuthController {
 
     return ResponseEntity.ok(
         ResponseFactory.create(
-            Response.Status.OK.get(),
+            HttpStatus.CREATED,
             "auth:user:creation:success",
             new UserResponse(request.getEmail())
         ));
@@ -79,7 +80,7 @@ public class AuthController {
 
     return ResponseEntity.ok(
         ResponseFactory.create(
-            Response.Status.OK.get(),
+            HttpStatus.OK,
             "auth:user:login:success",
             token
         ));

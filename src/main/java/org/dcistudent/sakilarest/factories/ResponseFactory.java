@@ -5,6 +5,7 @@ import org.dcistudent.sakilarest.models.responses.EmptyResponse;
 import org.dcistudent.sakilarest.models.responses.ResponsePayload;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 
 public final class ResponseFactory {
 
@@ -12,15 +13,15 @@ public final class ResponseFactory {
   }
 
   public static @NotNull <T extends ResponsePayload> Response<T> create(
-      int status, @NotNull
-      String message,
+      @NotNull HttpStatus status,
+      @NotNull String message,
       @NotNull T data
   ) {
     return Response.create(status, message, data);
   }
 
   public static <T extends ResponsePayload> Response<Page<T>> create(
-      int status,
+      @NotNull HttpStatus status,
       @NotNull String message,
       @NotNull Page<T> page
   ) {
@@ -28,7 +29,7 @@ public final class ResponseFactory {
   }
 
   public static @NotNull Response<String> create(
-      int status,
+      @NotNull HttpStatus status,
       @NotNull String message,
       @NotNull String data
   ) {
@@ -36,7 +37,7 @@ public final class ResponseFactory {
   }
 
   public static @NotNull Response<EmptyResponse> create(
-      int status,
+      @NotNull HttpStatus status,
       @NotNull String message
   ) {
     return Response.create(status, message, EmptyResponse.INSTANCE);

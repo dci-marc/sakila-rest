@@ -10,6 +10,7 @@ import org.dcistudent.sakilarest.models.responses.domain.FilmResponse;
 import org.dcistudent.sakilarest.services.FilmService;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -33,7 +34,7 @@ public class FilmController {
     try {
       return ResponseEntity.ok(
           ResponseFactory.create(
-              Response.Status.OK.get(),
+              HttpStatus.OK,
               "films:fetch:success",
               this.filmService.routeSearch(request)
           )
@@ -41,7 +42,7 @@ public class FilmController {
     } catch (NoSuchElementException e) {
       return ResponseEntity.badRequest().contentType(MediaType.APPLICATION_PROBLEM_JSON)
           .body(ResponseFactory.create(
-              Response.Status.BAD_REQUEST.get(),
+              HttpStatus.NOT_FOUND,
               "films:fetch:not.found",
               Page.empty()
           ));
@@ -53,7 +54,7 @@ public class FilmController {
     try {
       return ResponseEntity.ok(
           ResponseFactory.create(
-              Response.Status.OK.get(),
+              HttpStatus.OK,
               "film:fetch:success",
               this.filmService.getFilm(id.longValue())
           ));
@@ -61,7 +62,7 @@ public class FilmController {
       return ResponseEntity.badRequest()
           .contentType(MediaType.APPLICATION_PROBLEM_JSON)
           .body(ResponseFactory.create(
-              Response.Status.BAD_REQUEST.get(),
+              HttpStatus.NOT_FOUND,
               "film:fetch:not.found",
               EmptyResponse.INSTANCE
           ));

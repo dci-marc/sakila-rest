@@ -46,7 +46,7 @@ public class GlobalExceptionHandler {
         .status(HttpStatus.INTERNAL_SERVER_ERROR.value())
         .contentType(MediaType.APPLICATION_PROBLEM_JSON)
         .body(ResponseFactory.create(
-            Response.Status.INTERNAL_SERVER_ERROR.get(),
+            HttpStatus.INTERNAL_SERVER_ERROR,
             "server:internal:error"
         ));
   }
@@ -57,7 +57,7 @@ public class GlobalExceptionHandler {
         .status(HttpStatus.BAD_REQUEST.value())
         .contentType(MediaType.APPLICATION_PROBLEM_JSON)
         .body(ResponseFactory.create(
-            Response.Status.BAD_REQUEST.get(),
+            HttpStatus.BAD_REQUEST,
             "error:request:unreadable"
         ));
   }
@@ -70,7 +70,7 @@ public class GlobalExceptionHandler {
         .status(HttpStatus.INTERNAL_SERVER_ERROR.value())
         .contentType(MediaType.APPLICATION_PROBLEM_JSON)
         .body(ResponseFactory.create(
-            Response.Status.INTERNAL_SERVER_ERROR.get(),
+            HttpStatus.BAD_REQUEST,
             "error:json:processing"
         ));
   }
@@ -90,7 +90,7 @@ public class GlobalExceptionHandler {
         .status(HttpStatus.BAD_REQUEST.value())
         .contentType(MediaType.APPLICATION_PROBLEM_JSON)
         .body(ResponseFactory.create(
-            Response.Status.BAD_REQUEST.get(),
+            HttpStatus.BAD_REQUEST,
             "error:validation:fail",
             new DictionaryListResponse(errors)
         ));

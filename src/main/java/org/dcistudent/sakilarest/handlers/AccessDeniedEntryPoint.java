@@ -29,7 +29,7 @@ public class AccessDeniedEntryPoint implements AccessDeniedHandler {
         .status(HttpStatus.FORBIDDEN.value())
         .contentType(MediaType.APPLICATION_PROBLEM_JSON)
         .body(ResponseFactory.create(
-            HttpStatus.FORBIDDEN.value(),
+            HttpStatus.FORBIDDEN,
             "error:access:denied"
         ));
 

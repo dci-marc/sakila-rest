@@ -10,6 +10,7 @@ import org.dcistudent.sakilarest.models.responses.domain.StoresResponse;
 import org.dcistudent.sakilarest.services.StoreService;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -34,7 +35,7 @@ public class StoreController {
     try {
       return ResponseEntity.ok(
           ResponseFactory.create(
-              Response.Status.OK.get(),
+              HttpStatus.OK,
               "stores:fetch:success",
               this.storeService.getAll(request)
           ));
@@ -43,7 +44,7 @@ public class StoreController {
           .badRequest()
           .contentType(MediaType.APPLICATION_PROBLEM_JSON)
           .body(ResponseFactory.create(
-              Response.Status.BAD_REQUEST.get(),
+              HttpStatus.NOT_FOUND,
               "stores:fetch:not.found",
               Page.empty()
           ));
@@ -55,7 +56,7 @@ public class StoreController {
     try {
       return ResponseEntity.ok(
           ResponseFactory.create(
-              Response.Status.OK.get(),
+              HttpStatus.OK,
               "store:fetch:success",
               this.storeService.getById(id)
           ));
@@ -64,7 +65,7 @@ public class StoreController {
           .badRequest()
           .contentType(MediaType.APPLICATION_PROBLEM_JSON)
           .body(ResponseFactory.create(
-              Response.Status.BAD_REQUEST.get(),
+              HttpStatus.NOT_FOUND,
               "store:fetch:not.found",
               EmptyResponse.INSTANCE
           ));

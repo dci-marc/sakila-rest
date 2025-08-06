@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.springframework.http.HttpStatus;
 
 import java.util.Objects;
 
@@ -12,12 +13,12 @@ import java.util.Objects;
 @Setter
 public class Response<T> {
 
-  private final int status;
+  private final @NotNull HttpStatus status;
   @NotBlank
   private final @NotNull String message;
   private final @NotNull T data;
 
-  protected Response(int status, @NotNull String message, @Nullable T data) {
+  protected Response(@NotNull HttpStatus status, @NotNull String message, @Nullable T data) {
     this.status = status;
     this.message = message;
     Objects.requireNonNull(data, "Data must not be null");
@@ -33,7 +34,7 @@ public class Response<T> {
    * @param <T>     The generic type of data.
    * @return A new Response instance.
    */
-  public static <T> Response<T> create(int status, @NotNull String message, @NotNull T data) {
+  public static <T> Response<T> create(@NotNull HttpStatus status, @NotNull String message, @NotNull T data) {
     return new Response<>(status, message, data);
   }
 
@@ -46,39 +47,7 @@ public class Response<T> {
    * @param message The response message.
    * @return A new Response instance with an empty string for data.
    */
-  public static Response<String> create(int status, @NotNull String message) {
+  public static Response<String> create(@NotNull HttpStatus status, @NotNull String message) {
     return new Response<>(status, message, "");
-  }
-
-  public enum Status {
-    OK(200),
-    BAD_REQUEST(400),
-    INTERNAL_SERVER_ERROR(500);
-
-    private final int value;
-
-    Status(int value) {
-      this.value = value;
-    }
-
-    public int get() {
-      return this.value;
-    }
-  }
-
-  public enum Message {
-    OK("OK"),
-    BAD_REQUEST("Bad Request"),
-    INTERNAL_SERVER_ERROR("Internal Server Error");
-
-    private final @NotNull String value;
-
-    Message(@NotNull String value) {
-      this.value = value;
-    }
-
-    public @NotNull String get() {
-      return this.value;
-    }
   }
 }

@@ -29,7 +29,7 @@ public class UnauthorizedEntryPoint implements AuthenticationEntryPoint {
         .status(HttpStatus.UNAUTHORIZED.value())
         .contentType(MediaType.APPLICATION_PROBLEM_JSON)
         .body(ResponseFactory.create(
-            HttpStatus.UNAUTHORIZED.value(),
+            HttpStatus.UNAUTHORIZED,
             "auth:user:login:fail"
         ));
 
