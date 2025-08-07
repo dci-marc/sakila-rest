@@ -11,7 +11,7 @@ It should reflect the best and most widely used concepts and principles -
 as far as I can tell as a beginner - while also showing several possibilities
 for how different solutions can look.
 
-## GitHub & SonarQube Badges
+---
 
 [![CodeQL](https://github.com/dci-marc/sakila-rest/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/dci-marc/sakila-rest/actions/workflows/github-code-scanning/codeql)
 [![SonarQube](https://github.com/dci-marc/sakila-rest/actions/workflows/build.yml/badge.svg)](https://github.com/dci-marc/sakila-rest/actions/workflows/build.yml)
