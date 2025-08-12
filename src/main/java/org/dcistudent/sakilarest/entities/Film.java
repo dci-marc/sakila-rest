@@ -6,6 +6,7 @@ import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.Instant;
 
@@ -20,7 +21,7 @@ import java.time.Instant;
 })
 @Getter
 @Setter
-public class Film {
+public class Film implements Serializable {
   @Id
   @Column(name = "film_id", columnDefinition = "int UNSIGNED not null")
   private @NotNull Long id;
