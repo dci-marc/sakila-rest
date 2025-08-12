@@ -12,11 +12,11 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-@Cacheable("stores")
 public interface StoreRepository extends JpaRepository<Store, Long> {
 
   @NotNull Page<Store> findAll(@NotNull Pageable pageable);
 
+  @Cacheable("stores.id")
   @EntityGraph(value = "Store.eager", type = EntityGraph.EntityGraphType.LOAD)
   @NotNull Optional<Store> findById(@NotNull Long id);
 }
