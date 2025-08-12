@@ -1,7 +1,8 @@
 services:
   mariadb:
     image: mariadb:10.11
-    container_name: sakila-mysql
+    container_name: sakila-mariadb
+    restart: always
     environment:
       MARIADB_ROOT_PASSWORD: root
       MARIADB_DATABASE: sakila
@@ -14,6 +15,20 @@ services:
       # - ./src/main/resources/mysql-dump/dump-sakila-202507101349.sql.gz:/docker-entrypoint-initdb.d/init.sql.gz
     healthcheck:
       test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:alpine
+    container_name: sakila-redis
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./redis_data:/data
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
       interval: 10s
       timeout: 5s
       retries: 5

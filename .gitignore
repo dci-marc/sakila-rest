@@ -34,6 +34,7 @@ build/
 
 ### Docker ###
 mariadb_data/
+redis_data/
 
 ### Configuration files ###
 /src/main/resources/application.properties
