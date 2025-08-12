@@ -1,0 +1,4 @@
+# active profile
+spring.profiles.active=dev
+spring.application.name=sakila-rest
+spring.flyway.enabled=true

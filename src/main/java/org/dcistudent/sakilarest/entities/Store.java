@@ -6,6 +6,7 @@ import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.Serializable;
 import java.time.Instant;
 import java.util.List;
 
@@ -24,7 +25,7 @@ import java.util.List;
     @NamedAttributeNode("inventory")
 })
 
-public class Store {
+public class Store implements Serializable {
   @Id
   @Column(name = "store_id", columnDefinition = "int UNSIGNED not null")
   private @NotNull Long id;

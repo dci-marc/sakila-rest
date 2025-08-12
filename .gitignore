@@ -34,10 +34,12 @@ build/
 
 ### Docker ###
 mariadb_data/
+redis_data/
 
 ### Configuration files ###
 /src/main/resources/application.properties
-/src/main/resources/*-dev.*
+/src/main/resources/*-dev.properties
+/src/main/resources/*-dev.yml
 
 ### Logging ###
 #/src/main/resources/log/**
