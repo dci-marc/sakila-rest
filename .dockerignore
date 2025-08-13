@@ -1,0 +1,39 @@
+# IntelliJ IDEA project files
+.idea
+*.iml
+
+# Maven/Gradle build outputs
+target
+build
+out
+
+# Logs
+*.log
+logs/
+spring.log
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Git
+.git
+.gitignore
+
+# Docker volumes or database data
+mariadb_data
+postgres_data
+mysql_data
+
+# Temporary files
+tmp/
+*.tmp
+
+# Test coverage & reports
+coverage/
+jacoco.exec
+surefire-reports/
+
+# Node.js stuff
+node_modules
+dist
