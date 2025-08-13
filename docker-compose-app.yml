@@ -1,0 +1,11 @@
+services:
+  sakila-rest-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: sakila-rest-app
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+    restart: unless-stopped
