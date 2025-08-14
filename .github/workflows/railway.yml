@@ -32,8 +32,8 @@ jobs:
 
       # 5. Railway Deployment
       - name: Deploy to Railway
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_API_KEY }}
         run: |
-          echo ${{ secrets.RAILWAY_API_KEY }} > railway.token
-          railway login --token-file railway.token
-          railway link --project ${{ secrets.RAILWAY_PROJECT_KEY }}
-          railway up --service ${{ secrets.RAILWAY_SERVICE_KEY }}
+          railway link --project ${{ secrets.RAILWAY_PROJECT_ID }} --service ${{ secrets.RAILWAY_SERVICE_ID }}
+          railway up --service ${{ secrets.RAILWAY_SERVICE_ID }}
