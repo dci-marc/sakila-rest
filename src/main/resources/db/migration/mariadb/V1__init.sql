@@ -285,7 +285,7 @@ CREATE TABLE staff (
   store_id INT UNSIGNED NOT NULL,
   active BOOLEAN NOT NULL DEFAULT TRUE,
   username VARCHAR(16) NOT NULL,
-  password VARCHAR(40) BINARY DEFAULT NULL,
+  password VARCHAR(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
   last_update TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY  (staff_id),
   KEY idx_fk_store_id (store_id),
@@ -316,8 +316,8 @@ CREATE TABLE store (
 
 CREATE VIEW customer_list
 AS
-SELECT cu.customer_id AS ID, CONCAT(cu.first_name, _utf8' ', cu.last_name) AS name, a.address AS address, a.postal_code AS `zip code`,
-	a.phone AS phone, city.city AS city, country.country AS country, IF(cu.active, _utf8'active',_utf8'') AS notes, cu.store_id AS SID
+SELECT cu.customer_id AS ID, CONCAT(cu.first_name, _utf8mb4' ', cu.last_name) AS name, a.address AS address, a.postal_code AS `zip code`,
+	a.phone AS phone, city.city AS city, country.country AS country, IF(cu.active, _utf8mb4'active',_utf8mb4'') AS notes, cu.store_id AS SID
 FROM customer AS cu JOIN address AS a ON cu.address_id = a.address_id JOIN city ON a.city_id = city.city_id
 	JOIN country ON city.country_id = country.country_id;
 
@@ -328,7 +328,7 @@ FROM customer AS cu JOIN address AS a ON cu.address_id = a.address_id JOIN city 
 CREATE VIEW film_list
 AS
 SELECT film.film_id AS FID, film.title AS title, film.description AS description, category.name AS category, film.rental_rate AS price,
-	film.length AS length, film.rating AS rating, GROUP_CONCAT(CONCAT(actor.first_name, _utf8' ', actor.last_name) SEPARATOR ', ') AS actors
+	film.length AS length, film.rating AS rating, GROUP_CONCAT(CONCAT(actor.first_name, _utf8mb4' ', actor.last_name) SEPARATOR ', ') AS actors
 FROM category LEFT JOIN film_category ON category.category_id = film_category.category_id LEFT JOIN film ON film_category.film_id = film.film_id
         JOIN film_actor ON film.film_id = film_actor.film_id
 	JOIN actor ON film_actor.actor_id = actor.actor_id
@@ -342,7 +342,7 @@ CREATE VIEW nicer_but_slower_film_list
 AS
 SELECT film.film_id AS FID, film.title AS title, film.description AS description, category.name AS category, film.rental_rate AS price,
 	film.length AS length, film.rating AS rating, GROUP_CONCAT(CONCAT(CONCAT(UCASE(SUBSTR(actor.first_name,1,1)),
-	LCASE(SUBSTR(actor.first_name,2,LENGTH(actor.first_name))),_utf8' ',CONCAT(UCASE(SUBSTR(actor.last_name,1,1)),
+	LCASE(SUBSTR(actor.first_name,2,LENGTH(actor.first_name))),_utf8mb4' ',CONCAT(UCASE(SUBSTR(actor.last_name,1,1)),
 	LCASE(SUBSTR(actor.last_name,2,LENGTH(actor.last_name)))))) SEPARATOR ', ') AS actors
 FROM category LEFT JOIN film_category ON category.category_id = film_category.category_id LEFT JOIN film ON film_category.film_id = film.film_id
         JOIN film_actor ON film.film_id = film_actor.film_id
@@ -355,7 +355,7 @@ GROUP BY film.film_id, film.title, film.description, film.rental_rate, film.leng
 
 CREATE VIEW staff_list
 AS
-SELECT s.staff_id AS ID, CONCAT(s.first_name, _utf8' ', s.last_name) AS name, a.address AS address, a.postal_code AS `zip code`, a.phone AS phone,
+SELECT s.staff_id AS ID, CONCAT(s.first_name, _utf8mb4' ', s.last_name) AS name, a.address AS address, a.postal_code AS `zip code`, a.phone AS phone,
 	city.city AS city, country.country AS country, s.store_id AS SID
 FROM staff AS s JOIN address AS a ON s.address_id = a.address_id JOIN city ON a.city_id = city.city_id
 	JOIN country ON city.country_id = country.country_id;
@@ -367,8 +367,8 @@ FROM staff AS s JOIN address AS a ON s.address_id = a.address_id JOIN city ON a.
 CREATE VIEW sales_by_store
 AS
 SELECT
-CONCAT(c.city, _utf8',', cy.country) AS store
-, CONCAT(m.first_name, _utf8' ', m.last_name) AS manager
+CONCAT(c.city, _utf8mb4',', cy.country) AS store
+, CONCAT(m.first_name, _utf8mb4' ', m.last_name) AS manager
 , SUM(p.amount) AS total_sales
 FROM payment AS p
 INNER JOIN rental AS r ON p.rental_id = r.rental_id
