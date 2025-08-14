@@ -27,13 +27,13 @@ jobs:
 
       # 4. Railway CLI Setup
       - name: Set up Railway CLI
-        uses: railwayapp/cli@v1
-        with:
-          version: latest
+        run: |
+          curl -fsSL https://railway.app/cli/install.sh | bash
 
       # 5. Railway Deployment
       - name: Deploy to Railway
         run: |
-          railway login --token ${{ secrets.RAILWAY_API_KEY }}
+          echo ${{ secrets.RAILWAY_API_KEY }} > railway.token
+          railway login --token-file railway.token
           railway link --project ${{ secrets.RAILWAY_PROJECT_KEY }}
           railway up --service ${{ secrets.RAILWAY_SERVICE_KEY }}
