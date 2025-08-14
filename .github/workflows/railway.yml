@@ -28,7 +28,7 @@ jobs:
       # 4. Railway CLI Setup
       - name: Set up Railway CLI
         run: |
-          curl -fsSL https://railway.app/cli/install.sh | bash
+          bash <(curl -fsSL cli.new)
 
       # 5. Railway Deployment
       - name: Deploy to Railway
