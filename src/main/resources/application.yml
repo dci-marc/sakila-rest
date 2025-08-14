@@ -30,7 +30,7 @@ spring:
 
   flyway:
     enabled: true
-    locations: classpath:db/migration/mysql
+    locations: classpath:db/migration/mariadb
     baseline-on-migrate: true
 
   # === JACKSON (JSON) CONFIGURATION ===
