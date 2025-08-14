@@ -35,4 +35,5 @@ jobs:
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_API_KEY }}
         run: |
+          railway link --project ${{ secrets.RAILWAY_PROJECT_KEY }}
           railway up --service ${{ secrets.RAILWAY_SERVICE_KEY }}
