@@ -10,7 +10,8 @@ RUN apk add --no-cache git-lfs \
 COPY . .
 
 # Pull LFS objects since Railway isn't pulling them
-RUN git lfs pull
+RUN --mount=type=git,repo=https://github.com/dci-marc/sakila-rest.git \
+    git lfs pull
 
 # Maven Build
 RUN ./mvnw clean package -DskipTests
