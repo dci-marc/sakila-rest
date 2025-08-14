@@ -26,7 +26,7 @@ jobs:
       - run: ./mvnw clean package -DskipTests
 
       # 4. Railway Deploy
-      - uses: railwayapp/railway-action@v2
+      - uses: railwayapp/railway-github-action@v2
         with:
           railwayToken: ${{ secrets.RAILWAY_API_KEY }}
           projectId: 0e6ff615-7a95-447c-a0f8-3938e85466fa
