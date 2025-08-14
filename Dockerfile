@@ -1,7 +1,18 @@
 # ---- Build Stage ----
 FROM eclipse-temurin:17-jdk-alpine AS build
 WORKDIR /app
+
+# Install Git LFS
+RUN apk add --no-cache git-lfs \
+    && git lfs install
+
+# Copy project
 COPY . .
+
+# Pull LFS objects since Railway isn't pulling them
+RUN git lfs pull
+
+# Maven Build
 RUN ./mvnw clean package -DskipTests
 
 # ---- Runtime Stage ----
