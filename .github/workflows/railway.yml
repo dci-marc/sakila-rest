@@ -28,13 +28,8 @@ jobs:
       - name: Build with Maven
         run: ./mvnw clean package -DskipTests
 
-      # 4. Railway CLI Setup
-      - name: Install Railway CLI
-        run: |
-          curl -fsSL https://railway.app/install.sh | sh
-          echo "$HOME/.railway/bin" >> $GITHUB_PATH
-
-      # 5. Railway Deployment
+      # 4. Railway Deployment using official Docker container
       - name: Deploy to Railway
-        run: |
-          RAILWAY_TOKEN=${{ secrets.RAILWAY_API_KEY }} railway up
+        uses: railwayapp/cli@master
+        with:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_API_KEY }}
