@@ -38,7 +38,5 @@ jobs:
       - name: Deploy to Railway
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_API_KEY }}
-          RAILWAY_PROJECT: ${{ secrets.RAILWAY_PROJECT_KEY }}
-          RAILWAY_SERVICE: ${{ secrets.RAILWAY_SERVICE_KEY }}
         run: |
-          railway up
+          railway up --project ${{ secrets.RAILWAY_PROJECT_KEY }} --service ${{ secrets.RAILWAY_SERVICE_KEY }}
