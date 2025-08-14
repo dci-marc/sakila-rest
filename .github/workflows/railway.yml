@@ -11,29 +11,34 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Repository checkout including Git LFS
-      - uses: actions/checkout@v4
+      # 1. Repository checkout including LFS support
+      - name: Checkout Repository
+        uses: actions/checkout@v4
         with:
           lfs: true
 
       # 2. Java + Maven Setup
-      - uses: actions/setup-java@v3
+      - name: Set up Java and Maven
+        uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
           java-version: 17
 
       # 3. Maven Build
-      - run: ./mvnw clean package -DskipTests
+      - name: Build with Maven
+        run: ./mvnw clean package -DskipTests
 
       # 4. Railway CLI Setup
-      - name: Set up Railway CLI
-        run: |
-          bash <(curl -fsSL cli.new)
+      - name: Install Railway CLI
+        uses: Jxsh/setup-railway-cli@v2
+        with:
+          version: latest
 
       # 5. Railway Deployment
       - name: Deploy to Railway
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_API_KEY }}
+          RAILWAY_PROJECT: ${{ secrets.RAILWAY_PROJECT_KEY }}
+          RAILWAY_SERVICE: ${{ secrets.RAILWAY_SERVICE_KEY }}
         run: |
-          railway link --project ${{ secrets.RAILWAY_PROJECT_KEY }}
-          railway up --service ${{ secrets.RAILWAY_SERVICE_KEY }}
+          railway up
