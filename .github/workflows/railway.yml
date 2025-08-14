@@ -1,0 +1,31 @@
+name: Build and Deploy to Railway
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Repository checkout including Git LFS
+      - uses: actions/checkout@v4
+        with:
+          lfs: true
+
+      # 2. Java + Maven Setup
+      - uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: 17
+
+      # 3. Maven Build
+      - run: ./mvnw clean package -DskipTests
+
+      # 4. Railway Deploy
+      - uses: railwayapp/railway-action@v2
+        with:
+          railwayToken: ${{ secrets.RAILWAY_API_KEY }}
+          projectId: 0e6ff615-7a95-447c-a0f8-3938e85466fa
+          serviceId: 14ec836d-b7e5-4d66-8ad9-36c7aa7e0d16
