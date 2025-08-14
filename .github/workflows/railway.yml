@@ -25,9 +25,15 @@ jobs:
       # 3. Maven Build
       - run: ./mvnw clean package -DskipTests
 
-      # 4. Railway Deploy
-      - uses: railwayapp/railway-github-action@v2
+      # 4. Railway CLI Setup
+      - name: Set up Railway CLI
+        uses: railwayapp/cli@v1
         with:
-          railwayToken: ${{ secrets.RAILWAY_API_KEY }}
-          projectId: 0e6ff615-7a95-447c-a0f8-3938e85466fa
-          serviceId: 14ec836d-b7e5-4d66-8ad9-36c7aa7e0d16
+          version: latest
+
+      # 5. Railway Deployment
+      - name: Deploy to Railway
+        run: |
+          railway login --token ${{ secrets.RAILWAY_API_KEY }}
+          railway link --project ${{ secrets.RAILWAY_PROJECT_KEY }}
+          railway up --service ${{ secrets.RAILWAY_SERVICE_KEY }}
