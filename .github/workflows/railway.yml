@@ -30,9 +30,9 @@ jobs:
 
       # 4. Railway CLI Setup
       - name: Install Railway CLI
-        uses: Jxsh/setup-railway-cli@v2
-        with:
-          version: latest
+        run: |
+          curl -fsSL https://railway.app/install.sh | sh
+          echo "$HOME/.railway/bin" >> $GITHUB_PATH
 
       # 5. Railway Deployment
       - name: Deploy to Railway
