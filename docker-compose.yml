@@ -13,11 +13,6 @@ services:
     volumes:
       - ./mariadb_data:/var/lib/mysql
       # - ./src/main/resources/mysql-dump/dump-sakila-202507101349.sql.gz:/docker-entrypoint-initdb.d/init.sql.gz
-    healthcheck:
-      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
-      interval: 10s
-      timeout: 5s
-      retries: 5
 
   redis:
     image: redis:alpine
@@ -27,11 +22,6 @@ services:
       - "6379:6379"
     volumes:
       - ./redis_data:/data
-    healthcheck:
-      test: [ "CMD", "redis-cli", "ping" ]
-      interval: 10s
-      timeout: 5s
-      retries: 5
 
   postgresql:
     image: postgres:15
