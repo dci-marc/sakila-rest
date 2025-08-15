@@ -24,7 +24,7 @@ spring:
     password: ${SPRING_DATASOURCE_PASSWORD}
 
   flyway:
-    locations: classpath:db/migration/mariadb
+    enabled: true
     baseline-on-migrate: true
 
   # === JPA / HIBERNATE CONFIGURATION ===
@@ -35,8 +35,6 @@ spring:
     properties:
       hibernate:
         format_sql: true
-        dialect: org.hibernate.dialect.MySQLDialect
-        # dialect: org.hibernate.dialect.PostgreSQLDialect
 
   # === JACKSON (JSON) CONFIGURATION ===
   jackson:
