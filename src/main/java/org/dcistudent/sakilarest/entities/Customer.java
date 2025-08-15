@@ -17,7 +17,7 @@ import java.time.Instant;
 })
 @Getter
 @Setter
-public class Customer implements Serializable {
+public class Customer extends AbstractUuidEntity implements Serializable {
   @Id
   @Column(name = "customer_id", columnDefinition = "int UNSIGNED not null")
   private @NotNull Long id;

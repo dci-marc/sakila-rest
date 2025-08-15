@@ -21,7 +21,7 @@ import java.time.Instant;
 })
 @Getter
 @Setter
-public class Film implements Serializable {
+public class Film extends AbstractUuidEntity implements Serializable {
   @Id
   @Column(name = "film_id", columnDefinition = "int UNSIGNED not null")
   private @NotNull Long id;

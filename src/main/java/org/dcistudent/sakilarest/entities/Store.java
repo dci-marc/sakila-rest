@@ -25,7 +25,7 @@ import java.util.List;
     @NamedAttributeNode("inventory")
 })
 
-public class Store implements Serializable {
+public class Store extends AbstractUuidEntity implements Serializable {
   @Id
   @Column(name = "store_id", columnDefinition = "int UNSIGNED not null")
   private @NotNull Long id;

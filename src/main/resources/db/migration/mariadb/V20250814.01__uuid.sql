@@ -1,0 +1,26 @@
+ALTER TABLE film ADD COLUMN uuid UUID;
+UPDATE film
+SET uuid = UUID()
+WHERE uuid IS NULL;
+ALTER TABLE film
+ADD CONSTRAINT film_uuid_unique UNIQUE (uuid);
+ALTER TABLE film
+MODIFY COLUMN uuid UUID NOT NULL;
+
+ALTER TABLE `store` ADD COLUMN uuid UUID;
+UPDATE `store`
+SET uuid = UUID()
+WHERE uuid IS NULL;
+ALTER TABLE `store`
+ADD CONSTRAINT store_uuid_unique UNIQUE (uuid);
+ALTER TABLE `store`
+MODIFY COLUMN uuid UUID NOT NULL;
+
+ALTER TABLE customer ADD COLUMN uuid UUID;
+UPDATE customer
+SET uuid = UUID()
+WHERE uuid IS NULL;
+ALTER TABLE customer
+ADD CONSTRAINT customer_uuid_unique UNIQUE (uuid);
+ALTER TABLE customer
+MODIFY COLUMN uuid UUID NOT NULL;
