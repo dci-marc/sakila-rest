@@ -18,6 +18,12 @@ public class ConfigGuard {
   @Value("${auth0:domain}")
   private @NotNull String auth0Domain;
 
+  /**
+   * Check if database system configuration was loaded.
+   */
+  @Value("${spring.flyway.locations}")
+  private @NotNull String springFlywayLocations;
+
   @Bean
   @NotNull
   ApplicationRunner validateConfig() {
@@ -25,7 +31,8 @@ public class ConfigGuard {
       if (
           this.serverApplicationName.isBlank() ||
               this.springDatasourceUrl.isBlank() ||
-              this.auth0Domain.isBlank()
+              this.auth0Domain.isBlank() ||
+              this.springFlywayLocations.isBlank()
       ) {
         throw new IllegalStateException(
             "Configuration properties 'server', 'spring', and 'auth0' must be set." +
