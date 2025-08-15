@@ -20,6 +20,7 @@ import java.util.List;
 @Setter
 
 @NamedEntityGraph(name = "Store.eager", attributeNodes = {
+    @NamedAttributeNode("uuid"),
     @NamedAttributeNode("managerStaff"),
     @NamedAttributeNode("customer"),
     @NamedAttributeNode("inventory")

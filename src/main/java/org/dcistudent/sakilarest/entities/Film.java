@@ -10,9 +10,6 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.Instant;
 
-/**
- * Join Table / Junction Table / Mapping Table
- */
 @Entity
 @Table(name = "film", schema = "sakila", indexes = {
     @Index(name = "idx_title", columnList = "title"),
