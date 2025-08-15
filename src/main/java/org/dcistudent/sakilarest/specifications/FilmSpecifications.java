@@ -41,6 +41,7 @@ public class FilmSpecifications {
     return spec;
   }
 
+  @SuppressWarnings("java:S1604")
   public static Specification<Film> hasTitle(@NotNull String title) {
     // non-Lambda version
     return new Specification<>() {
