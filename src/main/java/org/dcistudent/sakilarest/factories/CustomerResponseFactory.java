@@ -14,6 +14,7 @@ public final class CustomerResponseFactory {
 
   public static @NotNull CustomerResponse create(@NotNull Customer customer) {
     return new CustomerResponse(
+        customer.getUuid(),
         customer.getFirstName(),
         customer.getLastName(),
         customer.getEmail(),

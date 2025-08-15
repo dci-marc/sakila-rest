@@ -14,6 +14,7 @@ public final class FilmResponseFactory {
 
   public static @NotNull FilmResponse create(@NotNull Film film) {
     return new FilmResponse(
+        film.getUuid(),
         film.getTitle(),
         film.getDescription(),
         film.getReleaseYear(),
