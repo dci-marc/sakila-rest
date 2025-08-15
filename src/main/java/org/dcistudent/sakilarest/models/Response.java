@@ -1,16 +1,12 @@
 package org.dcistudent.sakilarest.models;
 
 import jakarta.validation.constraints.NotBlank;
-import lombok.Getter;
-import lombok.Setter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.springframework.http.HttpStatus;
 
 import java.util.Objects;
 
-@Getter
-@Setter
 public class Response<T> {
 
   private final @NotNull HttpStatus status;
@@ -49,5 +45,17 @@ public class Response<T> {
    */
   public static Response<String> create(@NotNull HttpStatus status, @NotNull String message) {
     return new Response<>(status, message, "");
+  }
+
+  public @NotNull HttpStatus getStatus() {
+    return this.status;
+  }
+
+  public @NotNull String getMessage() {
+    return this.message;
+  }
+
+  public @NotNull T getData() {
+    return this.data;
   }
 }

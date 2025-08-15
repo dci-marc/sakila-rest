@@ -1,12 +1,10 @@
 package org.dcistudent.sakilarest.models.responses.error;
 
-import lombok.Getter;
 import org.dcistudent.sakilarest.models.Response;
 import org.dcistudent.sakilarest.models.responses.Auth0Response;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.http.HttpStatus;
 
-@Getter
 public final class Auth0ErrorResponse extends Response<String> implements Auth0Response {
 
   public Auth0ErrorResponse(@NotNull HttpStatus status) {
