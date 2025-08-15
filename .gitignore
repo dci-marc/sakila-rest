@@ -39,6 +39,8 @@ build/
 
 ### Docker ###
 mariadb_data/
+postgres_data/
+mysql_data/
 redis_data/
 
 ### Configuration files ###
