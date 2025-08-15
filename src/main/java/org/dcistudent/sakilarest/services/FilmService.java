@@ -6,6 +6,8 @@ import org.dcistudent.sakilarest.models.requests.FilmRequest;
 import org.dcistudent.sakilarest.models.responses.domain.FilmResponse;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -18,25 +20,11 @@ public class FilmService {
   }
 
   public @NotNull Page<FilmResponse> routeSearch(FilmRequest request) {
-    if (request.getTitle().length() > 0) {
-      return FilmResponseFactory.create(
-          this.filmManager.findByTitle(request.getLimit(), request.getOffset(), request.getTitle())
-      );
-    }
+    Pageable pageable = PageRequest.of(request.getOffset(), request.getLimit());
 
-    if (request.getDescription().length() > 0) {
-      FilmResponseFactory.create(
-          this.filmManager.findByDescription(request.getLimit(), request.getOffset(), request.getDescription())
-      );
-    }
-
-    if (request.getReleaseYear() > 0) {
-      return FilmResponseFactory.create(
-          this.filmManager.findByReleaseYear(request.getLimit(), request.getOffset(), request.getReleaseYear())
-      );
-    }
-
-    return FilmResponseFactory.create(this.filmManager.findAll(request.getLimit(), request.getOffset()));
+    return FilmResponseFactory.create(
+        this.filmManager.findAll(request, pageable)
+    );
   }
 
   public @NotNull FilmResponse getFilm(@NotNull Long id) {
