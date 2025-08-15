@@ -1,5 +1,9 @@
 package org.dcistudent.sakilarest.specifications;
 
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Root;
 import org.dcistudent.sakilarest.entities.Film;
 import org.dcistudent.sakilarest.models.requests.FilmRequest;
 import org.jetbrains.annotations.NotNull;
@@ -38,8 +42,22 @@ public class FilmSpecifications {
   }
 
   public static Specification<Film> hasTitle(@NotNull String title) {
-    return (root, query, cb) ->
-        cb.like(root.get("title"), "%" + title + "%");
+    // non-Lambda version
+    return new Specification<>() {
+      @Override
+      public Predicate toPredicate(
+          Root<Film> root,
+          CriteriaQuery<?> query,
+          CriteriaBuilder cb) {
+        return cb.like(root.get("title"), "%" + title + "%");
+      }
+    };
+
+    /**
+     * Lambda version:
+     * return (root, query, cb) ->
+     *     cb.like(root.get("title"), "%" + title + "%");
+     */
   }
 
   public static Specification<Film> hasDescription(@NotNull String description) {
