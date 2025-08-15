@@ -21,7 +21,7 @@ public class ConfigGuard {
   /**
    * Check if database system configuration was loaded.
    */
-  @Value("${spring.flyway.locations}")
+  @Value("${spring:flyway:locations}")
   private @NotNull String springFlywayLocations;
 
   @Bean
