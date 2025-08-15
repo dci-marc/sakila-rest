@@ -1,20 +1,24 @@
 package org.dcistudent.sakilarest.entities;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.PrePersist;
-import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.UUID;
 
-@Getter
+@MappedSuperclass
 abstract public class AbstractUuidEntity {
 
   @Column(name = "uuid", columnDefinition = "uuid", nullable = false, unique = true)
-  protected @NotNull String uuid;
+  protected @NotNull UUID uuid;
 
   @PrePersist
   protected void onCreate() {
-    this.uuid = UUID.randomUUID().toString();
+    this.uuid = UUID.randomUUID();
+  }
+
+  public @NotNull UUID getUuid() {
+    return this.uuid;
   }
 }
