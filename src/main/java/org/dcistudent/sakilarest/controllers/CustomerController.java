@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.NoSuchElementException;
 
 @RestController
-@RequestMapping("/customers")
+@RequestMapping("/customers") // plural nouns
 public class CustomerController {
 
   private final @NotNull CustomerService customerService;

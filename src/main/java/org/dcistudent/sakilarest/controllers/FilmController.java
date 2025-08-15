@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.NoSuchElementException;
 
 @RestController
-@RequestMapping("/films")
+@RequestMapping("/films") // plural nouns
 public class FilmController {
 
   private final @NotNull FilmService filmService;

@@ -6,6 +6,7 @@ import org.dcistudent.sakilarest.models.Response;
 import org.dcistudent.sakilarest.models.requests.LimitOffsetRequest;
 import org.dcistudent.sakilarest.models.responses.EmptyResponse;
 import org.dcistudent.sakilarest.models.responses.ResponsePayload;
+import org.dcistudent.sakilarest.models.responses.domain.CustomerResponse;
 import org.dcistudent.sakilarest.models.responses.domain.StoresResponse;
 import org.dcistudent.sakilarest.services.StoreService;
 import org.jetbrains.annotations.NotNull;
@@ -18,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.NoSuchElementException;
 
 @RestController
-@RequestMapping("/stores")
+@RequestMapping("/stores") // plural nouns
 public class StoreController {
 
   @NotNull
@@ -68,6 +69,30 @@ public class StoreController {
               HttpStatus.NOT_FOUND,
               "store:fetch:not.found",
               EmptyResponse.INSTANCE
+          ));
+    }
+  }
+
+  @GetMapping("/{id}/customers")
+  public @NotNull ResponseEntity<Response<Page<CustomerResponse>>> getStoreCustomers(
+      @NotNull @PathVariable Long id,
+      @NotNull @ModelAttribute @Valid LimitOffsetRequest request
+  ) {
+    try {
+      return ResponseEntity.ok(
+          ResponseFactory.create(
+              HttpStatus.OK,
+              "store:customers:fetch:success",
+              this.storeService.getCustomersByStoreId(id, request)
+          ));
+    } catch (NoSuchElementException e) {
+      return ResponseEntity
+          .badRequest()
+          .contentType(MediaType.APPLICATION_PROBLEM_JSON)
+          .body(ResponseFactory.create(
+              HttpStatus.NOT_FOUND,
+              "store:customers:fetch:not.found",
+              Page.empty()
           ));
     }
   }
