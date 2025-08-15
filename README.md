@@ -2,6 +2,10 @@
 
 RESTful API service demo on the Sakila dataset.
 
+## Public Instance
+
+[https://sakila-rest-production.up.railway.app/api/v1/](https://sakila-rest-production.up.railway.app/api/v1/)
+
 ## Intention
 
 This project is developed exclusively for personal use for possible reference
