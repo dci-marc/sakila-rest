@@ -1,8 +1,6 @@
 package org.dcistudent.sakilarest.entities;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
 import org.hibernate.annotations.CurrentTimestamp;
 import org.jetbrains.annotations.NotNull;
 
@@ -11,8 +9,6 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "log")
-@Getter
-@Setter
 public class Log {
   @Id
   @GeneratedValue(strategy = GenerationType.UUID)
@@ -35,5 +31,37 @@ public class Log {
   }
 
   public Log() {
+  }
+
+  public UUID getId() {
+    return this.id;
+  }
+
+  public @NotNull Integer getLevel() {
+    return this.level;
+  }
+
+  public @NotNull Instant getDatetime() {
+    return this.datetime;
+  }
+
+  public @NotNull String getMessage() {
+    return this.message;
+  }
+
+  public void setId(UUID id) {
+    this.id = id;
+  }
+
+  public void setLevel(@NotNull Integer level) {
+    this.level = level;
+  }
+
+  public void setDatetime(@NotNull Instant datetime) {
+    this.datetime = datetime;
+  }
+
+  public void setMessage(@NotNull String message) {
+    this.message = message;
   }
 }

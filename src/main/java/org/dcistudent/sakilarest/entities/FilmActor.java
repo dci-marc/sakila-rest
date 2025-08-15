@@ -1,8 +1,6 @@
 package org.dcistudent.sakilarest.entities;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
 import org.jetbrains.annotations.NotNull;
 
@@ -12,8 +10,6 @@ import java.time.Instant;
 @Table(name = "film_actor", schema = "sakila", indexes = {
     @Index(name = "idx_fk_film_id", columnList = "film_id")
 })
-@Getter
-@Setter
 public class FilmActor {
   @EmbeddedId
   private @NotNull FilmActorId id;
@@ -31,4 +27,36 @@ public class FilmActor {
   @ColumnDefault("CURRENT_TIMESTAMP")
   @Column(name = "last_update", nullable = false)
   private @NotNull Instant lastUpdate;
+
+  public @NotNull FilmActorId getId() {
+    return this.id;
+  }
+
+  public @NotNull Actor getActor() {
+    return this.actor;
+  }
+
+  public @NotNull Film getFilm() {
+    return this.film;
+  }
+
+  public @NotNull Instant getLastUpdate() {
+    return this.lastUpdate;
+  }
+
+  public void setId(@NotNull FilmActorId id) {
+    this.id = id;
+  }
+
+  public void setActor(@NotNull Actor actor) {
+    this.actor = actor;
+  }
+
+  public void setFilm(@NotNull Film film) {
+    this.film = film;
+  }
+
+  public void setLastUpdate(@NotNull Instant lastUpdate) {
+    this.lastUpdate = lastUpdate;
+  }
 }

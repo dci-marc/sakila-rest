@@ -4,14 +4,12 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import lombok.Getter;
 import org.hibernate.annotations.Immutable;
 import org.jetbrains.annotations.NotNull;
 
 @Entity
 @Immutable
 @Table(name = "customer_list", schema = "sakila")
-@Getter
 public class CustomerList {
   @Id
   @Column(name = "ID", columnDefinition = "int UNSIGNED not null")
@@ -42,5 +40,41 @@ public class CustomerList {
   private @NotNull Long sid;
 
   protected CustomerList() {
+  }
+
+  public @NotNull Long getId() {
+    return this.id;
+  }
+
+  public @NotNull String getName() {
+    return this.name;
+  }
+
+  public @NotNull String getAddress() {
+    return this.address;
+  }
+
+  public @NotNull String getZipCode() {
+    return this.zipCode;
+  }
+
+  public @NotNull String getPhone() {
+    return this.phone;
+  }
+
+  public @NotNull String getCity() {
+    return this.city;
+  }
+
+  public @NotNull String getCountry() {
+    return this.country;
+  }
+
+  public @NotNull String getNotes() {
+    return this.notes;
+  }
+
+  public @NotNull Long getSid() {
+    return this.sid;
   }
 }

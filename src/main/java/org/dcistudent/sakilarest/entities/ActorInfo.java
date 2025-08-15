@@ -1,14 +1,12 @@
 package org.dcistudent.sakilarest.entities;
 
 import jakarta.persistence.*;
-import lombok.Getter;
 import org.hibernate.annotations.Immutable;
 import org.jetbrains.annotations.NotNull;
 
 @Entity
 @Immutable
 @Table(name = "actor_info", schema = "sakila")
-@Getter
 public class ActorInfo {
   @Id
   @Column(name = "actor_id", columnDefinition = "int UNSIGNED not null")
@@ -25,5 +23,21 @@ public class ActorInfo {
   private @NotNull String filmInfo;
 
   protected ActorInfo() {
+  }
+
+  public @NotNull Long getActorId() {
+    return this.actorId;
+  }
+
+  public @NotNull String getFirstName() {
+    return this.firstName;
+  }
+
+  public @NotNull String getLastName() {
+    return this.lastName;
+  }
+
+  public @NotNull String getFilmInfo() {
+    return this.filmInfo;
   }
 }

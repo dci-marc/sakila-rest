@@ -1,8 +1,6 @@
 package org.dcistudent.sakilarest.entities;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
 import org.jetbrains.annotations.NotNull;
 
@@ -16,8 +14,6 @@ import java.util.List;
 }, uniqueConstraints = {
     @UniqueConstraint(name = "idx_unique_manager", columnNames = {"manager_staff_id"})
 })
-@Getter
-@Setter
 
 @NamedEntityGraph(name = "Store.eager", attributeNodes = {
     @NamedAttributeNode("uuid"),
@@ -48,4 +44,52 @@ public class Store extends AbstractUuidEntity implements Serializable {
   @ColumnDefault("CURRENT_TIMESTAMP")
   @Column(name = "last_update", nullable = false)
   private @NotNull Instant lastUpdate;
+
+  public @NotNull Long getId() {
+    return this.id;
+  }
+
+  public @NotNull Staff getManagerStaff() {
+    return this.managerStaff;
+  }
+
+  public @NotNull Address getAddress() {
+    return this.address;
+  }
+
+  public @NotNull List<Customer> getCustomer() {
+    return this.customer;
+  }
+
+  public @NotNull List<Inventory> getInventory() {
+    return this.inventory;
+  }
+
+  public @NotNull Instant getLastUpdate() {
+    return this.lastUpdate;
+  }
+
+  public void setId(@NotNull Long id) {
+    this.id = id;
+  }
+
+  public void setManagerStaff(@NotNull Staff managerStaff) {
+    this.managerStaff = managerStaff;
+  }
+
+  public void setAddress(@NotNull Address address) {
+    this.address = address;
+  }
+
+  public void setCustomer(@NotNull List<Customer> customer) {
+    this.customer = customer;
+  }
+
+  public void setInventory(@NotNull List<Inventory> inventory) {
+    this.inventory = inventory;
+  }
+
+  public void setLastUpdate(@NotNull Instant lastUpdate) {
+    this.lastUpdate = lastUpdate;
+  }
 }

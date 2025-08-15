@@ -1,7 +1,6 @@
 package org.dcistudent.sakilarest.entities;
 
 import jakarta.persistence.*;
-import lombok.Getter;
 import org.hibernate.annotations.Immutable;
 import org.jetbrains.annotations.NotNull;
 
@@ -10,7 +9,6 @@ import java.math.BigDecimal;
 @Entity
 @Immutable
 @Table(name = "film_list", schema = "sakila")
-@Getter
 public class FilmList {
   @Id
   @Column(name = "FID", columnDefinition = "int UNSIGNED")
@@ -41,5 +39,37 @@ public class FilmList {
   private @NotNull String actors;
 
   protected FilmList() {
+  }
+
+  public @NotNull Long getFid() {
+    return this.fid;
+  }
+
+  public @NotNull String getTitle() {
+    return this.title;
+  }
+
+  public @NotNull String getDescription() {
+    return this.description;
+  }
+
+  public @NotNull String getCategory() {
+    return this.category;
+  }
+
+  public @NotNull BigDecimal getPrice() {
+    return this.price;
+  }
+
+  public @NotNull Integer getLength() {
+    return this.length;
+  }
+
+  public @NotNull String getRating() {
+    return this.rating;
+  }
+
+  public @NotNull String getActors() {
+    return this.actors;
   }
 }

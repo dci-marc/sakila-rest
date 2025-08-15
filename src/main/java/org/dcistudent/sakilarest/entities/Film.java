@@ -1,8 +1,6 @@
 package org.dcistudent.sakilarest.entities;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
 import org.jetbrains.annotations.NotNull;
 
@@ -16,8 +14,6 @@ import java.time.Instant;
     @Index(name = "idx_fk_language_id", columnList = "language_id"),
     @Index(name = "idx_fk_original_language_id", columnList = "original_language_id")
 })
-@Getter
-@Setter
 public class Film extends AbstractUuidEntity implements Serializable {
   @Id
   @Column(name = "film_id", columnDefinition = "int UNSIGNED not null")
@@ -68,4 +64,108 @@ public class Film extends AbstractUuidEntity implements Serializable {
   @ColumnDefault("CURRENT_TIMESTAMP")
   @Column(name = "last_update", nullable = false)
   private @NotNull Instant lastUpdate;
+
+  public @NotNull Long getId() {
+    return this.id;
+  }
+
+  public @NotNull String getTitle() {
+    return this.title;
+  }
+
+  public @NotNull String getDescription() {
+    return this.description;
+  }
+
+  public @NotNull Integer getReleaseYear() {
+    return this.releaseYear;
+  }
+
+  public @NotNull Language getLanguage() {
+    return this.language;
+  }
+
+  public @NotNull Language getOriginalLanguage() {
+    return this.originalLanguage;
+  }
+
+  public @NotNull Short getRentalDuration() {
+    return this.rentalDuration;
+  }
+
+  public @NotNull BigDecimal getRentalRate() {
+    return this.rentalRate;
+  }
+
+  public @NotNull Integer getLength() {
+    return this.length;
+  }
+
+  public @NotNull BigDecimal getReplacementCost() {
+    return this.replacementCost;
+  }
+
+  public @NotNull String getRating() {
+    return this.rating;
+  }
+
+  public @NotNull String getSpecialFeatures() {
+    return this.specialFeatures;
+  }
+
+  public @NotNull Instant getLastUpdate() {
+    return this.lastUpdate;
+  }
+
+  public void setId(@NotNull Long id) {
+    this.id = id;
+  }
+
+  public void setTitle(@NotNull String title) {
+    this.title = title;
+  }
+
+  public void setDescription(@NotNull String description) {
+    this.description = description;
+  }
+
+  public void setReleaseYear(@NotNull Integer releaseYear) {
+    this.releaseYear = releaseYear;
+  }
+
+  public void setLanguage(@NotNull Language language) {
+    this.language = language;
+  }
+
+  public void setOriginalLanguage(@NotNull Language originalLanguage) {
+    this.originalLanguage = originalLanguage;
+  }
+
+  public void setRentalDuration(@NotNull Short rentalDuration) {
+    this.rentalDuration = rentalDuration;
+  }
+
+  public void setRentalRate(@NotNull BigDecimal rentalRate) {
+    this.rentalRate = rentalRate;
+  }
+
+  public void setLength(@NotNull Integer length) {
+    this.length = length;
+  }
+
+  public void setReplacementCost(@NotNull BigDecimal replacementCost) {
+    this.replacementCost = replacementCost;
+  }
+
+  public void setRating(@NotNull String rating) {
+    this.rating = rating;
+  }
+
+  public void setSpecialFeatures(@NotNull String specialFeatures) {
+    this.specialFeatures = specialFeatures;
+  }
+
+  public void setLastUpdate(@NotNull Instant lastUpdate) {
+    this.lastUpdate = lastUpdate;
+  }
 }

@@ -1,8 +1,6 @@
 package org.dcistudent.sakilarest.entities;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -16,8 +14,6 @@ import java.time.Instant;
     @Index(name = "idx_fk_customer_id", columnList = "customer_id"),
     @Index(name = "idx_fk_staff_id", columnList = "staff_id")
 })
-@Getter
-@Setter
 public class Payment {
   @Id
   @Column(name = "payment_id", columnDefinition = "int UNSIGNED not null")
@@ -45,4 +41,60 @@ public class Payment {
   @ColumnDefault("CURRENT_TIMESTAMP")
   @Column(name = "last_update")
   private @NotNull Instant lastUpdate;
+
+  public @NotNull Long getId() {
+    return this.id;
+  }
+
+  public @NotNull Customer getCustomer() {
+    return this.customer;
+  }
+
+  public @NotNull Staff getStaff() {
+    return this.staff;
+  }
+
+  public @NotNull Rental getRental() {
+    return this.rental;
+  }
+
+  public @NotNull BigDecimal getAmount() {
+    return this.amount;
+  }
+
+  public @NotNull Instant getPaymentDate() {
+    return this.paymentDate;
+  }
+
+  public @NotNull Instant getLastUpdate() {
+    return this.lastUpdate;
+  }
+
+  public void setId(@NotNull Long id) {
+    this.id = id;
+  }
+
+  public void setCustomer(@NotNull Customer customer) {
+    this.customer = customer;
+  }
+
+  public void setStaff(@NotNull Staff staff) {
+    this.staff = staff;
+  }
+
+  public void setRental(@NotNull Rental rental) {
+    this.rental = rental;
+  }
+
+  public void setAmount(@NotNull BigDecimal amount) {
+    this.amount = amount;
+  }
+
+  public void setPaymentDate(@NotNull Instant paymentDate) {
+    this.paymentDate = paymentDate;
+  }
+
+  public void setLastUpdate(@NotNull Instant lastUpdate) {
+    this.lastUpdate = lastUpdate;
+  }
 }

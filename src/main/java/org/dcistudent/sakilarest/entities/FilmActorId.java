@@ -2,8 +2,6 @@ package org.dcistudent.sakilarest.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
-import lombok.Getter;
-import lombok.Setter;
 import org.hibernate.Hibernate;
 import org.jetbrains.annotations.NotNull;
 
@@ -12,8 +10,6 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Embeddable
-@Getter
-@Setter
 public class FilmActorId implements Serializable {
   @Serial
   private static final long serialVersionUID = 5914215412321227295L;
@@ -35,5 +31,21 @@ public class FilmActorId implements Serializable {
   @Override
   public int hashCode() {
     return Objects.hash(this.actorId, this.filmId);
+  }
+
+  public @NotNull Long getActorId() {
+    return this.actorId;
+  }
+
+  public @NotNull Long getFilmId() {
+    return this.filmId;
+  }
+
+  public void setActorId(@NotNull Long actorId) {
+    this.actorId = actorId;
+  }
+
+  public void setFilmId(@NotNull Long filmId) {
+    this.filmId = filmId;
   }
 }
