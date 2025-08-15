@@ -35,15 +35,16 @@ public final class StoreResponseFactory {
                 customer.getLastUpdate().toString()))
             .toList(),
         store.getInventory().stream()
-            .map(inventory -> new FilmResponse(
-                inventory.getFilm().getUuid(),
-                inventory.getFilm().getTitle(),
-                inventory.getFilm().getDescription(),
-                inventory.getFilm().getReleaseYear(),
-                inventory.getFilm().getLength(),
-                inventory.getFilm().getRating(),
-                inventory.getFilm().getSpecialFeatures(),
-                inventory.getFilm().getLastUpdate().toString()))
+            .map(inventory -> new FilmResponse.Builder()
+                .setUuid(inventory.getFilm().getUuid())
+                .setTitle(inventory.getFilm().getTitle())
+                .setDescription(inventory.getFilm().getDescription())
+                .setReleaseYear(inventory.getFilm().getReleaseYear())
+                .setLength(inventory.getFilm().getLength())
+                .setRating(inventory.getFilm().getRating())
+                .setSpecialFeatures(inventory.getFilm().getSpecialFeatures())
+                .setLastUpdate(inventory.getFilm().getLastUpdate().toString())
+                .build())
             .toList()
     );
   }

@@ -13,16 +13,16 @@ public final class FilmResponseFactory {
   }
 
   public static @NotNull FilmResponse create(@NotNull Film film) {
-    return new FilmResponse(
-        film.getUuid(),
-        film.getTitle(),
-        film.getDescription(),
-        film.getReleaseYear(),
-        film.getLength(),
-        film.getRating(),
-        film.getSpecialFeatures(),
-        film.getLastUpdate().atZone(ZoneId.systemDefault()).toString()
-    );
+    return new FilmResponse.Builder()
+        .setUuid(film.getUuid())
+        .setTitle(film.getTitle())
+        .setDescription(film.getDescription())
+        .setReleaseYear(film.getReleaseYear())
+        .setLength(film.getLength())
+        .setRating(film.getRating())
+        .setSpecialFeatures(film.getSpecialFeatures())
+        .setLastUpdate(film.getLastUpdate().atZone(ZoneId.systemDefault()).toString())
+        .build();
   }
 
   public static @NotNull Page<FilmResponse> create(@NotNull Page<Film> films) {
