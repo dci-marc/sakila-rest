@@ -44,8 +44,8 @@ mysql_data/
 redis_data/
 
 ### Configuration files ###
-/src/main/resources/*-dev.properties
-/src/main/resources/*-dev.yml
+/src/main/resources/application-*.yml
+!/src/main/resources/application-*.yml.dist
 
 ### Logging ###
 #/src/main/resources/log/**
