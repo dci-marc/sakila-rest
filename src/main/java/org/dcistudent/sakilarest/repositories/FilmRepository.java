@@ -2,7 +2,6 @@ package org.dcistudent.sakilarest.repositories;
 
 import org.dcistudent.sakilarest.entities.Film;
 import org.jetbrains.annotations.NotNull;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
@@ -12,7 +11,6 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-@Cacheable("films")
 public interface FilmRepository extends PagingAndSortingRepository<Film, Long> {
 
   @NotNull Page<Film> findAll(@NotNull Pageable pageable);

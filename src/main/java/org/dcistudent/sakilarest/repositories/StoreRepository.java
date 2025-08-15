@@ -2,7 +2,6 @@ package org.dcistudent.sakilarest.repositories;
 
 import org.dcistudent.sakilarest.entities.Store;
 import org.jetbrains.annotations.NotNull;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.EntityGraph;
@@ -16,7 +15,6 @@ public interface StoreRepository extends JpaRepository<Store, Long> {
 
   @NotNull Page<Store> findAll(@NotNull Pageable pageable);
 
-  @Cacheable("stores.id")
   @EntityGraph(value = "Store.eager", type = EntityGraph.EntityGraphType.LOAD)
   @NotNull Optional<Store> findById(@NotNull Long id);
 }
