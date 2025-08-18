@@ -1,5 +1,6 @@
 package org.dcistudent.sakilarest.handlers;
 
+import com.bugsnag.Bugsnag;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.dcistudent.sakilarest.controllers.ProblemController;
 import org.dcistudent.sakilarest.factories.ResponseFactory;
@@ -23,9 +24,11 @@ import java.util.*;
 public class GlobalExceptionHandler {
 
   private final @NotNull SqlLogger sqlLogger;
+  private final @NotNull Bugsnag bugsnag;
 
-  public GlobalExceptionHandler(@NotNull SqlLogger sqlLogger) {
+  public GlobalExceptionHandler(@NotNull SqlLogger sqlLogger, @NotNull Bugsnag bugsnag) {
     this.sqlLogger = sqlLogger;
+    this.bugsnag = bugsnag;
   }
 
   @ExceptionHandler(Exception.class)
@@ -41,6 +44,7 @@ public class GlobalExceptionHandler {
     }
 
     this.sqlLogger.logFatal(Arrays.toString(e.getStackTrace()));
+    this.bugsnag.notify(e);
 
     return ResponseEntity
         .status(HttpStatus.INTERNAL_SERVER_ERROR.value())
