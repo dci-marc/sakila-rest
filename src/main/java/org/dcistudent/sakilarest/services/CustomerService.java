@@ -2,11 +2,13 @@ package org.dcistudent.sakilarest.services;
 
 import org.dcistudent.sakilarest.factories.CustomerResponseFactory;
 import org.dcistudent.sakilarest.managers.CustomerManager;
-import org.dcistudent.sakilarest.models.requests.CustomerRequest;
+import org.dcistudent.sakilarest.models.requests.LimitOffsetRequest;
 import org.dcistudent.sakilarest.models.responses.domain.CustomerResponse;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
+
+import java.util.UUID;
 
 @Service
 public class CustomerService {
@@ -17,9 +19,15 @@ public class CustomerService {
     this.customerManager = customerManager;
   }
 
-  public @NotNull Page<CustomerResponse> routeSearch(CustomerRequest request) {
+  public @NotNull Page<CustomerResponse> getAll(@NotNull UUID storeId, @NotNull LimitOffsetRequest request) {
     return CustomerResponseFactory.create(
-        this.customerManager.findCustomersAddressAbove100(request.getLimit(), request.getOffset())
+        this.customerManager.findCustomersByStore(storeId, request.getLimit(), request.getOffset())
+    );
+  }
+
+  public @NotNull CustomerResponse getCustomer(@NotNull UUID storeId, @NotNull UUID customerId) {
+    return CustomerResponseFactory.create(
+        this.customerManager.findCustomerInStore(storeId, customerId)
     );
   }
 }

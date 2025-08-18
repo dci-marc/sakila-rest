@@ -1,12 +1,8 @@
 package org.dcistudent.sakilarest.services;
 
-import org.dcistudent.sakilarest.entities.Store;
-import org.dcistudent.sakilarest.factories.CustomerResponseFactory;
 import org.dcistudent.sakilarest.factories.StoreResponseFactory;
-import org.dcistudent.sakilarest.managers.CustomerManager;
 import org.dcistudent.sakilarest.managers.StoreManager;
 import org.dcistudent.sakilarest.models.requests.LimitOffsetRequest;
-import org.dcistudent.sakilarest.models.responses.domain.CustomerResponse;
 import org.dcistudent.sakilarest.models.responses.domain.StoreResponse;
 import org.dcistudent.sakilarest.models.responses.domain.StoresResponse;
 import org.jetbrains.annotations.NotNull;
@@ -21,15 +17,8 @@ public class StoreService {
   @NotNull
   private final StoreManager storeManager;
 
-  @NotNull
-  private final CustomerManager customerManager;
-
-  public StoreService(
-      @NotNull StoreManager storeManager,
-      @NotNull CustomerManager customerManager
-  ) {
+  public StoreService(@NotNull StoreManager storeManager) {
     this.storeManager = storeManager;
-    this.customerManager = customerManager;
   }
 
   public @NotNull Page<StoresResponse> getAll(LimitOffsetRequest request) {
@@ -39,22 +28,6 @@ public class StoreService {
   public @NotNull StoreResponse getByUuid(@NotNull UUID id) {
     return StoreResponseFactory.create(
         this.storeManager.findStoreByUuidEager(id)
-    );
-  }
-
-  public @NotNull Page<CustomerResponse> getCustomersByStoreUuid(
-      @NotNull UUID storeId,
-      @NotNull LimitOffsetRequest request
-  ) {
-    Store store = this.storeManager.findStoreByUuid(storeId);
-    return CustomerResponseFactory.create(
-        this.customerManager.findCustomersByStoreId(store.getId(), request.getLimit(), request.getOffset())
-    );
-  }
-
-  public @NotNull CustomerResponse getCustomer(@NotNull UUID storeId, @NotNull UUID customerId) {
-    return CustomerResponseFactory.create(
-        this.customerManager.findCustomerInStore(storeId, customerId)
     );
   }
 }

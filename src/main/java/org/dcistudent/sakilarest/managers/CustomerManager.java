@@ -20,17 +20,8 @@ public class CustomerManager {
     this.customerRepository = customerRepository;
   }
 
-  public @NotNull Page<Customer> findCustomersAddressAbove100(@NotNull Integer limit, @NotNull Integer offset) {
-    Pageable pageable = PageRequest.of(offset, limit);
-    return this.customerRepository
-        .findCustomersAddressAbove100(pageable)
-        .orElseThrow(
-            () -> new NoSuchElementException("No customers found with address length greater than 100 characters")
-        );
-  }
-
-  public @NotNull Page<Customer> findCustomersByStoreId(
-      @NotNull Long storeId,
+  public @NotNull Page<Customer> findCustomersByStore(
+      @NotNull UUID storeId,
       @NotNull Integer limit,
       @NotNull Integer offset
   ) {
@@ -45,7 +36,7 @@ public class CustomerManager {
       @NotNull UUID customerId
   ) {
     return this.customerRepository
-        .findCustomerInStore(storeId, customerId)
+        .findCustomerByStoreId(storeId, customerId)
         .orElseThrow(() -> new NoSuchElementException("No customer found with id " + customerId + " for store " + storeId));
   }
 }
