@@ -12,7 +12,8 @@ import java.time.Instant;
 @Table(name = "film", schema = "sakila", indexes = {
     @Index(name = "idx_title", columnList = "title"),
     @Index(name = "idx_fk_language_id", columnList = "language_id"),
-    @Index(name = "idx_fk_original_language_id", columnList = "original_language_id")
+    @Index(name = "idx_fk_original_language_id", columnList = "original_language_id"),
+    @Index(name = "idx_uuid", columnList = "uuid")
 })
 public class Film extends AbstractUuidEntity implements Serializable {
   @Id

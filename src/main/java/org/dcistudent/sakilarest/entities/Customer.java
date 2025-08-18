@@ -11,7 +11,8 @@ import java.time.Instant;
 @Table(name = "customer", schema = "sakila", indexes = {
     @Index(name = "idx_fk_store_id", columnList = "store_id"),
     @Index(name = "idx_last_name", columnList = "last_name"),
-    @Index(name = "idx_fk_address_id", columnList = "address_id")
+    @Index(name = "idx_fk_address_id", columnList = "address_id"),
+    @Index(name = "idx_uuid", columnList = "uuid")
 })
 public class Customer extends AbstractUuidEntity implements Serializable {
   @Id

@@ -6,11 +6,12 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.Serializable;
 import java.time.Instant;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "store", schema = "sakila", indexes = {
-    @Index(name = "idx_fk_address_id", columnList = "address_id")
+    @Index(name = "idx_fk_address_id", columnList = "address_id"),
+    @Index(name = "idx_uuid", columnList = "uuid")
 }, uniqueConstraints = {
     @UniqueConstraint(name = "idx_unique_manager", columnNames = {"manager_staff_id"})
 })
@@ -36,10 +37,10 @@ public class Store extends AbstractUuidEntity implements Serializable {
   private @NotNull Address address;
 
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "store")
-  private @NotNull List<Customer> customer;
+  private @NotNull Set<Customer> customer;
 
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "store")
-  private @NotNull List<Inventory> inventory;
+  private @NotNull Set<Inventory> inventory;
 
   @ColumnDefault("CURRENT_TIMESTAMP")
   @Column(name = "last_update", nullable = false)
@@ -57,11 +58,11 @@ public class Store extends AbstractUuidEntity implements Serializable {
     return this.address;
   }
 
-  public @NotNull List<Customer> getCustomer() {
+  public @NotNull Set<Customer> getCustomer() {
     return this.customer;
   }
 
-  public @NotNull List<Inventory> getInventory() {
+  public @NotNull Set<Inventory> getInventory() {
     return this.inventory;
   }
 
@@ -81,11 +82,11 @@ public class Store extends AbstractUuidEntity implements Serializable {
     this.address = address;
   }
 
-  public void setCustomer(@NotNull List<Customer> customer) {
+  public void setCustomer(@NotNull Set<Customer> customer) {
     this.customer = customer;
   }
 
-  public void setInventory(@NotNull List<Inventory> inventory) {
+  public void setInventory(@NotNull Set<Inventory> inventory) {
     this.inventory = inventory;
   }
 
