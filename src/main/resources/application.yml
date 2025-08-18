@@ -5,3 +5,6 @@ spring:
     name: sakila-rest
   config:
     import: optional:classpath:db-${DB_SYSTEM}.yml
+
+bugsnag:
+  key: ${BUGSNAG_API_KEY}
