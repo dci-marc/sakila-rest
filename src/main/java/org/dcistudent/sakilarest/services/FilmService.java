@@ -10,6 +10,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 public class FilmService {
 
@@ -27,7 +29,7 @@ public class FilmService {
     );
   }
 
-  public @NotNull FilmResponse getFilm(@NotNull Long id) {
+  public @NotNull FilmResponse getFilm(@NotNull UUID id) {
     return FilmResponseFactory.create(this.filmManager.findById(id));
   }
 }

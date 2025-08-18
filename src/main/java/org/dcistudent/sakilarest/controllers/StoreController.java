@@ -17,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.NoSuchElementException;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/stores") // plural nouns
@@ -53,13 +54,13 @@ public class StoreController {
   }
 
   @GetMapping("/{id}")
-  public @NotNull ResponseEntity<Response<ResponsePayload>> getStoreById(@NotNull @PathVariable Long id) {
+  public @NotNull ResponseEntity<Response<ResponsePayload>> getStoreById(@NotNull @PathVariable UUID id) {
     try {
       return ResponseEntity.ok(
           ResponseFactory.create(
               HttpStatus.OK,
               "store:fetch:success",
-              this.storeService.getById(id)
+              this.storeService.getByUuid(id)
           ));
     } catch (NoSuchElementException e) {
       return ResponseEntity
@@ -75,7 +76,7 @@ public class StoreController {
 
   @GetMapping("/{id}/customers")
   public @NotNull ResponseEntity<Response<Page<CustomerResponse>>> getStoreCustomers(
-      @NotNull @PathVariable Long id,
+      @NotNull @PathVariable UUID id,
       @NotNull @ModelAttribute @Valid LimitOffsetRequest request
   ) {
     try {
@@ -83,7 +84,7 @@ public class StoreController {
           ResponseFactory.create(
               HttpStatus.OK,
               "store:customers:fetch:success",
-              this.storeService.getCustomersByStoreId(id, request)
+              this.storeService.getCustomersByStoreUuid(id, request)
           ));
     } catch (NoSuchElementException e) {
       return ResponseEntity

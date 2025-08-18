@@ -10,13 +10,14 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Repository
 public interface FilmRepository extends PagingAndSortingRepository<Film, Long>, JpaSpecificationExecutor<Film> {
 
   @NotNull Page<Film> findAll(@NotNull Pageable pageable);
 
-  @NotNull Optional<Film> findById(@NotNull Long id);
+  @NotNull Optional<Film> findByUuid(@NotNull UUID id);
 
   @NotNull Optional<Page<Film>> findByTitleContainingIgnoreCase(
       @NotNull String pattern,

@@ -11,6 +11,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.NoSuchElementException;
+import java.util.UUID;
 
 @Service
 public class FilmManager {
@@ -22,9 +23,9 @@ public class FilmManager {
     this.filmRepository = filmRepository;
   }
 
-  public @NotNull Film findById(@NotNull Long id) {
+  public @NotNull Film findById(@NotNull UUID id) {
     return this.filmRepository
-        .findById(id)
+        .findByUuid(id)
         .orElseThrow(() -> new NoSuchElementException("Film not found with ID: " + id));
   }
 

@@ -3,6 +3,7 @@ package org.dcistudent.sakilarest.managers;
 import jakarta.persistence.EntityGraph;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.TypedQuery;
 import org.dcistudent.sakilarest.entities.Store;
 import org.dcistudent.sakilarest.repositories.StoreRepository;
 import org.jetbrains.annotations.NotNull;
@@ -11,10 +12,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class StoreManager {
@@ -41,13 +41,15 @@ public class StoreManager {
         .orElseThrow(() -> new NoSuchElementException("Store with id " + id + " not found"));
   }
 
-  public @NotNull Store findStoreByIdEager(@NotNull Long id) {
-    Map<String, Object> hints = new HashMap<>();
+  public @NotNull Store findStoreByUuidEager(@NotNull UUID id) {
     EntityGraph<?> entityGraph = this.entityManager.getEntityGraph("Store.eager");
-    hints.put(FetchHints.GRAPH_LOAD, entityGraph);
 
-    Store store = this.entityManager.find(Store.class, id, hints);
-    return Optional.ofNullable(store)
+    TypedQuery<Store> query = this.entityManager
+        .createQuery("SELECT s FROM Store s WHERE s.uuid = :uuid", Store.class)
+        .setParameter("uuid", id)
+        .setHint(FetchHints.GRAPH_LOAD, entityGraph);
+
+    return Optional.ofNullable(query.getSingleResult())
         .orElseThrow(() -> new NoSuchElementException("Store with id " + id + " not found"));
   }
 }

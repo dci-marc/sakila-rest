@@ -13,6 +13,8 @@ import org.jetbrains.annotations.NotNull;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 public class StoreService {
 
@@ -34,16 +36,16 @@ public class StoreService {
     return StoreResponseFactory.create(this.storeManager.findAll(request.getLimit(), request.getOffset()));
   }
 
-  public @NotNull StoreResponse getById(@NotNull Long id) {
-    Store store = this.storeManager.findStoreByIdEager(id);
+  public @NotNull StoreResponse getByUuid(@NotNull UUID id) {
+    Store store = this.storeManager.findStoreByUuidEager(id);
     return StoreResponseFactory.create(store);
   }
 
-  public @NotNull Page<CustomerResponse> getCustomersByStoreId(
-      @NotNull Long storeId,
+  public @NotNull Page<CustomerResponse> getCustomersByStoreUuid(
+      @NotNull UUID storeId,
       @NotNull LimitOffsetRequest request
   ) {
-    Store store = this.storeManager.findStoreByIdEager(storeId);
+    Store store = this.storeManager.findStoreByUuidEager(storeId);
     return CustomerResponseFactory.create(
         this.customerManager.findCustomersByStoreId(store.getId(), request.getLimit(), request.getOffset())
     );

@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.NoSuchElementException;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/films") // plural nouns
@@ -52,13 +53,13 @@ public class FilmController {
   }
 
   @GetMapping("/{id}")
-  public @NotNull ResponseEntity<Response<ResponsePayload>> getFilm(@NotNull @PathVariable Integer id) {
+  public @NotNull ResponseEntity<Response<ResponsePayload>> getFilm(@NotNull @PathVariable UUID id) {
     try {
       return ResponseEntity.ok(
           ResponseFactory.create(
               HttpStatus.OK,
               "film:fetch:success",
-              this.filmService.getFilm(id.longValue())
+              this.filmService.getFilm(id)
           ));
     } catch (NoSuchElementException e) {
       return ResponseEntity
