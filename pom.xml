@@ -129,6 +129,12 @@
             <artifactId>guava</artifactId>
             <version>33.4.8-jre</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/com.bugsnag/bugsnag -->
+        <dependency>
+            <groupId>com.bugsnag</groupId>
+            <artifactId>bugsnag</artifactId>
+            <version>3.8.0</version>
+        </dependency>
     </dependencies>
 
     <build>
