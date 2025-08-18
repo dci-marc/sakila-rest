@@ -37,17 +37,24 @@ public class StoreService {
   }
 
   public @NotNull StoreResponse getByUuid(@NotNull UUID id) {
-    Store store = this.storeManager.findStoreByUuidEager(id);
-    return StoreResponseFactory.create(store);
+    return StoreResponseFactory.create(
+        this.storeManager.findStoreByUuidEager(id)
+    );
   }
 
   public @NotNull Page<CustomerResponse> getCustomersByStoreUuid(
       @NotNull UUID storeId,
       @NotNull LimitOffsetRequest request
   ) {
-    Store store = this.storeManager.findStoreByUuidEager(storeId);
+    Store store = this.storeManager.findStoreByUuid(storeId);
     return CustomerResponseFactory.create(
         this.customerManager.findCustomersByStoreId(store.getId(), request.getLimit(), request.getOffset())
+    );
+  }
+
+  public @NotNull CustomerResponse getCustomer(@NotNull UUID storeId, @NotNull UUID customerId) {
+    return CustomerResponseFactory.create(
+        this.customerManager.findCustomerInStore(storeId, customerId)
     );
   }
 }

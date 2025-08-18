@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Repository
 public interface CustomerRepository extends JpaRepository<Customer, Long> {
@@ -19,4 +20,7 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {
 
   @Query("SELECT c FROM Customer c WHERE c.store.id = :storeId")
   @NotNull Optional<Page<Customer>> findCustomersByStoreId(@NotNull Long storeId, @NotNull Pageable pageable);
+
+  @Query("SELECT c FROM Customer c WHERE c.store.uuid = :storeId AND c.uuid = :customerId")
+  @NotNull Optional<Customer> findCustomerInStore(@NotNull UUID storeId, @NotNull UUID customerId);
 }

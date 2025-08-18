@@ -97,4 +97,28 @@ public class StoreController {
           ));
     }
   }
+
+  @GetMapping("/{storeId}/customers/{customerId}")
+  public @NotNull ResponseEntity<Response<ResponsePayload>> getStoreCustomer(
+      @NotNull @PathVariable UUID storeId,
+      @NotNull @PathVariable UUID customerId
+  ) {
+    try {
+      return ResponseEntity.ok(
+          ResponseFactory.create(
+              HttpStatus.OK,
+              "store:fetch:success",
+              this.storeService.getCustomer(storeId, customerId)
+          ));
+    } catch (NoSuchElementException e) {
+      return ResponseEntity
+          .badRequest()
+          .contentType(MediaType.APPLICATION_PROBLEM_JSON)
+          .body(ResponseFactory.create(
+              HttpStatus.NOT_FOUND,
+              "store:fetch:not.found",
+              EmptyResponse.INSTANCE
+          ));
+    }
+  }
 }

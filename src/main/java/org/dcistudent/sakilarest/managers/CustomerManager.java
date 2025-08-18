@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.NoSuchElementException;
+import java.util.UUID;
 
 @Service
 public class CustomerManager {
@@ -37,5 +38,14 @@ public class CustomerManager {
     return this.customerRepository
         .findCustomersByStoreId(storeId, pageable)
         .orElseThrow(() -> new NoSuchElementException("No customers found for store with id " + storeId));
+  }
+
+  public @NotNull Customer findCustomerInStore(
+      @NotNull UUID storeId,
+      @NotNull UUID customerId
+  ) {
+    return this.customerRepository
+        .findCustomerInStore(storeId, customerId)
+        .orElseThrow(() -> new NoSuchElementException("No customer found with id " + customerId + " for store " + storeId));
   }
 }

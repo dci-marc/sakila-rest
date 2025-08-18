@@ -35,10 +35,10 @@ public class StoreManager {
     return this.repository.findAll(pageable);
   }
 
-  public @NotNull Store findStoreById(@NotNull Long id) {
+  public @NotNull Store findStoreByUuid(@NotNull UUID id) {
     return this.repository
-        .findById(id)
-        .orElseThrow(() -> new NoSuchElementException("Store with id " + id + " not found"));
+        .findByUuid(id)
+        .orElseThrow(() -> new NoSuchElementException("Store with uuid " + id + " not found"));
   }
 
   public @NotNull Store findStoreByUuidEager(@NotNull UUID id) {
