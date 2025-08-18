@@ -9,9 +9,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Repository
 public interface StoreRepository extends JpaRepository<Store, Long> {
+
+  @NotNull Optional<Store> findByUuid(@NotNull UUID uuid);
 
   @NotNull Page<Store> findAll(@NotNull Pageable pageable);
 
