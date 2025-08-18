@@ -24,7 +24,7 @@ import java.util.UUID;
 public class StoreController {
 
   @NotNull
-  public final StoreService storeService;
+  private final StoreService storeService;
 
   public StoreController(@NotNull StoreService storeService) {
     this.storeService = storeService;
