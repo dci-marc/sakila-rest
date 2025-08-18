@@ -47,9 +47,9 @@ public class FilmSpecifications {
     return new Specification<>() {
       @Override
       public Predicate toPredicate(
-          Root<Film> root,
+          @NotNull Root<Film> root,
           CriteriaQuery<?> query,
-          CriteriaBuilder cb) {
+          @NotNull CriteriaBuilder cb) {
         return cb.like(root.get("title"), "%" + title + "%");
       }
     };

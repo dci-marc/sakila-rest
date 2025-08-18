@@ -20,7 +20,8 @@ public class ProblemController {
       "java:S112"
   })
   public void provokeRuntimeError() {
-    throw Problem.builder()
+    throw Problem
+        .builder()
         .withType(URI.create("https://example.org/provoke-error/runtime"))
         .withTitle("Runtime Error")
         .withStatus(Status.INTERNAL_SERVER_ERROR)
@@ -45,7 +46,8 @@ public class ProblemController {
       String str = null;
       str.length(); // NOSONAR
     } catch (NullPointerException e) {
-      throw Problem.builder()
+      throw Problem
+          .builder()
           .withType(URI.create("https://example.org/provoke-error/null-pointer"))
           .withTitle("Null Pointer Error")
           .withStatus(Status.INTERNAL_SERVER_ERROR)
@@ -64,7 +66,8 @@ public class ProblemController {
         throw new IllegalArgumentException("Argument cannot be null");
       }
     } catch (IllegalArgumentException e) {
-      throw Problem.builder()
+      throw Problem
+          .builder()
           .withType(URI.create("https://example.org/provoke-error/illegal-argument"))
           .withTitle("Illegal Argument Error")
           .withStatus(Status.BAD_REQUEST)
@@ -86,7 +89,8 @@ public class ProblemController {
       // This will throw an ArithmeticException (division by zero)
       int result = 1 / 0; // NOSONAR
     } catch (ArithmeticException e) {
-      throw Problem.builder()
+      throw Problem
+          .builder()
           .withType(URI.create("https://example.org/provoke-error/arithmetic"))
           .withTitle("Arithmetic Error")
           .withStatus(Status.INTERNAL_SERVER_ERROR)

@@ -40,7 +40,9 @@ public class FilmController {
           )
       );
     } catch (NoSuchElementException e) {
-      return ResponseEntity.badRequest().contentType(MediaType.APPLICATION_PROBLEM_JSON)
+      return ResponseEntity
+          .badRequest()
+          .contentType(MediaType.APPLICATION_PROBLEM_JSON)
           .body(ResponseFactory.create(
               HttpStatus.NOT_FOUND,
               "films:fetch:not.found",
@@ -59,7 +61,8 @@ public class FilmController {
               this.filmService.getFilm(id.longValue())
           ));
     } catch (NoSuchElementException e) {
-      return ResponseEntity.badRequest()
+      return ResponseEntity
+          .badRequest()
           .contentType(MediaType.APPLICATION_PROBLEM_JSON)
           .body(ResponseFactory.create(
               HttpStatus.NOT_FOUND,
