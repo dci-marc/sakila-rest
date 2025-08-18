@@ -37,9 +37,11 @@ public class Store extends AbstractUuidEntity implements Serializable {
   private @NotNull Address address;
 
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "store")
+  @OrderBy("id ASC")
   private @NotNull Set<Customer> customer;
 
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "store")
+  @OrderBy("id ASC")
   private @NotNull Set<Inventory> inventory;
 
   @ColumnDefault("CURRENT_TIMESTAMP")
