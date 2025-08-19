@@ -1,0 +1,91 @@
+# === SERVER CONFIGURATION ===
+server:
+  port: 8080
+  servlet:
+    context-path: /api/v1
+
+spring:
+  profiles:
+    active: dev
+  application:
+    name: sakila-rest
+
+  # === SECURITY CONFIGURATION ===
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${auth0.issuer}
+
+  # === DATABASE CONFIGURATION (MariaDB) ===
+  datasource:
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
+
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+
+  # === JPA / HIBERNATE CONFIGURATION ===
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+  # === JACKSON (JSON) CONFIGURATION ===
+  jackson:
+    serialization:
+      indent_output: true
+    default-property-inclusion: non_null
+
+  # === CACHING ===
+  data:
+    redis:
+      host: localhost
+      port: 6379
+  cache:
+    type: redis
+    redis:
+      time-to-live: 60000
+      cache-null-values: false
+      use-key-prefix: true
+
+  # === DEVTOOLS ===
+  devtools:
+    restart:
+      enabled: true
+    livereload:
+      enabled: true
+
+  main:
+    banner-mode: off
+
+logging:
+  level:
+    org.springframework: ERROR
+    org.hibernate.SQL: ERROR
+    org.hibernate.type.descriptor.sql.BasicBinder: ERROR
+
+problem:
+  stack-traces:
+    enabled: false
+
+# === SWAGGER CONFIGURATION ===
+# springdoc:
+#   swagger-ui:
+#     path: /docs
+
+# === AUTH0 CONFIGURATION ===
+auth0:
+  domain: ${AUTH0_DOMAIN}
+  issuer: ${AUTH0_ISSUER}
+  audience: ${AUTH0_AUDIENCE}
+  mgmt-client-id: ${AUTH0_MGMT_CLIENT_ID}
+  mgmt-client-secret: ${AUTH0_MGMT_CLIENT_SECRET}
+  app-client-id: ${AUTH0_APP_CLIENT_ID}
+  app-client-secret: ${AUTH0_APP_CLIENT_SECRET}
+  connection: Username-Password-Authentication

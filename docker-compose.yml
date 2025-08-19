@@ -1,0 +1,56 @@
+services:
+  mariadb:
+    image: mariadb:10.11
+    container_name: sakila-mariadb
+    restart: unless-stopped
+    environment:
+      MARIADB_ROOT_PASSWORD: root
+      MARIADB_DATABASE: sakila
+      MARIADB_USER: marc
+      MARIADB_PASSWORD: marc
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mariadb_data:/var/lib/mysql
+
+  mysql:
+    image: mysql:8
+    container_name: sakila-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: sakila
+      MYSQL_USER: marc
+      MYSQL_PASSWORD: marc
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./mysql_data:/var/lib/mysql
+
+  redis:
+    image: redis:alpine
+    container_name: sakila-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./redis_data:/data
+
+  postgresql:
+    image: postgres:15
+    container_name: sakila-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
+
+volumes:
+  mariadb_data:
+  mysql_data:
+  redis_data:
+  postgres_data:
