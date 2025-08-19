@@ -33,13 +33,13 @@ jobs:
       - name: Prepare release artifact
         run: |
           mkdir -p release-artifacts
-          cp target/*.jar release-artifacts/myapp-${{ matrix.os }}.jar
+          cp target/*.jar release-artifacts/sakila-rest-${{ matrix.os }}.jar
           ls -l release-artifacts
 
       - name: Upload artifact for release
         uses: actions/upload-artifact@v4
         with:
-          name: myapp-${{ matrix.os }}
+          name: sakila-rest-${{ matrix.os }}
           path: release-artifacts/*.jar
 
   create-release:
