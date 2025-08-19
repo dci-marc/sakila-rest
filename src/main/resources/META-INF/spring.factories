@@ -1,0 +1,2 @@
+org.springframework.boot.context.config.ConfigDataLocationResolver=org.dcistudent.sakilarest.configs.DotenvConfigLocationResolver
+org.springframework.boot.context.config.ConfigDataLoader=org.dcistudent.sakilarest.configs.DotenvConfigLoader

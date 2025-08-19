@@ -4,7 +4,9 @@ spring:
   application:
     name: sakila-rest
   config:
-    import: optional:classpath:db-${DB_SYSTEM}.yml
+    import:
+      - optional:classpath:db-${DB_SYSTEM}.yml
+      - dotenv:.env
 
 bugsnag:
   key: ${BUGSNAG_API_KEY}
