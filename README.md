@@ -1,6 +1,6 @@
 # Sakila RESTful API service
 
-RESTful API service demo on the Sakila dataset.
+Spring RESTful API service demo on the Sakila dataset.
 
 ## Public Instance
 
@@ -15,7 +15,7 @@ It should reflect the best and most widely used concepts and principles -
 as far as I can tell as a beginner - while also showing several possibilities
 for how different solutions can look.
 
-####
+## Statistics
 
 ![Repobeats Analyse](https://repobeats.axiom.co/api/embed/2969d79bc381679b6cfb58bb2fa17c8c60235626.svg "Repobeats analytics image")
 
