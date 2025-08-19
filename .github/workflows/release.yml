@@ -3,7 +3,10 @@ name: Multi-OS Release with Maven Build
 on:
   push:
     tags:
-      - "*"   # Nur Tags wie v1.0.0
+      - "*"
+
+permissions:
+  contents: write
 
 jobs:
   build-and-release:
@@ -61,6 +64,6 @@ jobs:
           tag_name: ${{ env.TAG_NAME }}
           name: Release ${{ env.TAG_NAME }}
           generate_release_notes: true
-          files: release-artifacts/*.jar
+          files: release-artifacts/**/*.jar
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
