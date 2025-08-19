@@ -3,12 +3,12 @@ package org.dcistudent.sakilarest.controllers;
 import jakarta.validation.Valid;
 import org.dcistudent.sakilarest.exceptions.Auth0Exception;
 import org.dcistudent.sakilarest.factories.ResponseFactory;
-import org.dcistudent.sakilarest.models.Response;
 import org.dcistudent.sakilarest.models.requests.UserRequest;
-import org.dcistudent.sakilarest.models.responses.EmptyResponse;
-import org.dcistudent.sakilarest.models.responses.ResponsePayload;
 import org.dcistudent.sakilarest.models.responses.domain.UserResponse;
 import org.dcistudent.sakilarest.models.responses.error.ErrorResponse;
+import org.dcistudent.sakilarest.models.responses.shared.EmptyResponse;
+import org.dcistudent.sakilarest.models.responses.shared.Response;
+import org.dcistudent.sakilarest.models.responses.shared.ResponsePayload;
 import org.dcistudent.sakilarest.services.Auth0Service;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.http.HttpStatus;
@@ -49,7 +49,9 @@ public class AuthController {
           .body(ResponseFactory.create(
               HttpStatus.BAD_REQUEST,
               "auth:user:creation:fail",
-              new ErrorResponse(e.getMessage())
+              new ErrorResponse.Builder()
+                  .setMessage(e.getMessage())
+                  .build()
           ));
     }
 
@@ -57,7 +59,9 @@ public class AuthController {
         ResponseFactory.create(
             HttpStatus.CREATED,
             "auth:user:creation:success",
-            new UserResponse(request.getEmail())
+            new UserResponse.Builder()
+                .setEmail(request.getEmail())
+                .build()
         ));
   }
 

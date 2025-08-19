@@ -1,26 +1,20 @@
 package org.dcistudent.sakilarest.models.responses.domain;
 
-import org.dcistudent.sakilarest.models.responses.shared.AbstractUuidResponse;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.UUID;
-
-public class CustomerResponse extends AbstractUuidResponse implements DomainResponse {
+public final class StaffResponse {
 
   @NotNull String firstName;
   @NotNull String lastName;
   @NotNull String email;
   @NotNull Boolean active;
-  @NotNull String createDate;
   @NotNull String lastUpdate;
 
-  public CustomerResponse(@NotNull Builder builder) {
-    super(builder.uuid);
+  public StaffResponse(@NotNull Builder builder) {
     this.firstName = builder.firstName;
     this.lastName = builder.lastName;
     this.email = builder.email;
     this.active = builder.active;
-    this.createDate = builder.createDate;
     this.lastUpdate = builder.lastUpdate;
   }
 
@@ -40,27 +34,16 @@ public class CustomerResponse extends AbstractUuidResponse implements DomainResp
     return this.active;
   }
 
-  public @NotNull String getCreateDate() {
-    return this.createDate;
-  }
-
   public @NotNull String getLastUpdate() {
     return this.lastUpdate;
   }
 
   public static class Builder {
-    private @NotNull UUID uuid = UUID.randomUUID();
     private @NotNull String firstName = "";
     private @NotNull String lastName = "";
     private @NotNull String email = "";
-    private @NotNull Boolean active = true;
-    private @NotNull String createDate = "";
+    private @NotNull Boolean active = false;
     private @NotNull String lastUpdate = "";
-
-    public @NotNull Builder setUuid(@NotNull UUID uuid) {
-      this.uuid = uuid;
-      return this;
-    }
 
     public @NotNull Builder setFirstName(@NotNull String firstName) {
       this.firstName = firstName;
@@ -82,18 +65,13 @@ public class CustomerResponse extends AbstractUuidResponse implements DomainResp
       return this;
     }
 
-    public @NotNull Builder setCreateDate(@NotNull String createDate) {
-      this.createDate = createDate;
-      return this;
-    }
-
     public @NotNull Builder setLastUpdate(@NotNull String lastUpdate) {
       this.lastUpdate = lastUpdate;
       return this;
     }
 
-    public @NotNull CustomerResponse build() {
-      return new CustomerResponse(this);
+    public @NotNull StaffResponse build() {
+      return new StaffResponse(this);
     }
   }
 }

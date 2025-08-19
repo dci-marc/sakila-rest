@@ -1,4 +1,4 @@
-package org.dcistudent.sakilarest.models;
+package org.dcistudent.sakilarest.models.responses.shared;
 
 import jakarta.validation.constraints.NotBlank;
 import org.jetbrains.annotations.NotNull;

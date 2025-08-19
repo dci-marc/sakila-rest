@@ -1,6 +1,5 @@
 package org.dcistudent.sakilarest.models.responses.domain;
 
-import org.dcistudent.sakilarest.models.responses.StaffResponse;
 import org.dcistudent.sakilarest.models.responses.shared.AbstractUuidResponse;
 import org.jetbrains.annotations.NotNull;
 
@@ -11,10 +10,10 @@ public final class StoresResponse extends AbstractUuidResponse implements Domain
   @NotNull String lastUpdate;
   @NotNull StaffResponse staff;
 
-  public StoresResponse(@NotNull UUID uuid, @NotNull String lastUpdate, @NotNull StaffResponse staff) {
-    super(uuid);
-    this.lastUpdate = lastUpdate;
-    this.staff = staff;
+  public StoresResponse(@NotNull Builder builder) {
+    super(builder.uuid);
+    this.lastUpdate = builder.lastUpdate;
+    this.staff = builder.staff;
   }
 
   public @NotNull String getLastUpdate() {
@@ -23,5 +22,30 @@ public final class StoresResponse extends AbstractUuidResponse implements Domain
 
   public @NotNull StaffResponse getStaff() {
     return this.staff;
+  }
+
+  public static class Builder {
+    private @NotNull UUID uuid = UUID.randomUUID();
+    private @NotNull String lastUpdate = "";
+    private @NotNull StaffResponse staff = new StaffResponse.Builder().build();
+
+    public @NotNull Builder setUuid(@NotNull UUID uuid) {
+      this.uuid = uuid;
+      return this;
+    }
+
+    public @NotNull Builder setLastUpdate(@NotNull String lastUpdate) {
+      this.lastUpdate = lastUpdate;
+      return this;
+    }
+
+    public @NotNull Builder setStaff(@NotNull StaffResponse staff) {
+      this.staff = staff;
+      return this;
+    }
+
+    public @NotNull StoresResponse build() {
+      return new StoresResponse(this);
+    }
   }
 }

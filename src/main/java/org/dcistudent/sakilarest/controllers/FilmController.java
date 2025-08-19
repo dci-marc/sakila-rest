@@ -2,10 +2,10 @@ package org.dcistudent.sakilarest.controllers;
 
 import jakarta.validation.Valid;
 import org.dcistudent.sakilarest.factories.ResponseFactory;
-import org.dcistudent.sakilarest.models.Response;
+import org.dcistudent.sakilarest.models.responses.shared.Response;
 import org.dcistudent.sakilarest.models.requests.FilmRequest;
-import org.dcistudent.sakilarest.models.responses.EmptyResponse;
-import org.dcistudent.sakilarest.models.responses.ResponsePayload;
+import org.dcistudent.sakilarest.models.responses.shared.EmptyResponse;
+import org.dcistudent.sakilarest.models.responses.shared.ResponsePayload;
 import org.dcistudent.sakilarest.models.responses.domain.FilmResponse;
 import org.dcistudent.sakilarest.services.FilmService;
 import org.jetbrains.annotations.NotNull;

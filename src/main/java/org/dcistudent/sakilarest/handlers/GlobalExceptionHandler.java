@@ -5,9 +5,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import org.dcistudent.sakilarest.controllers.ProblemController;
 import org.dcistudent.sakilarest.factories.ResponseFactory;
 import org.dcistudent.sakilarest.loggers.SqlLogger;
-import org.dcistudent.sakilarest.models.Response;
-import org.dcistudent.sakilarest.models.responses.EmptyResponse;
 import org.dcistudent.sakilarest.models.responses.shared.DictionaryListResponse;
+import org.dcistudent.sakilarest.models.responses.shared.EmptyResponse;
+import org.dcistudent.sakilarest.models.responses.shared.Response;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -96,7 +96,9 @@ public class GlobalExceptionHandler {
         .body(ResponseFactory.create(
             HttpStatus.BAD_REQUEST,
             "error:validation:fail",
-            new DictionaryListResponse(errors)
+            new DictionaryListResponse.Builder()
+                .setItems(errors)
+                .build()
         ));
   }
 }

@@ -13,15 +13,15 @@ public final class CustomerResponseFactory {
   }
 
   public static @NotNull CustomerResponse create(@NotNull Customer customer) {
-    return new CustomerResponse(
-        customer.getUuid(),
-        customer.getFirstName(),
-        customer.getLastName(),
-        customer.getEmail(),
-        customer.getActive(),
-        customer.getCreateDate().atZone(ZoneId.systemDefault()).toString(),
-        customer.getLastUpdate().atZone(ZoneId.systemDefault()).toString()
-    );
+    return new CustomerResponse.Builder()
+        .setUuid(customer.getUuid())
+        .setFirstName(customer.getFirstName())
+        .setLastName(customer.getLastName())
+        .setEmail(customer.getEmail())
+        .setActive(customer.getActive())
+        .setCreateDate(customer.getCreateDate().atZone(ZoneId.systemDefault()).toString())
+        .setLastUpdate(customer.getLastUpdate().atZone(ZoneId.systemDefault()).toString())
+        .build();
   }
 
   public static @NotNull Page<CustomerResponse> create(@NotNull Page<Customer> customers) {

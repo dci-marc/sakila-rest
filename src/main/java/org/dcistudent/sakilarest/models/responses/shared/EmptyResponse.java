@@ -1,4 +1,4 @@
-package org.dcistudent.sakilarest.models.responses;
+package org.dcistudent.sakilarest.models.responses.shared;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.dcistudent.sakilarest.serializers.responses.EmptyResponseSerializer;
