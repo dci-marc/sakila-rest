@@ -17,6 +17,8 @@ for how different solutions can look.
 
 ####
 
+![Repobeats Analyse](https://repobeats.axiom.co/api/embed/2969d79bc381679b6cfb58bb2fa17c8c60235626.svg "Repobeats analytics image")
+
 ![License](https://badges.ws/github/l/dci-marc/sakila-rest)
 ![Language](https://badges.ws/github/lang/dci-marc/sakila-rest)
 ![Repository Size](https://badges.ws/github/repo-size/dci-marc/sakila-rest)
