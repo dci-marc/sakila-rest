@@ -17,6 +17,13 @@ for how different solutions can look.
 
 ####
 
+![License](https://badges.ws/github/l/dci-marc/sakila-rest)
+![Language](https://badges.ws/github/lang/dci-marc/sakila-rest)
+![Repository Size](https://badges.ws/github/repo-size/dci-marc/sakila-rest)
+![Code Size](https://badges.ws/github/lang-size/dci-marc/sakila-rest)
+![Contributors](https://badges.ws/github/contributors/dci-marc/sakila-rest)
+![Last Commit](https://badges.ws/github/last-commit/dci-marc/sakila-rest)
+
 [![CodeQL](https://github.com/dci-marc/sakila-rest/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/dci-marc/sakila-rest/actions/workflows/github-code-scanning/codeql)
 [![SonarQube](https://github.com/dci-marc/sakila-rest/actions/workflows/build.yml/badge.svg)](https://github.com/dci-marc/sakila-rest/actions/workflows/build.yml)
 
