@@ -9,6 +9,7 @@
       <option name="environmentVariables" />
     </selectedOptions>
     <option name="SPRING_BOOT_MAIN_CLASS" value="org.dcistudent.sakilarest.SakilaRestApplication" />
+    <option name="VM_PARAMETERS" value="-agentpath:$USER_HOME$/bin/graalvm/lib/libnative-image-agent.so=config-output-dir=$PROJECT_DIR$/src/main/resources/META-INF/native-image" />
     <method v="2">
       <option name="Make" enabled="true" />
     </method>

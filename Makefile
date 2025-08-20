@@ -31,5 +31,8 @@ pause:
 unpause:
 	@docker compose unpause
 
+native:
+	@./mvnw spring-boot:build-image -DskipTests -Dpack.verbose=true -Dspring.aot.debug=true && ./build-copy.sh
+
 all:
 	@make build && make start

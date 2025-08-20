@@ -10,15 +10,22 @@
     </parent>
     <groupId>org.dcistudent</groupId>
     <artifactId>sakila-rest</artifactId>
-    <version>0.2.0</version>
+    <version>0.3.0</version>
     <name>sakila-rest</name>
     <description>sakila-rest</description>
     <url/>
     <licenses>
-        <license/>
+        <license>
+            <name>MIT License</name>
+            <url>https://opensource.org/license/mit/</url>
+            <distribution>repo</distribution>
+        </license>
     </licenses>
     <developers>
-        <developer/>
+        <developer>
+            <id>dci-marc</id>
+            <name>DCI Marc</name>
+        </developer>
     </developers>
     <scm>
         <connection/>
@@ -172,6 +179,24 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <image>
+                        <builder>paketobuildpacks/builder-jammy-base</builder>
+                        <env>
+                            <BP_NATIVE_IMAGE>true</BP_NATIVE_IMAGE>
+                            <BP_NATIVE_IMAGE_BUILD_ARGUMENTS>--verbose --no-fallback -J-Xmx6G
+                            </BP_NATIVE_IMAGE_BUILD_ARGUMENTS>
+                        </env>
+                    </image>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>process-aot</id>
+                        <goals>
+                            <goal>process-aot</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

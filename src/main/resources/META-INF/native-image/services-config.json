@@ -1,0 +1,10 @@
+{
+  "services": [
+    {
+      "name": "org.hibernate.bytecode.spi.BytecodeProvider",
+      "implementations": [
+        "org.hibernate.bytecode.internal.bytebuddy.BytecodeProviderImpl"
+      ]
+    }
+  ]
+}
