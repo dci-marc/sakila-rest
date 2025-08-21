@@ -28,7 +28,7 @@ public final class Size {
       throw new IllegalArgumentException("Exponent must be an unsigned integer.");
     }
 
-    return this.bytes / (int) Math.pow(1024, exponent);
+    return this.bytes / (1 << (exponent * 10));
   }
 
   @Override
