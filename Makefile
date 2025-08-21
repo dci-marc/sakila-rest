@@ -16,6 +16,9 @@ start-postgres:
 start-redis:
 	@docker compose up -d redis
 
+start-minio:
+	@docker compose up -d minio
+
 start-dev:
 	@make start-mariadb && make start-redis
 
