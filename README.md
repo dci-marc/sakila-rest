@@ -6,6 +6,10 @@ Spring RESTful API service demo on the Sakila dataset.
 
 [https://sakila-rest-production.up.railway.app/api/v1/](https://sakila-rest-production.up.railway.app/api/v1/)
 
+## API Documentation
+
+[https://sakila-rest-production.up.railway.app/api/v1/docs](https://sakila-rest-production.up.railway.app/api/v1/docs)
+
 ## Intention
 
 This project is developed exclusively for personal use for possible reference
