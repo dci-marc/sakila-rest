@@ -59,10 +59,3 @@ services:
       - MINIO_ROOT_PASSWORD=minio
     volumes:
       - ./data/minio:/bitnami/minio/data
-
-volumes:
-  mariadb:
-  mysql:
-  redis:
-  postgres:
-  minio:
