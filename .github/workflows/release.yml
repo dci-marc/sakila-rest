@@ -15,7 +15,8 @@ jobs:
       SPRING_PROFILES_ACTIVE: prod
     strategy:
       matrix:
-        os: [ ubuntu-latest, windows-latest, macos-latest ]
+        # os: [ ubuntu-latest, windows-latest, macos-latest ]
+        os: [ ubuntu-latest ]
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
