@@ -20,7 +20,7 @@ import java.util.NoSuchElementException;
 @RequestMapping("/s3")
 public class S3Controller {
 
-  private @NotNull S3Service service;
+  private final @NotNull S3Service service;
 
   public S3Controller(@NotNull S3Service service) {
     this.service = service;
