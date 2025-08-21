@@ -23,12 +23,12 @@ public final class Size {
     return this.bytes;
   }
 
-  public int get(int exponent) {
+  public long get(int exponent) {
     if (exponent < 0) {
       throw new IllegalArgumentException("Exponent must be a non-negative integer.");
     }
 
-    return (int) (this.bytes / Math.pow(1024, exponent));
+    return (long) (this.bytes / Math.pow(1024, exponent));
   }
 
   @Override
