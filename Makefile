@@ -16,6 +16,9 @@ start-postgres:
 start-redis:
 	@docker compose up -d redis
 
+start-minio:
+	@docker compose up -d minio
+
 start-dev:
 	@make start-mariadb && make start-redis
 
@@ -30,6 +33,11 @@ pause:
 
 unpause:
 	@docker compose unpause
+
+native:
+	@./mvnw clean package -DskipTests && \
+		./mvnw spring-boot:build-image -DskipTests -Dpack.verbose=true -Dspring.aot.debug=true && \
+		./build-copy.sh
 
 all:
 	@make build && make start

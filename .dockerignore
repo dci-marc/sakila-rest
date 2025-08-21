@@ -3,6 +3,7 @@
 *.iml
 
 # Maven/Gradle build outputs
+bin
 target
 build
 out
@@ -21,10 +22,7 @@ Thumbs.db
 .gitignore
 
 # Docker volumes or database data
-mariadb_data
-postgres_data
-mysql_data
-redis_data
+data
 
 # Temporary files
 tmp/

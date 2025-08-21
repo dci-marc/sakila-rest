@@ -4,6 +4,7 @@
 .env.production
 .env.test
 HELP.md
+bin/
 target/
 .mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
@@ -38,10 +39,7 @@ build/
 .vscode/
 
 ### Docker ###
-mariadb_data/
-postgres_data/
-mysql_data/
-redis_data/
+data/
 
 ### Configuration files ###
 /src/main/resources/application-*.yml

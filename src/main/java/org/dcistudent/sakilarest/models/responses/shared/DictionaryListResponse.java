@@ -5,28 +5,28 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 import java.util.Map;
 
-public final class DictionaryListResponse implements ResponsePayload {
+public final class DictionaryListResponse<K, V> implements ResponsePayload {
 
-  @NotNull List<Map<String, String>> items;
+  @NotNull List<Map<K, V>> items;
 
-  public DictionaryListResponse(@NotNull Builder builder) {
+  public DictionaryListResponse(@NotNull Builder<K, V> builder) {
     this.items = builder.items;
   }
 
-  public @NotNull List<Map<String, String>> getItems() {
+  public @NotNull List<Map<K, V>> getItems() {
     return this.items;
   }
 
-  public static class Builder {
-    private @NotNull List<Map<String, String>> items = List.of();
+  public static class Builder<K, V> {
+    private @NotNull List<Map<K, V>> items = List.of();
 
-    public @NotNull Builder setItems(@NotNull List<Map<String, String>> items) {
+    public @NotNull Builder<K, V> setItems(@NotNull List<Map<K, V>> items) {
       this.items = items;
       return this;
     }
 
-    public @NotNull DictionaryListResponse build() {
-      return new DictionaryListResponse(this);
+    public @NotNull DictionaryListResponse<K, V> build() {
+      return new DictionaryListResponse<>(this);
     }
   }
 }
