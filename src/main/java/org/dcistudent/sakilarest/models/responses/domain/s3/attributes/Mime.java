@@ -18,7 +18,7 @@ public final class Mime {
 
   public void setType(@NotNull String type) {
     if (type.isEmpty()) {
-      throw new IllegalArgumentException("MIME type cannot be null or empty");
+      throw new IllegalArgumentException("MIME type cannot be empty");
     }
     this.type = type;
   }
