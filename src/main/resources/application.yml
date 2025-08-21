@@ -8,5 +8,11 @@ spring:
       - optional:classpath:db-${DB_SYSTEM}.yml
       - dotenv:.env
 
+# === SWAGGER CONFIGURATION ===
+springdoc:
+  swagger-ui:
+    path: /docs
+
+# === BUGSNAG CONFIGURATION ===
 bugsnag:
   key: ${BUGSNAG_API_KEY}
