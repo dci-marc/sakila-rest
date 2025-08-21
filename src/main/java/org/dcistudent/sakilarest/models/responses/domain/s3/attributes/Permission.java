@@ -43,6 +43,6 @@ public final class Permission {
 
   @Override
   public String toString() {
-    return String.format("[r=%s,w=%s,d=%s]", this.read, this.write, this.delete);
+    return String.format("r=%s,w=%s,d=%s", this.read, this.write, this.delete);
   }
 }
