@@ -1,6 +1,11 @@
 package org.dcistudent.sakilarest.controllers;
 
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.dcistudent.sakilarest.factories.ResponseFactory;
+import org.dcistudent.sakilarest.models.responses.domain.DirectoryResponse;
 import org.dcistudent.sakilarest.models.responses.shared.EmptyResponse;
 import org.dcistudent.sakilarest.models.responses.shared.Response;
 import org.dcistudent.sakilarest.models.responses.shared.ResponsePayload;
@@ -27,6 +32,26 @@ public class S3Controller {
   }
 
   @GetMapping("/files/{directoryName}")
+  @ApiResponses(
+      value = {
+          @ApiResponse(
+              responseCode = "200",
+              description = "Successfully fetched files from the specified directory.",
+              content = @Content(
+                  mediaType = MediaType.APPLICATION_JSON_VALUE,
+                  schema = @Schema(implementation = DirectoryResponse.class)
+              )
+          ),
+          @ApiResponse(
+              responseCode = "400",
+              description = "Directory not found or invalid request.",
+              content = @Content(
+                  mediaType = MediaType.APPLICATION_PROBLEM_JSON_VALUE,
+                  schema = @Schema(implementation = EmptyResponse.class)
+              )
+          )
+      }
+  )
   public @NotNull ResponseEntity<Response<ResponsePayload>> getFiles(@NotNull @PathVariable String directoryName) {
     try {
       return ResponseEntity.ok(

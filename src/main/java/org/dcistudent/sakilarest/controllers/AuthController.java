@@ -1,5 +1,9 @@
 package org.dcistudent.sakilarest.controllers;
 
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import org.dcistudent.sakilarest.exceptions.Auth0Exception;
 import org.dcistudent.sakilarest.factories.ResponseFactory;
@@ -30,6 +34,34 @@ public class AuthController {
   }
 
   @PostMapping("/register")
+  @ApiResponses(
+      value = {
+          @ApiResponse(
+              responseCode = "201",
+              description = "User successfully registered.",
+              content = @Content(
+                  mediaType = MediaType.APPLICATION_JSON_VALUE,
+                  schema = @Schema(implementation = UserResponse.class)
+              )
+          ),
+          @ApiResponse(
+              responseCode = "400",
+              description = "Invalid request or user already exists.",
+              content = @Content(
+                  mediaType = MediaType.APPLICATION_PROBLEM_JSON_VALUE,
+                  schema = @Schema(implementation = ErrorResponse.class)
+              )
+          ),
+          @ApiResponse(
+              responseCode = "500",
+              description = "Internal server error.",
+              content = @Content(
+                  mediaType = MediaType.APPLICATION_PROBLEM_JSON_VALUE,
+                  schema = @Schema(implementation = Response.class)
+              )
+          )
+      }
+  )
   public @NotNull ResponseEntity<Response<ResponsePayload>> register(@NotNull @RequestBody @Valid UserRequest request) {
     try {
       this.auth0Service.registerUser(request.getEmail(), request.getPassword());
@@ -66,6 +98,34 @@ public class AuthController {
   }
 
   @PostMapping("/login")
+  @ApiResponses(
+      value = {
+          @ApiResponse(
+              responseCode = "200",
+              description = "User successfully logged in.",
+              content = @Content(
+                  mediaType = MediaType.APPLICATION_JSON_VALUE,
+                  schema = @Schema(implementation = Response.class)
+              )
+          ),
+          @ApiResponse(
+              responseCode = "400",
+              description = "Invalid credentials or user not found.",
+              content = @Content(
+                  mediaType = MediaType.APPLICATION_PROBLEM_JSON_VALUE,
+                  schema = @Schema(implementation = ErrorResponse.class)
+              )
+          ),
+          @ApiResponse(
+              responseCode = "500",
+              description = "Internal server error.",
+              content = @Content(
+                  mediaType = MediaType.APPLICATION_PROBLEM_JSON_VALUE,
+                  schema = @Schema(implementation = Response.class)
+              )
+          )
+      }
+  )
   public @NotNull ResponseEntity<Response<String>> login(@NotNull @RequestBody @Valid UserRequest request) {
     String token;
 

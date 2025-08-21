@@ -1,8 +1,13 @@
 package org.dcistudent.sakilarest.controllers;
 
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import org.dcistudent.sakilarest.factories.ResponseFactory;
 import org.dcistudent.sakilarest.models.requests.FilmRequest;
+import org.dcistudent.sakilarest.models.responses.domain.FilmPageResponse;
 import org.dcistudent.sakilarest.models.responses.domain.FilmResponse;
 import org.dcistudent.sakilarest.models.responses.shared.EmptyResponse;
 import org.dcistudent.sakilarest.models.responses.shared.Response;
@@ -29,6 +34,26 @@ public class FilmController {
   }
 
   @GetMapping
+  @ApiResponses(
+      value = {
+          @ApiResponse(
+              responseCode = "200",
+              description = "Successfully fetched films.",
+              content = @Content(
+                  mediaType = MediaType.APPLICATION_JSON_VALUE,
+                  schema = @Schema(implementation = FilmPageResponse.class)
+              )
+          ),
+          @ApiResponse(
+              responseCode = "400",
+              description = "Invalid request or no films found.",
+              content = @Content(
+                  mediaType = MediaType.APPLICATION_PROBLEM_JSON_VALUE,
+                  schema = @Schema(implementation = Response.class)
+              )
+          )
+      }
+  )
   public @NotNull ResponseEntity<Response<Page<FilmResponse>>> getFilms(
       @NotNull @ModelAttribute @Valid FilmRequest request
   ) {
@@ -53,6 +78,26 @@ public class FilmController {
   }
 
   @GetMapping("/{id}")
+  @ApiResponses(
+      value = {
+          @ApiResponse(
+              responseCode = "200",
+              description = "Successfully fetched film by ID.",
+              content = @Content(
+                  mediaType = MediaType.APPLICATION_JSON_VALUE,
+                  schema = @Schema(implementation = FilmResponse.class)
+              )
+          ),
+          @ApiResponse(
+              responseCode = "400",
+              description = "Film not found or invalid ID.",
+              content = @Content(
+                  mediaType = MediaType.APPLICATION_PROBLEM_JSON_VALUE,
+                  schema = @Schema(implementation = Response.class)
+              )
+          )
+      }
+  )
   public @NotNull ResponseEntity<Response<ResponsePayload>> getFilm(@NotNull @PathVariable UUID id) {
     try {
       return ResponseEntity.ok(
