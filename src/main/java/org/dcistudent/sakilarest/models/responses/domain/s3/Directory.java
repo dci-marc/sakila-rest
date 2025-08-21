@@ -25,7 +25,7 @@ public final class Directory implements DomainResponse {
 
   public void addFile(@NotNull File file) {
     this.files.add(file);
-    this.totalFiles++;
+    this.totalFiles = this.files.size();
   }
 
   public @NotNull String getName() {
