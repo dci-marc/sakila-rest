@@ -43,8 +43,8 @@ public class GlobalExceptionHandler {
       throw e;
     }
 
-    this.sqlLogger.logFatal(Arrays.toString(e.getStackTrace()));
     this.bugsnag.notify(e);
+    this.sqlLogger.logFatal(Arrays.toString(e.getStackTrace()));
 
     return ResponseEntity
         .status(HttpStatus.INTERNAL_SERVER_ERROR.value())
