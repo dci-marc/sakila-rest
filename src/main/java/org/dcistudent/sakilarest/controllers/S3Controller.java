@@ -40,7 +40,7 @@ public class S3Controller {
           .badRequest()
           .contentType(MediaType.APPLICATION_PROBLEM_JSON)
           .body(ResponseFactory.create(
-              HttpStatus.NOT_FOUND,
+              HttpStatus.BAD_REQUEST,
               "s3:files:fetch:not.found",
               EmptyResponse.INSTANCE
           ));

@@ -2,11 +2,11 @@ package org.dcistudent.sakilarest.controllers;
 
 import jakarta.validation.Valid;
 import org.dcistudent.sakilarest.factories.ResponseFactory;
-import org.dcistudent.sakilarest.models.responses.shared.Response;
 import org.dcistudent.sakilarest.models.requests.LimitOffsetRequest;
-import org.dcistudent.sakilarest.models.responses.shared.EmptyResponse;
-import org.dcistudent.sakilarest.models.responses.shared.ResponsePayload;
 import org.dcistudent.sakilarest.models.responses.domain.StoresResponse;
+import org.dcistudent.sakilarest.models.responses.shared.EmptyResponse;
+import org.dcistudent.sakilarest.models.responses.shared.Response;
+import org.dcistudent.sakilarest.models.responses.shared.ResponsePayload;
 import org.dcistudent.sakilarest.services.StoreService;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.data.domain.Page;
@@ -45,7 +45,7 @@ public class StoreController {
           .badRequest()
           .contentType(MediaType.APPLICATION_PROBLEM_JSON)
           .body(ResponseFactory.create(
-              HttpStatus.NOT_FOUND,
+              HttpStatus.BAD_REQUEST,
               "stores:fetch:not.found",
               Page.empty()
           ));
@@ -66,7 +66,7 @@ public class StoreController {
           .badRequest()
           .contentType(MediaType.APPLICATION_PROBLEM_JSON)
           .body(ResponseFactory.create(
-              HttpStatus.NOT_FOUND,
+              HttpStatus.BAD_REQUEST,
               "store:fetch:not.found",
               EmptyResponse.INSTANCE
           ));
