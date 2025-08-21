@@ -7,7 +7,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Directory implements DomainResponse {
+public final class Directory implements DomainResponse {
 
   private @NotNull String name;
   private @NotNull String path;
