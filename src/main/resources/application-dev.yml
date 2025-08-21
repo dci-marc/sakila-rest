@@ -69,11 +69,6 @@ problem:
   stack-traces:
     enabled: false
 
-# === SWAGGER CONFIGURATION ===
-# springdoc:
-#   swagger-ui:
-#     path: /docs
-
 # === AUTH0 CONFIGURATION ===
 auth0:
   domain: ${AUTH0_DOMAIN}

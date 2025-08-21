@@ -28,15 +28,16 @@ public class SecurityConfig {
       @NotNull HttpSecurity http,
       @NotNull UnauthorizedEntryPoint unauthorizedEntryPoint,
       @NotNull AccessDeniedEntryPoint accessDeniedEntryPoint
-  )
-      throws Exception {
+  ) throws Exception {
     http
         .csrf(csrf -> csrf
             .ignoringRequestMatchers("/**", "/api/v1/**")
         )
         .authorizeHttpRequests(auth -> auth
-            .requestMatchers("/auth/**", "/api/v1/auth/**").permitAll()
-            .requestMatchers("/**", "/api/v1/**").authenticated()
+            .requestMatchers("/auth/**").permitAll()
+            .requestMatchers("/docs/**").permitAll()
+            .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html", "/webjars/**").permitAll()
+            .requestMatchers("/**").authenticated()
             .anyRequest().denyAll()
         )
         .exceptionHandling(exception -> exception
