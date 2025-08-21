@@ -9,7 +9,7 @@ import org.springframework.http.HttpStatus;
 
 public class DirectoryResponse extends Response<Directory> {
 
-  protected DirectoryResponse(@NotNull HttpStatus status, @NotNull String message, @Nullable Directory data) {
+  public DirectoryResponse(@NotNull HttpStatus status, @NotNull String message, @Nullable Directory data) {
     super(status, message, data);
   }
 }
