@@ -25,7 +25,7 @@ public final class Size {
 
   public int get(int exponent) {
     if (exponent < 0) {
-      throw new IllegalArgumentException("Exponent must be an unsigned integer.");
+      throw new IllegalArgumentException("Exponent must be a non-negative integer.");
     }
 
     return (int) (this.bytes / Math.pow(1024, exponent));
