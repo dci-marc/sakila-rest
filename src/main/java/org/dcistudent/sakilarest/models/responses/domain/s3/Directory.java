@@ -4,14 +4,14 @@ import org.dcistudent.sakilarest.models.responses.domain.DomainResponse;
 import org.dcistudent.sakilarest.models.responses.domain.s3.directories.File;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 public final class Directory implements DomainResponse {
 
   private @NotNull String name;
   private @NotNull String path;
-  private @NotNull Set<File> files = new HashSet<>();
+  private @NotNull Set<File> files = new LinkedHashSet<>();
   private int totalFiles = 0;
 
   public Directory(@NotNull String name, @NotNull String path) {
