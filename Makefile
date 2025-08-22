@@ -20,7 +20,7 @@ start-minio:
 	@docker compose up -d minio
 
 start-dev:
-	@make start-mariadb && make start-redis
+	@make start-mariadb && make start-redis && make start-minio
 
 stop:
 	@docker compose down
