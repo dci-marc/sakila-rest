@@ -1,12 +1,13 @@
 package org.dcistudent.sakilarest.models.responses.domain;
 
 import org.dcistudent.sakilarest.interfaces.models.responses.domain.DomainResponse;
+import org.dcistudent.sakilarest.interfaces.models.responses.shared.Buildable;
 import org.dcistudent.sakilarest.models.responses.shared.AbstractUuidResponse;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.UUID;
 
-public class CustomerResponse extends AbstractUuidResponse implements DomainResponse {
+public final class CustomerResponse extends AbstractUuidResponse implements DomainResponse {
 
   @NotNull String firstName;
   @NotNull String lastName;
@@ -49,7 +50,7 @@ public class CustomerResponse extends AbstractUuidResponse implements DomainResp
     return this.lastUpdate;
   }
 
-  public static class Builder {
+  public static final class Builder implements Buildable<CustomerResponse> {
     private @NotNull UUID uuid = UUID.randomUUID();
     private @NotNull String firstName = "";
     private @NotNull String lastName = "";

@@ -7,7 +7,7 @@ import org.jetbrains.annotations.Nullable;
 import org.springframework.http.HttpStatus;
 
 
-public class DirectoryResponse extends Response<Directory> {
+public final class DirectoryResponse extends Response<Directory> {
 
   public DirectoryResponse(@NotNull HttpStatus status, @NotNull String message, @Nullable Directory data) {
     super(status, message, data);

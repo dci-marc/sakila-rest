@@ -1,5 +1,6 @@
 package org.dcistudent.sakilarest.models.responses.shared;
 
+import org.dcistudent.sakilarest.interfaces.models.responses.shared.Buildable;
 import org.dcistudent.sakilarest.interfaces.models.responses.shared.ResponsePayload;
 import org.jetbrains.annotations.NotNull;
 
@@ -18,7 +19,7 @@ public final class DictionaryListResponse<K, V> implements ResponsePayload {
     return this.items;
   }
 
-  public static class Builder<K, V> {
+  public static final class Builder<K, V> implements Buildable<DictionaryListResponse<K, V>> {
     private @NotNull List<Map<K, V>> items = List.of();
 
     public @NotNull Builder<K, V> setItems(@NotNull List<Map<K, V>> items) {

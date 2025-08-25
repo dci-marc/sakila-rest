@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 
 @Component
-public class AccessDeniedEntryPoint implements AccessDeniedHandler {
+public final class AccessDeniedEntryPoint implements AccessDeniedHandler {
 
   @Override
   public void handle(

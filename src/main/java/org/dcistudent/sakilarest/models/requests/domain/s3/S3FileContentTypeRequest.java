@@ -1,8 +1,9 @@
 package org.dcistudent.sakilarest.models.requests.domain.s3;
 
+import org.dcistudent.sakilarest.interfaces.models.responses.shared.Buildable;
 import org.jetbrains.annotations.NotNull;
 
-public class S3FileContentTypeRequest {
+public final class S3FileContentTypeRequest implements Buildable<S3FileContentTypeRequest> {
 
   public static final @NotNull String IMAGE_JPEG = "image/jpeg";
   public static final @NotNull String IMAGE_PNG = "image/png";

@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.UUID;
 
 @Service
-public class CustomerService {
+public final class CustomerService {
 
   private final @NotNull CustomerManager customerManager;
 

@@ -5,7 +5,7 @@ import org.springframework.data.domain.PageImpl;
 
 import java.util.List;
 
-public class CustomerPageResponse extends PageImpl<CustomerResponse> {
+public final class CustomerPageResponse extends PageImpl<CustomerResponse> {
 
   public CustomerPageResponse(@NotNull List<CustomerResponse> content) {
     super(content);

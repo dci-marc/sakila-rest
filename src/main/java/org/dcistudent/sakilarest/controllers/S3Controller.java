@@ -25,7 +25,7 @@ import java.util.Objects;
 
 @RestController
 @RequestMapping("/s3")
-public class S3Controller {
+public final class S3Controller {
 
   private final @NotNull S3Service service;
 

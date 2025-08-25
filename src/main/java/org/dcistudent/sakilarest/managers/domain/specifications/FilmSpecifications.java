@@ -13,7 +13,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.function.Function;
 
-public class FilmSpecifications {
+public final class FilmSpecifications {
 
   private static final @NotNull Map<String, Function<FilmRequest, Specification<Film>>> FILTERS = new LinkedHashMap<>();
 

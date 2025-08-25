@@ -12,7 +12,7 @@ import java.util.NoSuchElementException;
 import java.util.UUID;
 
 @Service
-public class CustomerManager {
+public final class CustomerManager {
 
   private final @NotNull CustomerRepository customerRepository;
 

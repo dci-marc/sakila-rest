@@ -8,7 +8,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 
-public class EmptyResponseSerializer extends JsonSerializer<EmptyResponse> {
+public final class EmptyResponseSerializer extends JsonSerializer<EmptyResponse> {
 
   @Override
   public void serialize(

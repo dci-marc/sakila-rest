@@ -8,7 +8,7 @@ import org.springframework.boot.context.config.ConfigDataLocationResolverContext
 import java.util.Collections;
 import java.util.List;
 
-public class DotenvConfigLocationResolver implements ConfigDataLocationResolver<DotenvConfigResource> {
+public final class DotenvConfigLocationResolver implements ConfigDataLocationResolver<DotenvConfigResource> {
 
   @Override
   public boolean isResolvable(

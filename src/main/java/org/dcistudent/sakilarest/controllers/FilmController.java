@@ -25,7 +25,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/films") // plural nouns
-public class FilmController {
+public final class FilmController {
 
   private final @NotNull FilmService filmService;
 

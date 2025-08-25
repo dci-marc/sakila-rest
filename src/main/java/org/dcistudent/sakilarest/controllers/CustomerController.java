@@ -25,7 +25,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/stores/{id}") // plural nouns
-public class CustomerController {
+public final class CustomerController {
 
   private final @NotNull CustomerService service;
 
