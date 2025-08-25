@@ -13,7 +13,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.Map;
 
 @Service
-public class Auth0Service {
+public final class Auth0Service {
 
   private static final @NotNull String STRING_PASSWORD = "password";
   private static final @NotNull String STRING_ACCESS_TOKEN = "access_token";

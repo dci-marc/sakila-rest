@@ -14,7 +14,7 @@ import java.util.NoSuchElementException;
 import java.util.UUID;
 
 @Service
-public class FilmManager {
+public final class FilmManager {
 
   @NotNull
   private final FilmRepository filmRepository;

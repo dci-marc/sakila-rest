@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.UUID;
 
 @Service
-public class FilmService {
+public final class FilmService {
 
   final @NotNull FilmManager filmManager;
 
