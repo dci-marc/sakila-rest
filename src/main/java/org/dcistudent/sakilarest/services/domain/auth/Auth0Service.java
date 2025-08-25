@@ -1,7 +1,7 @@
 package org.dcistudent.sakilarest.services.domain.auth;
 
 import org.dcistudent.sakilarest.configs.Auth0Config;
-import org.dcistudent.sakilarest.exceptions.Auth0Exception;
+import org.dcistudent.sakilarest.exceptions.domain.Auth0Exception;
 import org.dcistudent.sakilarest.models.responses.error.Auth0ErrorResponse;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.boot.web.client.RestTemplateBuilder;

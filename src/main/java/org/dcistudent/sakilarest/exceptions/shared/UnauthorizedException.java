@@ -1,4 +1,4 @@
-package org.dcistudent.sakilarest.exceptions;
+package org.dcistudent.sakilarest.exceptions.shared;
 
 import org.jetbrains.annotations.NotNull;
 import org.springframework.http.HttpStatus;

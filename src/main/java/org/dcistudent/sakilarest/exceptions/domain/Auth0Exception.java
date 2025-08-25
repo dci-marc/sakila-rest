@@ -1,4 +1,4 @@
-package org.dcistudent.sakilarest.exceptions;
+package org.dcistudent.sakilarest.exceptions.domain;
 
 import org.dcistudent.sakilarest.models.responses.error.Auth0ErrorResponse;
 import org.jetbrains.annotations.NotNull;
