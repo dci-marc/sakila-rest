@@ -1,10 +1,11 @@
-package org.dcistudent.sakilarest.managers;
+package org.dcistudent.sakilarest.managers.domain;
 
 import jakarta.persistence.EntityGraph;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 import org.dcistudent.sakilarest.entities.Store;
+import org.dcistudent.sakilarest.managers.shared.FetchHints;
 import org.dcistudent.sakilarest.repositories.domain.StoreRepository;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.data.domain.Page;

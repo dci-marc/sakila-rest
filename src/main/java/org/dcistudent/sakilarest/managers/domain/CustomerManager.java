@@ -1,4 +1,4 @@
-package org.dcistudent.sakilarest.managers;
+package org.dcistudent.sakilarest.managers.domain;
 
 import org.dcistudent.sakilarest.entities.Customer;
 import org.dcistudent.sakilarest.repositories.domain.CustomerRepository;

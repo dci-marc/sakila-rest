@@ -1,4 +1,4 @@
-package org.dcistudent.sakilarest.managers.specifications;
+package org.dcistudent.sakilarest.managers.domain.specifications;
 
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;

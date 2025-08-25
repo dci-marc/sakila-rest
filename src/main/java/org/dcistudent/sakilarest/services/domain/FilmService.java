@@ -1,7 +1,7 @@
 package org.dcistudent.sakilarest.services.domain;
 
 import org.dcistudent.sakilarest.factories.FilmResponseFactory;
-import org.dcistudent.sakilarest.managers.FilmManager;
+import org.dcistudent.sakilarest.managers.domain.FilmManager;
 import org.dcistudent.sakilarest.models.requests.domain.FilmRequest;
 import org.dcistudent.sakilarest.models.responses.domain.FilmResponse;
 import org.jetbrains.annotations.NotNull;

@@ -1,4 +1,4 @@
-package org.dcistudent.sakilarest.managers;
+package org.dcistudent.sakilarest.managers.shared;
 
 import org.jetbrains.annotations.NotNull;
 
