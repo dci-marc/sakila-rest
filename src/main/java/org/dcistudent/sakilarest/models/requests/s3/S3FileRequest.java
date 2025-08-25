@@ -16,16 +16,6 @@ public final class S3FileRequest {
     this.base64Content = builder.base64Content;
   }
 
-  public @NotNull S3FileRequest build() {
-    if (this.filePath.isEmpty()) {
-      throw new IllegalStateException("File path is not set.");
-    }
-    if (this.fileName.isEmpty()) {
-      throw new IllegalStateException("File name is not set.");
-    }
-    return this;
-  }
-
   public @NotNull String getFilePath() {
     return this.filePath;
   }
