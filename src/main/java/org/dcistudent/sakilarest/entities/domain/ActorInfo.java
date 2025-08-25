@@ -1,4 +1,4 @@
-package org.dcistudent.sakilarest.entities;
+package org.dcistudent.sakilarest.entities.domain;
 
 import jakarta.persistence.*;
 import org.hibernate.annotations.Immutable;

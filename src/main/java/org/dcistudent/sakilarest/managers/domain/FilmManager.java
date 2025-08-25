@@ -1,6 +1,6 @@
 package org.dcistudent.sakilarest.managers.domain;
 
-import org.dcistudent.sakilarest.entities.Film;
+import org.dcistudent.sakilarest.entities.domain.Film;
 import org.dcistudent.sakilarest.managers.domain.specifications.FilmSpecifications;
 import org.dcistudent.sakilarest.models.requests.domain.FilmRequest;
 import org.dcistudent.sakilarest.repositories.domain.FilmRepository;

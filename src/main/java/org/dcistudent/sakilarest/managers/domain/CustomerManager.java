@@ -1,6 +1,6 @@
 package org.dcistudent.sakilarest.managers.domain;
 
-import org.dcistudent.sakilarest.entities.Customer;
+import org.dcistudent.sakilarest.entities.domain.Customer;
 import org.dcistudent.sakilarest.repositories.domain.CustomerRepository;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.data.domain.Page;

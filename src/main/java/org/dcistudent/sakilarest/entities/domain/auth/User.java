@@ -1,4 +1,4 @@
-package org.dcistudent.sakilarest.entities.auth;
+package org.dcistudent.sakilarest.entities.domain.auth;
 
 import jakarta.persistence.*;
 import org.jetbrains.annotations.NotNull;

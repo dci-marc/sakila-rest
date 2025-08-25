@@ -1,4 +1,4 @@
-package org.dcistudent.sakilarest.entities;
+package org.dcistudent.sakilarest.entities.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -9,8 +9,8 @@ import org.jetbrains.annotations.NotNull;
 
 @Entity
 @Immutable
-@Table(name = "customer_list", schema = "sakila")
-public class CustomerList {
+@Table(name = "staff_list", schema = "sakila")
+public class StaffList {
   @Id
   @Column(name = "ID", columnDefinition = "int UNSIGNED not null")
   private @NotNull Long id;
@@ -33,13 +33,10 @@ public class CustomerList {
   @Column(name = "country", nullable = false, length = 50)
   private @NotNull String country;
 
-  @Column(name = "notes", nullable = false, length = 6)
-  private @NotNull String notes;
-
   @Column(name = "SID", columnDefinition = "int UNSIGNED not null")
   private @NotNull Long sid;
 
-  protected CustomerList() {
+  protected StaffList() {
   }
 
   public @NotNull Long getId() {
@@ -68,10 +65,6 @@ public class CustomerList {
 
   public @NotNull String getCountry() {
     return this.country;
-  }
-
-  public @NotNull String getNotes() {
-    return this.notes;
   }
 
   public @NotNull Long getSid() {

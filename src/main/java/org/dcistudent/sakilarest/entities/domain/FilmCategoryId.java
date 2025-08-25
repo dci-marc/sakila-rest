@@ -1,4 +1,4 @@
-package org.dcistudent.sakilarest.entities;
+package org.dcistudent.sakilarest.entities.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;

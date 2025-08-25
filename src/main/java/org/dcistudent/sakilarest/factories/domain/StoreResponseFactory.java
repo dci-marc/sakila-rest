@@ -1,6 +1,6 @@
 package org.dcistudent.sakilarest.factories.domain;
 
-import org.dcistudent.sakilarest.entities.Store;
+import org.dcistudent.sakilarest.entities.domain.Store;
 import org.dcistudent.sakilarest.models.responses.domain.*;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.data.domain.Page;

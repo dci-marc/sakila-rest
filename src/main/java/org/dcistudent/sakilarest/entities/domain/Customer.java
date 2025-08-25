@@ -1,20 +1,28 @@
-package org.dcistudent.sakilarest.entities;
+package org.dcistudent.sakilarest.entities.domain;
 
 import jakarta.persistence.*;
+import org.dcistudent.sakilarest.entities.shared.AbstractUuidEntity;
 import org.hibernate.annotations.ColumnDefault;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.Serializable;
 import java.time.Instant;
 
 @Entity
-@Table(name = "staff", schema = "sakila", indexes = {
+@Table(name = "customer", schema = "sakila", indexes = {
+    @Index(name = "idx_fk_store_id", columnList = "store_id"),
+    @Index(name = "idx_last_name", columnList = "last_name"),
     @Index(name = "idx_fk_address_id", columnList = "address_id"),
-    @Index(name = "idx_fk_store_id", columnList = "store_id")
+    @Index(name = "idx_uuid", columnList = "uuid")
 })
-public class Staff {
+public class Customer extends AbstractUuidEntity implements Serializable {
   @Id
-  @Column(name = "staff_id", columnDefinition = "int UNSIGNED not null")
+  @Column(name = "customer_id", columnDefinition = "int UNSIGNED not null")
   private @NotNull Long id;
+
+  @ManyToOne(fetch = FetchType.LAZY, optional = false)
+  @JoinColumn(name = "store_id", nullable = false)
+  private @NotNull Store store;
 
   @Column(name = "first_name", nullable = false, length = 45)
   private @NotNull String firstName;
@@ -22,34 +30,30 @@ public class Staff {
   @Column(name = "last_name", nullable = false, length = 45)
   private @NotNull String lastName;
 
-  @Column(name = "address_id", columnDefinition = "int UNSIGNED not null")
-  private @NotNull Long addressId;
-
-  @Column(name = "picture")
-  private byte @NotNull [] picture;
-
   @Column(name = "email", length = 50)
   private @NotNull String email;
 
-  @Column(name = "store_id", columnDefinition = "int UNSIGNED not null")
-  private @NotNull Long storeId;
+  @ManyToOne(fetch = FetchType.LAZY, optional = false)
+  @JoinColumn(name = "address_id", nullable = false)
+  private @NotNull Address address;
 
   @ColumnDefault("1")
   @Column(name = "active", nullable = false)
   private @NotNull Boolean active = false;
 
-  @Column(name = "username", nullable = false, length = 16)
-  private @NotNull String username;
-
-  @Column(name = "password", length = 40)
-  private @NotNull String password;
+  @Column(name = "create_date", nullable = false)
+  private @NotNull Instant createDate;
 
   @ColumnDefault("CURRENT_TIMESTAMP")
-  @Column(name = "last_update", nullable = false)
+  @Column(name = "last_update")
   private @NotNull Instant lastUpdate;
 
   public @NotNull Long getId() {
     return this.id;
+  }
+
+  public @NotNull Store getStore() {
+    return this.store;
   }
 
   public @NotNull String getFirstName() {
@@ -60,32 +64,20 @@ public class Staff {
     return this.lastName;
   }
 
-  public @NotNull Long getAddressId() {
-    return this.addressId;
-  }
-
-  public byte @NotNull [] getPicture() {
-    return this.picture;
-  }
-
   public @NotNull String getEmail() {
     return this.email;
   }
 
-  public @NotNull Long getStoreId() {
-    return this.storeId;
+  public @NotNull Address getAddress() {
+    return this.address;
   }
 
   public @NotNull Boolean getActive() {
     return this.active;
   }
 
-  public @NotNull String getUsername() {
-    return this.username;
-  }
-
-  public @NotNull String getPassword() {
-    return this.password;
+  public @NotNull Instant getCreateDate() {
+    return this.createDate;
   }
 
   public @NotNull Instant getLastUpdate() {
@@ -96,6 +88,10 @@ public class Staff {
     this.id = id;
   }
 
+  public void setStore(@NotNull Store store) {
+    this.store = store;
+  }
+
   public void setFirstName(@NotNull String firstName) {
     this.firstName = firstName;
   }
@@ -104,32 +100,20 @@ public class Staff {
     this.lastName = lastName;
   }
 
-  public void setAddressId(@NotNull Long addressId) {
-    this.addressId = addressId;
-  }
-
-  public void setPicture(byte @NotNull [] picture) {
-    this.picture = picture;
-  }
-
   public void setEmail(@NotNull String email) {
     this.email = email;
   }
 
-  public void setStoreId(@NotNull Long storeId) {
-    this.storeId = storeId;
+  public void setAddress(@NotNull Address address) {
+    this.address = address;
   }
 
   public void setActive(@NotNull Boolean active) {
     this.active = active;
   }
 
-  public void setUsername(@NotNull String username) {
-    this.username = username;
-  }
-
-  public void setPassword(@NotNull String password) {
-    this.password = password;
+  public void setCreateDate(@NotNull Instant createDate) {
+    this.createDate = createDate;
   }
 
   public void setLastUpdate(@NotNull Instant lastUpdate) {

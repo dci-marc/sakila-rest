@@ -1,4 +1,4 @@
-package org.dcistudent.sakilarest.entities;
+package org.dcistudent.sakilarest.entities.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,13 +10,13 @@ import org.jetbrains.annotations.NotNull;
 import java.time.Instant;
 
 @Entity
-@Table(name = "language", schema = "sakila")
-public class Language {
+@Table(name = "category", schema = "sakila")
+public class Category {
   @Id
-  @Column(name = "language_id", columnDefinition = "int UNSIGNED not null")
+  @Column(name = "category_id", columnDefinition = "int UNSIGNED not null")
   private @NotNull Long id;
 
-  @Column(name = "name", nullable = false, length = 20)
+  @Column(name = "name", nullable = false, length = 25)
   private @NotNull String name;
 
   @ColumnDefault("CURRENT_TIMESTAMP")

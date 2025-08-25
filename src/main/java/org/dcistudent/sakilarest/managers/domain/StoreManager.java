@@ -4,7 +4,7 @@ import jakarta.persistence.EntityGraph;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
-import org.dcistudent.sakilarest.entities.Store;
+import org.dcistudent.sakilarest.entities.domain.Store;
 import org.dcistudent.sakilarest.managers.shared.FetchHints;
 import org.dcistudent.sakilarest.repositories.domain.StoreRepository;
 import org.jetbrains.annotations.NotNull;

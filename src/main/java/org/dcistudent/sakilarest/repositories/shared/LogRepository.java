@@ -1,6 +1,6 @@
 package org.dcistudent.sakilarest.repositories.shared;
 
-import org.dcistudent.sakilarest.entities.Log;
+import org.dcistudent.sakilarest.entities.shared.Log;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
