@@ -18,7 +18,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
-public class StoreManager {
+public final class StoreManager {
 
   @PersistenceContext
   private @NotNull EntityManager entityManager;

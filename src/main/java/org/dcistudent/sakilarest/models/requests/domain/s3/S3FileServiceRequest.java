@@ -51,8 +51,7 @@ public final class S3FileServiceRequest {
     );
   }
 
-  public static class Builder implements Buildable {
-
+  public static final class Builder implements Buildable<S3FileServiceRequest> {
     private @NotNull String bucket = "";
     private @NotNull String path = "";
     private @NotNull InputStream inputStream = InputStream.nullInputStream();

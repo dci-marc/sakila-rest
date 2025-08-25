@@ -11,7 +11,7 @@ import java.net.URI;
 
 @RestController
 @RequestMapping("/provoke-error")
-public class ProblemController {
+public final class ProblemController {
 
   public static final @NotNull String MAPPING_BASE = "/provoke-error";
 

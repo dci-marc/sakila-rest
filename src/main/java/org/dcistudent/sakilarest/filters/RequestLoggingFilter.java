@@ -16,7 +16,7 @@ import java.util.logging.Logger;
 
 @Component
 @Profile("dev")
-public class RequestLoggingFilter extends OncePerRequestFilter {
+public final class RequestLoggingFilter extends OncePerRequestFilter {
 
   private static final @NotNull Logger LOG = Logger.getLogger(RequestLoggingFilter.class.getName());
 

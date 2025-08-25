@@ -3,7 +3,7 @@ package org.dcistudent.sakilarest.configs;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.boot.context.config.ConfigDataResource;
 
-public class DotenvConfigResource extends ConfigDataResource {
+public final class DotenvConfigResource extends ConfigDataResource {
 
   private final @NotNull String directory;
   private final @NotNull String filename;

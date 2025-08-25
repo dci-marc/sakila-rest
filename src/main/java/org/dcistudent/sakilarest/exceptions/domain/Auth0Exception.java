@@ -3,7 +3,7 @@ package org.dcistudent.sakilarest.exceptions.domain;
 import org.dcistudent.sakilarest.models.responses.error.Auth0ErrorResponse;
 import org.jetbrains.annotations.NotNull;
 
-public class Auth0Exception extends RuntimeException {
+public final class Auth0Exception extends RuntimeException {
 
   private final transient @NotNull Auth0ErrorResponse error;
 

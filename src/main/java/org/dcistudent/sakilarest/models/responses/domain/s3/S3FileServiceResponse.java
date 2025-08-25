@@ -1,9 +1,10 @@
 package org.dcistudent.sakilarest.models.responses.domain.s3;
 
+import org.dcistudent.sakilarest.interfaces.models.responses.shared.Buildable;
 import org.jetbrains.annotations.NotNull;
 import software.amazon.awssdk.services.s3.model.GetObjectResponse;
 
-public class S3FileServiceResponse {
+public final class S3FileServiceResponse {
 
   private GetObjectResponse response = null;
   private byte @NotNull [] content = new byte[0];
@@ -21,7 +22,7 @@ public class S3FileServiceResponse {
     return this.content;
   }
 
-  public static class Builder {
+  public static final class Builder implements Buildable<S3FileServiceResponse> {
     private GetObjectResponse response = null;
     private byte @NotNull [] content = new byte[0];
 

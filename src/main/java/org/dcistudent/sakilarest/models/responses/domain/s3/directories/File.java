@@ -1,6 +1,7 @@
 package org.dcistudent.sakilarest.models.responses.domain.s3.directories;
 
 import org.dcistudent.sakilarest.interfaces.models.responses.domain.DomainResponse;
+import org.dcistudent.sakilarest.interfaces.models.responses.shared.Buildable;
 import org.dcistudent.sakilarest.models.responses.domain.s3.attributes.*;
 import org.jetbrains.annotations.NotNull;
 
@@ -54,7 +55,7 @@ public final class File implements DomainResponse {
     return this.createdAt;
   }
 
-  public static class Builder {
+  public static final class Builder implements Buildable<File> {
     private @NotNull String name = "";
     private @NotNull Long size = 0L;
     private @NotNull String mime = "";

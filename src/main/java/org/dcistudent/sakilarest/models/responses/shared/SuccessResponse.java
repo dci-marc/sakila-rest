@@ -1,9 +1,10 @@
 package org.dcistudent.sakilarest.models.responses.shared;
 
+import org.dcistudent.sakilarest.interfaces.models.responses.shared.Buildable;
 import org.dcistudent.sakilarest.interfaces.models.responses.shared.ResponsePayload;
 import org.jetbrains.annotations.NotNull;
 
-public class SuccessResponse implements ResponsePayload {
+public final class SuccessResponse implements ResponsePayload {
 
   private final boolean success;
 
@@ -15,7 +16,7 @@ public class SuccessResponse implements ResponsePayload {
     return this.success;
   }
 
-  public static class Builder {
+  public static final class Builder implements Buildable<SuccessResponse> {
     private boolean success;
 
     public @NotNull Builder setSuccess(boolean success) {

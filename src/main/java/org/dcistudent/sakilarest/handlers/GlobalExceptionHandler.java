@@ -22,7 +22,7 @@ import java.io.IOException;
 import java.util.*;
 
 @RestControllerAdvice
-public class GlobalExceptionHandler {
+public final class GlobalExceptionHandler {
 
   private final @NotNull SqlLogger sqlLogger;
   private final @NotNull Bugsnag bugsnag;

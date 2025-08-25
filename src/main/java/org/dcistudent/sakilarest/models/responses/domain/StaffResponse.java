@@ -1,5 +1,6 @@
 package org.dcistudent.sakilarest.models.responses.domain;
 
+import org.dcistudent.sakilarest.interfaces.models.responses.shared.Buildable;
 import org.jetbrains.annotations.NotNull;
 
 public final class StaffResponse {
@@ -38,7 +39,7 @@ public final class StaffResponse {
     return this.lastUpdate;
   }
 
-  public static class Builder {
+  public static final class Builder implements Buildable<StaffResponse> {
     private @NotNull String firstName = "";
     private @NotNull String lastName = "";
     private @NotNull String email = "";

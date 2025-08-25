@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class DotenvConfigLoader implements ConfigDataLoader<DotenvConfigResource> {
+public final class DotenvConfigLoader implements ConfigDataLoader<DotenvConfigResource> {
 
   @Override
   public @NotNull ConfigData load(@NotNull ConfigDataLoaderContext context, DotenvConfigResource resource) {

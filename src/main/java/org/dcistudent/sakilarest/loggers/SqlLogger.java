@@ -5,7 +5,7 @@ import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Component;
 
 @Component
-public class SqlLogger {
+public final class SqlLogger {
 
   private final @NotNull LogManager logManager;
 

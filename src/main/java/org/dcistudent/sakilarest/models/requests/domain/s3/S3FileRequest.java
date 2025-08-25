@@ -1,5 +1,6 @@
 package org.dcistudent.sakilarest.models.requests.domain.s3;
 
+import org.dcistudent.sakilarest.interfaces.models.responses.shared.Buildable;
 import org.jetbrains.annotations.NotNull;
 
 public final class S3FileRequest {
@@ -32,7 +33,7 @@ public final class S3FileRequest {
     return this.base64Content;
   }
 
-  public static class Builder {
+  public static final class Builder implements Buildable<S3FileRequest> {
     private @NotNull String filePath = "";
     private @NotNull String fileName = "";
     private @NotNull String contentType = "";
