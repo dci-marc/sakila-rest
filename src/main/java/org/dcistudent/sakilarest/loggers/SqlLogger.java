@@ -1,6 +1,6 @@
 package org.dcistudent.sakilarest.loggers;
 
-import org.dcistudent.sakilarest.managers.LogManager;
+import org.dcistudent.sakilarest.managers.shared.LogManager;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Component;
 
