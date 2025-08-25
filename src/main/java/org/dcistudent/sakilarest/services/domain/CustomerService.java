@@ -1,6 +1,6 @@
 package org.dcistudent.sakilarest.services.domain;
 
-import org.dcistudent.sakilarest.factories.CustomerResponseFactory;
+import org.dcistudent.sakilarest.factories.domain.CustomerResponseFactory;
 import org.dcistudent.sakilarest.managers.domain.CustomerManager;
 import org.dcistudent.sakilarest.models.requests.shared.LimitOffsetRequest;
 import org.dcistudent.sakilarest.models.responses.domain.CustomerResponse;

@@ -6,7 +6,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import org.dcistudent.sakilarest.exceptions.Auth0Exception;
-import org.dcistudent.sakilarest.factories.ResponseFactory;
+import org.dcistudent.sakilarest.factories.shared.ResponseFactory;
 import org.dcistudent.sakilarest.interfaces.models.responses.shared.ResponsePayload;
 import org.dcistudent.sakilarest.models.requests.domain.UserRequest;
 import org.dcistudent.sakilarest.models.responses.domain.UserResponse;

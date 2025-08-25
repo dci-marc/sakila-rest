@@ -1,4 +1,4 @@
-package org.dcistudent.sakilarest.factories;
+package org.dcistudent.sakilarest.factories.shared;
 
 import org.dcistudent.sakilarest.interfaces.models.responses.shared.ResponsePayload;
 import org.dcistudent.sakilarest.models.responses.shared.EmptyResponse;
