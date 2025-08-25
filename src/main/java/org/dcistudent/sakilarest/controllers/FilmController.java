@@ -13,6 +13,7 @@ import org.dcistudent.sakilarest.models.responses.domain.FilmResponse;
 import org.dcistudent.sakilarest.models.responses.shared.EmptyResponse;
 import org.dcistudent.sakilarest.models.responses.shared.Response;
 import org.dcistudent.sakilarest.services.domain.FilmService;
+import org.dcistudent.sakilarest.services.shared.DiscordService;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -27,9 +28,11 @@ import java.util.UUID;
 @RequestMapping("/films") // plural nouns
 public final class FilmController {
 
+  private final @NotNull DiscordService discordService;
   private final @NotNull FilmService filmService;
 
-  public FilmController(@NotNull FilmService filmService) {
+  public FilmController(@NotNull DiscordService discordService, @NotNull FilmService filmService) {
+    this.discordService = discordService;
     this.filmService = filmService;
   }
 
@@ -58,6 +61,10 @@ public final class FilmController {
       @NotNull @ModelAttribute @Valid FilmRequest request
   ) {
     try {
+      this.discordService.ok(
+          "get:/films",
+          "Fetched films with request: " + request.getTitle()
+      );
       return ResponseEntity.ok(
           ResponseFactory.create(
               HttpStatus.OK,
@@ -100,6 +107,10 @@ public final class FilmController {
   )
   public @NotNull ResponseEntity<Response<ResponsePayload>> getFilm(@NotNull @PathVariable UUID id) {
     try {
+      this.discordService.ok(
+          "get:/films/{id}",
+          "Fetched film with ID: " + id
+      );
       return ResponseEntity.ok(
           ResponseFactory.create(
               HttpStatus.OK,
