@@ -1,6 +1,6 @@
 package org.dcistudent.sakilarest.managers;
 
-import org.dcistudent.sakilarest.repositories.LogRepository;
+import org.dcistudent.sakilarest.repositories.shared.LogRepository;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

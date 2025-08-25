@@ -1,4 +1,4 @@
-package org.dcistudent.sakilarest.repositories;
+package org.dcistudent.sakilarest.repositories.domain;
 
 import org.dcistudent.sakilarest.entities.Film;
 import org.jetbrains.annotations.NotNull;

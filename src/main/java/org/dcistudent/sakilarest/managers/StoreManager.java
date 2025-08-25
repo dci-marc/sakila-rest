@@ -5,7 +5,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 import org.dcistudent.sakilarest.entities.Store;
-import org.dcistudent.sakilarest.repositories.StoreRepository;
+import org.dcistudent.sakilarest.repositories.domain.StoreRepository;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

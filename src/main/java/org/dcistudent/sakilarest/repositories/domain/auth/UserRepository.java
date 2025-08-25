@@ -1,4 +1,4 @@
-package org.dcistudent.sakilarest.repositories.auth;
+package org.dcistudent.sakilarest.repositories.domain.auth;
 
 import org.dcistudent.sakilarest.entities.auth.User;
 import org.jetbrains.annotations.NotNull;
@@ -10,5 +10,5 @@ import java.util.Optional;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    @NotNull Optional<User> findByEmail(@NotNull String email);
+  @NotNull Optional<User> findByEmail(@NotNull String email);
 }

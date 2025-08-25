@@ -1,4 +1,4 @@
-package org.dcistudent.sakilarest.repositories;
+package org.dcistudent.sakilarest.repositories.shared;
 
 import org.dcistudent.sakilarest.entities.Log;
 import org.jetbrains.annotations.NotNull;
