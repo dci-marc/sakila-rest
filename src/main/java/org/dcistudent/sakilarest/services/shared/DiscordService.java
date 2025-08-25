@@ -14,10 +14,11 @@ import java.util.List;
 public final class DiscordService {
 
   private final @NotNull DiscordConfig config;
-  private final @NotNull RestTemplate template = new RestTemplate();
+  private final @NotNull RestTemplate template;
 
-  public DiscordService(@NotNull DiscordConfig config) {
+  public DiscordService(@NotNull DiscordConfig config, @NotNull RestTemplate template) {
     this.config = config;
+    this.template = template;
   }
 
   public void ok(@NotNull String message, @NotNull String description) {
