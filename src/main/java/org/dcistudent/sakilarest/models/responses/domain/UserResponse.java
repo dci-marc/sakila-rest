@@ -1,5 +1,6 @@
 package org.dcistudent.sakilarest.models.responses.domain;
 
+import org.dcistudent.sakilarest.interfaces.models.responses.domain.DomainResponse;
 import org.jetbrains.annotations.NotNull;
 
 public final class UserResponse implements DomainResponse {

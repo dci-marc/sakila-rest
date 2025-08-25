@@ -1,6 +1,6 @@
 package org.dcistudent.sakilarest.models.responses.error;
 
-import org.dcistudent.sakilarest.models.responses.shared.ResponsePayload;
+import org.dcistudent.sakilarest.interfaces.models.responses.shared.ResponsePayload;
 import org.jetbrains.annotations.NotNull;
 
 public final class ErrorResponse implements ResponsePayload {

@@ -1,7 +1,7 @@
 package org.dcistudent.sakilarest.models.responses.error;
 
+import org.dcistudent.sakilarest.interfaces.models.responses.domain.Auth0Response;
 import org.dcistudent.sakilarest.models.responses.shared.Response;
-import org.dcistudent.sakilarest.models.responses.domain.Auth0Response;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.http.HttpStatus;
 

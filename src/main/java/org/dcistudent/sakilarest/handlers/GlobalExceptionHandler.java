@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 
+import java.io.IOException;
 import java.util.*;
 
 @RestControllerAdvice
@@ -80,7 +81,7 @@ public class GlobalExceptionHandler {
   }
 
   @ExceptionHandler(MethodArgumentNotValidException.class)
-  public @NotNull ResponseEntity<Response<DictionaryListResponse>> handleValidation(MethodArgumentNotValidException e) {
+  public @NotNull ResponseEntity<Response<DictionaryListResponse<String, String>>> handleValidation(MethodArgumentNotValidException e) {
     List<Map<String, String>> errors = e.getBindingResult().getFieldErrors().stream()
         .map(err -> {
           Map<String, String> errorDetail = new HashMap<>();
@@ -96,9 +97,22 @@ public class GlobalExceptionHandler {
         .body(ResponseFactory.create(
             HttpStatus.BAD_REQUEST,
             "error:validation:fail",
-            new DictionaryListResponse.Builder()
+            new DictionaryListResponse.Builder<String, String>()
                 .setItems(errors)
                 .build()
+        ));
+  }
+
+  @ExceptionHandler(IOException.class)
+  public @NotNull ResponseEntity<Response<EmptyResponse>> handleIOException(@NotNull IOException e) {
+    this.sqlLogger.logFatal(Arrays.toString(e.getStackTrace()));
+
+    return ResponseEntity
+        .status(HttpStatus.INTERNAL_SERVER_ERROR.value())
+        .contentType(MediaType.APPLICATION_PROBLEM_JSON)
+        .body(ResponseFactory.create(
+            HttpStatus.INTERNAL_SERVER_ERROR,
+            "error:io:exception"
         ));
   }
 }
