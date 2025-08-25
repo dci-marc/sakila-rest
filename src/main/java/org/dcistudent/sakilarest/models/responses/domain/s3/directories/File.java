@@ -11,7 +11,7 @@ public final class File implements DomainResponse {
   private final @NotNull Name name;
   private final @NotNull Size size;
   private final @NotNull Mime mime;
-  private final byte @NotNull [] base64Content = new byte[0];
+  private byte @NotNull [] base64Content = new byte[0];
   private final @NotNull Permission permission;
   private final @NotNull Modified modifiedAt;
   private final @NotNull Created createdAt;
@@ -20,6 +20,7 @@ public final class File implements DomainResponse {
     this.name = new Name(builder.name);
     this.size = new Size(builder.size);
     this.mime = new Mime(builder.mime);
+    this.base64Content = builder.base64Content;
     this.permission = new Permission(builder.readable, builder.writable, builder.deletable);
     this.modifiedAt = new Modified(builder.modifiedAt);
     this.createdAt = new Created(builder.createdAt);
