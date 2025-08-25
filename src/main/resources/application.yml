@@ -17,6 +17,11 @@ springdoc:
 bugsnag:
   key: ${BUGSNAG_API_KEY}
 
+# === DISCORD CONFIGURATION ===
+discord:
+  name: ${spring.application.name}
+  webhook-url: ${DISCORD_WEBHOOK_URL}
+
 # === S3 CONFIGURATION ===
 s3:
   bucket: ${S3_BUCKET}
