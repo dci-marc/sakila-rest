@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 
+import java.io.IOException;
 import java.util.*;
 
 @RestControllerAdvice
@@ -99,6 +100,19 @@ public class GlobalExceptionHandler {
             new DictionaryListResponse.Builder<String, String>()
                 .setItems(errors)
                 .build()
+        ));
+  }
+
+  @ExceptionHandler(IOException.class)
+  public @NotNull ResponseEntity<Response<EmptyResponse>> handleIOException(@NotNull IOException e) {
+    this.sqlLogger.logFatal(Arrays.toString(e.getStackTrace()));
+
+    return ResponseEntity
+        .status(HttpStatus.INTERNAL_SERVER_ERROR.value())
+        .contentType(MediaType.APPLICATION_PROBLEM_JSON)
+        .body(ResponseFactory.create(
+            HttpStatus.INTERNAL_SERVER_ERROR,
+            "error:io:exception"
         ));
   }
 }

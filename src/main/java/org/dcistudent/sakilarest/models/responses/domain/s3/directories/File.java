@@ -1,15 +1,17 @@
 package org.dcistudent.sakilarest.models.responses.domain.s3.directories;
 
+import org.dcistudent.sakilarest.interfaces.models.responses.domain.DomainResponse;
 import org.dcistudent.sakilarest.models.responses.domain.s3.attributes.*;
 import org.jetbrains.annotations.NotNull;
 
 import java.time.Instant;
 
-public final class File {
+public final class File implements DomainResponse {
 
   private final @NotNull Name name;
   private final @NotNull Size size;
   private final @NotNull Mime mime;
+  private byte @NotNull [] base64Content = new byte[0];
   private final @NotNull Permission permission;
   private final @NotNull Modified modifiedAt;
   private final @NotNull Created createdAt;
@@ -18,6 +20,7 @@ public final class File {
     this.name = new Name(builder.name);
     this.size = new Size(builder.size);
     this.mime = new Mime(builder.mime);
+    this.base64Content = builder.base64Content;
     this.permission = new Permission(builder.readable, builder.writable, builder.deletable);
     this.modifiedAt = new Modified(builder.modifiedAt);
     this.createdAt = new Created(builder.createdAt);
@@ -35,6 +38,10 @@ public final class File {
     return this.mime;
   }
 
+  public byte @NotNull [] getBase64Content() {
+    return this.base64Content;
+  }
+
   public @NotNull Permission getPermission() {
     return this.permission;
   }
@@ -49,8 +56,9 @@ public final class File {
 
   public static class Builder {
     private @NotNull String name = "";
-    private int size = 0;
+    private @NotNull Long size = 0L;
     private @NotNull String mime = "";
+    private byte @NotNull [] base64Content = new byte[0];
     private boolean readable = false;
     private boolean writable = false;
     private boolean deletable = false;
@@ -62,13 +70,18 @@ public final class File {
       return this;
     }
 
-    public @NotNull Builder setSize(int size) {
+    public @NotNull Builder setSize(@NotNull Long size) {
       this.size = size;
       return this;
     }
 
     public @NotNull Builder setMime(@NotNull String mime) {
       this.mime = mime;
+      return this;
+    }
+
+    public @NotNull Builder setBase64Content(byte @NotNull [] base64Content) {
+      this.base64Content = base64Content;
       return this;
     }
 
