@@ -12,7 +12,7 @@ import org.dcistudent.sakilarest.models.responses.domain.FilmPageResponse;
 import org.dcistudent.sakilarest.models.responses.domain.FilmResponse;
 import org.dcistudent.sakilarest.models.responses.shared.EmptyResponse;
 import org.dcistudent.sakilarest.models.responses.shared.Response;
-import org.dcistudent.sakilarest.services.FilmService;
+import org.dcistudent.sakilarest.services.domain.FilmService;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;

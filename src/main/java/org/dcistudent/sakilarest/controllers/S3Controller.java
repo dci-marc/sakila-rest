@@ -10,7 +10,7 @@ import org.dcistudent.sakilarest.models.requests.domain.s3.S3FileRequest;
 import org.dcistudent.sakilarest.models.responses.domain.DirectoryResponse;
 import org.dcistudent.sakilarest.models.responses.shared.EmptyResponse;
 import org.dcistudent.sakilarest.models.responses.shared.Response;
-import org.dcistudent.sakilarest.services.S3Service;
+import org.dcistudent.sakilarest.services.shared.S3Service;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;

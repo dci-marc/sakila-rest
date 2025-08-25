@@ -12,7 +12,7 @@ import org.dcistudent.sakilarest.models.responses.domain.CustomerPageResponse;
 import org.dcistudent.sakilarest.models.responses.domain.CustomerResponse;
 import org.dcistudent.sakilarest.models.responses.shared.EmptyResponse;
 import org.dcistudent.sakilarest.models.responses.shared.Response;
-import org.dcistudent.sakilarest.services.CustomerService;
+import org.dcistudent.sakilarest.services.domain.CustomerService;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;

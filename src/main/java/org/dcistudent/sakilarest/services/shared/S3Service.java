@@ -1,4 +1,4 @@
-package org.dcistudent.sakilarest.services;
+package org.dcistudent.sakilarest.services.shared;
 
 import org.dcistudent.sakilarest.models.requests.domain.s3.S3FileRequest;
 import org.dcistudent.sakilarest.models.responses.domain.s3.Directory;

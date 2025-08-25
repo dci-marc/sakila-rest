@@ -1,4 +1,4 @@
-package org.dcistudent.sakilarest.services.auth;
+package org.dcistudent.sakilarest.services.domain.auth;
 
 import org.dcistudent.sakilarest.entities.auth.User;
 import org.dcistudent.sakilarest.models.requests.domain.UserRequest;

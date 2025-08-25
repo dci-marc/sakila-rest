@@ -1,4 +1,4 @@
-package org.dcistudent.sakilarest.services;
+package org.dcistudent.sakilarest.services.domain.auth;
 
 import org.dcistudent.sakilarest.configs.Auth0Config;
 import org.dcistudent.sakilarest.exceptions.Auth0Exception;

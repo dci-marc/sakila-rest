@@ -1,4 +1,4 @@
-package org.dcistudent.sakilarest.services;
+package org.dcistudent.sakilarest.services.domain;
 
 import org.dcistudent.sakilarest.factories.CustomerResponseFactory;
 import org.dcistudent.sakilarest.managers.CustomerManager;
