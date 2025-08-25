@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.time.Instant;
+import java.util.Base64;
 import java.util.List;
 
 @Service
@@ -46,11 +47,13 @@ public final class S3Service {
   }
 
   public @NotNull SuccessResponse put(@NotNull S3FileRequest request) {
+    byte[] content = Base64.getDecoder().decode(request.getBase64Content());
+
     return new SuccessResponse.Builder().setSuccess(
         this.service.upload(
             String.format("%s/%s", request.getFilePath(), request.getFileName()),
-            new ByteArrayInputStream(request.getBase64Content()),
-            request.getBase64Content().length
+            new ByteArrayInputStream(content),
+            content.length
         )
     ).build();
   }
