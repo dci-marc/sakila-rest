@@ -6,7 +6,6 @@
     <module name="sakila-rest" />
     <selectedOptions>
       <option name="spring.boot.profiles" visible="false" />
-      <option name="environmentVariables" />
     </selectedOptions>
     <option name="SPRING_BOOT_MAIN_CLASS" value="org.dcistudent.sakilarest.SakilaRestApplication" />
     <method v="2">
