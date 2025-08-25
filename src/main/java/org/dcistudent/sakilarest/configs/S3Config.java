@@ -1,5 +1,6 @@
 package org.dcistudent.sakilarest.configs;
 
+import org.dcistudent.sakilarest.interfaces.models.responses.shared.Buildable;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
@@ -57,8 +58,7 @@ public final class S3Config {
     this.url = URI.create(url);
   }
 
-  public static class Builder {
-
+  public static final class Builder implements Buildable {
     private @NotNull String bucket = "";
     private @NotNull String region = "";
     private @NotNull String accessKey = "";

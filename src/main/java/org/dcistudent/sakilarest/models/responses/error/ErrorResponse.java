@@ -1,5 +1,6 @@
 package org.dcistudent.sakilarest.models.responses.error;
 
+import org.dcistudent.sakilarest.interfaces.models.responses.shared.Buildable;
 import org.dcistudent.sakilarest.interfaces.models.responses.shared.ResponsePayload;
 import org.jetbrains.annotations.NotNull;
 
@@ -15,7 +16,7 @@ public final class ErrorResponse implements ResponsePayload {
     return this.message;
   }
 
-  public static class Builder {
+  public static final class Builder implements Buildable<ErrorResponse> {
     private @NotNull String message = "";
 
     public @NotNull Builder setMessage(@NotNull String message) {
