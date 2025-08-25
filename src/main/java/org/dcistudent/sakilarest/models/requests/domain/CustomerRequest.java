@@ -1,8 +1,9 @@
-package org.dcistudent.sakilarest.models.requests;
+package org.dcistudent.sakilarest.models.requests.domain;
 
+import org.dcistudent.sakilarest.models.requests.shared.LimitOffsetRequest;
 import org.jetbrains.annotations.NotNull;
 
-public class CustomerRequest extends LimitOffsetRequest {
+public final class CustomerRequest extends LimitOffsetRequest {
 
   private @NotNull String title = "";
   private @NotNull String description = "";

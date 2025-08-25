@@ -1,4 +1,4 @@
-package org.dcistudent.sakilarest.models.requests.s3;
+package org.dcistudent.sakilarest.models.requests.domain.s3;
 
 import org.jetbrains.annotations.NotNull;
 

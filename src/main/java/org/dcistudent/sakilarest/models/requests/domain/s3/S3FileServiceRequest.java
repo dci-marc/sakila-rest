@@ -1,4 +1,4 @@
-package org.dcistudent.sakilarest.models.requests.s3;
+package org.dcistudent.sakilarest.models.requests.domain.s3;
 
 import org.dcistudent.sakilarest.interfaces.models.responses.shared.Buildable;
 import org.jetbrains.annotations.NotNull;

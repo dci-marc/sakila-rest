@@ -7,7 +7,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import org.dcistudent.sakilarest.factories.ResponseFactory;
 import org.dcistudent.sakilarest.interfaces.models.responses.shared.ResponsePayload;
-import org.dcistudent.sakilarest.models.requests.FilmRequest;
+import org.dcistudent.sakilarest.models.requests.domain.FilmRequest;
 import org.dcistudent.sakilarest.models.responses.domain.FilmPageResponse;
 import org.dcistudent.sakilarest.models.responses.domain.FilmResponse;
 import org.dcistudent.sakilarest.models.responses.shared.EmptyResponse;

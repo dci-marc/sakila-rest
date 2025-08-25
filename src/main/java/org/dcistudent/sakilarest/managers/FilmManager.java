@@ -2,7 +2,7 @@ package org.dcistudent.sakilarest.managers;
 
 import org.dcistudent.sakilarest.entities.Film;
 import org.dcistudent.sakilarest.managers.specifications.FilmSpecifications;
-import org.dcistudent.sakilarest.models.requests.FilmRequest;
+import org.dcistudent.sakilarest.models.requests.domain.FilmRequest;
 import org.dcistudent.sakilarest.repositories.FilmRepository;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.data.domain.Page;

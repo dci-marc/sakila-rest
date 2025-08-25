@@ -6,7 +6,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.dcistudent.sakilarest.factories.ResponseFactory;
 import org.dcistudent.sakilarest.interfaces.models.responses.shared.ResponsePayload;
-import org.dcistudent.sakilarest.models.requests.s3.S3FileRequest;
+import org.dcistudent.sakilarest.models.requests.domain.s3.S3FileRequest;
 import org.dcistudent.sakilarest.models.responses.domain.DirectoryResponse;
 import org.dcistudent.sakilarest.models.responses.shared.EmptyResponse;
 import org.dcistudent.sakilarest.models.responses.shared.Response;

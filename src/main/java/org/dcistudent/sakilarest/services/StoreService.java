@@ -2,7 +2,7 @@ package org.dcistudent.sakilarest.services;
 
 import org.dcistudent.sakilarest.factories.StoreResponseFactory;
 import org.dcistudent.sakilarest.managers.StoreManager;
-import org.dcistudent.sakilarest.models.requests.LimitOffsetRequest;
+import org.dcistudent.sakilarest.models.requests.shared.LimitOffsetRequest;
 import org.dcistudent.sakilarest.models.responses.domain.StoreResponse;
 import org.dcistudent.sakilarest.models.responses.domain.StoresResponse;
 import org.jetbrains.annotations.NotNull;

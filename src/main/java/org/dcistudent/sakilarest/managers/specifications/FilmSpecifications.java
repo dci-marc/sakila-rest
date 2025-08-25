@@ -5,7 +5,7 @@ import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 import org.dcistudent.sakilarest.entities.Film;
-import org.dcistudent.sakilarest.models.requests.FilmRequest;
+import org.dcistudent.sakilarest.models.requests.domain.FilmRequest;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.data.jpa.domain.Specification;
 

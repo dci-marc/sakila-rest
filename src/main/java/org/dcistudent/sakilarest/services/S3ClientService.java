@@ -1,7 +1,7 @@
 package org.dcistudent.sakilarest.services;
 
 import org.dcistudent.sakilarest.configs.S3Config;
-import org.dcistudent.sakilarest.models.requests.s3.S3FileServiceRequest;
+import org.dcistudent.sakilarest.models.requests.domain.s3.S3FileServiceRequest;
 import org.dcistudent.sakilarest.models.responses.domain.s3.S3FileServiceResponse;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
