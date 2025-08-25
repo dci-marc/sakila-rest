@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 @Service
 public final class DiscordService {
@@ -22,7 +23,7 @@ public final class DiscordService {
   }
 
   public void ok(@NotNull String message, @NotNull String description) {
-    this.template.postForEntity(
+    CompletableFuture.runAsync(() -> this.template.postForEntity(
         this.config.getWebhookUrl(),
         new Discord.Builder()
             .setUsername(this.config.getName())
@@ -35,11 +36,11 @@ public final class DiscordService {
                 )
             )
             .build(),
-        String.class);
+        String.class));
   }
 
   public void ok(@NotNull String message, @NotNull String description, @NotNull List<Field> fields) {
-    this.template.postForEntity(
+    CompletableFuture.runAsync(() -> this.template.postForEntity(
         this.config.getWebhookUrl(),
         new Discord.Builder()
             .setUsername(this.config.getName())
@@ -53,11 +54,11 @@ public final class DiscordService {
                 )
             )
             .build(),
-        String.class);
+        String.class));
   }
 
   public void error(@NotNull String message, @NotNull String description) {
-    this.template.postForEntity(
+    CompletableFuture.runAsync(() -> this.template.postForEntity(
         this.config.getWebhookUrl(),
         new Discord.Builder()
             .setUsername(this.config.getName())
@@ -77,11 +78,11 @@ public final class DiscordService {
                 )
             )
             .build(),
-        String.class);
+        String.class));
   }
 
   public void error(@NotNull String message, @NotNull String description, @NotNull List<Field> fields) {
-    this.template.postForEntity(
+    CompletableFuture.runAsync(() -> this.template.postForEntity(
         this.config.getWebhookUrl(),
         new Discord.Builder()
             .setUsername(this.config.getName())
@@ -95,6 +96,6 @@ public final class DiscordService {
                 )
             )
             .build(),
-        String.class);
+        String.class));
   }
 }
