@@ -51,8 +51,8 @@ public final class Embed {
       return this;
     }
 
-    public @NotNull Builder setColor(@NotNull Integer color) {
-      this.color = color;
+    public @NotNull Builder setColor(@NotNull String color) {
+      this.color = Integer.parseInt(color, 16);
       return this;
     }
 
