@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.UUID;
@@ -14,6 +15,7 @@ import java.util.UUID;
 @Repository
 public interface LogRepository extends JpaRepository<Log, UUID> {
 
+  @Transactional(readOnly = true)
   default @NotNull List<Log> findWithLimit(@NotNull Integer limit) {
     if (limit < 1 || limit > 100) {
       throw new IllegalArgumentException("Limit must be between 1 and 100");
