@@ -10,17 +10,17 @@ public final class PathNormalizer {
   private PathNormalizer() {
   }
 
-  public static @NotNull String getFilename(@NotNull String path) {
-    Path normalizedPath = Paths.get(path).normalize();
+  public static @NotNull String getFilename(@NotNull String userPath) {
+    Path path = Paths.get(userPath);
 
-    if (normalizedPath.isAbsolute() || normalizedPath.toString().contains("..")) {
+    if (path.isAbsolute() || path.toString().contains("..")) {
       throw new SecurityException("Illegal path specified.");
     }
 
-    if (normalizedPath.toFile().isDirectory()) {
+    if (path.toFile().isDirectory()) {
       throw new SecurityException("Path is a directory.");
     }
 
-    return normalizedPath.toFile().getName();
+    return path.normalize().toFile().getName();
   }
 }
