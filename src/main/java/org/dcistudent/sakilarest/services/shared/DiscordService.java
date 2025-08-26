@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 @Service
-@ConditionalOnProperty(name = "discord.webhook-url", havingValue = "", matchIfMissing = false)
+@ConditionalOnProperty(name = "discord.webhook-url", matchIfMissing = false)
 public final class DiscordService implements DiscordServiceInterface {
 
   private final @NotNull DiscordConfig config;
