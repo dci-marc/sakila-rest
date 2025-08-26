@@ -63,7 +63,7 @@ public final class FilmController {
     try {
       this.discordService.ok(
           "get:/films",
-          "Fetched films with request: " + request.getTitle()
+          String.format("Fetched films with request: %s", request)
       );
       return ResponseEntity.ok(
           ResponseFactory.create(
@@ -109,7 +109,7 @@ public final class FilmController {
     try {
       this.discordService.ok(
           "get:/films/{id}",
-          "Fetched film with ID: " + id
+          String.format("Fetched film with id: %s", id)
       );
       return ResponseEntity.ok(
           ResponseFactory.create(
