@@ -1,6 +1,7 @@
 package org.dcistudent.sakilarest.managers.domain;
 
 import org.dcistudent.sakilarest.entities.domain.Customer;
+import org.dcistudent.sakilarest.exceptions.shared.NotFoundException;
 import org.dcistudent.sakilarest.repositories.domain.CustomerRepository;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.data.domain.Page;
@@ -8,7 +9,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.NoSuchElementException;
 import java.util.UUID;
 
 @Service
@@ -28,7 +28,7 @@ public final class CustomerManager {
     Pageable pageable = PageRequest.of(offset, limit);
     return this.customerRepository
         .findCustomersByStoreId(storeId, pageable)
-        .orElseThrow(() -> new NoSuchElementException("No customers found for store with id " + storeId));
+        .orElseThrow(() -> new NotFoundException("No customers found for store with id " + storeId));
   }
 
   public @NotNull Customer findCustomerInStore(
@@ -37,6 +37,6 @@ public final class CustomerManager {
   ) {
     return this.customerRepository
         .findCustomerByStoreId(storeId, customerId)
-        .orElseThrow(() -> new NoSuchElementException("No customer found with id " + customerId + " for store " + storeId));
+        .orElseThrow(() -> new NotFoundException("No customer found with id " + customerId + " for store " + storeId));
   }
 }
