@@ -37,7 +37,7 @@ public final class S3FileServiceResponse {
     }
 
     public @NotNull Builder setContent(byte @NotNull [] content) {
-      this.content = Base64.getEncoder().encodeToString(content);
+      this.content = Base64.getEncoder().withoutPadding().encodeToString(content);
       return this;
     }
 
