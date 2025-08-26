@@ -5,7 +5,6 @@ import org.jetbrains.annotations.NotNull;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Optional;
 
 /**
  * Utility class for extracting a safe filename from a user-supplied path string.
@@ -31,10 +30,17 @@ public final class PathNormalizer {
     try {
       // Step 1: Validate raw user input string before normalization
       // -----------------------------------------------------------
-      // Reject absolute paths straight away (e.g., "/etc/passwd" or "C:\...")
-      if (userPath.startsWith("/") || userPath.startsWith("\\") ||
-          userPath.matches("^[a-zA-Z]:[\\\\/].*")) {
+      // Reject Unix-style absolute paths ("/etc/passwd").
+      if (userPath.startsWith("/") || userPath.startsWith("\\")) {
         throw new SecurityException("Absolute paths are not allowed.");
+      }
+
+      // Reject Windows absolute paths like "C:\foo" or "C:/foo"
+      // Regex explanation:
+      //   ^[a-zA-Z]:     → drive letter with colon
+      //   [\\\\/]        → must be followed by either "\" or "/"
+      if (userPath.matches("^[a-zA-Z]:[\\\\/].*")) {
+        throw new SecurityException("Absolute Windows paths are not allowed.");
       }
 
       // Explicitly reject any unnormalized ".." segment.
