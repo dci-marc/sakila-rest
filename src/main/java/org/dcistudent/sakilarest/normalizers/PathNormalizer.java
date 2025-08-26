@@ -33,7 +33,7 @@ public final class PathNormalizer {
       // -----------------------------------------------------------
       // Reject absolute paths straight away (e.g., "/etc/passwd" or "C:\...")
       if (userPath.startsWith("/") || userPath.startsWith("\\") ||
-          userPath.matches("^[a-zA-Z]:.*")) {
+          userPath.matches("^[a-zA-Z]:[\\\\/].*")) {
         throw new SecurityException("Absolute paths are not allowed.");
       }
 
