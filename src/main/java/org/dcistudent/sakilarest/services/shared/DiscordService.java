@@ -1,5 +1,6 @@
 package org.dcistudent.sakilarest.services.shared;
 
+import com.bugsnag.Bugsnag;
 import org.dcistudent.sakilarest.configs.DiscordConfig;
 import org.dcistudent.sakilarest.interfaces.services.shared.DiscordServiceInterface;
 import org.dcistudent.sakilarest.models.requests.shared.discord.Discord;
@@ -19,10 +20,12 @@ public final class DiscordService implements DiscordServiceInterface {
 
   private final @NotNull DiscordConfig config;
   private final @NotNull RestTemplate template;
+  private final @NotNull Bugsnag bugsnag;
 
-  public DiscordService(@NotNull DiscordConfig config, @NotNull RestTemplate template) {
+  public DiscordService(@NotNull DiscordConfig config, @NotNull RestTemplate template, @NotNull Bugsnag bugsnag) {
     this.config = config;
     this.template = template;
+    this.bugsnag = bugsnag;
   }
 
   public void ok(@NotNull String message, @NotNull String description) {
@@ -60,8 +63,10 @@ public final class DiscordService implements DiscordServiceInterface {
         .build()
         .setFieldsColor(color);
 
-    CompletableFuture.runAsync(
-        () -> this.template.postForEntity(this.config.getWebhookUrl(), discord, String.class)
-    );
+    CompletableFuture.runAsync(() -> this.template.postForEntity(this.config.getWebhookUrl(), discord, String.class))
+        .exceptionally(throwable -> {
+          this.bugsnag.notify(throwable);
+          return null;
+        });
   }
 }
