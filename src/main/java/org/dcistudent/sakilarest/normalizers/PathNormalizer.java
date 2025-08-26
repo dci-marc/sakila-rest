@@ -5,6 +5,7 @@ import org.jetbrains.annotations.NotNull;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Optional;
 
 /**
  * Utility class for extracting a safe filename from a user-supplied path string.
