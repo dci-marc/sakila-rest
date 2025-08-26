@@ -1,6 +1,5 @@
 package org.dcistudent.sakilarest.normalizers;
 
-import org.dcistudent.sakilarest.exceptions.shared.ForbiddenException;
 import org.jetbrains.annotations.NotNull;
 
 import java.nio.file.Path;
@@ -14,10 +13,14 @@ public final class PathNormalizer {
   public static @NotNull String getFilename(@NotNull String path) {
     Path normalizedPath = Paths.get(path).normalize();
 
-    if (normalizedPath.startsWith("..") || normalizedPath.isAbsolute() || normalizedPath.toString().contains("../")) {
-      throw new ForbiddenException("Illegal path specified.");
+    if (normalizedPath.isAbsolute() || normalizedPath.toString().contains("..")) {
+      throw new SecurityException("Illegal path specified.");
     }
 
-    return normalizedPath.getFileName().toString();
+    if (normalizedPath.toFile().isDirectory()) {
+      throw new SecurityException("Path is a directory.");
+    }
+
+    return normalizedPath.toFile().getName();
   }
 }
