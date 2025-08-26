@@ -10,12 +10,10 @@ public final class Discord {
 
   private final @NotNull String username;
   private final @NotNull List<Embed> embeds;
-  private @NotNull Integer fieldsColor;
 
   public Discord(@NotNull Builder builder) {
     this.username = builder.username;
     this.embeds = builder.embeds;
-    this.fieldsColor = 0;
   }
 
   public @NotNull String getUsername() {
@@ -24,15 +22,6 @@ public final class Discord {
 
   public @NotNull List<Embed> getEmbeds() {
     return this.embeds;
-  }
-
-  public @NotNull Integer getFieldsColor() {
-    return this.fieldsColor;
-  }
-
-  public @NotNull Discord setFieldsColor(@NotNull Integer color) {
-    this.fieldsColor = color;
-    return this;
   }
 
   public static final class Builder implements Buildable<Discord> {
