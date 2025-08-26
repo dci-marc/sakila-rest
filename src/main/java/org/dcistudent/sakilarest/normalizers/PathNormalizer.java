@@ -11,7 +11,7 @@ import java.util.Optional;
  * Utility class for extracting a safe filename from a user-supplied path string.
  * <p>
  * This implementation hardens against directory traversal attacks
- * (e.g., "../etc/passwd") by performing strict syntactic checks.
+ * (e.g., "../etc/passwd") by validating the raw input *before* normalization.
  */
 public final class PathNormalizer {
 
@@ -20,7 +20,7 @@ public final class PathNormalizer {
   }
 
   /**
-   * Extracts a normalized and safe filename from user input.
+   * Extracts a sanitized filename from user input.
    *
    * @param userPath raw user-supplied path string (potentially malicious)
    * @return sanitized filename string
@@ -29,40 +29,41 @@ public final class PathNormalizer {
    */
   public static @NotNull String getFilename(@NotNull String userPath) {
     try {
-      // Parse into a Path object and normalize it.
-      // Normalization resolves "." and ".." segments syntactically.
-      // Example: "subdir/../file.txt" → "file.txt"
-      Path path = Paths.get(userPath).normalize();
-
-      // Reject absolute paths (e.g., "/etc/passwd" or "C:\windows\system32").
-      // We only want relative filenames under application control.
-      if (path.isAbsolute()) {
+      // Step 1: Validate raw user input string before normalization
+      // -----------------------------------------------------------
+      // Reject absolute paths straight away (e.g., "/etc/passwd" or "C:\...")
+      if (userPath.startsWith("/") || userPath.startsWith("\\") ||
+          userPath.matches("^[a-zA-Z]:.*")) {
         throw new SecurityException("Absolute paths are not allowed.");
       }
 
-      // After normalization, no ".." should remain.
-      // If it does, the user attempted directory traversal.
-      if (path.toString().contains("..")) {
+      // Explicitly reject any unnormalized ".." segment.
+      // Example: "../../../etc/passwd"
+      if (userPath.contains("..")) {
         throw new SecurityException("Parent directory traversal is not allowed.");
       }
 
-      // Extract only the last component (the filename).
-      // Example: "foo/bar.txt" → "bar.txt"
+      // Step 2: Convert to Path and normalize
+      // -----------------------------------------------------------
+      // Only after we know the input contains no traversal attempts,
+      // we normalize to clean up redundant "./" segments.
+      Path path = Paths.get(userPath).normalize();
+
+      // Step 3: Extract the filename safely
+      // -----------------------------------------------------------
       Path filename = Optional
           .ofNullable(path.getFileName())
           .orElseThrow(() -> new SecurityException("No filename specified."));
 
-      // Ensure the filename is not empty (e.g., user input "foo/")
       if (filename.toString().isEmpty()) {
         throw new SecurityException("Filename is empty.");
       }
 
-      // Return the sanitized filename as plain string.
       return filename.toString();
 
     } catch (InvalidPathException e) {
       // Happens if the user input contains invalid characters
-      // (e.g., NUL bytes, illegal UTF-8 sequences).
+      // (e.g., NUL bytes, malformed UTF-8).
       throw new SecurityException("Invalid path.", e);
     }
   }
