@@ -8,7 +8,7 @@ public final class S3FileRequest {
   private final @NotNull String filePath;
   private final @NotNull String fileName;
   private final @NotNull S3FileContentTypeRequest contentType;
-  private final byte @NotNull [] base64Content;
+  private final @NotNull String base64Content;
 
   public S3FileRequest(@NotNull Builder builder) {
     this.filePath = builder.filePath;
@@ -29,7 +29,7 @@ public final class S3FileRequest {
     return this.contentType;
   }
 
-  public byte @NotNull [] getBase64Content() {
+  public @NotNull String getBase64Content() {
     return this.base64Content;
   }
 
@@ -37,7 +37,7 @@ public final class S3FileRequest {
     private @NotNull String filePath = "";
     private @NotNull String fileName = "";
     private @NotNull String contentType = "";
-    private byte @NotNull [] base64Content = new byte[0];
+    private @NotNull String base64Content = "";
 
     public @NotNull Builder setFilePath(@NotNull String filePath) {
       this.filePath = filePath;
@@ -54,7 +54,7 @@ public final class S3FileRequest {
       return this;
     }
 
-    public @NotNull Builder setBase64Content(byte @NotNull [] base64Content) {
+    public @NotNull Builder setBase64Content(@NotNull String base64Content) {
       this.base64Content = base64Content;
       return this;
     }
