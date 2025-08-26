@@ -45,7 +45,7 @@ public final class Discord {
     }
 
     public @NotNull Builder setEmbeds(@NotNull List<Embed> embeds) {
-      embeds.forEach(this::addEmbed);
+      this.embeds = embeds;
       return this;
     }
 
