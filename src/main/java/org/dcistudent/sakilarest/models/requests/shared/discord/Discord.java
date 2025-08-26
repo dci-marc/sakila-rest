@@ -49,7 +49,7 @@ public final class Discord {
       return this;
     }
 
-    private @NotNull Builder addEmbed(@NotNull Embed embed) {
+    public @NotNull Builder addEmbed(@NotNull Embed embed) {
       this.embeds.add(embed);
       return this;
     }
