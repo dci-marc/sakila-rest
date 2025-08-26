@@ -7,13 +7,13 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import org.dcistudent.sakilarest.factories.shared.ResponseFactory;
 import org.dcistudent.sakilarest.interfaces.models.responses.shared.ResponsePayload;
+import org.dcistudent.sakilarest.interfaces.services.shared.DiscordServiceInterface;
 import org.dcistudent.sakilarest.models.requests.domain.FilmRequest;
 import org.dcistudent.sakilarest.models.responses.domain.FilmPageResponse;
 import org.dcistudent.sakilarest.models.responses.domain.FilmResponse;
 import org.dcistudent.sakilarest.models.responses.shared.EmptyResponse;
 import org.dcistudent.sakilarest.models.responses.shared.Response;
 import org.dcistudent.sakilarest.services.domain.FilmService;
-import org.dcistudent.sakilarest.services.shared.DiscordService;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -28,10 +28,10 @@ import java.util.UUID;
 @RequestMapping("/films") // plural nouns
 public final class FilmController {
 
-  private final @NotNull DiscordService discordService;
+  private final @NotNull DiscordServiceInterface discordService;
   private final @NotNull FilmService filmService;
 
-  public FilmController(@NotNull DiscordService discordService, @NotNull FilmService filmService) {
+  public FilmController(@NotNull DiscordServiceInterface discordService, @NotNull FilmService filmService) {
     this.discordService = discordService;
     this.filmService = filmService;
   }
