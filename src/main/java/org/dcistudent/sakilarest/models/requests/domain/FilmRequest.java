@@ -41,4 +41,15 @@ public final class FilmRequest extends LimitOffsetRequest {
   public void setReleaseYear(@NotNull Integer releaseYear) {
     this.releaseYear = releaseYear;
   }
+
+  @Override
+  public @NotNull String toString() {
+    return "FilmRequest{" +
+        "title='" + this.getTitle() + '\'' +
+        ", description='" + this.getDescription() + '\'' +
+        ", releaseYear=" + this.getReleaseYear() +
+        ", limit=" + this.getLimit() +
+        ", offset=" + this.getOffset() +
+        '}';
+  }
 }
