@@ -39,6 +39,10 @@ public final class S3FileServiceRequest {
   }
 
   public @NotNull PutObjectRequest put() {
+    if (this.inputStream.equals(InputStream.nullInputStream())) {
+      throw new IllegalStateException("InputStream must be set for PUT requests");
+    }
+
     Map<String, String> metadata = new HashMap<>();
     metadata.put(S3FileServiceRequest.METADATA_FILENAME_KEY, Paths.get(this.path).getFileName().toString());
     metadata.put(S3FileServiceRequest.METADATA_CONTENT_TYPE_KEY, this.contentType);
