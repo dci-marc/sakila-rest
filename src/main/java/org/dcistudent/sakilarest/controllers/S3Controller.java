@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import org.dcistudent.sakilarest.exceptions.shared.NotFoundException;
 import org.dcistudent.sakilarest.factories.shared.ResponseFactory;
 import org.dcistudent.sakilarest.interfaces.models.responses.shared.ResponsePayload;
 import org.dcistudent.sakilarest.models.requests.domain.s3.S3FileRequest;
@@ -20,7 +21,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.Base64;
-import java.util.NoSuchElementException;
 import java.util.Objects;
 
 @RestController
@@ -62,7 +62,7 @@ public final class S3Controller {
               "s3:files:fetch:success",
               this.service.getList(path)
           ));
-    } catch (NoSuchElementException e) {
+    } catch (NotFoundException e) {
       return ResponseEntity
           .badRequest()
           .contentType(MediaType.APPLICATION_PROBLEM_JSON)
@@ -106,7 +106,7 @@ public final class S3Controller {
               file
           )
       );
-    } catch (NoSuchElementException e) {
+    } catch (NotFoundException e) {
       return ResponseEntity
           .badRequest()
           .contentType(MediaType.APPLICATION_PROBLEM_JSON)
@@ -149,7 +149,7 @@ public final class S3Controller {
               "s3:files:delete:success",
               this.service.delete(path)
           ));
-    } catch (NoSuchElementException e) {
+    } catch (NotFoundException e) {
       return ResponseEntity
           .badRequest()
           .contentType(MediaType.APPLICATION_PROBLEM_JSON)

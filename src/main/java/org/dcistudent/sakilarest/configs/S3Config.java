@@ -62,7 +62,7 @@ public final class S3Config {
     this.url = URI.create(url);
   }
 
-  public static final class Builder implements Buildable {
+  public static final class Builder implements Buildable<S3Config> {
     private @NotNull String bucket = "";
     private @NotNull String region = "";
     private @NotNull String accessKey = "";
