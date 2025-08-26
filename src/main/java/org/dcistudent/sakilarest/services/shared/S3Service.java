@@ -1,6 +1,7 @@
 package org.dcistudent.sakilarest.services.shared;
 
 import org.dcistudent.sakilarest.models.requests.domain.s3.S3FileRequest;
+import org.dcistudent.sakilarest.models.requests.domain.s3.S3FileServiceRequest;
 import org.dcistudent.sakilarest.models.responses.domain.s3.Directory;
 import org.dcistudent.sakilarest.models.responses.domain.s3.S3FileServiceResponse;
 import org.dcistudent.sakilarest.models.responses.domain.s3.directories.File;
@@ -67,13 +68,13 @@ public final class S3Service {
     Map<String, String> metadata = response.getResponse().metadata();
     String filename = Optional
         .ofNullable(
-            metadata.get("filename")
+            metadata.get(S3FileServiceRequest.METADATA_FILENAME_KEY)
         ).orElse(Paths.get(path).getFileName().toString());
 
     return new File.Builder()
         .setName(filename)
         .setSize(response.getResponse().contentLength())
-        .setMime(metadata.get("content-type"))
+        .setMime(metadata.get(S3FileServiceRequest.METADATA_CONTENT_TYPE_KEY))
         .setBase64Content(response.getContent())
         .setReadable(true)
         .setWritable(true)

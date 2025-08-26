@@ -14,6 +14,9 @@ import java.util.Map;
 
 public final class S3FileServiceRequest {
 
+  public static final @NotNull String METADATA_FILENAME_KEY = "filename";
+  public static final @NotNull String METADATA_CONTENT_TYPE_KEY = "content-type";
+
   private final @NotNull String bucket;
   private final @NotNull String path;
   private final @NotNull InputStream inputStream;
@@ -37,8 +40,8 @@ public final class S3FileServiceRequest {
 
   public @NotNull PutObjectRequest put() {
     Map<String, String> metadata = new HashMap<>();
-    metadata.put("filename", Paths.get(this.path).getFileName().toString());
-    metadata.put("content-type", this.contentType);
+    metadata.put(S3FileServiceRequest.METADATA_FILENAME_KEY, Paths.get(this.path).getFileName().toString());
+    metadata.put(S3FileServiceRequest.METADATA_CONTENT_TYPE_KEY, this.contentType);
 
     return PutObjectRequest.builder()
         .bucket(this.bucket)
