@@ -5,6 +5,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 import org.dcistudent.sakilarest.entities.domain.Store;
+import org.dcistudent.sakilarest.exceptions.shared.NotFoundException;
 import org.dcistudent.sakilarest.managers.shared.FetchHints;
 import org.dcistudent.sakilarest.repositories.domain.StoreRepository;
 import org.jetbrains.annotations.NotNull;
@@ -13,7 +14,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -39,7 +39,7 @@ public final class StoreManager {
   public @NotNull Store findStoreByUuid(@NotNull UUID id) {
     return this.repository
         .findByUuid(id)
-        .orElseThrow(() -> new NoSuchElementException("Store with uuid " + id + " not found"));
+        .orElseThrow(() -> new NotFoundException("Store with uuid " + id + " not found"));
   }
 
   public @NotNull Store findStoreByUuidEager(@NotNull UUID id) {
@@ -51,6 +51,6 @@ public final class StoreManager {
         .setHint(FetchHints.GRAPH_LOAD, entityGraph);
 
     return Optional.ofNullable(query.getSingleResult())
-        .orElseThrow(() -> new NoSuchElementException("Store with id " + id + " not found"));
+        .orElseThrow(() -> new NotFoundException("Store with id " + id + " not found"));
   }
 }

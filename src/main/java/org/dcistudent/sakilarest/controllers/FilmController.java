@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
+import org.dcistudent.sakilarest.exceptions.shared.NotFoundException;
 import org.dcistudent.sakilarest.factories.shared.ResponseFactory;
 import org.dcistudent.sakilarest.interfaces.models.responses.shared.ResponsePayload;
 import org.dcistudent.sakilarest.interfaces.services.shared.DiscordServiceInterface;
@@ -24,7 +25,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.UUID;
 
 @RestController
@@ -87,7 +87,7 @@ public final class FilmController {
               this.filmService.routeSearch(request)
           )
       );
-    } catch (NoSuchElementException e) {
+    } catch (NotFoundException e) {
       return ResponseEntity
           .badRequest()
           .contentType(MediaType.APPLICATION_PROBLEM_JSON)
@@ -144,7 +144,7 @@ public final class FilmController {
               "film:fetch:success",
               this.filmService.getFilm(id)
           ));
-    } catch (NoSuchElementException e) {
+    } catch (NotFoundException e) {
       return ResponseEntity
           .badRequest()
           .contentType(MediaType.APPLICATION_PROBLEM_JSON)

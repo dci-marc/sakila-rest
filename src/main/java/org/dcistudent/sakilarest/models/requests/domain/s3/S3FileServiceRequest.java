@@ -1,6 +1,7 @@
 package org.dcistudent.sakilarest.models.requests.domain.s3;
 
 import org.dcistudent.sakilarest.interfaces.models.responses.shared.Buildable;
+import org.dcistudent.sakilarest.normalizers.PathNormalizer;
 import org.jetbrains.annotations.NotNull;
 import software.amazon.awssdk.core.sync.RequestBody;
 import software.amazon.awssdk.services.s3.model.DeleteObjectRequest;
@@ -8,7 +9,6 @@ import software.amazon.awssdk.services.s3.model.GetObjectRequest;
 import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 
 import java.io.InputStream;
-import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -44,7 +44,7 @@ public final class S3FileServiceRequest {
     }
 
     Map<String, String> metadata = new HashMap<>();
-    metadata.put(S3FileServiceRequest.METADATA_FILENAME_KEY, Paths.get(this.path).getFileName().toString());
+    metadata.put(S3FileServiceRequest.METADATA_FILENAME_KEY, PathNormalizer.getFilename(this.path));
     metadata.put(S3FileServiceRequest.METADATA_CONTENT_TYPE_KEY, this.contentType);
 
     return PutObjectRequest.builder()

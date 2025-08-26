@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
+import org.dcistudent.sakilarest.exceptions.shared.NotFoundException;
 import org.dcistudent.sakilarest.factories.shared.ResponseFactory;
 import org.dcistudent.sakilarest.interfaces.models.responses.shared.ResponsePayload;
 import org.dcistudent.sakilarest.models.requests.shared.LimitOffsetRequest;
@@ -21,7 +22,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.NoSuchElementException;
 import java.util.UUID;
 
 @RestController
@@ -66,7 +66,7 @@ public final class StoreController {
               "stores:fetch:success",
               this.storeService.getAll(request)
           ));
-    } catch (NoSuchElementException e) {
+    } catch (NotFoundException e) {
       return ResponseEntity
           .badRequest()
           .contentType(MediaType.APPLICATION_PROBLEM_JSON)
@@ -107,7 +107,7 @@ public final class StoreController {
               "store:fetch:success",
               this.storeService.getByUuid(id)
           ));
-    } catch (NoSuchElementException e) {
+    } catch (NotFoundException e) {
       return ResponseEntity
           .badRequest()
           .contentType(MediaType.APPLICATION_PROBLEM_JSON)
