@@ -192,7 +192,7 @@ public final class S3Controller {
           .setFilePath(filePath)
           .setFileName(fileName)
           .setContentType(Objects.requireNonNull(file.getContentType()))
-          .setBase64Content(Base64.getEncoder().encode(file.getBytes()))
+          .setBase64Content(Base64.getEncoder().encodeToString(file.getBytes()))
           .build();
 
       return ResponseEntity.ok(

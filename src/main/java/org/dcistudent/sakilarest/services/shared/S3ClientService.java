@@ -33,12 +33,18 @@ public final class S3ClientService {
         .build();
   }
 
-  public boolean upload(@NotNull String path, @NotNull InputStream inputStream, long contentLength) {
+  public boolean upload(
+      @NotNull String path,
+      @NotNull InputStream inputStream,
+      @NotNull String contentType,
+      long contentLength
+  ) {
     S3FileServiceRequest request = new S3FileServiceRequest.Builder()
         .setBucket(this.config.getBucket())
         .setPath(path)
         .setInputStream(inputStream)
         .setContentLength(contentLength)
+        .setContentType(contentType)
         .build();
 
     return this.client
