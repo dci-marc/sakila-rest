@@ -5,7 +5,6 @@ import org.dcistudent.sakilarest.configs.DiscordConfig;
 import org.dcistudent.sakilarest.interfaces.services.shared.DiscordServiceInterface;
 import org.dcistudent.sakilarest.models.requests.shared.discord.Discord;
 import org.dcistudent.sakilarest.models.requests.shared.discord.Embed;
-import org.dcistudent.sakilarest.models.requests.shared.discord.Field;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
@@ -28,40 +27,28 @@ public final class DiscordService implements DiscordServiceInterface {
     this.bugsnag = bugsnag;
   }
 
-  public void ok(@NotNull String message, @NotNull String description) {
-    this.ok(message, description, List.of());
+  public void ok(@NotNull List<Embed> embeds) {
+    this.send(embeds, "33EE33");
   }
 
-  public void ok(@NotNull String message, @NotNull String description, @NotNull List<Field> fields) {
-    this.send(message, description, fields, 0x33EE33);
+  public void error(@NotNull List<Embed> embeds) {
+    this.send(embeds, "EE3333");
   }
 
-  public void error(@NotNull String message, @NotNull String description) {
-    this.error(message, description, List.of());
-  }
+  private void send(@NotNull List<Embed> embeds, @NotNull String color) {
+    List<Embed> coloredEmbeds = embeds.stream().map(
+        embed -> new Embed.Builder()
+            .setTitle(embed.getTitle())
+            .setDescription(embed.getDescription())
+            .setColor(color)
+            .setFields(embed.getFields())
+            .build()
+    ).toList();
 
-  public void error(@NotNull String message, @NotNull String description, @NotNull List<Field> fields) {
-    this.send(message, description, fields, 0xEE3333);
-  }
-
-  private void send(
-      @NotNull String message,
-      @NotNull String description,
-      @NotNull List<Field> fields,
-      @NotNull Integer color
-  ) {
     Discord discord = new Discord.Builder()
         .setUsername(this.config.getName())
-        .setEmbeds(
-            List.of(new Embed.Builder()
-                .setTitle(message)
-                .setDescription(description)
-                .setFields(fields)
-                .build()
-            )
-        )
-        .build()
-        .setFieldsColor(color);
+        .setEmbeds(coloredEmbeds)
+        .build();
 
     CompletableFuture.runAsync(() -> this.template.postForEntity(this.config.getWebhookUrl(), discord, String.class))
         .exceptionally(throwable -> {

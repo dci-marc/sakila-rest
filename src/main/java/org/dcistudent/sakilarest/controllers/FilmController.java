@@ -9,6 +9,8 @@ import org.dcistudent.sakilarest.factories.shared.ResponseFactory;
 import org.dcistudent.sakilarest.interfaces.models.responses.shared.ResponsePayload;
 import org.dcistudent.sakilarest.interfaces.services.shared.DiscordServiceInterface;
 import org.dcistudent.sakilarest.models.requests.domain.FilmRequest;
+import org.dcistudent.sakilarest.models.requests.shared.discord.Embed;
+import org.dcistudent.sakilarest.models.requests.shared.discord.Field;
 import org.dcistudent.sakilarest.models.responses.domain.FilmPageResponse;
 import org.dcistudent.sakilarest.models.responses.domain.FilmResponse;
 import org.dcistudent.sakilarest.models.responses.shared.EmptyResponse;
@@ -21,6 +23,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.UUID;
 
@@ -62,8 +65,20 @@ public final class FilmController {
   ) {
     try {
       this.discordService.ok(
-          "get:/films",
-          String.format("Fetched films with request: %s", request)
+          List.of(
+              new Embed.Builder()
+                  .setTitle("get:/films")
+                  .setDescription("Fetched films with query parameters.")
+                  .setFields(
+                      List.of(
+                          new Field.Builder()
+                              .setName("page")
+                              .setValue(request.toString())
+                              .build()
+                      )
+                  )
+                  .build()
+          )
       );
       return ResponseEntity.ok(
           ResponseFactory.create(
@@ -108,8 +123,20 @@ public final class FilmController {
   public @NotNull ResponseEntity<Response<ResponsePayload>> getFilm(@NotNull @PathVariable UUID id) {
     try {
       this.discordService.ok(
-          "get:/films/{id}",
-          String.format("Fetched film with id: %s", id)
+          List.of(
+              new Embed.Builder()
+                  .setTitle("get:/films/{id}")
+                  .setDescription("Fetched film by ID.")
+                  .setFields(
+                      List.of(
+                          new Field.Builder()
+                              .setName("id")
+                              .setValue(id.toString())
+                              .build()
+                      )
+                  )
+                  .build()
+          )
       );
       return ResponseEntity.ok(
           ResponseFactory.create(
