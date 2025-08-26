@@ -6,12 +6,12 @@ import org.dcistudent.sakilarest.models.responses.domain.s3.Directory;
 import org.dcistudent.sakilarest.models.responses.domain.s3.S3FileServiceResponse;
 import org.dcistudent.sakilarest.models.responses.domain.s3.directories.File;
 import org.dcistudent.sakilarest.models.responses.shared.SuccessResponse;
+import org.dcistudent.sakilarest.normalizers.PathNormalizer;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.nio.file.Paths;
 import java.time.Instant;
 import java.util.Base64;
 import java.util.List;
@@ -69,7 +69,7 @@ public final class S3Service {
     String filename = Optional
         .ofNullable(
             metadata.get(S3FileServiceRequest.METADATA_FILENAME_KEY)
-        ).orElse(Paths.get(path).getFileName().toString());
+        ).orElse(PathNormalizer.getFilename(path));
 
     return new File.Builder()
         .setName(filename)
