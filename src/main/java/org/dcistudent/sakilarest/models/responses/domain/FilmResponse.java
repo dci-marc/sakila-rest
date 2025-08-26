@@ -56,7 +56,7 @@ public final class FilmResponse extends AbstractUuidResponse implements DomainRe
     return this.lastUpdate;
   }
 
-  public static final class Builder implements Buildable {
+  public static final class Builder implements Buildable<FilmResponse> {
     private @NotNull UUID uuid = UUID.randomUUID();
     private @NotNull String title = "";
     private @NotNull String description = "";
