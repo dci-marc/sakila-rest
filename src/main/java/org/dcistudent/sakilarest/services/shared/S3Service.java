@@ -14,6 +14,7 @@ import java.nio.file.Paths;
 import java.time.Instant;
 import java.util.Base64;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -55,6 +56,7 @@ public final class S3Service {
         this.service.upload(
             String.format("%s/%s", request.getFilePath(), request.getFileName()),
             new ByteArrayInputStream(content),
+            request.getContentType().get(),
             content.length
         )
     ).build();
@@ -62,15 +64,16 @@ public final class S3Service {
 
   public @NotNull File get(@NotNull String path) throws IOException {
     S3FileServiceResponse response = this.service.download(path);
+    Map<String, String> metadata = response.getResponse().metadata();
     String filename = Optional
         .ofNullable(
-            response.getResponse().metadata().get(S3ClientService.HEADER_FILENAME)
+            metadata.get("filename")
         ).orElse(Paths.get(path).getFileName().toString());
 
     return new File.Builder()
         .setName(filename)
         .setSize(response.getResponse().contentLength())
-        .setMime(response.getResponse().contentType())
+        .setMime(metadata.get("content-type"))
         .setBase64Content(response.getContent())
         .setReadable(true)
         .setWritable(true)

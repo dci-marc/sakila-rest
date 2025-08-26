@@ -14,6 +14,10 @@ public final class S3FileContentTypeRequest implements Buildable<S3FileContentTy
 
   private @NotNull String contentType = "";
 
+  public @NotNull String get() {
+    return this.contentType;
+  }
+
   public @NotNull S3FileContentTypeRequest set(@NotNull String contentType) {
     this.contentType = S3FileContentType.fromString(contentType);
     return this;
