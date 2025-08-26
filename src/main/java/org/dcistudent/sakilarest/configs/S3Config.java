@@ -35,6 +35,10 @@ public final class S3Config {
   }
 
   public @NotNull URI getUrl() {
+    if (this.url.toString().isEmpty()) {
+      throw new IllegalStateException("S3 URL is not configured.");
+    }
+
     return this.url;
   }
 
