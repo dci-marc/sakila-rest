@@ -4,10 +4,12 @@ import org.dcistudent.sakilarest.interfaces.models.responses.shared.Buildable;
 import org.jetbrains.annotations.NotNull;
 import software.amazon.awssdk.services.s3.model.GetObjectResponse;
 
+import java.util.Base64;
+
 public final class S3FileServiceResponse {
 
-  private GetObjectResponse response = null;
-  private byte @NotNull [] content = new byte[0];
+  private final @NotNull GetObjectResponse response;
+  private final @NotNull String content;
 
   public S3FileServiceResponse(@NotNull Builder builder) {
     this.response = builder.response;
@@ -18,13 +20,13 @@ public final class S3FileServiceResponse {
     return this.response;
   }
 
-  public byte @NotNull [] getContent() {
+  public @NotNull String getContent() {
     return this.content;
   }
 
   public static final class Builder implements Buildable<S3FileServiceResponse> {
-    private GetObjectResponse response = null;
-    private byte @NotNull [] content = new byte[0];
+    private @NotNull GetObjectResponse response = GetObjectResponse.builder().build();
+    private @NotNull String content = "";
 
     public @NotNull Builder setResponse(@NotNull GetObjectResponse response) {
       this.response = response;
@@ -32,7 +34,7 @@ public final class S3FileServiceResponse {
     }
 
     public @NotNull Builder setContent(byte @NotNull [] content) {
-      this.content = content;
+      this.content = Base64.getEncoder().encodeToString(content);
       return this;
     }
 
