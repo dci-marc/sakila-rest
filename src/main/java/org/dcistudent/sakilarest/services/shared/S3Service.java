@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.time.Instant;
 import java.util.Base64;
 import java.util.List;
@@ -64,7 +65,7 @@ public final class S3Service {
     String filename = Optional
         .ofNullable(
             response.getResponse().metadata().get(S3ClientService.HEADER_FILENAME)
-        ).orElse("");
+        ).orElse(Paths.get(path).getFileName().toString());
 
     return new File.Builder()
         .setName(filename)

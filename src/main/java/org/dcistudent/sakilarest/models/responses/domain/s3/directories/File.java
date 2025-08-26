@@ -12,7 +12,7 @@ public final class File implements DomainResponse {
   private final @NotNull Name name;
   private final @NotNull Size size;
   private final @NotNull Mime mime;
-  private byte @NotNull [] base64Content = new byte[0];
+  private final @NotNull String base64Content;
   private final @NotNull Permission permission;
   private final @NotNull Modified modifiedAt;
   private final @NotNull Created createdAt;
@@ -39,7 +39,7 @@ public final class File implements DomainResponse {
     return this.mime;
   }
 
-  public byte @NotNull [] getBase64Content() {
+  public @NotNull String getBase64Content() {
     return this.base64Content;
   }
 
@@ -59,7 +59,7 @@ public final class File implements DomainResponse {
     private @NotNull String name = "";
     private @NotNull Long size = 0L;
     private @NotNull String mime = "";
-    private byte @NotNull [] base64Content = new byte[0];
+    private @NotNull String base64Content = "";
     private boolean readable = false;
     private boolean writable = false;
     private boolean deletable = false;
@@ -81,7 +81,7 @@ public final class File implements DomainResponse {
       return this;
     }
 
-    public @NotNull Builder setBase64Content(byte @NotNull [] base64Content) {
+    public @NotNull Builder setBase64Content(@NotNull String base64Content) {
       this.base64Content = base64Content;
       return this;
     }
