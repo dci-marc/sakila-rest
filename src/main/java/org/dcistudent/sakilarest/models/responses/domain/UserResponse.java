@@ -6,11 +6,11 @@ import org.jetbrains.annotations.NotNull;
 
 public final class UserResponse implements DomainResponse {
 
+  private final @NotNull String email;
+
   public UserResponse(@NotNull Builder builder) {
     this.email = builder.email;
   }
-
-  @NotNull String email;
 
   public @NotNull String getEmail() {
     return this.email;

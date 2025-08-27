@@ -3,9 +3,10 @@ package org.dcistudent.sakilarest.models.responses.domain.s3.attributes;
 import com.fasterxml.jackson.annotation.JsonValue;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.Serializable;
 import java.time.Instant;
 
-public final class Created {
+public final class Created implements Serializable {
 
   private @NotNull Instant point;
 

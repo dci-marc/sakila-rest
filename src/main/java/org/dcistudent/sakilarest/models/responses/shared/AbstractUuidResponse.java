@@ -7,7 +7,7 @@ import java.util.UUID;
 
 public abstract class AbstractUuidResponse implements Serializable {
 
-  @NotNull UUID uuid;
+  private final @NotNull UUID uuid;
 
   protected AbstractUuidResponse() {
     this.uuid = UUID.randomUUID();

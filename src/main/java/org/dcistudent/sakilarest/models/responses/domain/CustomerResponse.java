@@ -5,17 +5,16 @@ import org.dcistudent.sakilarest.interfaces.models.responses.shared.Buildable;
 import org.dcistudent.sakilarest.models.responses.shared.AbstractUuidResponse;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.Serializable;
 import java.util.UUID;
 
-public final class CustomerResponse extends AbstractUuidResponse implements DomainResponse, Serializable {
+public final class CustomerResponse extends AbstractUuidResponse implements DomainResponse {
 
-  @NotNull String firstName;
-  @NotNull String lastName;
-  @NotNull String email;
-  @NotNull Boolean active;
-  @NotNull String createDate;
-  @NotNull String lastUpdate;
+  private final @NotNull String firstName;
+  private final @NotNull String lastName;
+  private final @NotNull String email;
+  private final @NotNull Boolean active;
+  private final @NotNull String createDate;
+  private final @NotNull String lastUpdate;
 
   public CustomerResponse(@NotNull Builder builder) {
     super(builder.uuid);

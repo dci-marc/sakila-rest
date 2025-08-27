@@ -5,20 +5,15 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.springframework.http.HttpStatus;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Response<T> {
+public class Response<T> implements Serializable {
 
   private final @NotNull HttpStatus status;
   @NotBlank
   private final @NotNull String message;
   private final @NotNull T data;
-
-  protected Response() {
-    this.status = HttpStatus.OK;
-    this.message = "OK";
-    this.data = (T) "";
-  }
 
   protected Response(@NotNull HttpStatus status, @NotNull String message, @Nullable T data) {
     this.status = status;

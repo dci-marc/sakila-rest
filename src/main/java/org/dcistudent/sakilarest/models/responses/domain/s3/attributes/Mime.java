@@ -3,7 +3,9 @@ package org.dcistudent.sakilarest.models.responses.domain.s3.attributes;
 import com.fasterxml.jackson.annotation.JsonValue;
 import org.jetbrains.annotations.NotNull;
 
-public final class Mime {
+import java.io.Serializable;
+
+public final class Mime implements Serializable {
 
   private @NotNull String type = "";
 
