@@ -5,10 +5,9 @@ import org.dcistudent.sakilarest.interfaces.models.responses.shared.Buildable;
 import org.dcistudent.sakilarest.models.responses.domain.s3.attributes.*;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.Serializable;
 import java.time.Instant;
 
-public final class File implements DomainResponse, Serializable {
+public final class File implements DomainResponse {
 
   private final @NotNull Name name;
   private final @NotNull Size size;

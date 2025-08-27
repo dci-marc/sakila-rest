@@ -5,10 +5,8 @@ import org.dcistudent.sakilarest.interfaces.models.responses.shared.ResponsePayl
 import org.dcistudent.sakilarest.serializers.responses.EmptyResponseSerializer;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.Serializable;
-
 @JsonSerialize(using = EmptyResponseSerializer.class)
-public final class EmptyResponse implements ResponsePayload, Serializable {
+public final class EmptyResponse implements ResponsePayload {
   public static final @NotNull EmptyResponse INSTANCE;
 
   static {

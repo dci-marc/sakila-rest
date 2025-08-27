@@ -5,16 +5,15 @@ import org.dcistudent.sakilarest.interfaces.models.responses.shared.Buildable;
 import org.dcistudent.sakilarest.models.responses.shared.AbstractUuidResponse;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
 
-public final class StoreResponse extends AbstractUuidResponse implements DomainResponse, Serializable {
+public final class StoreResponse extends AbstractUuidResponse implements DomainResponse {
 
-  @NotNull String lastUpdate;
-  @NotNull StaffResponse staff;
-  @NotNull List<CustomerResponse> customers;
-  @NotNull List<FilmResponse> films;
+  private final @NotNull String lastUpdate;
+  private final @NotNull StaffResponse staff;
+  private final @NotNull List<CustomerResponse> customers;
+  private final @NotNull List<FilmResponse> films;
 
   public StoreResponse(@NotNull Builder builder) {
     super(builder.uuid);

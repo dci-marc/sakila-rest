@@ -6,7 +6,7 @@ import org.jetbrains.annotations.NotNull;
 
 public final class ErrorResponse implements ResponsePayload {
 
-  @NotNull String message;
+  private final @NotNull String message;
 
   public ErrorResponse(@NotNull Builder builder) {
     this.message = builder.message;

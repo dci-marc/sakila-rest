@@ -2,7 +2,9 @@ package org.dcistudent.sakilarest.models.responses.domain.s3.attributes;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public final class Permission {
+import java.io.Serializable;
+
+public final class Permission implements Serializable {
 
   @JsonProperty("read")
   private boolean read = false;

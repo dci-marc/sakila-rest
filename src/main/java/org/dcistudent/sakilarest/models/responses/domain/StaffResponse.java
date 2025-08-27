@@ -3,13 +3,15 @@ package org.dcistudent.sakilarest.models.responses.domain;
 import org.dcistudent.sakilarest.interfaces.models.responses.shared.Buildable;
 import org.jetbrains.annotations.NotNull;
 
-public final class StaffResponse {
+import java.io.Serializable;
 
-  @NotNull String firstName;
-  @NotNull String lastName;
-  @NotNull String email;
-  @NotNull Boolean active;
-  @NotNull String lastUpdate;
+public final class StaffResponse implements Serializable {
+
+  private final @NotNull String firstName;
+  private final @NotNull String lastName;
+  private final @NotNull String email;
+  private final @NotNull Boolean active;
+  private final @NotNull String lastUpdate;
 
   public StaffResponse(@NotNull Builder builder) {
     this.firstName = builder.firstName;

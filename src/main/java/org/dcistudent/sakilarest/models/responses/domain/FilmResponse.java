@@ -9,13 +9,13 @@ import java.util.UUID;
 
 public final class FilmResponse extends AbstractUuidResponse implements DomainResponse {
 
-  @NotNull String title;
-  @NotNull String description;
-  int releaseYear;
-  int length;
-  @NotNull String rating;
-  @NotNull String specialFeatures;
-  @NotNull String lastUpdate;
+  private final @NotNull String title;
+  private final @NotNull String description;
+  private final int releaseYear;
+  private final int length;
+  private final @NotNull String rating;
+  private final @NotNull String specialFeatures;
+  private final @NotNull String lastUpdate;
 
   public FilmResponse(@NotNull Builder builder) {
     super(builder.uuid);

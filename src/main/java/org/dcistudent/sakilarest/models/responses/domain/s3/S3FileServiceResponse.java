@@ -4,9 +4,10 @@ import org.dcistudent.sakilarest.interfaces.models.responses.shared.Buildable;
 import org.jetbrains.annotations.NotNull;
 import software.amazon.awssdk.services.s3.model.GetObjectResponse;
 
+import java.io.Serializable;
 import java.util.Base64;
 
-public final class S3FileServiceResponse {
+public final class S3FileServiceResponse implements Serializable {
 
   private final @NotNull GetObjectResponse response;
   private final @NotNull String content;
