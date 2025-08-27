@@ -1,9 +1,12 @@
 package org.dcistudent.sakilarest.services.domain;
 
+import org.dcistudent.sakilarest.entities.domain.Film;
+import org.dcistudent.sakilarest.exceptions.shared.NotFoundException;
 import org.dcistudent.sakilarest.factories.domain.FilmResponseFactory;
 import org.dcistudent.sakilarest.managers.domain.FilmManager;
 import org.dcistudent.sakilarest.models.requests.domain.FilmRequest;
 import org.dcistudent.sakilarest.models.responses.domain.FilmResponse;
+import org.dcistudent.sakilarest.models.responses.shared.EmptyResponse;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -30,6 +33,10 @@ public final class FilmService {
   }
 
   public @NotNull FilmResponse getFilm(@NotNull UUID id) {
-    return FilmResponseFactory.create(this.filmManager.findById(id));
+    Film film = this.filmManager
+        .findById(id)
+        .orElseThrow(() -> new NotFoundException("film:fetch:not.found", EmptyResponse.INSTANCE));
+
+    return FilmResponseFactory.create(film);
   }
 }

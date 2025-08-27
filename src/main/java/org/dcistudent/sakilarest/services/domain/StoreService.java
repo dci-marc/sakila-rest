@@ -1,14 +1,18 @@
 package org.dcistudent.sakilarest.services.domain;
 
+import org.dcistudent.sakilarest.entities.domain.Store;
+import org.dcistudent.sakilarest.exceptions.shared.NotFoundException;
 import org.dcistudent.sakilarest.factories.domain.StoreResponseFactory;
 import org.dcistudent.sakilarest.managers.domain.StoreManager;
 import org.dcistudent.sakilarest.models.requests.shared.LimitOffsetRequest;
 import org.dcistudent.sakilarest.models.responses.domain.StoreResponse;
 import org.dcistudent.sakilarest.models.responses.domain.StoresResponse;
+import org.dcistudent.sakilarest.models.responses.shared.EmptyResponse;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -26,8 +30,11 @@ public final class StoreService {
   }
 
   public @NotNull StoreResponse getByUuid(@NotNull UUID id) {
-    return StoreResponseFactory.create(
-        this.storeManager.findStoreByUuidEager(id)
-    );
+    Optional<Store> store = this.storeManager.findStoreByUuidEager(id);
+    if (store.isEmpty()) {
+      throw new NotFoundException("store:fetch:not.found", EmptyResponse.INSTANCE);
+    }
+
+    return StoreResponseFactory.create(store.get());
   }
 }

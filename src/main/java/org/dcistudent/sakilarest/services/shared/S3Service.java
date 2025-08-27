@@ -1,10 +1,12 @@
 package org.dcistudent.sakilarest.services.shared;
 
+import org.dcistudent.sakilarest.exceptions.shared.NotFoundException;
 import org.dcistudent.sakilarest.models.requests.domain.s3.S3FileRequest;
 import org.dcistudent.sakilarest.models.requests.domain.s3.S3FileServiceRequest;
 import org.dcistudent.sakilarest.models.responses.domain.s3.Directory;
 import org.dcistudent.sakilarest.models.responses.domain.s3.S3FileServiceResponse;
 import org.dcistudent.sakilarest.models.responses.domain.s3.directories.File;
+import org.dcistudent.sakilarest.models.responses.shared.EmptyResponse;
 import org.dcistudent.sakilarest.models.responses.shared.SuccessResponse;
 import org.dcistudent.sakilarest.normalizers.PathNormalizer;
 import org.jetbrains.annotations.NotNull;
@@ -65,6 +67,10 @@ public final class S3Service {
 
   public @NotNull File get(@NotNull String path) throws IOException {
     S3FileServiceResponse response = this.service.download(path);
+    if (response.getResponse().contentLength() == 0) {
+      throw new NotFoundException("s3:file:download:not.found", EmptyResponse.INSTANCE);
+    }
+
     Map<String, String> metadata = response.getResponse().metadata();
     String filename = Optional
         .ofNullable(
@@ -85,6 +91,10 @@ public final class S3Service {
   }
 
   public @NotNull SuccessResponse delete(@NotNull String path) {
-    return new SuccessResponse.Builder().setSuccess(this.service.delete(path)).build();
+    if (!this.service.delete(path)) {
+      throw new NotFoundException("s3:file:delete:not.found", EmptyResponse.INSTANCE);
+    }
+
+    return new SuccessResponse.Builder().setSuccess(true).build();
   }
 }
