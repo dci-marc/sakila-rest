@@ -8,12 +8,11 @@ import org.springframework.http.HttpStatus;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class Response<T> implements Serializable {
+public class Response<T extends Serializable> implements Serializable {
 
   private final @NotNull HttpStatus status;
   @NotBlank
   private final @NotNull String message;
-  @SuppressWarnings("NotSerializableField")
   private final @NotNull T data;
 
   protected Response(@NotNull HttpStatus status, @NotNull String message, @Nullable T data) {
@@ -32,7 +31,7 @@ public class Response<T> implements Serializable {
    * @param <T>     The generic type of data.
    * @return A new Response instance.
    */
-  public static <T> Response<T> create(@NotNull HttpStatus status, @NotNull String message, @NotNull T data) {
+  public static <T extends Serializable> Response<T> create(@NotNull HttpStatus status, @NotNull String message, @NotNull T data) {
     return new Response<>(status, message, data);
   }
 

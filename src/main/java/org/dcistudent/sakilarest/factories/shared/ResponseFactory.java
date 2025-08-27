@@ -1,10 +1,10 @@
 package org.dcistudent.sakilarest.factories.shared;
 
+import org.dcistudent.sakilarest.interfaces.models.responses.shared.Paged;
 import org.dcistudent.sakilarest.interfaces.models.responses.shared.ResponsePayload;
 import org.dcistudent.sakilarest.models.responses.shared.EmptyResponse;
 import org.dcistudent.sakilarest.models.responses.shared.Response;
 import org.jetbrains.annotations.NotNull;
-import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 
 public final class ResponseFactory {
@@ -20,10 +20,10 @@ public final class ResponseFactory {
     return Response.create(status, message, data);
   }
 
-  public static <T extends ResponsePayload> Response<Page<T>> create(
+  public static <T extends ResponsePayload> Response<Paged<T>> create(
       @NotNull HttpStatus status,
       @NotNull String message,
-      @NotNull Page<T> page
+      @NotNull Paged<T> page
   ) {
     return Response.create(status, message, page);
   }
