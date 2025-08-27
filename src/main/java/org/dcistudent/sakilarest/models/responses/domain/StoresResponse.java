@@ -9,8 +9,8 @@ import java.util.UUID;
 
 public final class StoresResponse extends AbstractUuidResponse implements DomainResponse {
 
-  @NotNull String lastUpdate;
-  @NotNull StaffResponse staff;
+  private final @NotNull String lastUpdate;
+  private final @NotNull StaffResponse staff;
 
   public StoresResponse(@NotNull Builder builder) {
     super(builder.uuid);

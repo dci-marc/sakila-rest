@@ -6,7 +6,11 @@ import java.util.UUID;
 
 public abstract class AbstractUuidResponse {
 
-  @NotNull UUID uuid;
+  private final @NotNull UUID uuid;
+
+  protected AbstractUuidResponse() {
+    this.uuid = UUID.randomUUID();
+  }
 
   protected AbstractUuidResponse(@NotNull UUID uuid) {
     this.uuid = uuid;

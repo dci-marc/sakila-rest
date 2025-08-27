@@ -10,10 +10,10 @@ import java.util.UUID;
 
 public final class StoreResponse extends AbstractUuidResponse implements DomainResponse {
 
-  @NotNull String lastUpdate;
-  @NotNull StaffResponse staff;
-  @NotNull List<CustomerResponse> customers;
-  @NotNull List<FilmResponse> films;
+  private final @NotNull String lastUpdate;
+  private final @NotNull StaffResponse staff;
+  private final @NotNull List<CustomerResponse> customers;
+  private final @NotNull List<FilmResponse> films;
 
   public StoreResponse(@NotNull Builder builder) {
     super(builder.uuid);
