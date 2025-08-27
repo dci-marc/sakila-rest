@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import org.dcistudent.sakilarest.factories.shared.ResponseFactory;
+import org.dcistudent.sakilarest.interfaces.models.responses.shared.Paged;
 import org.dcistudent.sakilarest.interfaces.models.responses.shared.ResponsePayload;
 import org.dcistudent.sakilarest.models.requests.shared.LimitOffsetRequest;
 import org.dcistudent.sakilarest.models.responses.domain.CustomerPageResponse;
@@ -13,7 +14,6 @@ import org.dcistudent.sakilarest.models.responses.domain.CustomerResponse;
 import org.dcistudent.sakilarest.models.responses.shared.Response;
 import org.dcistudent.sakilarest.services.domain.CustomerService;
 import org.jetbrains.annotations.NotNull;
-import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -52,7 +52,7 @@ public final class CustomerController {
           )
       }
   )
-  public @NotNull ResponseEntity<Response<Page<CustomerResponse>>> getStoreCustomers(
+  public @NotNull ResponseEntity<Response<Paged<CustomerResponse>>> getStoreCustomers(
       @NotNull @PathVariable UUID id,
       @NotNull @ModelAttribute @Valid LimitOffsetRequest request
   ) {

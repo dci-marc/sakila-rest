@@ -2,6 +2,7 @@ package org.dcistudent.sakilarest.factories.domain;
 
 import org.dcistudent.sakilarest.entities.domain.Store;
 import org.dcistudent.sakilarest.models.responses.domain.*;
+import org.dcistudent.sakilarest.models.responses.shared.PagedResponse;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.data.domain.Page;
 
@@ -52,18 +53,7 @@ public final class StoreResponseFactory {
         .build();
   }
 
-  public static @NotNull Page<StoresResponse> create(@NotNull Page<Store> stores) {
-    return stores.map(store -> new StoresResponse.Builder()
-        .setUuid(store.getUuid())
-        .setLastUpdate(store.getLastUpdate().toString())
-        .setStaff(new StaffResponse.Builder()
-            .setFirstName(store.getManagerStaff().getFirstName())
-            .setLastName(store.getManagerStaff().getLastName())
-            .setEmail(store.getManagerStaff().getEmail())
-            .setActive(store.getManagerStaff().getActive())
-            .setLastUpdate(store.getManagerStaff().getLastUpdate().toString())
-            .build())
-        .build()
-    );
+  public static @NotNull PagedResponse<StoresResponse> create(@NotNull Page<Store> stores) {
+    return new PagedResponse(stores.getContent(), stores.getPageable(), stores.getTotalElements());
   }
 }

@@ -2,6 +2,7 @@ package org.dcistudent.sakilarest.factories.domain;
 
 import org.dcistudent.sakilarest.entities.domain.Customer;
 import org.dcistudent.sakilarest.models.responses.domain.CustomerResponse;
+import org.dcistudent.sakilarest.models.responses.shared.PagedResponse;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.data.domain.Page;
 
@@ -24,7 +25,7 @@ public final class CustomerResponseFactory {
         .build();
   }
 
-  public static @NotNull Page<CustomerResponse> create(@NotNull Page<Customer> customers) {
-    return customers.map(CustomerResponseFactory::create);
+  public static @NotNull PagedResponse<CustomerResponse> create(@NotNull Page<Customer> customers) {
+    return new PagedResponse(customers.getContent(), customers.getPageable(), customers.getTotalElements());
   }
 }

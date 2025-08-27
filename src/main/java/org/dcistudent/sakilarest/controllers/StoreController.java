@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import org.dcistudent.sakilarest.factories.shared.ResponseFactory;
+import org.dcistudent.sakilarest.interfaces.models.responses.shared.Paged;
 import org.dcistudent.sakilarest.interfaces.models.responses.shared.ResponsePayload;
 import org.dcistudent.sakilarest.models.requests.shared.LimitOffsetRequest;
 import org.dcistudent.sakilarest.models.responses.domain.StorePageResponse;
@@ -15,7 +16,6 @@ import org.dcistudent.sakilarest.models.responses.shared.EmptyResponse;
 import org.dcistudent.sakilarest.models.responses.shared.Response;
 import org.dcistudent.sakilarest.services.domain.StoreService;
 import org.jetbrains.annotations.NotNull;
-import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -55,7 +55,7 @@ public final class StoreController {
           )
       }
   )
-  public @NotNull ResponseEntity<Response<Page<StoresResponse>>> getStores(
+  public @NotNull ResponseEntity<Response<Paged<StoresResponse>>> getStores(
       @NotNull @ModelAttribute @Valid LimitOffsetRequest request
   ) {
     return ResponseEntity.ok(

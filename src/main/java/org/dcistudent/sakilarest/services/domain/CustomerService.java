@@ -3,12 +3,12 @@ package org.dcistudent.sakilarest.services.domain;
 import org.dcistudent.sakilarest.entities.domain.Customer;
 import org.dcistudent.sakilarest.exceptions.shared.NotFoundException;
 import org.dcistudent.sakilarest.factories.domain.CustomerResponseFactory;
+import org.dcistudent.sakilarest.interfaces.models.responses.shared.Paged;
 import org.dcistudent.sakilarest.managers.domain.CustomerManager;
 import org.dcistudent.sakilarest.models.requests.shared.LimitOffsetRequest;
 import org.dcistudent.sakilarest.models.responses.domain.CustomerResponse;
 import org.dcistudent.sakilarest.models.responses.shared.EmptyResponse;
 import org.jetbrains.annotations.NotNull;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -22,7 +22,7 @@ public final class CustomerService {
     this.customerManager = customerManager;
   }
 
-  public @NotNull Page<CustomerResponse> getAll(@NotNull UUID storeId, @NotNull LimitOffsetRequest request) {
+  public @NotNull Paged<CustomerResponse> getAll(@NotNull UUID storeId, @NotNull LimitOffsetRequest request) {
     return CustomerResponseFactory.create(
         this.customerManager.findCustomersByStore(storeId, request.getLimit(), request.getOffset())
     );

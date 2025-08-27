@@ -3,12 +3,12 @@ package org.dcistudent.sakilarest.services.domain;
 import org.dcistudent.sakilarest.entities.domain.Film;
 import org.dcistudent.sakilarest.exceptions.shared.NotFoundException;
 import org.dcistudent.sakilarest.factories.domain.FilmResponseFactory;
+import org.dcistudent.sakilarest.interfaces.models.responses.shared.Paged;
 import org.dcistudent.sakilarest.managers.domain.FilmManager;
 import org.dcistudent.sakilarest.models.requests.domain.FilmRequest;
 import org.dcistudent.sakilarest.models.responses.domain.FilmResponse;
 import org.dcistudent.sakilarest.models.responses.shared.EmptyResponse;
 import org.jetbrains.annotations.NotNull;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -24,7 +24,7 @@ public final class FilmService {
     this.filmManager = filmManager;
   }
 
-  public @NotNull Page<FilmResponse> routeSearch(FilmRequest request) {
+  public @NotNull Paged<FilmResponse> routeSearch(FilmRequest request) {
     Pageable pageable = PageRequest.of(request.getOffset(), request.getLimit());
 
     return FilmResponseFactory.create(
