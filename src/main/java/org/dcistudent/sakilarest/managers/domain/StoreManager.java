@@ -42,7 +42,7 @@ public final class StoreManager {
         .orElseThrow(() -> new NotFoundException("Store with uuid " + id + " not found"));
   }
 
-  public @NotNull Store findStoreByUuidEager(@NotNull UUID id) {
+  public @NotNull Optional<Store> findStoreByUuidEager(@NotNull UUID id) {
     EntityGraph<?> entityGraph = this.entityManager.getEntityGraph("Store.eager");
 
     TypedQuery<Store> query = this.entityManager
@@ -50,7 +50,6 @@ public final class StoreManager {
         .setParameter("uuid", id)
         .setHint(FetchHints.GRAPH_LOAD, entityGraph);
 
-    return Optional.ofNullable(query.getSingleResult())
-        .orElseThrow(() -> new NotFoundException("Store with id " + id + " not found"));
+    return Optional.ofNullable(query.getSingleResult());
   }
 }
