@@ -5,7 +5,6 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 import org.dcistudent.sakilarest.entities.domain.Store;
-import org.dcistudent.sakilarest.exceptions.shared.NotFoundException;
 import org.dcistudent.sakilarest.managers.shared.FetchHints;
 import org.dcistudent.sakilarest.repositories.domain.StoreRepository;
 import org.jetbrains.annotations.NotNull;
@@ -36,10 +35,8 @@ public final class StoreManager {
     return this.repository.findAll(pageable);
   }
 
-  public @NotNull Store findStoreByUuid(@NotNull UUID id) {
-    return this.repository
-        .findByUuid(id)
-        .orElseThrow(() -> new NotFoundException("Store with uuid " + id + " not found"));
+  public @NotNull Optional<Store> findStoreByUuid(@NotNull UUID id) {
+    return this.repository.findByUuid(id);
   }
 
   public @NotNull Optional<Store> findStoreByUuidEager(@NotNull UUID id) {

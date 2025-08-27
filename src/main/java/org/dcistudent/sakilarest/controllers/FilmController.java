@@ -5,7 +5,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
-import org.dcistudent.sakilarest.exceptions.shared.NotFoundException;
 import org.dcistudent.sakilarest.factories.shared.ResponseFactory;
 import org.dcistudent.sakilarest.interfaces.models.responses.shared.ResponsePayload;
 import org.dcistudent.sakilarest.interfaces.services.shared.DiscordServiceInterface;
@@ -14,7 +13,6 @@ import org.dcistudent.sakilarest.models.requests.shared.discord.Embed;
 import org.dcistudent.sakilarest.models.requests.shared.discord.Field;
 import org.dcistudent.sakilarest.models.responses.domain.FilmPageResponse;
 import org.dcistudent.sakilarest.models.responses.domain.FilmResponse;
-import org.dcistudent.sakilarest.models.responses.shared.EmptyResponse;
 import org.dcistudent.sakilarest.models.responses.shared.Response;
 import org.dcistudent.sakilarest.services.domain.FilmService;
 import org.jetbrains.annotations.NotNull;
@@ -63,40 +61,29 @@ public final class FilmController {
   public @NotNull ResponseEntity<Response<Page<FilmResponse>>> getFilms(
       @NotNull @ModelAttribute @Valid FilmRequest request
   ) {
-    try {
-      this.discordService.ok(
-          List.of(
-              new Embed.Builder()
-                  .setTitle("get:/films")
-                  .setDescription("Fetched films with query parameters.")
-                  .setFields(
-                      List.of(
-                          new Field.Builder()
-                              .setName("page")
-                              .setValue(request.toString())
-                              .build()
-                      )
-                  )
-                  .build()
-          )
-      );
-      return ResponseEntity.ok(
-          ResponseFactory.create(
-              HttpStatus.OK,
-              "films:fetch:success",
-              this.filmService.routeSearch(request)
-          )
-      );
-    } catch (NotFoundException e) {
-      return ResponseEntity
-          .badRequest()
-          .contentType(MediaType.APPLICATION_PROBLEM_JSON)
-          .body(ResponseFactory.create(
-              HttpStatus.BAD_REQUEST,
-              "films:fetch:not.found",
-              Page.empty()
-          ));
-    }
+    this.discordService.ok(
+        List.of(
+            new Embed.Builder()
+                .setTitle("get:/films")
+                .setDescription("Fetched films with query parameters.")
+                .setFields(
+                    List.of(
+                        new Field.Builder()
+                            .setName("request")
+                            .setValue(request.toString())
+                            .build()
+                    )
+                )
+                .build()
+        )
+    );
+    return ResponseEntity.ok(
+        ResponseFactory.create(
+            HttpStatus.OK,
+            "films:fetch:success",
+            this.filmService.routeSearch(request)
+        )
+    );
   }
 
   @GetMapping("/{id}")
@@ -121,38 +108,27 @@ public final class FilmController {
       }
   )
   public @NotNull ResponseEntity<Response<ResponsePayload>> getFilm(@NotNull @PathVariable UUID id) {
-    try {
-      this.discordService.ok(
-          List.of(
-              new Embed.Builder()
-                  .setTitle("get:/films/{id}")
-                  .setDescription("Fetched film by ID.")
-                  .setFields(
-                      List.of(
-                          new Field.Builder()
-                              .setName("id")
-                              .setValue(id.toString())
-                              .build()
-                      )
-                  )
-                  .build()
-          )
-      );
-      return ResponseEntity.ok(
-          ResponseFactory.create(
-              HttpStatus.OK,
-              "film:fetch:success",
-              this.filmService.getFilm(id)
-          ));
-    } catch (NotFoundException e) {
-      return ResponseEntity
-          .badRequest()
-          .contentType(MediaType.APPLICATION_PROBLEM_JSON)
-          .body(ResponseFactory.create(
-              HttpStatus.BAD_REQUEST,
-              "film:fetch:not.found",
-              EmptyResponse.INSTANCE
-          ));
-    }
+    this.discordService.ok(
+        List.of(
+            new Embed.Builder()
+                .setTitle("get:/films/{id}")
+                .setDescription("Fetched film by ID.")
+                .setFields(
+                    List.of(
+                        new Field.Builder()
+                            .setName("id")
+                            .setValue(id.toString())
+                            .build()
+                    )
+                )
+                .build()
+        )
+    );
+    return ResponseEntity.ok(
+        ResponseFactory.create(
+            HttpStatus.OK,
+            "film:fetch:success",
+            this.filmService.getFilm(id)
+        ));
   }
 }

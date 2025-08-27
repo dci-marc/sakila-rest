@@ -1,7 +1,6 @@
 package org.dcistudent.sakilarest.managers.domain;
 
 import org.dcistudent.sakilarest.entities.domain.Film;
-import org.dcistudent.sakilarest.exceptions.shared.NotFoundException;
 import org.dcistudent.sakilarest.managers.domain.specifications.FilmSpecifications;
 import org.dcistudent.sakilarest.models.requests.domain.FilmRequest;
 import org.dcistudent.sakilarest.repositories.domain.FilmRepository;
@@ -11,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -23,10 +23,8 @@ public final class FilmManager {
     this.filmRepository = filmRepository;
   }
 
-  public @NotNull Film findById(@NotNull UUID id) {
-    return this.filmRepository
-        .findByUuid(id)
-        .orElseThrow(() -> new NotFoundException("Film not found with ID: " + id));
+  public @NotNull Optional<Film> findById(@NotNull UUID id) {
+    return this.filmRepository.findByUuid(id);
   }
 
   public @NotNull Page<Film> findAll(@NotNull FilmRequest request, @NotNull Pageable pageable) {

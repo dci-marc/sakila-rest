@@ -4,7 +4,6 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import org.dcistudent.sakilarest.exceptions.shared.NotFoundException;
 import org.dcistudent.sakilarest.factories.shared.ResponseFactory;
 import org.dcistudent.sakilarest.interfaces.models.responses.shared.ResponsePayload;
 import org.dcistudent.sakilarest.models.requests.domain.s3.S3FileRequest;
@@ -55,23 +54,12 @@ public final class S3Controller {
       }
   )
   public @NotNull ResponseEntity<Response<ResponsePayload>> getList(@NotNull @PathVariable String path) {
-    try {
-      return ResponseEntity.ok(
-          ResponseFactory.create(
-              HttpStatus.OK,
-              "s3:files:fetch:success",
-              this.service.getList(path)
-          ));
-    } catch (NotFoundException e) {
-      return ResponseEntity
-          .badRequest()
-          .contentType(MediaType.APPLICATION_PROBLEM_JSON)
-          .body(ResponseFactory.create(
-              HttpStatus.BAD_REQUEST,
-              "s3:files:fetch:not.found",
-              EmptyResponse.INSTANCE
-          ));
-    }
+    return ResponseEntity.ok(
+        ResponseFactory.create(
+            HttpStatus.OK,
+            "s3:files:fetch:success",
+            this.service.getList(path)
+        ));
   }
 
   @GetMapping("/files/{path}/download")
@@ -97,27 +85,13 @@ public final class S3Controller {
   )
   public @NotNull ResponseEntity<Response<ResponsePayload>> get(@NotNull @PathVariable String path)
       throws IOException {
-    try {
-      var file = this.service.get(path);
-      return ResponseEntity.ok(
-          ResponseFactory.create(
-              HttpStatus.OK,
-              "s3:files:download:success",
-              file
-          )
-      );
-    } catch (NotFoundException e) {
-      return ResponseEntity
-          .badRequest()
-          .contentType(MediaType.APPLICATION_PROBLEM_JSON)
-          .body(
-              ResponseFactory.create(
-                  HttpStatus.BAD_REQUEST,
-                  "s3:files:download:not.found",
-                  EmptyResponse.INSTANCE
-              )
-          );
-    }
+    return ResponseEntity.ok(
+        ResponseFactory.create(
+            HttpStatus.OK,
+            "s3:file:download:success",
+            this.service.get(path)
+        )
+    );
   }
 
   @DeleteMapping("/files/{path}")
@@ -142,23 +116,12 @@ public final class S3Controller {
       }
   )
   public @NotNull ResponseEntity<Response<ResponsePayload>> delete(@NotNull @PathVariable String path) {
-    try {
-      return ResponseEntity.ok(
-          ResponseFactory.create(
-              HttpStatus.OK,
-              "s3:files:delete:success",
-              this.service.delete(path)
-          ));
-    } catch (NotFoundException e) {
-      return ResponseEntity
-          .badRequest()
-          .contentType(MediaType.APPLICATION_PROBLEM_JSON)
-          .body(ResponseFactory.create(
-              HttpStatus.BAD_REQUEST,
-              "s3:files:delete:not.found",
-              EmptyResponse.INSTANCE
-          ));
-    }
+    return ResponseEntity.ok(
+        ResponseFactory.create(
+            HttpStatus.OK,
+            "s3:file:delete:success",
+            this.service.delete(path)
+        ));
   }
 
   @PutMapping("/files")
@@ -198,7 +161,7 @@ public final class S3Controller {
       return ResponseEntity.ok(
           ResponseFactory.create(
               HttpStatus.OK,
-              "s3:files:put:success",
+              "s3:file:put:success",
               this.service.put(request)
           ));
     } catch (IllegalArgumentException e) {
@@ -207,7 +170,7 @@ public final class S3Controller {
           .contentType(MediaType.APPLICATION_PROBLEM_JSON)
           .body(ResponseFactory.create(
               HttpStatus.BAD_REQUEST,
-              "s3:files:put:invalid.argument",
+              "s3:file:put:invalid.argument",
               EmptyResponse.INSTANCE
           ));
     } catch (IllegalStateException | IOException e) {
@@ -216,7 +179,7 @@ public final class S3Controller {
           .contentType(MediaType.APPLICATION_PROBLEM_JSON)
           .body(ResponseFactory.create(
               HttpStatus.BAD_REQUEST,
-              "s3:files:put:invalid.request",
+              "s3:file:put:invalid.request",
               EmptyResponse.INSTANCE
           ));
     }
