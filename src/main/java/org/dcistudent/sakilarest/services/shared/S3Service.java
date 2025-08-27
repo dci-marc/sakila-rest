@@ -67,7 +67,7 @@ public final class S3Service {
 
   public @NotNull File get(@NotNull String path) throws IOException {
     S3FileServiceResponse response = this.service.download(path);
-    if (response.getContent().isEmpty()) {
+    if (response.getResponse().contentLength() == 0) {
       throw new NotFoundException("s3:file:download:not.found", EmptyResponse.INSTANCE);
     }
 
