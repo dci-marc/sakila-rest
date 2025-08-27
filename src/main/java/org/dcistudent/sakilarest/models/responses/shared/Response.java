@@ -47,8 +47,8 @@ public class Response<T> {
     return new Response<>(status, message, "");
   }
 
-  public @NotNull HttpStatus getStatus() {
-    return this.status;
+  public @NotNull Integer getStatus() {
+    return this.status.value();
   }
 
   public @NotNull String getMessage() {

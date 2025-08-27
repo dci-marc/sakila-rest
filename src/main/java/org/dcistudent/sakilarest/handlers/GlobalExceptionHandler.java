@@ -9,6 +9,7 @@ import org.dcistudent.sakilarest.models.responses.shared.DictionaryListResponse;
 import org.dcistudent.sakilarest.models.responses.shared.EmptyResponse;
 import org.dcistudent.sakilarest.models.responses.shared.Response;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.beans.TypeMismatchException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -48,7 +49,7 @@ public final class GlobalExceptionHandler {
     this.sqlLogger.logFatal(Arrays.toString(e.getStackTrace()));
 
     return ResponseEntity
-        .status(HttpStatus.INTERNAL_SERVER_ERROR.value())
+        .status(HttpStatus.INTERNAL_SERVER_ERROR)
         .contentType(MediaType.APPLICATION_PROBLEM_JSON)
         .body(ResponseFactory.create(
             HttpStatus.INTERNAL_SERVER_ERROR,
@@ -59,7 +60,7 @@ public final class GlobalExceptionHandler {
   @ExceptionHandler(HttpMessageNotReadableException.class)
   public @NotNull ResponseEntity<Response<EmptyResponse>> handleUnreadable(@NotNull HttpMessageNotReadableException e) {
     return ResponseEntity
-        .status(HttpStatus.BAD_REQUEST.value())
+        .status(HttpStatus.BAD_REQUEST)
         .contentType(MediaType.APPLICATION_PROBLEM_JSON)
         .body(ResponseFactory.create(
             HttpStatus.BAD_REQUEST,
@@ -72,7 +73,7 @@ public final class GlobalExceptionHandler {
     this.sqlLogger.logFatal(Arrays.toString(e.getStackTrace()));
 
     return ResponseEntity
-        .status(HttpStatus.INTERNAL_SERVER_ERROR.value())
+        .status(HttpStatus.BAD_REQUEST)
         .contentType(MediaType.APPLICATION_PROBLEM_JSON)
         .body(ResponseFactory.create(
             HttpStatus.BAD_REQUEST,
@@ -92,7 +93,7 @@ public final class GlobalExceptionHandler {
         .toList();
 
     return ResponseEntity
-        .status(HttpStatus.BAD_REQUEST.value())
+        .status(HttpStatus.BAD_REQUEST)
         .contentType(MediaType.APPLICATION_PROBLEM_JSON)
         .body(ResponseFactory.create(
             HttpStatus.BAD_REQUEST,
@@ -103,12 +104,24 @@ public final class GlobalExceptionHandler {
         ));
   }
 
+  @ExceptionHandler(TypeMismatchException.class)
+  public @NotNull ResponseEntity<Response<String>> handleTypeMismatchArgument(@NotNull IllegalArgumentException e) {
+    return ResponseEntity
+        .status(HttpStatus.BAD_REQUEST)
+        .contentType(MediaType.APPLICATION_PROBLEM_JSON)
+        .body(ResponseFactory.create(
+            HttpStatus.BAD_REQUEST,
+            "error:illegal:argument",
+            e.getMessage()
+        ));
+  }
+
   @ExceptionHandler(IOException.class)
   public @NotNull ResponseEntity<Response<EmptyResponse>> handleIOException(@NotNull IOException e) {
     this.sqlLogger.logFatal(Arrays.toString(e.getStackTrace()));
 
     return ResponseEntity
-        .status(HttpStatus.INTERNAL_SERVER_ERROR.value())
+        .status(HttpStatus.INTERNAL_SERVER_ERROR)
         .contentType(MediaType.APPLICATION_PROBLEM_JSON)
         .body(ResponseFactory.create(
             HttpStatus.INTERNAL_SERVER_ERROR,

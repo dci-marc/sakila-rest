@@ -3,9 +3,11 @@ package org.dcistudent.sakilarest.exceptions.shared;
 import org.dcistudent.sakilarest.interfaces.models.responses.shared.ResponsePayload;
 import org.jetbrains.annotations.NotNull;
 
-public abstract class ApiException extends RuntimeException {
+import java.io.Serializable;
 
-  private final @NotNull ResponsePayload data;
+public abstract class ApiException extends RuntimeException implements Serializable {
+
+  protected final @NotNull ResponsePayload data;
 
   protected ApiException(@NotNull String message, @NotNull ResponsePayload data) {
     super(message);
