@@ -5,9 +5,10 @@ import org.dcistudent.sakilarest.interfaces.models.responses.shared.Buildable;
 import org.dcistudent.sakilarest.models.responses.shared.AbstractUuidResponse;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.Serializable;
 import java.util.UUID;
 
-public final class StoresResponse extends AbstractUuidResponse implements DomainResponse {
+public final class StoresResponse extends AbstractUuidResponse implements DomainResponse, Serializable {
 
   @NotNull String lastUpdate;
   @NotNull StaffResponse staff;
