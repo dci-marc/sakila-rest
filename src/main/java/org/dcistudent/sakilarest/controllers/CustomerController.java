@@ -5,13 +5,11 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
-import org.dcistudent.sakilarest.exceptions.shared.NotFoundException;
 import org.dcistudent.sakilarest.factories.shared.ResponseFactory;
 import org.dcistudent.sakilarest.interfaces.models.responses.shared.ResponsePayload;
 import org.dcistudent.sakilarest.models.requests.shared.LimitOffsetRequest;
 import org.dcistudent.sakilarest.models.responses.domain.CustomerPageResponse;
 import org.dcistudent.sakilarest.models.responses.domain.CustomerResponse;
-import org.dcistudent.sakilarest.models.responses.shared.EmptyResponse;
 import org.dcistudent.sakilarest.models.responses.shared.Response;
 import org.dcistudent.sakilarest.services.domain.CustomerService;
 import org.jetbrains.annotations.NotNull;
@@ -46,7 +44,7 @@ public final class CustomerController {
           ),
           @ApiResponse(
               responseCode = "400",
-              description = "Store not found or invalid request.",
+              description = "Customers not found or invalid request.",
               content = @Content(
                   mediaType = MediaType.APPLICATION_PROBLEM_JSON_VALUE,
                   schema = @Schema(implementation = Response.class)
@@ -58,23 +56,13 @@ public final class CustomerController {
       @NotNull @PathVariable UUID id,
       @NotNull @ModelAttribute @Valid LimitOffsetRequest request
   ) {
-    try {
-      return ResponseEntity.ok(
-          ResponseFactory.create(
-              HttpStatus.OK,
-              "store:customers:fetch:success",
-              this.service.getAll(id, request)
-          ));
-    } catch (NotFoundException e) {
-      return ResponseEntity
-          .badRequest()
-          .contentType(MediaType.APPLICATION_PROBLEM_JSON)
-          .body(ResponseFactory.create(
-              HttpStatus.BAD_REQUEST,
-              "store:customers:fetch:not.found",
-              Page.empty()
-          ));
-    }
+    return ResponseEntity.ok(
+        ResponseFactory.create(
+            HttpStatus.OK,
+            "customers:fetch:success",
+            this.service.getAll(id, request)
+        )
+    );
   }
 
   @GetMapping("/customers/{customerId}")
@@ -102,22 +90,12 @@ public final class CustomerController {
       @NotNull @PathVariable UUID id,
       @NotNull @PathVariable UUID customerId
   ) {
-    try {
-      return ResponseEntity.ok(
-          ResponseFactory.create(
-              HttpStatus.OK,
-              "store:fetch:success",
-              this.service.getCustomer(id, customerId)
-          ));
-    } catch (NotFoundException e) {
-      return ResponseEntity
-          .badRequest()
-          .contentType(MediaType.APPLICATION_PROBLEM_JSON)
-          .body(ResponseFactory.create(
-              HttpStatus.BAD_REQUEST,
-              "store:fetch:not.found",
-              EmptyResponse.INSTANCE
-          ));
-    }
+    return ResponseEntity.ok(
+        ResponseFactory.create(
+            HttpStatus.OK,
+            "customer:fetch:success",
+            this.service.getCustomer(id, customerId)
+        )
+    );
   }
 }

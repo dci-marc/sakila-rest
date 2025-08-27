@@ -7,6 +7,7 @@ import org.dcistudent.sakilarest.managers.domain.StoreManager;
 import org.dcistudent.sakilarest.models.requests.shared.LimitOffsetRequest;
 import org.dcistudent.sakilarest.models.responses.domain.StoreResponse;
 import org.dcistudent.sakilarest.models.responses.domain.StoresResponse;
+import org.dcistudent.sakilarest.models.responses.shared.EmptyResponse;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
@@ -31,7 +32,7 @@ public final class StoreService {
   public @NotNull StoreResponse getByUuid(@NotNull UUID id) {
     Optional<Store> store = this.storeManager.findStoreByUuidEager(id);
     if (store.isEmpty()) {
-      throw new NotFoundException("Store with id " + id + " not found");
+      throw new NotFoundException("store:fetch:not.found", EmptyResponse.INSTANCE);
     }
 
     return StoreResponseFactory.create(store.get());

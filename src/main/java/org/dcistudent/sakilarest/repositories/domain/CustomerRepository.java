@@ -17,7 +17,7 @@ import java.util.UUID;
 public interface CustomerRepository extends JpaRepository<Customer, Long> {
 
   @Query("SELECT c FROM Customer c WHERE c.store.uuid = :storeId AND c.active = true")
-  @NotNull Optional<Page<Customer>> findCustomersByStoreId(@NotNull UUID storeId, @NotNull Pageable pageable);
+  @NotNull Page<Customer> findCustomersByStoreId(@NotNull UUID storeId, @NotNull Pageable pageable);
 
   @Query("SELECT c FROM Customer c WHERE c.store.uuid = :storeId AND c.uuid = :customerId AND c.active = true")
   @NotNull Optional<Customer> findCustomerByStoreId(@NotNull UUID storeId, @NotNull UUID customerId);
