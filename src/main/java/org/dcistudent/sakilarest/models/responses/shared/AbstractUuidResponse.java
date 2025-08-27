@@ -2,10 +2,9 @@ package org.dcistudent.sakilarest.models.responses.shared;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.io.Serializable;
 import java.util.UUID;
 
-public abstract class AbstractUuidResponse implements Serializable {
+public abstract class AbstractUuidResponse {
 
   private final @NotNull UUID uuid;
 
