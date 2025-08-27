@@ -14,6 +14,12 @@ public class Response<T> {
   private final @NotNull String message;
   private final @NotNull T data;
 
+  protected Response() {
+    this.status = HttpStatus.OK;
+    this.message = "OK";
+    this.data = (T) "";
+  }
+
   protected Response(@NotNull HttpStatus status, @NotNull String message, @Nullable T data) {
     this.status = status;
     this.message = message;

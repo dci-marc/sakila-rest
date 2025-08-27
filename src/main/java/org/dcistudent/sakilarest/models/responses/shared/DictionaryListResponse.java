@@ -4,10 +4,11 @@ import org.dcistudent.sakilarest.interfaces.models.responses.shared.Buildable;
 import org.dcistudent.sakilarest.interfaces.models.responses.shared.ResponsePayload;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
-public final class DictionaryListResponse<K, V> implements ResponsePayload {
+public final class DictionaryListResponse<K, V> implements ResponsePayload, Serializable {
 
   @NotNull List<Map<K, V>> items;
 
