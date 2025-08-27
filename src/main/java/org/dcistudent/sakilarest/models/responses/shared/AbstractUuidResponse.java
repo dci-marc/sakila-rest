@@ -9,6 +9,10 @@ public abstract class AbstractUuidResponse implements Serializable {
 
   @NotNull UUID uuid;
 
+  protected AbstractUuidResponse() {
+    this.uuid = UUID.randomUUID();
+  }
+
   protected AbstractUuidResponse(@NotNull UUID uuid) {
     this.uuid = uuid;
   }
