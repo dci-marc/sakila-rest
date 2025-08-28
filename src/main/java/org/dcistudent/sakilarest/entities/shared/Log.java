@@ -28,6 +28,7 @@ public class Log {
   public Log(@NotNull Integer level, @NotNull String message) {
     this.level = level;
     this.message = message;
+    this.datetime = Instant.now();
   }
 
   public Log() {
@@ -49,7 +50,7 @@ public class Log {
     return this.message;
   }
 
-  public void setId(UUID id) {
+  public void setId(@NotNull UUID id) {
     this.id = id;
   }
 
