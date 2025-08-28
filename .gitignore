@@ -42,8 +42,8 @@ build/
 data/
 
 ### Configuration files ###
-/src/main/resources/application-*.yml
-!/src/main/resources/application-*.yml.dist
+#/src/main/resources/application-*.yml
+#!/src/main/resources/application-*.yml.dist
 
 ### Logging ###
 #/src/main/resources/log/**
