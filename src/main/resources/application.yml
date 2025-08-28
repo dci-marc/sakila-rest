@@ -1,6 +1,6 @@
 # === SERVER CONFIGURATION ===
 server:
-  port: ${APP_PORT}
+  port: 8080
   servlet:
     context-path: /api/v1
 
