@@ -26,6 +26,10 @@ public final class CustomerResponseFactory {
   }
 
   public static @NotNull PagedResponse<CustomerResponse> create(@NotNull Page<Customer> customers) {
-    return new PagedResponse(customers.getContent(), customers.getPageable(), customers.getTotalElements());
+    return new PagedResponse<>(
+        customers.map(CustomerResponseFactory::create).toList(),
+        customers.getPageable(),
+        customers.getTotalElements()
+    );
   }
 }
