@@ -42,6 +42,10 @@ spring:
       cache-null-values: false
       use-key-prefix: true
 
+logging:
+  level:
+    org.apache.catalina.startup.Catalina: CONFIG
+
 # === AUTH0 CONFIGURATION ===
 auth0:
   domain: ${AUTH0_DOMAIN}
