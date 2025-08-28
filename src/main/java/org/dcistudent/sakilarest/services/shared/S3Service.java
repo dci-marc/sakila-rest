@@ -57,7 +57,9 @@ public final class S3Service {
 
     return new SuccessResponse.Builder().setSuccess(
         this.service.upload(
-            String.format("%s/%s", request.getFilePath(), request.getFileName()),
+            request.getFilePath().isBlank() ?
+                request.getFileName() :
+                String.format("%s/%s", request.getFilePath(), request.getFileName()),
             new ByteArrayInputStream(content),
             request.getContentType().get(),
             content.length
