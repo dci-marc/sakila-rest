@@ -1,9 +1,3 @@
-# === SERVER CONFIGURATION ===
-server:
-  port: 8080
-  servlet:
-    context-path: /api/v1
-
 spring:
   # === SECURITY CONFIGURATION ===
   security:
@@ -18,14 +12,15 @@ spring:
     username: ${SPRING_DATASOURCE_USERNAME}
     password: ${SPRING_DATASOURCE_PASSWORD}
 
-  jpa:
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.MySQLDialect
-
   flyway:
     enabled: true
     baseline-on-migrate: true
+
+  # === JPA / HIBERNATE CONFIGURATION ===
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MariaDBDialect
 
   # === JACKSON (JSON) CONFIGURATION ===
   jackson:
