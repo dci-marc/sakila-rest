@@ -26,10 +26,10 @@ public class Staff {
   private @NotNull Long addressId;
 
   @Column(name = "picture")
-  private byte @NotNull [] picture;
+  private byte[] picture;
 
   @Column(name = "email", length = 50)
-  private @NotNull String email;
+  private String email;
 
   @Column(name = "store_id", columnDefinition = "int UNSIGNED not null")
   private @NotNull Long storeId;
@@ -42,7 +42,7 @@ public class Staff {
   private @NotNull String username;
 
   @Column(name = "password", length = 40)
-  private @NotNull String password;
+  private String password;
 
   @ColumnDefault("CURRENT_TIMESTAMP")
   @Column(name = "last_update", nullable = false)
@@ -64,11 +64,11 @@ public class Staff {
     return this.addressId;
   }
 
-  public byte @NotNull [] getPicture() {
+  public byte[] getPicture() {
     return this.picture;
   }
 
-  public @NotNull String getEmail() {
+  public String getEmail() {
     return this.email;
   }
 
@@ -84,7 +84,7 @@ public class Staff {
     return this.username;
   }
 
-  public @NotNull String getPassword() {
+  public String getPassword() {
     return this.password;
   }
 

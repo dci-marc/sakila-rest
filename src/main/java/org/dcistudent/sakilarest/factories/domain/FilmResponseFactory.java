@@ -27,6 +27,10 @@ public final class FilmResponseFactory {
   }
 
   public static @NotNull PagedResponse<FilmResponse> create(@NotNull Page<Film> films) {
-    return new PagedResponse(films.getContent(), films.getPageable(), films.getTotalElements());
+    return new PagedResponse<>(
+        films.map(FilmResponseFactory::create).toList(),
+        films.getPageable(),
+        films.getTotalElements()
+    );
   }
 }
