@@ -1,6 +1,6 @@
 package org.dcistudent.sakilarest.services.domain;
 
-import org.dcistudent.sakilarest.entities.domain.Store;
+import jakarta.persistence.NoResultException;
 import org.dcistudent.sakilarest.exceptions.shared.NotFoundException;
 import org.dcistudent.sakilarest.factories.domain.StoreResponseFactory;
 import org.dcistudent.sakilarest.interfaces.models.responses.shared.Paged;
@@ -12,7 +12,6 @@ import org.dcistudent.sakilarest.models.responses.shared.EmptyResponse;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -30,11 +29,10 @@ public final class StoreService {
   }
 
   public @NotNull StoreResponse getByUuid(@NotNull UUID id) {
-    Optional<Store> store = this.storeManager.findStoreByUuidEager(id);
-    if (store.isEmpty()) {
+    try {
+      return StoreResponseFactory.create(this.storeManager.findStoreByUuidEager(id));
+    } catch (NoResultException e) {
       throw new NotFoundException("store:fetch:not.found", EmptyResponse.INSTANCE);
     }
-
-    return StoreResponseFactory.create(store.get());
   }
 }

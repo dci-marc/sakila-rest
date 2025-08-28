@@ -1,9 +1,6 @@
 package org.dcistudent.sakilarest.managers.domain;
 
-import jakarta.persistence.EntityGraph;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.TypedQuery;
+import jakarta.persistence.*;
 import org.dcistudent.sakilarest.entities.domain.Store;
 import org.dcistudent.sakilarest.managers.shared.FetchHints;
 import org.dcistudent.sakilarest.repositories.domain.StoreRepository;
@@ -39,7 +36,8 @@ public final class StoreManager {
     return this.repository.findByUuid(id);
   }
 
-  public @NotNull Optional<Store> findStoreByUuidEager(@NotNull UUID id) {
+  public @NotNull Store findStoreByUuidEager(@NotNull UUID id)
+      throws NoResultException {
     EntityGraph<?> entityGraph = this.entityManager.getEntityGraph("Store.eager");
 
     TypedQuery<Store> query = this.entityManager
@@ -47,6 +45,6 @@ public final class StoreManager {
         .setParameter("uuid", id)
         .setHint(FetchHints.GRAPH_LOAD, entityGraph);
 
-    return Optional.ofNullable(query.getSingleResult());
+    return query.getSingleResult();
   }
 }
