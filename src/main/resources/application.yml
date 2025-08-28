@@ -1,3 +1,9 @@
+# === SERVER CONFIGURATION ===
+server:
+  port: ${APP_PORT}
+  servlet:
+    context-path: /api/v1
+
 spring:
   profiles:
     active: ${SPRING_PROFILES_ACTIVE}
