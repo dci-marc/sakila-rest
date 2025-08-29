@@ -42,19 +42,7 @@ public final class PathNormalizer {
         throw new SecurityException("Parent directory traversal is not allowed.");
       }
 
-      // Step 2: Convert to Path and normalize
-      // -----------------------------------------------------------
-      // Only after we know the input contains no traversal attempts,
-      // we normalize to clean up redundant "./" segments.
-      Path path = Paths.get(userPath).normalize();
-
-      // Step 3: Extract the directory safely
-      // -----------------------------------------------------------
-      Path parent = Optional
-          .ofNullable(path.getParent())
-          .orElseThrow(() -> new SecurityException("No directory specified."));
-
-      return parent.toString();
+      return Paths.get(userPath).normalize().toString();
 
     } catch (InvalidPathException e) {
       // Happens if the user input contains invalid characters
