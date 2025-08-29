@@ -11,21 +11,18 @@ public final class Directory implements DomainResponse {
 
   private @NotNull String name;
   private @NotNull String path;
-  private @NotNull Set<File> files = new LinkedHashSet<>();
-  private int totalFiles = 0;
+  private @NotNull Set<File> files;
+  private int totalFiles;
 
-  public Directory(@NotNull String name, @NotNull String path) {
-    this.name = name;
-    this.path = path;
+  public Directory(@NotNull Builder builder) {
+    this.name = builder.name;
+    this.path = builder.path;
+    this.files = builder.files;
+    this.totalFiles = this.files.size();
   }
 
   public boolean isEmpty() {
     return this.files.isEmpty();
-  }
-
-  public void addFile(@NotNull File file) {
-    this.files.add(file);
-    this.totalFiles = this.files.size();
   }
 
   public @NotNull String getName() {
@@ -55,5 +52,30 @@ public final class Directory implements DomainResponse {
 
   public int getTotalFiles() {
     return this.totalFiles;
+  }
+
+  public static final class Builder {
+    private @NotNull String name = "";
+    private @NotNull String path = "";
+    private @NotNull Set<File> files = new LinkedHashSet<>();
+
+    public @NotNull Builder setName(@NotNull String name) {
+      this.name = name;
+      return this;
+    }
+
+    public @NotNull Builder setPath(@NotNull String path) {
+      this.path = path;
+      return this;
+    }
+
+    public @NotNull Builder setFiles(@NotNull Set<File> files) {
+      this.files = files;
+      return this;
+    }
+
+    public @NotNull Directory build() {
+      return new Directory(this);
+    }
   }
 }
