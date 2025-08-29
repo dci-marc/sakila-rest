@@ -1,7 +1,7 @@
 package org.dcistudent.sakilarest.factories.domain;
 
-import org.dcistudent.sakilarest.entities.domain.Film;
-import org.dcistudent.sakilarest.models.responses.domain.FilmResponse;
+import org.dcistudent.sakilarest.entities.domain.films.Film;
+import org.dcistudent.sakilarest.models.responses.domain.films.FilmResponse;
 import org.dcistudent.sakilarest.models.responses.shared.PagedResponse;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.data.domain.Page;
