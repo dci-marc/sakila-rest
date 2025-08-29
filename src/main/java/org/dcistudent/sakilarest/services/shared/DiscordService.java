@@ -7,8 +7,10 @@ import org.dcistudent.sakilarest.models.requests.shared.discord.Discord;
 import org.dcistudent.sakilarest.models.requests.shared.discord.Embed;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.client.RestClient;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -18,12 +20,15 @@ import java.util.concurrent.CompletableFuture;
 public final class DiscordService implements DiscordServiceInterface {
 
   private final @NotNull DiscordConfig config;
-  private final @NotNull RestTemplate template;
+  private final @NotNull RestClient restClient;
   private final @NotNull Bugsnag bugsnag;
 
-  public DiscordService(@NotNull DiscordConfig config, @NotNull RestTemplate template, @NotNull Bugsnag bugsnag) {
+  public DiscordService(@NotNull DiscordConfig config, @NotNull Bugsnag bugsnag) {
     this.config = config;
-    this.template = template;
+    this.restClient = RestClient.builder()
+        .baseUrl(this.config.getWebhookUrl())
+        .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+        .build();
     this.bugsnag = bugsnag;
   }
 
@@ -50,10 +55,13 @@ public final class DiscordService implements DiscordServiceInterface {
         .setEmbeds(coloredEmbeds)
         .build();
 
-    CompletableFuture.runAsync(() -> this.template.postForEntity(this.config.getWebhookUrl(), discord, String.class))
-        .exceptionally(throwable -> {
-          this.bugsnag.notify(throwable);
-          return null;
-        });
+    CompletableFuture.runAsync(() -> this.restClient.post()
+        .body(discord)
+        .retrieve()
+        .toBodilessEntity()
+    ).exceptionally(throwable -> {
+      this.bugsnag.notify(throwable);
+      return null;
+    });
   }
 }
