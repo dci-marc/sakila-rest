@@ -1,12 +1,12 @@
-package org.dcistudent.sakilarest.services.shared;
+package org.dcistudent.sakilarest.services.domain.s3;
 
 import org.dcistudent.sakilarest.exceptions.shared.NotFoundException;
 import org.dcistudent.sakilarest.factories.domain.S3ResponseFactory;
 import org.dcistudent.sakilarest.models.requests.domain.s3.S3FileRequest;
-import org.dcistudent.sakilarest.models.responses.domain.s3.Directory;
+import org.dcistudent.sakilarest.models.responses.domain.fs.Directory;
+import org.dcistudent.sakilarest.models.responses.domain.fs.directories.File;
 import org.dcistudent.sakilarest.models.responses.domain.s3.S3DirectoryServiceResponse;
 import org.dcistudent.sakilarest.models.responses.domain.s3.S3FileServiceResponse;
-import org.dcistudent.sakilarest.models.responses.domain.s3.directories.File;
 import org.dcistudent.sakilarest.models.responses.shared.EmptyResponse;
 import org.dcistudent.sakilarest.models.responses.shared.SuccessResponse;
 import org.jetbrains.annotations.NotNull;
