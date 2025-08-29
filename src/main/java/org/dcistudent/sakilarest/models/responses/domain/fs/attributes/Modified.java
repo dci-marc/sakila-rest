@@ -1,4 +1,4 @@
-package org.dcistudent.sakilarest.models.responses.domain.s3.attributes;
+package org.dcistudent.sakilarest.models.responses.domain.fs.attributes;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 import org.jetbrains.annotations.NotNull;
@@ -6,11 +6,11 @@ import org.jetbrains.annotations.NotNull;
 import java.io.Serializable;
 import java.time.Instant;
 
-public final class Created implements Serializable {
+public final class Modified implements Serializable {
 
   private @NotNull Instant point;
 
-  public Created(@NotNull Instant point) {
+  public Modified(@NotNull Instant point) {
     this.point = point;
   }
 

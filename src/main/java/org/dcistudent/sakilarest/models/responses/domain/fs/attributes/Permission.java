@@ -1,4 +1,4 @@
-package org.dcistudent.sakilarest.models.responses.domain.s3.attributes;
+package org.dcistudent.sakilarest.models.responses.domain.fs.attributes;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

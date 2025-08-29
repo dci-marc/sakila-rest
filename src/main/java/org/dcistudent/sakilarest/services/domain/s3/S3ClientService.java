@@ -15,6 +15,7 @@ import software.amazon.awssdk.services.s3.model.ListObjectsV2Request;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Map;
 
 @Service
 public final class S3ClientService {
@@ -47,8 +48,12 @@ public final class S3ClientService {
         .forEach(s3Object -> {
           S3FileServiceResponse file = new S3FileServiceResponse.Builder()
               .setResponse(GetObjectResponse.builder()
+                  .metadata(Map.of(
+                      S3FileServiceRequest.METADATA_FILENAME_KEY, PathNormalizer.getFilename(s3Object.key()),
+                      S3FileServiceRequest.METADATA_CONTENT_TYPE_KEY, "application/octet-stream"
+                  ))
                   .contentLength(s3Object.size())
-                  .contentType("application/octet-stream")
+                  .lastModified(s3Object.lastModified())
                   .build())
               .setContent(new byte[0])
               .build();

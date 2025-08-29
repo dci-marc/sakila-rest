@@ -1,8 +1,8 @@
-package org.dcistudent.sakilarest.models.responses.domain.s3.directories;
+package org.dcistudent.sakilarest.models.responses.domain.fs.directories;
 
 import org.dcistudent.sakilarest.interfaces.models.responses.domain.DomainResponse;
 import org.dcistudent.sakilarest.interfaces.models.responses.shared.Buildable;
-import org.dcistudent.sakilarest.models.responses.domain.s3.attributes.*;
+import org.dcistudent.sakilarest.models.responses.domain.fs.attributes.*;
 import org.jetbrains.annotations.NotNull;
 
 import java.time.Instant;
