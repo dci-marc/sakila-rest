@@ -1,7 +1,10 @@
-package org.dcistudent.sakilarest.models.responses.domain;
+package org.dcistudent.sakilarest.models.responses.domain.stores;
 
 import org.dcistudent.sakilarest.interfaces.models.responses.domain.DomainResponse;
 import org.dcistudent.sakilarest.interfaces.models.responses.shared.Buildable;
+import org.dcistudent.sakilarest.models.responses.domain.StaffResponse;
+import org.dcistudent.sakilarest.models.responses.domain.customers.CustomerResponse;
+import org.dcistudent.sakilarest.models.responses.domain.films.FilmResponse;
 import org.dcistudent.sakilarest.models.responses.shared.AbstractUuidResponse;
 import org.jetbrains.annotations.NotNull;
 

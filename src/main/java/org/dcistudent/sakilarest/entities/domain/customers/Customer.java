@@ -1,6 +1,8 @@
-package org.dcistudent.sakilarest.entities.domain;
+package org.dcistudent.sakilarest.entities.domain.customers;
 
 import jakarta.persistence.*;
+import org.dcistudent.sakilarest.entities.domain.Address;
+import org.dcistudent.sakilarest.entities.domain.Store;
 import org.dcistudent.sakilarest.entities.shared.AbstractUuidEntity;
 import org.hibernate.annotations.ColumnDefault;
 import org.jetbrains.annotations.NotNull;

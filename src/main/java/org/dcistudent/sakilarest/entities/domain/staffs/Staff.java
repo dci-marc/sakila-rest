@@ -1,4 +1,4 @@
-package org.dcistudent.sakilarest.entities.domain;
+package org.dcistudent.sakilarest.entities.domain.staffs;
 
 import jakarta.persistence.*;
 import org.hibernate.annotations.ColumnDefault;

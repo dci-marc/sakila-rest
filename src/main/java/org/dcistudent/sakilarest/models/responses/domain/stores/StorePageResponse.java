@@ -1,4 +1,4 @@
-package org.dcistudent.sakilarest.models.responses.domain;
+package org.dcistudent.sakilarest.models.responses.domain.stores;
 
 import org.jetbrains.annotations.NotNull;
 import org.springframework.data.domain.PageImpl;

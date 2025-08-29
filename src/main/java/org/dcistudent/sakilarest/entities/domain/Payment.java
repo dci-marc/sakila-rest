@@ -1,6 +1,8 @@
 package org.dcistudent.sakilarest.entities.domain;
 
 import jakarta.persistence.*;
+import org.dcistudent.sakilarest.entities.domain.customers.Customer;
+import org.dcistudent.sakilarest.entities.domain.staffs.Staff;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;

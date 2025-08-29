@@ -1,4 +1,4 @@
-package org.dcistudent.sakilarest.models.responses.domain;
+package org.dcistudent.sakilarest.models.responses.domain.films;
 
 import org.dcistudent.sakilarest.interfaces.models.responses.domain.DomainResponse;
 import org.dcistudent.sakilarest.interfaces.models.responses.shared.Buildable;

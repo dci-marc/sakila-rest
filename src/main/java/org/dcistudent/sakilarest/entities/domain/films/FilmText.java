@@ -1,4 +1,4 @@
-package org.dcistudent.sakilarest.entities.domain;
+package org.dcistudent.sakilarest.entities.domain.films;
 
 import jakarta.persistence.*;
 import org.jetbrains.annotations.NotNull;

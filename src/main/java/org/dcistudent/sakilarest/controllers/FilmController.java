@@ -12,8 +12,8 @@ import org.dcistudent.sakilarest.interfaces.services.shared.DiscordServiceInterf
 import org.dcistudent.sakilarest.models.requests.domain.FilmRequest;
 import org.dcistudent.sakilarest.models.requests.shared.discord.Embed;
 import org.dcistudent.sakilarest.models.requests.shared.discord.Field;
-import org.dcistudent.sakilarest.models.responses.domain.FilmPageResponse;
-import org.dcistudent.sakilarest.models.responses.domain.FilmResponse;
+import org.dcistudent.sakilarest.models.responses.domain.films.FilmPageResponse;
+import org.dcistudent.sakilarest.models.responses.domain.films.FilmResponse;
 import org.dcistudent.sakilarest.models.responses.shared.Response;
 import org.dcistudent.sakilarest.services.domain.FilmService;
 import org.jetbrains.annotations.NotNull;

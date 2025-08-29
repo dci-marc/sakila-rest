@@ -1,4 +1,4 @@
-package org.dcistudent.sakilarest.configs;
+package org.dcistudent.sakilarest.configs.dotenvs;
 
 import io.github.cdimascio.dotenv.Dotenv;
 import org.jetbrains.annotations.NotNull;

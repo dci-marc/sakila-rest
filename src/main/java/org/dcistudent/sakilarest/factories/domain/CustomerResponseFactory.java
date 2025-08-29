@@ -1,7 +1,7 @@
 package org.dcistudent.sakilarest.factories.domain;
 
-import org.dcistudent.sakilarest.entities.domain.Customer;
-import org.dcistudent.sakilarest.models.responses.domain.CustomerResponse;
+import org.dcistudent.sakilarest.entities.domain.customers.Customer;
+import org.dcistudent.sakilarest.models.responses.domain.customers.CustomerResponse;
 import org.dcistudent.sakilarest.models.responses.shared.PagedResponse;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.data.domain.Page;
