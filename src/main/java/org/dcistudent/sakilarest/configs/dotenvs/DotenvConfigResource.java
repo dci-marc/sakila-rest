@@ -1,4 +1,4 @@
-package org.dcistudent.sakilarest.configs;
+package org.dcistudent.sakilarest.configs.dotenvs;
 
 import org.jetbrains.annotations.NotNull;
 import org.springframework.boot.context.config.ConfigDataResource;

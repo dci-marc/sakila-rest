@@ -1,6 +1,7 @@
-package org.dcistudent.sakilarest.entities.domain;
+package org.dcistudent.sakilarest.entities.domain.films;
 
 import jakarta.persistence.*;
+import org.dcistudent.sakilarest.entities.domain.Language;
 import org.dcistudent.sakilarest.entities.shared.AbstractUuidEntity;
 import org.hibernate.annotations.ColumnDefault;
 import org.jetbrains.annotations.NotNull;
