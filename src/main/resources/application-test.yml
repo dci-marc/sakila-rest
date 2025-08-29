@@ -1,0 +1,6 @@
+logging:
+  level:
+    org.springframework: ERROR
+    org.hibernate.SQL: ERROR
+    org.hibernate.type.descriptor.sql.BasicBinder: ERROR
+    org.apache.catalina.startup.Catalina: DEBUG

@@ -10,10 +10,12 @@ public final class ApplicationProfileConfig {
 
   private @NotNull String active;
   public static final @NotNull String PROFILE_DEVELOPMENT;
+  public static final @NotNull String PROFILE_TESTING;
   public static final @NotNull String PROFILE_PRODUCTION;
 
   static {
     PROFILE_DEVELOPMENT = "dev";
+    PROFILE_TESTING = "test";
     PROFILE_PRODUCTION = "prod";
   }
 
@@ -31,6 +33,10 @@ public final class ApplicationProfileConfig {
 
   public Boolean isDevProfile() {
     return PROFILE_DEVELOPMENT.equalsIgnoreCase(this.active);
+  }
+
+  public Boolean isTestProfile() {
+    return PROFILE_TESTING.equalsIgnoreCase(this.active);
   }
 
   public Boolean isProdProfile() {
