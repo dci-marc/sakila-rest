@@ -8,9 +8,10 @@ import org.dcistudent.sakilarest.factories.shared.ResponseFactory;
 import org.dcistudent.sakilarest.interfaces.models.responses.shared.ResponsePayload;
 import org.dcistudent.sakilarest.models.requests.domain.s3.S3FileRequest;
 import org.dcistudent.sakilarest.models.responses.domain.DirectoryResponse;
+import org.dcistudent.sakilarest.models.responses.domain.fs.Directory;
 import org.dcistudent.sakilarest.models.responses.shared.EmptyResponse;
 import org.dcistudent.sakilarest.models.responses.shared.Response;
-import org.dcistudent.sakilarest.services.shared.S3Service;
+import org.dcistudent.sakilarest.services.domain.s3.S3Service;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -32,7 +33,7 @@ public final class S3Controller {
     this.service = service;
   }
 
-  @GetMapping("/files/{path}")
+  @GetMapping("/files/{*path}")
   @ApiResponses(
       value = {
           @ApiResponse(
@@ -40,7 +41,7 @@ public final class S3Controller {
               description = "Successfully fetched files from the specified directory.",
               content = @Content(
                   mediaType = MediaType.APPLICATION_JSON_VALUE,
-                  schema = @Schema(implementation = DirectoryResponse.class)
+                  schema = @Schema(implementation = Directory.class)
               )
           ),
           @ApiResponse(
@@ -53,12 +54,12 @@ public final class S3Controller {
           )
       }
   )
-  public @NotNull ResponseEntity<Response<ResponsePayload>> getList(@NotNull @PathVariable String path) {
+  public @NotNull ResponseEntity<Response<Directory>> getList(@NotNull @PathVariable String path) {
     return ResponseEntity.ok(
         ResponseFactory.create(
             HttpStatus.OK,
             "s3:files:fetch:success",
-            this.service.getList(path)
+            this.service.getList(path.substring(1))
         ));
   }
 

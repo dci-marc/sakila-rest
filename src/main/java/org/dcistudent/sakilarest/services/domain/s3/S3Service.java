@@ -1,24 +1,20 @@
-package org.dcistudent.sakilarest.services.shared;
+package org.dcistudent.sakilarest.services.domain.s3;
 
 import org.dcistudent.sakilarest.exceptions.shared.NotFoundException;
+import org.dcistudent.sakilarest.factories.domain.S3ResponseFactory;
 import org.dcistudent.sakilarest.models.requests.domain.s3.S3FileRequest;
-import org.dcistudent.sakilarest.models.requests.domain.s3.S3FileServiceRequest;
-import org.dcistudent.sakilarest.models.responses.domain.s3.Directory;
+import org.dcistudent.sakilarest.models.responses.domain.fs.Directory;
+import org.dcistudent.sakilarest.models.responses.domain.fs.directories.File;
+import org.dcistudent.sakilarest.models.responses.domain.s3.S3DirectoryServiceResponse;
 import org.dcistudent.sakilarest.models.responses.domain.s3.S3FileServiceResponse;
-import org.dcistudent.sakilarest.models.responses.domain.s3.directories.File;
 import org.dcistudent.sakilarest.models.responses.shared.EmptyResponse;
 import org.dcistudent.sakilarest.models.responses.shared.SuccessResponse;
-import org.dcistudent.sakilarest.normalizers.PathNormalizer;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.time.Instant;
 import java.util.Base64;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 
 @Service
 public final class S3Service {
@@ -29,27 +25,13 @@ public final class S3Service {
     this.service = service;
   }
 
-  /**
-   * Showcase method to simulate fetching files from a directory in S3.
-   */
-  public @NotNull Directory getList(@NotNull String directoryName) {
-    Directory dir = new Directory(directoryName, "/");
-    List<String> fileNames = List.of("file1.txt", "file2.jpg", "file3.pdf");
+  public @NotNull Directory getList(@NotNull String path) {
+    S3DirectoryServiceResponse response = this.service.list(path);
+    if (response.getFiles().isEmpty()) {
+      throw new NotFoundException("s3:files:list:not.found", EmptyResponse.INSTANCE);
+    }
 
-    fileNames.forEach(fileName -> dir.addFile(
-        new File.Builder()
-            .setName(fileName)
-            .setSize(1024L)
-            .setMime("application/octet-stream")
-            .setReadable(true)
-            .setWritable(true)
-            .setDeletable(false)
-            .setModifiedAt(Instant.now())
-            .setCreatedAt(Instant.now())
-            .build()
-    ));
-
-    return dir;
+    return S3ResponseFactory.create(path, response);
   }
 
   public @NotNull SuccessResponse put(@NotNull S3FileRequest request) {
@@ -73,23 +55,7 @@ public final class S3Service {
       throw new NotFoundException("s3:file:download:not.found", EmptyResponse.INSTANCE);
     }
 
-    Map<String, String> metadata = response.getResponse().metadata();
-    String filename = Optional
-        .ofNullable(
-            metadata.get(S3FileServiceRequest.METADATA_FILENAME_KEY)
-        ).orElse(PathNormalizer.getFilename(path));
-
-    return new File.Builder()
-        .setName(filename)
-        .setSize(response.getResponse().contentLength())
-        .setMime(metadata.get(S3FileServiceRequest.METADATA_CONTENT_TYPE_KEY))
-        .setBase64Content(response.getContent())
-        .setReadable(true)
-        .setWritable(true)
-        .setDeletable(true)
-        .setModifiedAt(response.getResponse().lastModified())
-        .setCreatedAt(response.getResponse().lastModified())
-        .build();
+    return S3ResponseFactory.create(path, response);
   }
 
   public @NotNull SuccessResponse delete(@NotNull String path) {

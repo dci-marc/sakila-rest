@@ -13,9 +13,6 @@ public final class S3FileServiceResponse {
 
   public S3FileServiceResponse(@NotNull Builder builder) {
     this.response = builder.response;
-    if (builder.content.isEmpty()) {
-      throw new IllegalArgumentException("Content cannot be empty");
-    }
     this.content = builder.content;
   }
 
