@@ -4,13 +4,15 @@ import org.dcistudent.sakilarest.configs.Auth0Config;
 import org.dcistudent.sakilarest.exceptions.domain.Auth0Exception;
 import org.dcistudent.sakilarest.models.responses.error.Auth0ErrorResponse;
 import org.jetbrains.annotations.NotNull;
-import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.http.*;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClient;
 import org.springframework.web.client.RestClientResponseException;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.Map;
+import java.util.Objects;
 
 @Service
 public final class Auth0Service {
@@ -18,38 +20,35 @@ public final class Auth0Service {
   private static final @NotNull String STRING_PASSWORD = "password";
   private static final @NotNull String STRING_ACCESS_TOKEN = "access_token";
 
-  private final @NotNull RestTemplate restTemplate;
+  private final @NotNull RestClient restClient;
   private final @NotNull Auth0Config config;
 
-  public Auth0Service(
-      @NotNull Auth0Config config,
-      @NotNull RestTemplateBuilder builder
-  ) {
+  public Auth0Service(@NotNull Auth0Config config) {
     this.config = config;
-    this.restTemplate = builder
-        .rootUri("https://" + config.getDomain())
+    this.restClient = RestClient.builder()
+        .baseUrl("https://" + config.getDomain())
         .build();
   }
 
   public @NotNull String getManagementToken() {
-    var body = Map.of(
+    Map<String, String> body = Map.of(
         "grant_type", "client_credentials",
         "client_id", this.config.getMgmtClientId(),
         "client_secret", this.config.getMgmtClientSecret(),
         "audience", this.config.getAudience()
     );
 
-    HttpHeaders headers = new HttpHeaders();
-    headers.setContentType(MediaType.APPLICATION_JSON);
-    HttpEntity<Map<String, String>> requestEntity = new HttpEntity<>(body, headers);
-
-    Map<String, Object> response = this.restTemplate.postForObject(
-        "/oauth/token",
-        requestEntity,
-        Map.class
+    Map<String, Object> response = Objects.requireNonNullElseGet(
+        this.restClient.post()
+            .uri("/oauth/token")
+            .contentType(MediaType.APPLICATION_JSON)
+            .body(body)
+            .retrieve()
+            .body(Map.class),
+        Map::of
     );
 
-    if (response == null || !response.containsKey(Auth0Service.STRING_ACCESS_TOKEN)) {
+    if (response.isEmpty() || !response.containsKey(Auth0Service.STRING_ACCESS_TOKEN)) {
       throw new Auth0Exception(
           new Auth0ErrorResponse(
               HttpStatus.INTERNAL_SERVER_ERROR,
@@ -65,24 +64,20 @@ public final class Auth0Service {
   public void registerUser(@NotNull String email, @NotNull String password) {
     String token = this.getManagementToken();
 
-    var body = Map.of(
+    Map<String, String> body = Map.of(
         "email", email,
         Auth0Service.STRING_PASSWORD, password,
         "connection", this.config.getConnection()
     );
 
-    HttpHeaders headers = new HttpHeaders();
-    headers.setContentType(MediaType.APPLICATION_JSON);
-    headers.set(HttpHeaders.AUTHORIZATION, "Bearer " + token);
-    HttpEntity<Map<String, String>> requestEntity = new HttpEntity<>(body, headers);
-
     try {
-      this.restTemplate.exchange(
-          "/api/v2/users",
-          HttpMethod.POST,
-          requestEntity,
-          Void.class
-      );
+      this.restClient.post()
+          .uri("/api/v2/users")
+          .contentType(MediaType.APPLICATION_JSON)
+          .header(HttpHeaders.AUTHORIZATION, "Bearer " + token)
+          .body(body)
+          .retrieve()
+          .toBodilessEntity();
     } catch (RestClientResponseException e) {
       throw new Auth0Exception(
           new Auth0ErrorResponse(HttpStatus.valueOf(e.getStatusCode().value()))
@@ -91,7 +86,7 @@ public final class Auth0Service {
   }
 
   public @NotNull String loginUser(@NotNull String username, @NotNull String password) {
-    var body = Map.of(
+    Map<String, String> body = Map.of(
         "grant_type", Auth0Service.STRING_PASSWORD,
         "username", username,
         Auth0Service.STRING_PASSWORD, password,
@@ -103,18 +98,18 @@ public final class Auth0Service {
     );
     Map<String, Object> response;
 
-    HttpHeaders headers = new HttpHeaders();
-    headers.setContentType(MediaType.APPLICATION_JSON);
-    HttpEntity<Map<String, String>> requestEntity = new HttpEntity<>(body, headers);
-
     try {
-      response = this.restTemplate.postForObject(
-          "/oauth/token",
-          requestEntity,
-          Map.class
+      response = Objects.requireNonNullElseGet(
+          this.restClient.post()
+              .uri("/oauth/token")
+              .contentType(MediaType.APPLICATION_JSON)
+              .body(body)
+              .retrieve()
+              .body(Map.class),
+          Map::of
       );
 
-      if (response == null || !response.containsKey(Auth0Service.STRING_ACCESS_TOKEN)) {
+      if (response.isEmpty() || !response.containsKey(Auth0Service.STRING_ACCESS_TOKEN)) {
         throw new Auth0Exception(
             new Auth0ErrorResponse(HttpStatus.SERVICE_UNAVAILABLE)
         );
