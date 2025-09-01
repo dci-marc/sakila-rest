@@ -1,4 +1,4 @@
-package org.dcistudent.sakilarest.controllers.domain;
+package org.dcistudent.sakilarest.controllers.domain.stores;
 
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
