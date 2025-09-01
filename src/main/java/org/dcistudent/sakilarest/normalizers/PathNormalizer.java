@@ -5,7 +5,7 @@ import org.jetbrains.annotations.NotNull;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Optional;
+import java.util.Objects;
 
 /**
  * Utility class for extracting a safe filename from a user-supplied path string.
@@ -90,16 +90,16 @@ public final class PathNormalizer {
 
       // Step 3: Extract the filename safely
       // -----------------------------------------------------------
-      Path filename = Optional
-          .ofNullable(path.getFileName())
-          .orElseThrow(() -> new SecurityException("No filename specified."));
+      Path filename = Objects.requireNonNull(path.getFileName());
 
       if (filename.toString().isEmpty()) {
         throw new SecurityException("Filename is empty.");
       }
 
       return filename.toString();
-
+    } catch (NullPointerException e) {
+      // Happens if getFileName() returns null (e.g., input is just "
+      throw new SecurityException("Filename is empty.", e);
     } catch (InvalidPathException e) {
       // Happens if the user input contains invalid characters
       // (e.g., NUL bytes, malformed UTF-8).
