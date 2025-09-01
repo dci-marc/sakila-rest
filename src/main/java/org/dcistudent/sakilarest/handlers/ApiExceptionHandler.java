@@ -1,7 +1,7 @@
 package org.dcistudent.sakilarest.handlers;
 
 import org.dcistudent.sakilarest.exceptions.shared.ApiException;
-import org.dcistudent.sakilarest.factories.shared.ResponseFactory;
+import org.dcistudent.sakilarest.factories.responses.shared.ResponseFactory;
 import org.dcistudent.sakilarest.interfaces.models.responses.shared.ResponsePayload;
 import org.dcistudent.sakilarest.models.responses.shared.Response;
 import org.jetbrains.annotations.NotNull;

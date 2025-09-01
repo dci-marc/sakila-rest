@@ -2,7 +2,7 @@ package org.dcistudent.sakilarest.services.domain;
 
 import org.dcistudent.sakilarest.entities.domain.customers.Customer;
 import org.dcistudent.sakilarest.exceptions.shared.NotFoundException;
-import org.dcistudent.sakilarest.factories.domain.CustomerResponseFactory;
+import org.dcistudent.sakilarest.factories.responses.domain.CustomerResponseFactory;
 import org.dcistudent.sakilarest.interfaces.models.responses.shared.Paged;
 import org.dcistudent.sakilarest.managers.domain.CustomerManager;
 import org.dcistudent.sakilarest.models.requests.shared.LimitOffsetRequest;

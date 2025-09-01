@@ -3,7 +3,7 @@ package org.dcistudent.sakilarest.handlers;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.dcistudent.sakilarest.factories.shared.ResponseFactory;
+import org.dcistudent.sakilarest.factories.responses.shared.ResponseFactory;
 import org.dcistudent.sakilarest.models.responses.shared.EmptyResponse;
 import org.dcistudent.sakilarest.models.responses.shared.Response;
 import org.jetbrains.annotations.NotNull;

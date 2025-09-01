@@ -98,7 +98,7 @@ public final class PathNormalizer {
 
       return filename.toString();
     } catch (NullPointerException e) {
-      // Happens if getFileName() returns null (e.g., input is just "
+      // Happens if getFileName() returns null
       throw new SecurityException("Filename is empty.", e);
     } catch (InvalidPathException e) {
       // Happens if the user input contains invalid characters

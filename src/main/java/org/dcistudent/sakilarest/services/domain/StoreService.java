@@ -2,7 +2,7 @@ package org.dcistudent.sakilarest.services.domain;
 
 import jakarta.persistence.NoResultException;
 import org.dcistudent.sakilarest.exceptions.shared.NotFoundException;
-import org.dcistudent.sakilarest.factories.domain.StoreResponseFactory;
+import org.dcistudent.sakilarest.factories.responses.domain.StoreResponseFactory;
 import org.dcistudent.sakilarest.interfaces.models.responses.shared.Paged;
 import org.dcistudent.sakilarest.managers.domain.StoreManager;
 import org.dcistudent.sakilarest.models.requests.shared.LimitOffsetRequest;

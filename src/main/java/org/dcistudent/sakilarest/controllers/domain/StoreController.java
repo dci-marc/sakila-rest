@@ -1,18 +1,20 @@
-package org.dcistudent.sakilarest.controllers;
+package org.dcistudent.sakilarest.controllers.domain;
 
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
-import org.dcistudent.sakilarest.factories.shared.ResponseFactory;
+import org.dcistudent.sakilarest.factories.responses.shared.ResponseFactory;
 import org.dcistudent.sakilarest.interfaces.models.responses.shared.Paged;
 import org.dcistudent.sakilarest.interfaces.models.responses.shared.ResponsePayload;
 import org.dcistudent.sakilarest.models.requests.shared.LimitOffsetRequest;
-import org.dcistudent.sakilarest.models.responses.domain.customers.CustomerPageResponse;
-import org.dcistudent.sakilarest.models.responses.domain.customers.CustomerResponse;
+import org.dcistudent.sakilarest.models.responses.domain.stores.StorePageResponse;
+import org.dcistudent.sakilarest.models.responses.domain.stores.StoreResponse;
+import org.dcistudent.sakilarest.models.responses.domain.stores.StoresResponse;
+import org.dcistudent.sakilarest.models.responses.shared.EmptyResponse;
 import org.dcistudent.sakilarest.models.responses.shared.Response;
-import org.dcistudent.sakilarest.services.domain.CustomerService;
+import org.dcistudent.sakilarest.services.domain.StoreService;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -22,29 +24,30 @@ import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/stores/{id}") // plural nouns
-public final class CustomerController {
+@RequestMapping("/stores") // plural nouns
+public final class StoreController {
 
-  private final @NotNull CustomerService service;
+  @NotNull
+  private final StoreService storeService;
 
-  public CustomerController(@NotNull CustomerService service) {
-    this.service = service;
+  public StoreController(@NotNull StoreService storeService) {
+    this.storeService = storeService;
   }
 
-  @GetMapping("/customers")
+  @GetMapping
   @ApiResponses(
       value = {
           @ApiResponse(
               responseCode = "200",
-              description = "Successfully fetched customers for the store.",
+              description = "Stores fetched successfully",
               content = @Content(
                   mediaType = MediaType.APPLICATION_JSON_VALUE,
-                  schema = @Schema(implementation = CustomerPageResponse.class)
+                  schema = @Schema(implementation = StorePageResponse.class)
               )
           ),
           @ApiResponse(
               responseCode = "400",
-              description = "Customers not found or invalid request.",
+              description = "No stores found",
               content = @Content(
                   mediaType = MediaType.APPLICATION_PROBLEM_JSON_VALUE,
                   schema = @Schema(implementation = Response.class)
@@ -52,50 +55,44 @@ public final class CustomerController {
           )
       }
   )
-  public @NotNull ResponseEntity<Response<Paged<CustomerResponse>>> getStoreCustomers(
-      @NotNull @PathVariable UUID id,
+  public @NotNull ResponseEntity<Response<Paged<StoresResponse>>> getStores(
       @NotNull @ModelAttribute @Valid LimitOffsetRequest request
   ) {
     return ResponseEntity.ok(
         ResponseFactory.create(
             HttpStatus.OK,
-            "customers:fetch:success",
-            this.service.getAll(id, request)
-        )
-    );
+            "stores:fetch:success",
+            this.storeService.getAll(request)
+        ));
   }
 
-  @GetMapping("/customers/{customerId}")
+  @GetMapping("/{id}")
   @ApiResponses(
       value = {
           @ApiResponse(
               responseCode = "200",
-              description = "Successfully fetched customer details.",
+              description = "Store fetched successfully",
               content = @Content(
                   mediaType = MediaType.APPLICATION_JSON_VALUE,
-                  schema = @Schema(implementation = CustomerResponse.class)
+                  schema = @Schema(implementation = StoreResponse.class)
               )
           ),
           @ApiResponse(
               responseCode = "400",
-              description = "Customer not found or invalid request.",
+              description = "Store not found",
               content = @Content(
                   mediaType = MediaType.APPLICATION_PROBLEM_JSON_VALUE,
-                  schema = @Schema(implementation = Response.class)
+                  schema = @Schema(implementation = EmptyResponse.class)
               )
           )
       }
   )
-  public @NotNull ResponseEntity<Response<ResponsePayload>> getStoreCustomer(
-      @NotNull @PathVariable UUID id,
-      @NotNull @PathVariable UUID customerId
-  ) {
+  public @NotNull ResponseEntity<Response<ResponsePayload>> getStoreById(@NotNull @PathVariable UUID id) {
     return ResponseEntity.ok(
         ResponseFactory.create(
             HttpStatus.OK,
-            "customer:fetch:success",
-            this.service.getCustomer(id, customerId)
-        )
-    );
+            "store:fetch:success",
+            this.storeService.getByUuid(id)
+        ));
   }
 }
