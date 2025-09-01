@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import org.dcistudent.sakilarest.factories.responses.shared.ResponseFactory;
+import org.dcistudent.sakilarest.factories.responses.shared.UserResponseFactory;
 import org.dcistudent.sakilarest.models.requests.domain.UserRequest;
 import org.dcistudent.sakilarest.models.responses.domain.UserResponse;
 import org.dcistudent.sakilarest.models.responses.error.ErrorResponse;
@@ -66,9 +67,7 @@ public final class AuthController {
         ResponseFactory.create(
             HttpStatus.CREATED,
             "auth:user:creation:success",
-            new UserResponse.Builder()
-                .setEmail(request.getEmail())
-                .build()
+            UserResponseFactory.create(request)
         ));
   }
 
