@@ -1,4 +1,4 @@
-package org.dcistudent.sakilarest.controllers;
+package org.dcistudent.sakilarest.controllers.domain;
 
 import org.jetbrains.annotations.NotNull;
 import org.springframework.web.bind.annotation.GetMapping;

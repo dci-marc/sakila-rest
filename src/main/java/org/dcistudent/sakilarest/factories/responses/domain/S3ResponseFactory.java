@@ -1,4 +1,4 @@
-package org.dcistudent.sakilarest.factories.domain;
+package org.dcistudent.sakilarest.factories.responses.domain;
 
 import org.dcistudent.sakilarest.models.requests.domain.s3.S3FileServiceRequest;
 import org.dcistudent.sakilarest.models.responses.domain.fs.Directory;
@@ -11,7 +11,7 @@ import software.amazon.awssdk.services.s3.model.GetObjectResponse;
 
 import java.nio.file.Paths;
 import java.util.Map;
-import java.util.Optional;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public final class S3ResponseFactory {
@@ -21,10 +21,10 @@ public final class S3ResponseFactory {
 
   public static @NotNull File create(@NotNull String path, @NotNull S3FileServiceResponse response) {
     Map<String, String> metadata = response.getResponse().metadata();
-    String filename = Optional
-        .ofNullable(
-            metadata.get(S3FileServiceRequest.METADATA_FILENAME_KEY)
-        ).orElse(PathNormalizer.getFilename(path));
+    String filename = Objects.requireNonNullElse(
+        metadata.get(S3FileServiceRequest.METADATA_FILENAME_KEY),
+        PathNormalizer.getFilename(path)
+    );
 
     return new File.Builder()
         .setName(filename)
@@ -48,10 +48,10 @@ public final class S3ResponseFactory {
                 .map(s3FileServiceResponse -> {
                   GetObjectResponse objectResponse = s3FileServiceResponse.getResponse();
                   Map<String, String> metadata = objectResponse.metadata();
-                  String filename = Optional
-                      .ofNullable(
-                          metadata.get(S3FileServiceRequest.METADATA_FILENAME_KEY)
-                      ).orElse(PathNormalizer.getFilename(path));
+                  String filename = Objects.requireNonNullElse(
+                      metadata.get(S3FileServiceRequest.METADATA_FILENAME_KEY),
+                      PathNormalizer.getFilename(path)
+                  );
 
                   return new File.Builder()
                       .setName(filename)

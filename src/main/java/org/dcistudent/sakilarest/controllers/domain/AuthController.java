@@ -1,12 +1,12 @@
-package org.dcistudent.sakilarest.controllers;
+package org.dcistudent.sakilarest.controllers.domain;
 
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
-import org.dcistudent.sakilarest.factories.shared.ResponseFactory;
-import org.dcistudent.sakilarest.interfaces.models.responses.shared.ResponsePayload;
+import org.dcistudent.sakilarest.factories.responses.shared.ResponseFactory;
+import org.dcistudent.sakilarest.factories.responses.shared.UserResponseFactory;
 import org.dcistudent.sakilarest.models.requests.domain.UserRequest;
 import org.dcistudent.sakilarest.models.responses.domain.UserResponse;
 import org.dcistudent.sakilarest.models.responses.error.ErrorResponse;
@@ -60,16 +60,14 @@ public final class AuthController {
           )
       }
   )
-  public @NotNull ResponseEntity<Response<ResponsePayload>> register(@NotNull @RequestBody @Valid UserRequest request) {
+  public @NotNull ResponseEntity<Response<UserResponse>> register(@NotNull @RequestBody @Valid UserRequest request) {
     this.auth0Service.registerUser(request.getEmail(), request.getPassword());
 
     return ResponseEntity.ok(
         ResponseFactory.create(
             HttpStatus.CREATED,
             "auth:user:creation:success",
-            new UserResponse.Builder()
-                .setEmail(request.getEmail())
-                .build()
+            UserResponseFactory.create(request)
         ));
   }
 

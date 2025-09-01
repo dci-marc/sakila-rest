@@ -1,13 +1,12 @@
-package org.dcistudent.sakilarest.controllers;
+package org.dcistudent.sakilarest.controllers.domain;
 
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
-import org.dcistudent.sakilarest.factories.shared.ResponseFactory;
+import org.dcistudent.sakilarest.factories.responses.shared.ResponseFactory;
 import org.dcistudent.sakilarest.interfaces.models.responses.shared.Paged;
-import org.dcistudent.sakilarest.interfaces.models.responses.shared.ResponsePayload;
 import org.dcistudent.sakilarest.interfaces.services.shared.DiscordServiceInterface;
 import org.dcistudent.sakilarest.models.requests.domain.FilmRequest;
 import org.dcistudent.sakilarest.models.requests.shared.discord.Embed;
@@ -107,7 +106,7 @@ public final class FilmController {
           )
       }
   )
-  public @NotNull ResponseEntity<Response<ResponsePayload>> getFilm(@NotNull @PathVariable UUID id) {
+  public @NotNull ResponseEntity<Response<FilmResponse>> getFilm(@NotNull @PathVariable UUID id) {
     this.discordService.ok(
         List.of(
             new Embed.Builder()

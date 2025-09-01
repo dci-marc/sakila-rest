@@ -1,13 +1,12 @@
-package org.dcistudent.sakilarest.controllers;
+package org.dcistudent.sakilarest.controllers.domain;
 
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
-import org.dcistudent.sakilarest.factories.shared.ResponseFactory;
+import org.dcistudent.sakilarest.factories.responses.shared.ResponseFactory;
 import org.dcistudent.sakilarest.interfaces.models.responses.shared.Paged;
-import org.dcistudent.sakilarest.interfaces.models.responses.shared.ResponsePayload;
 import org.dcistudent.sakilarest.models.requests.shared.LimitOffsetRequest;
 import org.dcistudent.sakilarest.models.responses.domain.customers.CustomerPageResponse;
 import org.dcistudent.sakilarest.models.responses.domain.customers.CustomerResponse;
@@ -86,7 +85,7 @@ public final class CustomerController {
           )
       }
   )
-  public @NotNull ResponseEntity<Response<ResponsePayload>> getStoreCustomer(
+  public @NotNull ResponseEntity<Response<CustomerResponse>> getStoreCustomer(
       @NotNull @PathVariable UUID id,
       @NotNull @PathVariable UUID customerId
   ) {

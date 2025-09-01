@@ -15,7 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @Component
-@Profile("dev")
+@Profile({"dev", "test"})
 public final class RequestLoggingFilter extends OncePerRequestFilter {
 
   private static final @NotNull Logger LOG = Logger.getLogger(RequestLoggingFilter.class.getName());

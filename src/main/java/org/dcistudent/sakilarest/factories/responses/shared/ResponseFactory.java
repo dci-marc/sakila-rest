@@ -1,4 +1,4 @@
-package org.dcistudent.sakilarest.factories.shared;
+package org.dcistudent.sakilarest.factories.responses.shared;
 
 import org.dcistudent.sakilarest.interfaces.models.responses.shared.Paged;
 import org.dcistudent.sakilarest.interfaces.models.responses.shared.ResponsePayload;
