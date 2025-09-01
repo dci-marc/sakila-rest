@@ -7,7 +7,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import org.dcistudent.sakilarest.factories.responses.shared.ResponseFactory;
 import org.dcistudent.sakilarest.interfaces.models.responses.shared.Paged;
-import org.dcistudent.sakilarest.interfaces.models.responses.shared.ResponsePayload;
 import org.dcistudent.sakilarest.models.requests.shared.LimitOffsetRequest;
 import org.dcistudent.sakilarest.models.responses.domain.stores.StorePageResponse;
 import org.dcistudent.sakilarest.models.responses.domain.stores.StoreResponse;
@@ -87,7 +86,7 @@ public final class StoreController {
           )
       }
   )
-  public @NotNull ResponseEntity<Response<ResponsePayload>> getStoreById(@NotNull @PathVariable UUID id) {
+  public @NotNull ResponseEntity<Response<StoreResponse>> getStoreById(@NotNull @PathVariable UUID id) {
     return ResponseEntity.ok(
         ResponseFactory.create(
             HttpStatus.OK,
