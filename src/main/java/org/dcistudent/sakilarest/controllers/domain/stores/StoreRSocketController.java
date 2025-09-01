@@ -1,4 +1,4 @@
-package org.dcistudent.sakilarest.controllers.domain;
+package org.dcistudent.sakilarest.controllers.domain.stores;
 
 import org.dcistudent.sakilarest.interfaces.models.responses.shared.Paged;
 import org.dcistudent.sakilarest.models.requests.shared.LimitOffsetRequest;
@@ -15,11 +15,11 @@ import java.util.UUID;
 
 @Controller
 @MessageMapping("stores")
-public class RsocketController {
+public class StoreRSocketController {
 
   private final @NotNull StoreService service;
 
-  public RsocketController(@NotNull StoreService service) {
+  public StoreRSocketController(@NotNull StoreService service) {
     this.service = service;
   }
 
