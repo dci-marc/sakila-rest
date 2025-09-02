@@ -1,0 +1,4 @@
+#!/bin/sh
+
+echo "❌ Rebase is forbidden."
+exit 1
