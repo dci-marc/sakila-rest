@@ -1,4 +1,4 @@
-package org.dcistudent.sakilarest.services.domain;
+package org.dcistudent.sakilarest.services.domain.stores;
 
 import jakarta.persistence.NoResultException;
 import org.dcistudent.sakilarest.exceptions.shared.NotFoundException;
@@ -11,11 +11,12 @@ import org.dcistudent.sakilarest.models.responses.domain.stores.StoresResponse;
 import org.dcistudent.sakilarest.models.responses.shared.EmptyResponse;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.UUID;
 
 @Service
-public final class StoreService {
+public class StoreService {
 
   @NotNull
   private final StoreManager storeManager;
@@ -24,10 +25,12 @@ public final class StoreService {
     this.storeManager = storeManager;
   }
 
+  @Transactional(readOnly = true)
   public @NotNull Paged<StoresResponse> getAll(LimitOffsetRequest request) {
     return StoreResponseFactory.create(this.storeManager.findAll(request.getLimit(), request.getOffset()));
   }
 
+  @Transactional(readOnly = true)
   public @NotNull StoreResponse getByUuid(@NotNull UUID id) {
     try {
       return StoreResponseFactory.create(this.storeManager.findStoreByUuidEager(id));
