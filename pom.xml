@@ -10,7 +10,7 @@
     </parent>
     <groupId>org.dcistudent</groupId>
     <artifactId>sakila-rest</artifactId>
-    <version>0.11.0</version>
+    <version>0.12.0</version>
     <name>sakila-rest</name>
     <description>sakila-rest</description>
     <url/>
