@@ -4,7 +4,7 @@ import org.dcistudent.sakilarest.interfaces.models.responses.shared.Paged;
 import org.dcistudent.sakilarest.models.requests.shared.LimitOffsetRequest;
 import org.dcistudent.sakilarest.models.responses.domain.stores.StoreResponse;
 import org.dcistudent.sakilarest.models.responses.domain.stores.StoresResponse;
-import org.dcistudent.sakilarest.services.domain.StoreService;
+import org.dcistudent.sakilarest.services.domain.stores.StoreService;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -14,7 +14,7 @@ import reactor.core.publisher.Mono;
 import java.util.UUID;
 
 @Controller
-@MessageMapping("stores")
+@MessageMapping("rsocket")
 public class StoreRSocketController {
 
   private final @NotNull StoreService service;
@@ -23,14 +23,14 @@ public class StoreRSocketController {
     this.service = service;
   }
 
-  @MessageMapping
+  @MessageMapping("stores")
   public @NotNull Mono<Paged<StoresResponse>> getStores(
       @NotNull LimitOffsetRequest request
   ) {
     return Mono.just(this.service.getAll(request));
   }
 
-  @MessageMapping("{id}")
+  @MessageMapping("stores.{id}")
   public @NotNull Mono<StoreResponse> getStoreById(@NotNull @DestinationVariable UUID id) {
     return Mono.just(this.service.getByUuid(id));
   }

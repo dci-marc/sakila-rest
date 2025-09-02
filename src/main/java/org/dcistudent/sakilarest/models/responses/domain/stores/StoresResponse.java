@@ -1,5 +1,8 @@
 package org.dcistudent.sakilarest.models.responses.domain.stores;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import org.dcistudent.sakilarest.interfaces.models.responses.domain.DomainResponse;
 import org.dcistudent.sakilarest.interfaces.models.responses.shared.Buildable;
 import org.dcistudent.sakilarest.models.responses.domain.StaffResponse;
@@ -8,6 +11,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.UUID;
 
+@JsonDeserialize(builder = StoresResponse.Builder.class)
 public final class StoresResponse extends AbstractUuidResponse implements DomainResponse {
 
   private final @NotNull String lastUpdate;
@@ -27,6 +31,7 @@ public final class StoresResponse extends AbstractUuidResponse implements Domain
     return this.staff;
   }
 
+  @JsonPOJOBuilder(withPrefix = "set")
   public static final class Builder implements Buildable<StoresResponse> {
     private @NotNull UUID uuid = UUID.randomUUID();
     private @NotNull String lastUpdate = "";
@@ -47,6 +52,7 @@ public final class StoresResponse extends AbstractUuidResponse implements Domain
       return this;
     }
 
+    @JsonCreator
     public @NotNull StoresResponse build() {
       return new StoresResponse(this);
     }
