@@ -1,10 +1,14 @@
 package org.dcistudent.sakilarest.models.responses.domain;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import org.dcistudent.sakilarest.interfaces.models.responses.shared.Buildable;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.Serializable;
 
+@JsonDeserialize(builder = StaffResponse.Builder.class)
 public final class StaffResponse implements Serializable {
 
   private final @NotNull String firstName;
@@ -41,6 +45,7 @@ public final class StaffResponse implements Serializable {
     return this.lastUpdate;
   }
 
+  @JsonPOJOBuilder(withPrefix = "set")
   public static final class Builder implements Buildable<StaffResponse> {
     private @NotNull String firstName = "";
     private @NotNull String lastName = "";
@@ -73,6 +78,7 @@ public final class StaffResponse implements Serializable {
       return this;
     }
 
+    @JsonCreator
     public @NotNull StaffResponse build() {
       return new StaffResponse(this);
     }
