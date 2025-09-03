@@ -13,7 +13,7 @@ import org.dcistudent.sakilarest.models.responses.domain.stores.StoreResponse;
 import org.dcistudent.sakilarest.models.responses.domain.stores.StoresResponse;
 import org.dcistudent.sakilarest.models.responses.shared.EmptyResponse;
 import org.dcistudent.sakilarest.models.responses.shared.Response;
-import org.dcistudent.sakilarest.services.domain.stores.StoreService;
+import org.dcistudent.sakilarest.services.domain.StoreService;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
