@@ -4,7 +4,7 @@ import org.dcistudent.sakilarest.interfaces.models.responses.shared.Paged;
 import org.dcistudent.sakilarest.models.requests.shared.LimitOffsetRequest;
 import org.dcistudent.sakilarest.models.responses.domain.stores.StoreResponse;
 import org.dcistudent.sakilarest.models.responses.domain.stores.StoresResponse;
-import org.dcistudent.sakilarest.services.domain.stores.StoreService;
+import org.dcistudent.sakilarest.services.domain.StoreService;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;

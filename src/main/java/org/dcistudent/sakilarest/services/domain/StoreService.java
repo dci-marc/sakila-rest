@@ -1,4 +1,4 @@
-package org.dcistudent.sakilarest.services.domain.stores;
+package org.dcistudent.sakilarest.services.domain;
 
 import jakarta.persistence.NoResultException;
 import org.dcistudent.sakilarest.exceptions.shared.NotFoundException;
