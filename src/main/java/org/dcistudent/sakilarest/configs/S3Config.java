@@ -1,6 +1,6 @@
 package org.dcistudent.sakilarest.configs;
 
-import org.dcistudent.sakilarest.interfaces.models.responses.shared.Buildable;
+import org.dcistudent.sakilarest.interfaces.models.responses.Buildable;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
