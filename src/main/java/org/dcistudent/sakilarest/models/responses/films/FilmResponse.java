@@ -1,0 +1,119 @@
+package org.dcistudent.sakilarest.models.responses.films;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+import org.dcistudent.sakilarest.interfaces.models.responses.DomainResponse;
+import org.dcistudent.sakilarest.interfaces.models.responses.Buildable;
+import org.dcistudent.sakilarest.models.responses.AbstractUuidResponse;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.UUID;
+
+@JsonDeserialize(builder = FilmResponse.Builder.class)
+public final class FilmResponse extends AbstractUuidResponse implements DomainResponse {
+
+  private final @NotNull String title;
+  private final @NotNull String description;
+  private final int releaseYear;
+  private final int length;
+  private final @NotNull String rating;
+  private final @NotNull String specialFeatures;
+  private final @NotNull String lastUpdate;
+
+  public FilmResponse(@NotNull Builder builder) {
+    super(builder.uuid);
+    this.title = builder.title;
+    this.description = builder.description;
+    this.releaseYear = builder.releaseYear;
+    this.length = builder.length;
+    this.rating = builder.rating;
+    this.specialFeatures = builder.specialFeatures;
+    this.lastUpdate = builder.lastUpdate;
+  }
+
+  public @NotNull String getTitle() {
+    return this.title;
+  }
+
+  public @NotNull String getDescription() {
+    return this.description;
+  }
+
+  public int getReleaseYear() {
+    return this.releaseYear;
+  }
+
+  public int getLength() {
+    return this.length;
+  }
+
+  public @NotNull String getRating() {
+    return this.rating;
+  }
+
+  public @NotNull String getSpecialFeatures() {
+    return this.specialFeatures;
+  }
+
+  public @NotNull String getLastUpdate() {
+    return this.lastUpdate;
+  }
+
+  @JsonPOJOBuilder(withPrefix = "set")
+  public static final class Builder implements Buildable<FilmResponse> {
+    private @NotNull UUID uuid = UUID.randomUUID();
+    private @NotNull String title = "";
+    private @NotNull String description = "";
+    private int releaseYear;
+    private int length;
+    private @NotNull String rating = "";
+    private @NotNull String specialFeatures = "";
+    private @NotNull String lastUpdate = "";
+
+    public @NotNull Builder setUuid(@NotNull UUID uuid) {
+      this.uuid = uuid;
+      return this;
+    }
+
+    public @NotNull Builder setTitle(@NotNull String title) {
+      this.title = title;
+      return this;
+    }
+
+    public @NotNull Builder setDescription(@NotNull String description) {
+      this.description = description;
+      return this;
+    }
+
+    public @NotNull Builder setReleaseYear(int releaseYear) {
+      this.releaseYear = releaseYear;
+      return this;
+    }
+
+    public @NotNull Builder setLength(int length) {
+      this.length = length;
+      return this;
+    }
+
+    public @NotNull Builder setRating(@NotNull String rating) {
+      this.rating = rating;
+      return this;
+    }
+
+    public @NotNull Builder setSpecialFeatures(@NotNull String specialFeatures) {
+      this.specialFeatures = specialFeatures;
+      return this;
+    }
+
+    public @NotNull Builder setLastUpdate(@NotNull String lastUpdate) {
+      this.lastUpdate = lastUpdate;
+      return this;
+    }
+
+    @JsonCreator
+    public @NotNull FilmResponse build() {
+      return new FilmResponse(this);
+    }
+  }
+}

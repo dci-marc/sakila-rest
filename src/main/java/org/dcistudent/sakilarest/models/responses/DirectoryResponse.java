@@ -1,0 +1,14 @@
+package org.dcistudent.sakilarest.models.responses;
+
+import org.dcistudent.sakilarest.models.responses.fs.Directory;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.springframework.http.HttpStatus;
+
+
+public final class DirectoryResponse extends Response<Directory> {
+
+  public DirectoryResponse(@NotNull HttpStatus status, @NotNull String message, @Nullable Directory data) {
+    super(status, message, data);
+  }
+}

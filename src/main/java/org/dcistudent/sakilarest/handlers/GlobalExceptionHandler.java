@@ -2,12 +2,12 @@ package org.dcistudent.sakilarest.handlers;
 
 import com.bugsnag.Bugsnag;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import org.dcistudent.sakilarest.controllers.domain.ProblemController;
-import org.dcistudent.sakilarest.factories.responses.shared.ResponseFactory;
+import org.dcistudent.sakilarest.controllers.ProblemController;
+import org.dcistudent.sakilarest.factories.responses.ResponseFactory;
 import org.dcistudent.sakilarest.loggers.SqlLogger;
-import org.dcistudent.sakilarest.models.responses.shared.DictionaryListResponse;
-import org.dcistudent.sakilarest.models.responses.shared.EmptyResponse;
-import org.dcistudent.sakilarest.models.responses.shared.Response;
+import org.dcistudent.sakilarest.models.responses.DictionaryListResponse;
+import org.dcistudent.sakilarest.models.responses.EmptyResponse;
+import org.dcistudent.sakilarest.models.responses.Response;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.TypeMismatchException;
 import org.springframework.http.HttpStatus;
