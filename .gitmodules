@@ -1,0 +1,3 @@
+[submodule "modules/git-stash-backup"]
+	path = modules/git-stash-backup
+	url = https://github.com/dci-marc/git-stash-backup.git

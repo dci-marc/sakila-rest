@@ -1,9 +1,9 @@
 package org.dcistudent.sakilarest.handlers;
 
-import org.dcistudent.sakilarest.exceptions.shared.ApiException;
-import org.dcistudent.sakilarest.factories.responses.shared.ResponseFactory;
-import org.dcistudent.sakilarest.interfaces.models.responses.shared.ResponsePayload;
-import org.dcistudent.sakilarest.models.responses.shared.Response;
+import org.dcistudent.sakilarest.exceptions.ApiException;
+import org.dcistudent.sakilarest.factories.responses.ResponseFactory;
+import org.dcistudent.sakilarest.interfaces.models.responses.ResponsePayload;
+import org.dcistudent.sakilarest.models.responses.Response;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
