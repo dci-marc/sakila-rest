@@ -1,8 +1,8 @@
-package org.dcistudent.sakilarest.models.responses.fs.directories;
+package org.dcistudent.sakilarest.models.responses.vfs.directories;
 
-import org.dcistudent.sakilarest.interfaces.models.responses.DomainResponse;
 import org.dcistudent.sakilarest.interfaces.models.responses.Buildable;
-import org.dcistudent.sakilarest.models.responses.fs.attributes.*;
+import org.dcistudent.sakilarest.interfaces.models.responses.DomainResponse;
+import org.dcistudent.sakilarest.models.responses.vfs.attributes.*;
 import org.jetbrains.annotations.NotNull;
 
 import java.time.Instant;

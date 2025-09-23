@@ -10,7 +10,7 @@ import org.dcistudent.sakilarest.models.requests.s3.S3FileRequest;
 import org.dcistudent.sakilarest.models.responses.DirectoryResponse;
 import org.dcistudent.sakilarest.models.responses.EmptyResponse;
 import org.dcistudent.sakilarest.models.responses.Response;
-import org.dcistudent.sakilarest.models.responses.fs.Directory;
+import org.dcistudent.sakilarest.models.responses.vfs.Directory;
 import org.dcistudent.sakilarest.services.s3.S3Service;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.http.HttpStatus;

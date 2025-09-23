@@ -1,4 +1,4 @@
-package org.dcistudent.sakilarest.models.responses.fs.attributes;
+package org.dcistudent.sakilarest.models.responses.vfs.attributes;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

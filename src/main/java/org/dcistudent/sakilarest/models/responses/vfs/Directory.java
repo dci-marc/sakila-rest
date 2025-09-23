@@ -1,7 +1,7 @@
-package org.dcistudent.sakilarest.models.responses.fs;
+package org.dcistudent.sakilarest.models.responses.vfs;
 
 import org.dcistudent.sakilarest.interfaces.models.responses.DomainResponse;
-import org.dcistudent.sakilarest.models.responses.fs.directories.File;
+import org.dcistudent.sakilarest.models.responses.vfs.directories.File;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.LinkedHashSet;

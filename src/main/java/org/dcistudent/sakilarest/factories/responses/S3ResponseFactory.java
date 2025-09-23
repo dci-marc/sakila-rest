@@ -1,10 +1,10 @@
 package org.dcistudent.sakilarest.factories.responses;
 
 import org.dcistudent.sakilarest.models.requests.s3.S3FileServiceRequest;
-import org.dcistudent.sakilarest.models.responses.fs.Directory;
-import org.dcistudent.sakilarest.models.responses.fs.directories.File;
 import org.dcistudent.sakilarest.models.responses.s3.S3DirectoryServiceResponse;
 import org.dcistudent.sakilarest.models.responses.s3.S3FileServiceResponse;
+import org.dcistudent.sakilarest.models.responses.vfs.Directory;
+import org.dcistudent.sakilarest.models.responses.vfs.directories.File;
 import org.dcistudent.sakilarest.normalizers.PathNormalizer;
 import org.jetbrains.annotations.NotNull;
 import software.amazon.awssdk.services.s3.model.GetObjectResponse;
