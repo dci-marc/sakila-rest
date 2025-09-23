@@ -5,10 +5,10 @@ import org.dcistudent.sakilarest.factories.responses.S3ResponseFactory;
 import org.dcistudent.sakilarest.models.requests.s3.S3FileRequest;
 import org.dcistudent.sakilarest.models.responses.EmptyResponse;
 import org.dcistudent.sakilarest.models.responses.SuccessResponse;
-import org.dcistudent.sakilarest.models.responses.fs.Directory;
-import org.dcistudent.sakilarest.models.responses.fs.directories.File;
 import org.dcistudent.sakilarest.models.responses.s3.S3DirectoryServiceResponse;
 import org.dcistudent.sakilarest.models.responses.s3.S3FileServiceResponse;
+import org.dcistudent.sakilarest.models.responses.vfs.Directory;
+import org.dcistudent.sakilarest.models.responses.vfs.directories.File;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
 

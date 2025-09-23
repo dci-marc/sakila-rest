@@ -1,6 +1,6 @@
 package org.dcistudent.sakilarest.models.responses;
 
-import org.dcistudent.sakilarest.models.responses.fs.Directory;
+import org.dcistudent.sakilarest.models.responses.vfs.Directory;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.springframework.http.HttpStatus;
