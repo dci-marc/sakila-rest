@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>API Doc</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="https://unpkg.com/@stoplight/elements@9.0.6/web-components.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/@stoplight/elements@9.0.6/styles.min.css">
+    <script defer>
+        const darkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        document.documentElement.dataset.theme = darkMode ? "dark" : "light";
+        document.documentElement.style.colorScheme = darkMode ? "dark" : "light";
+    </script>
+</head>
+<body>
+<elements-api
+        apiDescriptionUrl="/api/v1/v3/api-docs"
+        router="hash"
+        layout="responsive"
+        hideTryIt="true">
+</elements-api>
+</body>
+</html>
