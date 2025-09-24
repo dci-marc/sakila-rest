@@ -30,7 +30,6 @@ public class StoreRSocketController {
   @MessageMapping("stores")
   @RequestBody(
       description = "Limit and offset for pagination",
-      required = true,
       content = @Content(
           mediaType = MediaType.APPLICATION_JSON_VALUE,
           schema = @Schema(implementation = LimitOffsetRequest.class)

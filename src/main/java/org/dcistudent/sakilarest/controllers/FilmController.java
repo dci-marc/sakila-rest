@@ -40,7 +40,6 @@ public final class FilmController {
   @GetMapping
   @RequestBody(
       description = "Parameters for querying films",
-      required = true,
       content = @Content(
           mediaType = MediaType.APPLICATION_JSON_VALUE,
           schema = @Schema(implementation = FilmRequest.class)

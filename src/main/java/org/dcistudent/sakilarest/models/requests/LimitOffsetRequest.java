@@ -4,6 +4,7 @@ import jakarta.validation.constraints.Min;
 import org.jetbrains.annotations.NotNull;
 
 public class LimitOffsetRequest {
+
   @NotNull
   @Min(10)
   private Integer limit = 10;
