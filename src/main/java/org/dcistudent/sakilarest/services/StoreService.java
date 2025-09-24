@@ -11,7 +11,6 @@ import org.dcistudent.sakilarest.models.responses.stores.StoreResponse;
 import org.dcistudent.sakilarest.models.responses.stores.StoresResponse;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.UUID;
 
@@ -25,12 +24,10 @@ public class StoreService {
     this.storeManager = storeManager;
   }
 
-  @Transactional(readOnly = true)
   public @NotNull Paged<StoresResponse> getAll(LimitOffsetRequest request) {
     return StoreResponseFactory.create(this.storeManager.findAll(request.getLimit(), request.getOffset()));
   }
 
-  @Transactional(readOnly = true)
   public @NotNull StoreResponse getByUuid(@NotNull UUID id) {
     try {
       return StoreResponseFactory.create(this.storeManager.findStoreByUuidEager(id));

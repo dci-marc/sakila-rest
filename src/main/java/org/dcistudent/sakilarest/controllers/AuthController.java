@@ -2,6 +2,7 @@ package org.dcistudent.sakilarest.controllers;
 
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
@@ -17,7 +18,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -32,6 +32,14 @@ public final class AuthController {
   }
 
   @PostMapping("/register")
+  @RequestBody(
+      description = "User registration details",
+      required = true,
+      content = @Content(
+          mediaType = MediaType.APPLICATION_JSON_VALUE,
+          schema = @Schema(implementation = UserRequest.class)
+      )
+  )
   @ApiResponses(
       value = {
           @ApiResponse(
@@ -72,6 +80,14 @@ public final class AuthController {
   }
 
   @PostMapping("/login")
+  @RequestBody(
+      description = "User login details",
+      required = true,
+      content = @Content(
+          mediaType = MediaType.APPLICATION_JSON_VALUE,
+          schema = @Schema(implementation = UserRequest.class)
+      )
+  )
   @ApiResponses(
       value = {
           @ApiResponse(

@@ -2,6 +2,7 @@ package org.dcistudent.sakilarest.controllers;
 
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
@@ -31,6 +32,13 @@ public final class CustomerController {
   }
 
   @GetMapping("/customers")
+  @RequestBody(
+      description = "Limit and offset for pagination",
+      content = @Content(
+          mediaType = MediaType.APPLICATION_JSON_VALUE,
+          schema = @Schema(implementation = LimitOffsetRequest.class)
+      )
+  )
   @ApiResponses(
       value = {
           @ApiResponse(
@@ -65,6 +73,14 @@ public final class CustomerController {
   }
 
   @GetMapping("/customers/{customerId}")
+  @RequestBody(
+      description = "UUID of the customer to fetch",
+      required = true,
+      content = @Content(
+          mediaType = MediaType.APPLICATION_JSON_VALUE,
+          schema = @Schema(implementation = UUID.class)
+      )
+  )
   @ApiResponses(
       value = {
           @ApiResponse(
