@@ -2,6 +2,7 @@ package org.dcistudent.sakilarest.controllers.stores;
 
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
@@ -34,6 +35,14 @@ public final class StoreController {
   }
 
   @GetMapping
+  @RequestBody(
+      description = "Limit and offset for pagination",
+      required = true,
+      content = @Content(
+          mediaType = MediaType.APPLICATION_JSON_VALUE,
+          schema = @Schema(implementation = LimitOffsetRequest.class)
+      )
+  )
   @ApiResponses(
       value = {
           @ApiResponse(
@@ -66,6 +75,14 @@ public final class StoreController {
   }
 
   @GetMapping("/{id}")
+  @RequestBody(
+      description = "UUID of the store to fetch",
+      required = true,
+      content = @Content(
+          mediaType = MediaType.APPLICATION_JSON_VALUE,
+          schema = @Schema(implementation = UUID.class)
+      )
+  )
   @ApiResponses(
       value = {
           @ApiResponse(

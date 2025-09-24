@@ -2,6 +2,7 @@ package org.dcistudent.sakilarest.controllers;
 
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.dcistudent.sakilarest.factories.responses.ResponseFactory;
@@ -34,6 +35,14 @@ public final class S3Controller {
   }
 
   @GetMapping("/files/{*path}")
+  @RequestBody(
+      description = "The path of the directory to fetch files from.",
+      required = true,
+      content = @Content(
+          mediaType = MediaType.APPLICATION_JSON_VALUE,
+          schema = @Schema(implementation = String.class)
+      )
+  )
   @ApiResponses(
       value = {
           @ApiResponse(
@@ -64,6 +73,14 @@ public final class S3Controller {
   }
 
   @GetMapping("/files/{path}/download")
+  @RequestBody(
+      description = "The path of the file to download.",
+      required = true,
+      content = @Content(
+          mediaType = MediaType.APPLICATION_JSON_VALUE,
+          schema = @Schema(implementation = String.class)
+      )
+  )
   @ApiResponses(
       value = {
           @ApiResponse(
@@ -96,6 +113,14 @@ public final class S3Controller {
   }
 
   @DeleteMapping("/files/{path}")
+  @RequestBody(
+      description = "The path of the file to delete.",
+      required = true,
+      content = @Content(
+          mediaType = MediaType.APPLICATION_JSON_VALUE,
+          schema = @Schema(implementation = String.class)
+      )
+  )
   @ApiResponses(
       value = {
           @ApiResponse(
@@ -126,6 +151,14 @@ public final class S3Controller {
   }
 
   @PutMapping("/files")
+  @RequestBody(
+      description = "The file to upload along with its metadata.",
+      required = true,
+      content = @Content(
+          mediaType = MediaType.MULTIPART_FORM_DATA_VALUE,
+          schema = @Schema(implementation = MultipartFile.class)
+      )
+  )
   @ApiResponses(
       value = {
           @ApiResponse(
