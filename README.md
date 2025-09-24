@@ -11,6 +11,10 @@ It should reflect the best and most widely used concepts and principles -
 as far as I can tell as a beginner - while also showing several possibilities
 for how different solutions can look.
 
+## Documentation
+
+[![<> API Reference](https://badges.ws/badge/%3C%3E-API%20Reference-5555ff)](https://dci-marc.github.io/sakila-rest/)
+
 ## Statistics
 
 ![Repobeats Analyse](https://repobeats.axiom.co/api/embed/2969d79bc381679b6cfb58bb2fa17c8c60235626.svg "Repobeats analytics image")
