@@ -212,6 +212,32 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+            <plugin>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-maven-plugin</artifactId>
+                <version>1.5</version>
+                <configuration>
+                    <outputFileName>api.json</outputFileName>
+                    <outputDir>${project.basedir}/src/main/resources/static/docs</outputDir>
+                    <format>json</format>
+                    <apiDocsUrl>http://127.0.0.1:8181/api/v1/v3/api-docs</apiDocsUrl>
+                    <resourcePackages>
+                        <package>org.dcistudent.sakilarest</package>
+                    </resourcePackages>
+                    <springBootApplication>
+                        org.dcistudent.sakilarest.SakilaRestApplication
+                    </springBootApplication>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>generate-openapi</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
         </plugins>
     </build>
 </project>
