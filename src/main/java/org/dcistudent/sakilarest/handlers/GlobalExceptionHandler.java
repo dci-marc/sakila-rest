@@ -18,6 +18,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 import java.io.IOException;
 import java.util.*;
@@ -54,6 +55,20 @@ public final class GlobalExceptionHandler {
         .body(ResponseFactory.create(
             HttpStatus.INTERNAL_SERVER_ERROR,
             "server:internal:error"
+        ));
+  }
+
+  /**
+   * Handles 404 errors when a resource is not found without calling Bugsnag.
+   */
+  @ExceptionHandler(NoResourceFoundException.class)
+  public @NotNull ResponseEntity<Response<EmptyResponse>> handleNotFound(@NotNull NoResourceFoundException e) {
+    return ResponseEntity
+        .status(HttpStatus.NOT_FOUND)
+        .contentType(MediaType.APPLICATION_PROBLEM_JSON)
+        .body(ResponseFactory.create(
+            HttpStatus.NOT_FOUND,
+            "resource:not:found"
         ));
   }
 
