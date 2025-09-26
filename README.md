@@ -24,6 +24,9 @@ for how different solutions can look.
 - Maven
 - GraalVM (highly experimental)
 - Coolify with development, testing, production (self-hosted CI/CD)
+- SonarQube (Static Code Analysis)
+- Qodana (Static Code Analysis)
+- CodeQL (Static Code Analysis)
 - Git, Git Sub-Modules, Git Flow, Git LFS
 - GitHub Actions (Releases, Pages, Packages, SonarQube, Qodana, CodeQL, Build, ..)
 - GitHub Pages
