@@ -4,12 +4,92 @@ Spring RESTful API service demo on the Sakila dataset.
 
 ## Intention
 
-This project is developed exclusively for personal use for possible reference
-implementations.
+This project is developed exclusively for personal use for educational purposes and possible reference implementations.
 
 It should reflect the best and most widely used concepts and principles -
 as far as I can tell as a beginner - while also showing several possibilities
 for how different solutions can look.
+
+## Architecture, Concepts & Patterns
+
+### Architecture & Concepts
+
+- Microservice
+- RESTful API
+- Spring
+- Layered Architecture
+- Technical Separation
+- Docker & Docker Compose (App, Redis, PostgreSQL, MySQL, MariaDB, MinIO)
+- GNU Make
+- Maven
+- GraalVM (highly experimental)
+- Coolify with development, testing, production (self-hosted CI/CD)
+- Git, Git Sub-Modules, Git Flow, Git LFS
+- GitHub Actions (Releases, Pages, Packages, SonarQube, Qodana, CodeQL, Build, ..)
+- GitHub Pages
+- GitHub Packages (custom „Himaya” (Protection) library as dependency)
+- Unit Tests
+- Authy0 (OAuth2, JWT)
+- Entity Caching
+- Field Validation
+- Database Migrations (Flyway: PostgreSQL, MySQL, MariaDB)
+- OpenAPI 3.0 (Swagger)
+- Bruno (API Client Generation)
+- Strictly Not Null
+- S3 service with AWS SDK S3
+- `Dotenv` loader
+- Config Guard
+- Path Normalizer
+- Custom Handlers
+- Custom SQL Logger
+- Custom Request Filter
+- Custom Serializer
+- Custom Application Profile
+- RSocket (Client+Service)
+- Bugsnag Integration (Error Monitoring)
+- Discord Integration (Notifications)
+- Slack Integration (Notifications)
+
+#### Layered Architecture & Technical Separation
+
+- Controller
+- Service
+- Manager
+- Repository
+
+#### Patterns & Principles
+
+- DTO Pattern
+- Factory Pattern
+- Controller Pattern
+- Service Layer Pattern
+- Manager Pattern
+- Repository Pattern
+- Hydrator Pattern (planned)
+- Builder Pattern
+- Fluent Interface Pattern
+- Singleton Pattern
+- Problem Details (RFC 7807)
+- SOLID Principles
+- KISS Principle
+- DRY Principle
+- Code Analysis
+
+### Software & Modules
+
+#### Spring
+
+- Spring Web (MVC)
+- Spring Reactive Web (WebFlux) (planned)
+- Spring Security
+- Spring Data JPA/JDBC (Entity Navigation, DQL, Native SQL)
+- Spring Data Redis
+- Spring OAuth2 Resource Server
+- Spring Test
+
+#### Custom Modules
+
+- [„Himaya”](https://github.com/dci-marc/java-himaya) (Protection)
 
 ## Documentation
 
