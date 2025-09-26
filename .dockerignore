@@ -3,6 +3,7 @@
 *.iml
 
 # Maven/Gradle build outputs
+.m2/settings.xml
 bin
 target
 build

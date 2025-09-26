@@ -6,6 +6,7 @@
 HELP.md
 bin/
 target/
+.m2/settings.xml
 .mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
