@@ -96,7 +96,7 @@ for how different solutions can look.
 
 ## Documentation
 
-[![<> API Reference](https://badges.ws/badge/%3C%3E-API%20Reference-5555ff)](https://dci-marc.github.io/sakila-rest/)
+[![‹› API Reference](https://badges.ws/badge/%3C%3E-API%20Reference-5555ff)](https://dci-marc.github.io/sakila-rest/)
 
 ## Statistics
 
