@@ -42,11 +42,8 @@
     </properties>
     <repositories>
         <repository>
-            <id>github</id>
-            <url>https://maven.pkg.github.com/dci-marc/java-himaya</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
+            <id>gitlab-maven</id>
+            <url>https://gitlab.com/api/v4/projects/74947614/packages/maven</url>
         </repository>
     </repositories>
 
@@ -189,11 +186,11 @@
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-messaging</artifactId>
         </dependency>
-        <!--        <dependency>-->
-        <!--            <groupId>com.github.dci-marc</groupId>-->
-        <!--            <artifactId>java-himaya</artifactId>-->
-        <!--            <version>0.2.0</version>-->
-        <!--        </dependency>-->
+        <dependency>
+            <groupId>com.gitlab.dci-marc</groupId>
+            <artifactId>himaya</artifactId>
+            <version>0.2.1</version>
+        </dependency>
     </dependencies>
 
     <build>
