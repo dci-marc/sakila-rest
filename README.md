@@ -30,7 +30,7 @@ for how different solutions can look.
 - Git, Git Sub-Modules, Git Flow, Git LFS
 - GitHub Actions (Releases, Pages, Packages, SonarQube, Qodana, CodeQL, Build, ..)
 - GitHub Pages
-- GitHub Packages (custom „Himaya” (Protection) library as dependency)
+- GitLab Packages (custom „Himaya” (Protection) library as dependency)
 - Unit Tests
 - Authy0 (OAuth2, JWT)
 - Entity Caching
